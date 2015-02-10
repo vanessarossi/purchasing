@@ -11,7 +11,7 @@ Desenvolvido com base em duas normas realizadas pelo próprio setor, o principal
 * Solicitações de compra
 *  Cotações
 * Orçamentos
-*  O início de uma ordem de compra
+*  Ordem de compra
 *  Recepção da ordem de compra
 *  Todo o fluxo do setor integrado aos itens anteriores de acordo com as suas aprovações
 
