@@ -1,0 +1,25 @@
+#IntelliJ workspace files
+*.iml
+*.ipr
+*.iws
+.idea
+out
+test-output
+
+#Java config files
+*.class
+target/
+
+#JRebel
+rebel.xml
+
+#OSes
+.DS_Store
+__MACOSX/
+Thumbs.db
+
+#Log
+*.log
+
+##Deploy
+classes/
