@@ -1,6 +1,7 @@
 package com.purchasing.entity;
 
 import com.purchasing.enumerator.TypePersonEnum;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author vanessa
@@ -28,8 +30,13 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
+    @Length(min = 1, max = 200)
+    @Column(name = "name")
     private String name;
 
+    @NotNull
+    @Column(name = "type_person")
     @Enumerated(EnumType.ORDINAL)
     private TypePersonEnum typePerson;
 

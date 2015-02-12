@@ -1,5 +1,8 @@
 package com.purchasing.entity;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -13,12 +16,18 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id")
 public class NaturalPerson extends Person {
 
-    @Column(name = "cpf", nullable = false, insertable = true, updatable = true, length = 20 , unique = true)
+    @NotBlank
+    @Length(min = 1, max = 20)
+    @Column(name = "cpf", unique = true)
     private String cpf;
 
-    @Column(name = "rg", nullable = false, insertable = true, updatable = true, length = 20)
+    @NotBlank
+    @Length(min = 1, max = 20)
+    @Column(name = "rg", unique = true)
     private String rg;
 
-    @Column(name = "emitting_organ", nullable = false, insertable = true, updatable = true, length = 6)
+    @NotBlank
+    @Length(min = 1, max = 6)
+    @Column(name = "emitting_organ", unique = true)
     private String emittingOrgan;
 }

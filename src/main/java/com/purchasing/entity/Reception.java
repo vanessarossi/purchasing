@@ -1,7 +1,12 @@
 package com.purchasing.entity;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,12 +26,17 @@ import java.util.List;
 public class Reception {
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
+    @NotBlank
+    @Length(min = 1, max = 45)
+    @Column(name = "tax_document")
+    private String taxDocument;
     @OneToOne(mappedBy = "reception")
     private AdditionalPurchaseOrder additionalPurchaseOrder;
 
@@ -36,4 +46,7 @@ public class Reception {
 
     @OneToMany(mappedBy = "reception")
     private List<RequestDelivered> requestDelivereds;
+
+    @OneToOne
+    private PurchaseOrder purchaseOrder;
 }

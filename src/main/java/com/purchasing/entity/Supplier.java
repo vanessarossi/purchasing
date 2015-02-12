@@ -1,6 +1,5 @@
 package com.purchasing.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,29 +19,28 @@ import java.util.List;
 public class Supplier {
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @OneToMany(mappedBy = "supplier")
-    private List<Budget> budgets;
-
-    @OneToMany(mappedBy = "supplier")
-    private List<Contract> contracts;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Category category;
 
     @OneToOne
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person person;
 
     @OneToOne
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
     private Contact contact;
 
     @OneToOne
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
-    private Person person;
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+    @OneToMany(mappedBy = "supplier")
+    private List<Budget> budgets;
+
+    @OneToMany(mappedBy = "supplier")
+    private List<Contract> contracts;
 }

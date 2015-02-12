@@ -1,5 +1,8 @@
 package com.purchasing.entity;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -13,16 +16,24 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id")
 public class JuristicPerson extends Person{
 
-    @Column(name = "company_name", nullable = false, insertable = true, updatable = true, length = 200)
+    @NotBlank
+    @Length(min = 1, max = 200)
+    @Column(name = "company_name")
     private String companyName;
 
-    @Column(name = "municipal_inscription", nullable = true, insertable = true, updatable = true, length = 45)
+
+    @Length(min = 1, max = 45)
+    @Column(name = "municipal_inscription")
     private String municipalInscription;
 
-    @Column(name = "state_inscription", nullable = true, insertable = true, updatable = true, length = 45)
+    @NotBlank
+    @Length(min = 1, max = 45)
+    @Column(name = "state_inscription")
     private String stateInscription;
 
-    @Column(name = "cnpj", nullable = false, insertable = true, updatable = true, length = 30 , unique = true)
+    @NotBlank
+    @Length(min = 1, max = 30)
+    @Column(name = "cnpj", unique = true)
     private String cnpj;
 
 }

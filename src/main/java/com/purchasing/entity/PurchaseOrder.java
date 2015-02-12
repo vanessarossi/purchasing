@@ -2,6 +2,7 @@ package com.purchasing.entity;
 
 import com.purchasing.enumerator.StatusEnum;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -28,17 +30,14 @@ public class PurchaseOrder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
 
+    @NotNull
+    @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status;
-
-    @OneToMany(mappedBy = "purchaseOrder")
-    private List<AdditionalPurchaseOrder> additionalPurchaseOrders;
-
-    @OneToMany(mappedBy = "purchaseOrder")
-    private List<OrderRequest> orderRequests;
 
     @ManyToOne
     @JoinColumn(name = "approval_id", referencedColumnName = "id", nullable = false)
@@ -49,4 +48,14 @@ public class PurchaseOrder {
 
     @OneToOne(mappedBy = "purchaseOrder")
     private PaymentInformation paymentInformation;
+
+    @OneToOne(mappedBy = "purchaseOrder")
+    private Reception reception;
+
+    @OneToMany(mappedBy = "purchaseOrder")
+    private List<AdditionalPurchaseOrder> additionalPurchaseOrders;
+
+    @OneToMany(mappedBy = "purchaseOrder")
+    private List<OrderRequest> orderRequests;
+
 }

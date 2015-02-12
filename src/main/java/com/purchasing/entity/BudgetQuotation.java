@@ -1,5 +1,6 @@
 package com.purchasing.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 
 /**
@@ -23,6 +25,8 @@ public class BudgetQuotation {
 
     private Boolean chosenBudget;
 
+    @Digits(integer = 10, fraction = 2)
+    @Column(name = "unity_price")
     private BigDecimal unityPrice;
 
     @ManyToOne

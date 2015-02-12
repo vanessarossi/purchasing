@@ -1,6 +1,5 @@
 package com.purchasing.entity;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 
 /**
  * @author vanessa
@@ -18,12 +18,11 @@ import javax.persistence.Table;
 public class RequestDelivered {
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Basic
-    @Column(name = "quantity", nullable = true, insertable = true, updatable = true, length = 45)
+    @Digits(integer = 10, fraction = 2)
+    @Column(name = "quantity")
     private String quantity;
 
     @ManyToOne

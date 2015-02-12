@@ -1,5 +1,9 @@
 package com.purchasing.entity;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +25,21 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
+    @Length(min = 1, max = 200)
+    @Column(name = "description")
     private String description;
+    @NotBlank
+    @Length(min = 1, max = 200)
+    @Column(name = "model")
     private String model;
+    @NotBlank
+    @Length(min = 1, max = 100)
+    @Column(name = "mark")
     private String mark;
+    @NotBlank
+    @Length(min = 1, max = 100)
+    @Column(name = "observation")
     private String observation;
 
     @ManyToOne

@@ -1,7 +1,9 @@
 package com.purchasing.entity;
 
 import com.purchasing.enumerator.StatusEnum;
+import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,11 +26,21 @@ public class Situation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status;
+
+    @Column(name = "date_approval")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateApproval;
+
+    @Length(min = 1, max = 1000)
+    @Column(name = "justification_cancellation")
     private String justificationCancellation;
+
+    @Length(min = 1, max = 1000)
+    @Column(name = "justification_disapproval")
     private String justificationDisapproval;
 
     @OneToOne
