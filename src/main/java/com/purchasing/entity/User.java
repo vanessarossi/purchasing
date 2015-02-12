@@ -38,7 +38,7 @@ public class User {
     private Date lastAccess;
 
     @ManyToOne
-    @JoinColumn(name = "Role", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private Role role;
 
     @ManyToMany

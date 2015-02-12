@@ -30,65 +30,35 @@
         <mapping class="com.purchasing.entity.User"/>
         <mapping class="com.purchasing.entity.Company"/>
         <mapping class="com.purchasing.entity.CostCenter"/>
-
-
         <mapping class="com.purchasing.entity.Solicitation"/>
         <mapping class="com.purchasing.entity.Situation"/>
         <mapping class="com.purchasing.entity.SolicitationRequest"/>
         <mapping class="com.purchasing.entity.Service"/>
         <mapping class="com.purchasing.entity.TypeService"/>
-
-
         <mapping class="com.purchasing.entity.Person"/>
         <mapping class="com.purchasing.entity.JuristicPerson"/>
         <mapping class="com.purchasing.entity.NaturalPerson"/>
         <mapping class="com.purchasing.entity.Supplier"/>
-
-
         <mapping class="com.purchasing.entity.Address"/>
         <mapping class="com.purchasing.entity.State"/>
         <mapping class="com.purchasing.entity.Contact"/>
         <mapping class="com.purchasing.entity.Category"/>
-
-
         <mapping class="com.purchasing.entity.AdditionalPurchaseOrder"/>
-
-
         <mapping class="com.purchasing.entity.Approval"/>
-
-
         <mapping class="com.purchasing.entity.Quotation"/>
         <mapping class="com.purchasing.entity.QuotationRequest"/>
-
         <mapping class="com.purchasing.entity.Budget"/>
         <mapping class="com.purchasing.entity.BudgetQuotation"/>
-        <mapping class="com.purchasing.entity.PaymentBudget"/>
-
-
         <mapping class="com.purchasing.entity.Contract"/>
         <mapping class="com.purchasing.entity.RenewalContract"/>
-
         <mapping class="com.purchasing.entity.DeliveryInformation"/>
         <mapping class="com.purchasing.entity.FormPayment"/>
-
         <mapping class="com.purchasing.entity.OrderRequest"/>
         <mapping class="com.purchasing.entity.PaymentInformation"/>
-
-
         <mapping class="com.purchasing.entity.Product"/>
-
-
         <mapping class="com.purchasing.entity.PurchaseOrder"/>
         <mapping class="com.purchasing.entity.Reception"/>
         <mapping class="com.purchasing.entity.RequestDelivered"/>
-
-
-
-
-
-
-
-
         <mapping class="com.purchasing.entity.Unit"/>
 
     </session-factory>
