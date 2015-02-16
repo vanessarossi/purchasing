@@ -15,4 +15,5 @@ public class StateDAO extends DAOImpl<State,Long> {
     public StateDAO(Session session) {
         super(session);
     }
+
 }

@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
             String colMark = product.getMark();
             String buttonView = "<a onclick='viewProduct("+product.getId()+")' ><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
             String buttonEdit = "<a href=/purchasing/produto/editar/"+product.getId()+"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
-            String buttonRemove = "<a href=/purchasing/produto/deletar/"+product.getId()+"><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
+            String buttonRemove = "<a onclick='confirmDetele("+product.getId()+")'><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String [] row = {
                     colCode,
                     colDescription,

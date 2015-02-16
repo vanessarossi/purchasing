@@ -2,9 +2,16 @@ package com.purchasing.dao;
 
 import com.purchasing.dao.base.DAOImpl;
 import com.purchasing.entity.Supplier;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,15 +24,43 @@ public class SupplierDAO extends DAOImpl<Supplier,Long> {
         super(session);
     }
 
-    public List<Supplier> pagination(String search, int iDisplayStart, int iDisplayLength) {
-        return null;
-    }
-
     public List<Supplier> search(String text) {
-        return null;
+        Criteria criteria = getSession().createCriteria(Supplier.class);
+        Disjunction disjunction = Restrictions.disjunction();
+            criteria.createAlias("person","person");
+            criteria.createAlias("person.naturalPerson","naturalPerson");
+            criteria.createAlias("person.juristicPerson","juristicPerson");
+            disjunction.add(Restrictions.ilike("person.name",text, MatchMode.ANYWHERE));
+            disjunction.add(Restrictions.ilike("naturalPerson",text, MatchMode.ANYWHERE));
+            disjunction.add(Restrictions.ilike("juristicPerson",text, MatchMode.ANYWHERE));
+        List<Supplier>suppliers = new ArrayList<>();
+        suppliers.addAll(criteria.list());
+        return suppliers;
     }
 
-    public Integer totalPagination(String search) {
-        return null;
+    public List<Supplier> pagination(String sSearch,int iDisplayStart, int iDisplayLength){
+        Criteria criteria = getSession().createCriteria(Supplier.class);
+            criteria.setFirstResult(iDisplayStart);
+            criteria.setMaxResults(iDisplayLength);
+        Disjunction disjunction = Restrictions.disjunction();
+            criteria.createAlias("person","person");
+            disjunction.add(Restrictions.ilike("person.name",sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.asc("id"));
+        List<Supplier>suppliers = new ArrayList<>();
+        suppliers.addAll(criteria.list());
+        return suppliers;
+    }
+
+    public Integer totalPagination(String sSearch){
+        Integer total = 0;
+        Criteria criteria = getSession().createCriteria(Supplier.class);
+        Disjunction disjunction = Restrictions.disjunction();
+            criteria.createAlias("person", "person");
+            disjunction.add(Restrictions.ilike("person.name",sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.setProjection(Projections.rowCount());
+        total =  Integer.parseInt(criteria.uniqueResult().toString());
+        return total;
     }
 }
