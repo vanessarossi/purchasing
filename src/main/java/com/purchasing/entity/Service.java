@@ -37,4 +37,35 @@ public class Service {
     @OneToMany(mappedBy = "service")
     private List<SolicitationRequest> solicitationRequests;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public TypeService getTypeService() {
+        return typeService;
+    }
+
+    public void setTypeService(TypeService typeService) {
+        this.typeService = typeService;
+    }
+
+    public List<SolicitationRequest> getSolicitationRequests() {
+        return solicitationRequests;
+    }
+
+    public void setSolicitationRequests(List<SolicitationRequest> solicitationRequests) {
+        this.solicitationRequests = solicitationRequests;
+    }
 }

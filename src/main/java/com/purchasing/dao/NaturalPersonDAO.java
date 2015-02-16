@@ -15,4 +15,8 @@ public class NaturalPersonDAO extends DAOImpl<NaturalPerson,Long> {
     public NaturalPersonDAO(Session session) {
         super(session);
     }
+
+    public NaturalPerson findByCPF(String cpf) {
+        return null;
+    }
 }

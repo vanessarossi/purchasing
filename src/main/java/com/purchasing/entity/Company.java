@@ -38,4 +38,43 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<CostCenter> costCenters;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCorporateName() {
+        return corporateName;
+    }
+
+    public void setCorporateName(String corporateName) {
+        this.corporateName = corporateName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public List<CostCenter> getCostCenters() {
+        return costCenters;
+    }
+
+    public void setCostCenters(List<CostCenter> costCenters) {
+        this.costCenters = costCenters;
+    }
 }

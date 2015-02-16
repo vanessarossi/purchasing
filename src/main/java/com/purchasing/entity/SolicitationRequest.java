@@ -54,4 +54,68 @@ public class SolicitationRequest {
     @ManyToOne
     @JoinColumn(name = "solicitation_id", referencedColumnName = "id", nullable = false)
     private Solicitation solicitation;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public Boolean getAddQuotation() {
+        return addQuotation;
+    }
+
+    public void setAddQuotation(Boolean addQuotation) {
+        this.addQuotation = addQuotation;
+    }
+
+    public Float getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Float quantity) {
+        this.quantity = quantity;
+    }
+
+    public Date getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(Date deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Solicitation getSolicitation() {
+        return solicitation;
+    }
+
+    public void setSolicitation(Solicitation solicitation) {
+        this.solicitation = solicitation;
+    }
 }

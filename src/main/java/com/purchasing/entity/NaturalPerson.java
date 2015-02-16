@@ -30,4 +30,33 @@ public class NaturalPerson extends Person {
     @Length(min = 1, max = 6)
     @Column(name = "emitting_organ", unique = true)
     private String emittingOrgan;
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getEmittingOrgan() {
+        return emittingOrgan;
+    }
+
+    public void setEmittingOrgan(String emittingOrgan) {
+        this.emittingOrgan = emittingOrgan;
+    }
+
+    public void setPerson(Person person) {
+        super.setName(person.getName());
+        super.setTypePerson(person.getTypePerson());
+    }
 }

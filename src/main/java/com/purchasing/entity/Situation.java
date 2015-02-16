@@ -45,4 +45,52 @@ public class Situation {
 
     @OneToOne
     private Solicitation solicitation;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public Date getDateApproval() {
+        return dateApproval;
+    }
+
+    public void setDateApproval(Date dateApproval) {
+        this.dateApproval = dateApproval;
+    }
+
+    public String getJustificationCancellation() {
+        return justificationCancellation;
+    }
+
+    public void setJustificationCancellation(String justificationCancellation) {
+        this.justificationCancellation = justificationCancellation;
+    }
+
+    public String getJustificationDisapproval() {
+        return justificationDisapproval;
+    }
+
+    public void setJustificationDisapproval(String justificationDisapproval) {
+        this.justificationDisapproval = justificationDisapproval;
+    }
+
+    public Solicitation getSolicitation() {
+        return solicitation;
+    }
+
+    public void setSolicitation(Solicitation solicitation) {
+        this.solicitation = solicitation;
+    }
 }

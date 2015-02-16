@@ -52,4 +52,68 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<SolicitationRequest> solicitationRequests;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public List<SolicitationRequest> getSolicitationRequests() {
+        return solicitationRequests;
+    }
+
+    public void setSolicitationRequests(List<SolicitationRequest> solicitationRequests) {
+        this.solicitationRequests = solicitationRequests;
+    }
 }

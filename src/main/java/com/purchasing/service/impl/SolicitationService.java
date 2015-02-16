@@ -18,8 +18,6 @@ public interface SolicitationService {
     public File generateFile(Solicitation solicitation);
     public void removeProduct(SolicitationRequest solicitationRequest);
 
-    public Solicitation findSolicitationDeliveredPartiallyDelivered(Solicitation solicitation);
-
     /** Paginação **/
 
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength);

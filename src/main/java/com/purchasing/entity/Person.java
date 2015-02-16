@@ -47,4 +47,45 @@ public class Person {
     @Transient
     @OneToOne(mappedBy="juristicPerson")
     private JuristicPerson juristicPerson;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public TypePersonEnum getTypePerson() {
+        return typePerson;
+    }
+
+    public void setTypePerson(TypePersonEnum typePerson) {
+        this.typePerson = typePerson;
+    }
+
+    public NaturalPerson getNaturalPerson() {
+        return naturalPerson;
+    }
+
+    public void setNaturalPerson(NaturalPerson naturalPerson) {
+        this.naturalPerson = naturalPerson;
+    }
+
+    public JuristicPerson getJuristicPerson() {
+        return juristicPerson;
+    }
+
+    public void setJuristicPerson(JuristicPerson juristicPerson) {
+        this.juristicPerson = juristicPerson;
+    }
 }

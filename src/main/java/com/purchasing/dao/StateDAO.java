@@ -9,10 +9,10 @@ import javax.inject.Inject;
 /**
  * @author vanessa
  */
-public class SatateDAO extends DAOImpl<State,Long> {
+public class StateDAO extends DAOImpl<State,Long> {
 
     @Inject
-    public SatateDAO(Session session) {
+    public StateDAO(Session session) {
         super(session);
     }
 }

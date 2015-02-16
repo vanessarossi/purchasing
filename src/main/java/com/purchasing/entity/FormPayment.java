@@ -45,4 +45,52 @@ public class FormPayment {
 
     @OneToMany(mappedBy = "formPayment")
     private List<PaymentInformation> paymentInformations;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getInput() {
+        return input;
+    }
+
+    public void setInput(Boolean input) {
+        this.input = input;
+    }
+
+    public Integer getParcels() {
+        return parcels;
+    }
+
+    public void setParcels(Integer parcels) {
+        this.parcels = parcels;
+    }
+
+    public Integer getIntervalDay() {
+        return intervalDay;
+    }
+
+    public void setIntervalDay(Integer intervalDay) {
+        this.intervalDay = intervalDay;
+    }
+
+    public List<PaymentInformation> getPaymentInformations() {
+        return paymentInformations;
+    }
+
+    public void setPaymentInformations(List<PaymentInformation> paymentInformations) {
+        this.paymentInformations = paymentInformations;
+    }
 }

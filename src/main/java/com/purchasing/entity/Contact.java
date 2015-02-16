@@ -49,4 +49,68 @@ public class Contact {
     @Length(min = 1, max = 100)
     @Column(name = "contact_name")
     private String contactName;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSecondaryPhone() {
+        return secondaryPhone;
+    }
+
+    public void setSecondaryPhone(String secondaryPhone) {
+        this.secondaryPhone = secondaryPhone;
+    }
+
+    public String getCellPhone() {
+        return cellPhone;
+    }
+
+    public void setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
+    }
+
+    public String getSecondaryCellPhone() {
+        return secondaryCellPhone;
+    }
+
+    public void setSecondaryCellPhone(String secondaryCellPhone) {
+        this.secondaryCellPhone = secondaryCellPhone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
 }

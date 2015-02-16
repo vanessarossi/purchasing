@@ -45,5 +45,43 @@ public class Role {
     @OneToMany(mappedBy = "role")
     private List<User> users;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getMinimumValue() {
+        return minimumValue;
+    }
+
+    public void setMinimumValue(BigDecimal minimumValue) {
+        this.minimumValue = minimumValue;
+    }
+
+    public BigDecimal getMaximumValue() {
+        return maximumValue;
+    }
+
+    public void setMaximumValue(BigDecimal maximumValue) {
+        this.maximumValue = maximumValue;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 }

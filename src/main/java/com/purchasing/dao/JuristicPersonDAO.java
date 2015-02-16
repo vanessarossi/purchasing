@@ -15,4 +15,8 @@ public class JuristicPersonDAO extends DAOImpl<JuristicPerson,Long> {
     public JuristicPersonDAO(Session session) {
         super(session);
     }
+
+    public JuristicPerson findByCNPJ(String cnpj) {
+        return null;
+    }
 }

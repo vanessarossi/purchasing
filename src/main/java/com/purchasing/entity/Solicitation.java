@@ -73,4 +73,91 @@ public class Solicitation {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<SolicitationRequest> solicitationRequests;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TypeEnum getType() {
+        return type;
+    }
+
+    public void setType(TypeEnum type) {
+        this.type = type;
+    }
+
+    public Date getInitialDate() {
+        return initialDate;
+    }
+
+    public void setInitialDate(Date initialDate) {
+        this.initialDate = initialDate;
+    }
+
+    public Date getFinalDate() {
+        return finalDate;
+    }
+
+    public void setFinalDate(Date finalDate) {
+        this.finalDate = finalDate;
+    }
+
+    public Boolean getUrgency() {
+        return urgency;
+    }
+
+    public void setUrgency(Boolean urgency) {
+        this.urgency = urgency;
+    }
+
+    public Boolean getEmergency() {
+        return emergency;
+    }
+
+    public void setEmergency(Boolean emergency) {
+        this.emergency = emergency;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
+    public CostCenter getCostCenter() {
+        return costCenter;
+    }
+
+    public void setCostCenter(CostCenter costCenter) {
+        this.costCenter = costCenter;
+    }
+
+    public Situation getSituation() {
+        return situation;
+    }
+
+    public void setSituation(Situation situation) {
+        this.situation = situation;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<SolicitationRequest> getSolicitationRequests() {
+        return solicitationRequests;
+    }
+
+    public void setSolicitationRequests(List<SolicitationRequest> solicitationRequests) {
+        this.solicitationRequests = solicitationRequests;
+    }
 }

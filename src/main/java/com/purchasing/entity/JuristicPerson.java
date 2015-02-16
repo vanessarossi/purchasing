@@ -21,7 +21,6 @@ public class JuristicPerson extends Person{
     @Column(name = "company_name")
     private String companyName;
 
-
     @Length(min = 1, max = 45)
     @Column(name = "municipal_inscription")
     private String municipalInscription;
@@ -36,4 +35,41 @@ public class JuristicPerson extends Person{
     @Column(name = "cnpj", unique = true)
     private String cnpj;
 
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getMunicipalInscription() {
+        return municipalInscription;
+    }
+
+    public void setMunicipalInscription(String municipalInscription) {
+        this.municipalInscription = municipalInscription;
+    }
+
+    public String getStateInscription() {
+        return stateInscription;
+    }
+
+    public void setStateInscription(String stateInscription) {
+        this.stateInscription = stateInscription;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public void setPerson(Person person) {
+        super.setName(person.getName());
+        super.setTypePerson(person.getTypePerson());
+    }
 }
