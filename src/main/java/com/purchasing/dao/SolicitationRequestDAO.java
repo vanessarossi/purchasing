@@ -1,11 +1,13 @@
 package com.purchasing.dao;
 
 import com.purchasing.dao.base.DAOImpl;
+import com.purchasing.entity.Product;
 import com.purchasing.entity.Solicitation;
 import com.purchasing.entity.SolicitationRequest;
 import com.purchasing.enumerator.StatusEnum;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
@@ -68,6 +70,47 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
             criteria.add(Restrictions.eq("status", StatusEnum.Delivered));
         List<SolicitationRequest>solicitationRequests = new ArrayList<>();
             solicitationRequests.addAll(criteria.list());
+        return solicitationRequests;
+    }
+
+    public List<SolicitationRequest> findSolicitationRequestByProduct(Product product){
+        List<StatusEnum>status = new ArrayList<>();
+            status.add(StatusEnum.Approved);
+            status.add(StatusEnum.InAnalysis);
+            status.add(StatusEnum.QuotingProcess);
+
+        List<SolicitationRequest>solicitationRequests = new ArrayList<>();
+        Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
+            criteria.createAlias("solicitation","s");
+            criteria.createAlias("s.situation","situation");
+            criteria.add(Restrictions.eq("product",product));
+            criteria.add(Restrictions.eq("addQuotation",false));
+            criteria.add(Restrictions.isNull("status"));
+        Criterion criterion = Restrictions.and(Restrictions.in("situation.status", status));
+            criteria.add(criterion);
+            criteria.addOrder(Order.desc("id"));
+        solicitationRequests = criteria.list();
+        return solicitationRequests;
+    }
+
+    public List<SolicitationRequest> findSolicitationRequestBySolicitation(Solicitation solicitation){
+        List<StatusEnum>status = new ArrayList<>();
+            status.add(StatusEnum.Approved);
+            status.add(StatusEnum.InAnalysis);
+            status.add(StatusEnum.QuotingProcess);
+
+        List<SolicitationRequest>solicitationRequests = new ArrayList<>();
+        Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
+            criteria.createAlias("solicitation","s");
+            criteria.createAlias("s.situation","situation");
+            criteria.add(Restrictions.eq("solicitation",solicitation));
+            criteria.add(Restrictions.eq("addQuotation",false));
+            criteria.add(Restrictions.isNull("status"));
+            criteria.add(Restrictions.isNotNull("product"));
+        Criterion criterion = Restrictions.and(Restrictions.in("situation.status", status));
+            criteria.add(criterion);
+            criteria.addOrder(Order.desc("id"));
+        solicitationRequests = criteria.list();
         return solicitationRequests;
     }
 }

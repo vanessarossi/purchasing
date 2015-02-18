@@ -5,6 +5,7 @@ import com.purchasing.dao.ServiceDAO;
 import com.purchasing.dao.SituationDAO;
 import com.purchasing.dao.SolicitationDAO;
 import com.purchasing.dao.SolicitationRequestDAO;
+import com.purchasing.entity.Product;
 import com.purchasing.entity.Service;
 import com.purchasing.entity.Situation;
 import com.purchasing.entity.Solicitation;
@@ -413,5 +414,18 @@ public class SolicitationServiceImpl implements SolicitationService {
             situationDAO.save(situation);
             solicitationDAO.save(solicitationFound);
         }
+    }
+
+    @Override
+    public List<SolicitationRequest> searchSolicitationRequestByProduct(Product product) {
+        List<SolicitationRequest>  solicitationRequests  = new ArrayList<>();
+        solicitationRequests = solicitationRequestDAO.findSolicitationRequestByProduct(product);
+        return solicitationRequests;
+
+    }
+
+    @Override
+    public List<SolicitationRequest> searchSolicitationRequestBySolicitation(Solicitation solicitation) {
+        return null;
     }
 }

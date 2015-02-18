@@ -228,4 +228,5 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
         Solicitation solicitationFound = (Solicitation) criteria.uniqueResult();
         return solicitationFound;
     }
+
 }

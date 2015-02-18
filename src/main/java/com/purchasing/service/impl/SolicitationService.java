@@ -41,4 +41,5 @@ public interface SolicitationService {
     /** Help in quotation  **/
     public List<SolicitationRequest> searchSolicitationRequestByProduct(Product product);
     public List<SolicitationRequest> searchSolicitationRequestBySolicitation(Solicitation solicitation);
+
 }
