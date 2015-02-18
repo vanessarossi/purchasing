@@ -2,7 +2,9 @@ package com.purchasing.dao;
 
 import com.purchasing.dao.base.DAOImpl;
 import com.purchasing.entity.NaturalPerson;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import javax.inject.Inject;
 
@@ -17,6 +19,9 @@ public class NaturalPersonDAO extends DAOImpl<NaturalPerson,Long> {
     }
 
     public NaturalPerson findByCPF(String cpf) {
-        return null;
+        Criteria criteria = getSession().createCriteria(NaturalPerson.class);
+        criteria.add(Restrictions.eq("cpf", cpf));
+        NaturalPerson naturalPerson = (NaturalPerson) criteria.uniqueResult();
+        return naturalPerson;
     }
 }

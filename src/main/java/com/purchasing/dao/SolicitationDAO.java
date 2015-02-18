@@ -220,13 +220,12 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
         List<StatusEnum>status = new ArrayList<>();
             status.add(StatusEnum.PartiallyDelivered);
             status.add(StatusEnum.Approved);
-        Solicitation solicitationFound = new Solicitation();
         Criteria criteria = getSession().createCriteria(Solicitation.class);
             criteria.add(Restrictions.eq("id", solicitation.getId()));
             criteria.createAlias("situation","s");
         Criterion criterion = Restrictions.and(Restrictions.in("s.status", status));
             criteria.add(criterion);
-        solicitation = (Solicitation) criteria.uniqueResult();
-        return solicitation;
+        Solicitation solicitationFound = (Solicitation) criteria.uniqueResult();
+        return solicitationFound;
     }
 }
