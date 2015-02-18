@@ -60,6 +60,7 @@
         <mapping class="com.purchasing.entity.Reception"/>
         <mapping class="com.purchasing.entity.RequestDelivered"/>
         <mapping class="com.purchasing.entity.Unit"/>
+        <mapping class="com.purchasing.entity.PaymentInformationBudget"/>
 
     </session-factory>
 </hibernate-configuration>

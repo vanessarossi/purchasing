@@ -36,11 +36,7 @@ public class BudgetQuotation {
     @ManyToOne
     @JoinColumn(name = "quotation_request_id", referencedColumnName = "id", nullable = false)
     private QuotationRequest quotationRequest;
-
-    @ManyToOne
-    @JoinColumn(name = "payment_information_id", referencedColumnName = "id", nullable = false)
-    private PaymentInformation paymentInformation;
-
+    
     @OneToOne
     private OrderRequest orderRequest;
 }

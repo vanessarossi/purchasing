@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,7 +19,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author vanessa
@@ -87,8 +85,4 @@ public class PaymentInformation {
 
     @OneToOne
     private AdditionalPurchaseOrder additionalPurchaseOrder;
-
-    @OneToMany(mappedBy = "budget")
-    private List<BudgetQuotation> budgetQuotationList;
-
 }

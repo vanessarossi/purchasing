@@ -52,4 +52,10 @@ public class Budget {
 
     @OneToMany(mappedBy = "budget")
     private List<BudgetQuotation> budgetQuotations;
+
+    @OneToMany(mappedBy = "budget")
+    private List<PaymentInformationBudget> paymentInformationBudgets;
+
+
+
 }

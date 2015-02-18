@@ -151,7 +151,7 @@ public class SolicitationServiceImpl implements SolicitationService {
     }
 
     @Override
-    public void removeProduct(SolicitationRequest solicitationRequest) {
+    public void removeSolicitationRequest(SolicitationRequest solicitationRequest) {
         solicitationRequestDAO.delete(solicitationRequest);
     }
 
