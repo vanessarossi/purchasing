@@ -58,4 +58,15 @@ public class Conversor {
         }
         return date;
     }
+
+    public static String converterDateInStringForDocument(Date date) {
+            String dateString = null;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd_MM_yyyy");
+            try {
+                dateString = simpleDateFormat.format(date);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            return dateString;
+        }
 }

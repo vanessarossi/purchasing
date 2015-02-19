@@ -28,9 +28,9 @@ public class Contract {
     private Long id;
 
     @NotNull
-    @Column(name = "initital_date")
+    @Column(name = "initial_date")
     @Temporal(TemporalType.DATE)
-    private Date inititalDate;
+    private Date initialDate;
 
     @NotNull
     @Column(name = "final_date")
@@ -54,4 +54,68 @@ public class Contract {
 
     @OneToMany(mappedBy = "contract")
     private List<RenewalContract> renewalContracts;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getInitialDate() {
+        return initialDate;
+    }
+
+    public void setInitialDate(Date initialDate) {
+        this.initialDate = initialDate;
+    }
+
+    public Date getFinalDate() {
+        return finalDate;
+    }
+
+    public void setFinalDate(Date finalDate) {
+        this.finalDate = finalDate;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public List<PaymentInformation> getPaymentInformations() {
+        return paymentInformations;
+    }
+
+    public void setPaymentInformations(List<PaymentInformation> paymentInformations) {
+        this.paymentInformations = paymentInformations;
+    }
+
+    public List<RenewalContract> getRenewalContracts() {
+        return renewalContracts;
+    }
+
+    public void setRenewalContracts(List<RenewalContract> renewalContracts) {
+        this.renewalContracts = renewalContracts;
+    }
 }
