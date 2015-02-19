@@ -37,13 +37,6 @@ public class SolicitationServiceImpl implements SolicitationService {
     @Inject private ServiceDAO serviceDAO;
     @Inject private CostCenterDAO costCenterDAO;
 
-
-
-    public User getUserLogged(){
-        User user = (User) httpSession.getAttribute("userLogged");
-        return  user;
-    }
-
     @Override
     public Solicitation save(Solicitation solicitation) {
         solicitation.setUser(getUserLogged());
@@ -426,6 +419,19 @@ public class SolicitationServiceImpl implements SolicitationService {
 
     @Override
     public List<SolicitationRequest> searchSolicitationRequestBySolicitation(Solicitation solicitation) {
-        return null;
+        List<SolicitationRequest>  solicitationRequests  = new ArrayList<>();
+        solicitationRequests = solicitationRequestDAO.findSolicitationRequestBySolicitation(solicitation);
+        return solicitationRequests;
+    }
+
+    @Override
+    public Solicitation findByApprovedPartiallyDelivered(Solicitation solicitation) {
+        return solicitationDAO.findByApprovedPartiallyDelivered(solicitation);
+    }
+
+    @Override
+    public User getUserLogged(){
+        User user = (User) httpSession.getAttribute("userLogged");
+        return  user;
     }
 }

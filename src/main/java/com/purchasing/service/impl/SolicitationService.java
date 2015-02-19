@@ -3,6 +3,7 @@ package com.purchasing.service.impl;
 import com.purchasing.entity.Product;
 import com.purchasing.entity.Solicitation;
 import com.purchasing.entity.SolicitationRequest;
+import com.purchasing.entity.User;
 import com.purchasing.enumerator.StatusEnum;
 
 import java.io.File;
@@ -12,6 +13,8 @@ import java.util.List;
  * @author vanessa
  */
 public interface SolicitationService {
+
+    public User getUserLogged();
 
     public Solicitation save(Solicitation solicitation);
     public Solicitation copy (Solicitation solicitation);
@@ -42,4 +45,6 @@ public interface SolicitationService {
     public List<SolicitationRequest> searchSolicitationRequestByProduct(Product product);
     public List<SolicitationRequest> searchSolicitationRequestBySolicitation(Solicitation solicitation);
 
+    /** Help finalization **/
+    public Solicitation findByApprovedPartiallyDelivered(Solicitation solicitation);
 }
