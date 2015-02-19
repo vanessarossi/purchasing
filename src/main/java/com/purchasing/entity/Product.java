@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -29,18 +32,29 @@ public class Product {
     @Length(min = 1, max = 200)
     @Column(name = "description")
     private String description;
+
     @NotBlank
     @Length(min = 1, max = 200)
     @Column(name = "model")
     private String model;
+
     @NotBlank
     @Length(min = 1, max = 100)
     @Column(name = "mark")
     private String mark;
+    
     @NotBlank
     @Length(min = 1, max = 100)
     @Column(name = "observation")
     private String observation;
+
+    @NotNull
+    @Column(name = "bar_code")
+    private Integer barCode;
+
+    @Digits(integer = 10, fraction = 2)
+    @Column(name = "minimum_stock")
+    private Float minimumStock;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
@@ -52,6 +66,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<SolicitationRequest> solicitationRequests;
+
+    @OneToOne(mappedBy = "product")
+    private Stock stock;
 
     public Long getId() {
         return id;
@@ -93,6 +110,22 @@ public class Product {
         this.observation = observation;
     }
 
+    public Integer getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(Integer barCode) {
+        this.barCode = barCode;
+    }
+
+    public Float getMinimumStock() {
+        return minimumStock;
+    }
+
+    public void setMinimumStock(Float minimumStock) {
+        this.minimumStock = minimumStock;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -115,5 +148,13 @@ public class Product {
 
     public void setSolicitationRequests(List<SolicitationRequest> solicitationRequests) {
         this.solicitationRequests = solicitationRequests;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 }

@@ -4,6 +4,7 @@ import br.com.caelum.vraptor.simplemail.Mailer;
 import com.purchasing.dao.CompanyDAO;
 import com.purchasing.dao.RoleDAO;
 import com.purchasing.dao.UserDAO;
+import com.purchasing.entity.Company;
 import com.purchasing.entity.Role;
 import com.purchasing.entity.User;
 import com.purchasing.service.impl.UserService;
@@ -78,7 +79,7 @@ public class UserServiceImpl implements UserService {
     public User searchByUsername(User user) {
         User userFound = new User();
         if (user.getUsername() != null && user.getPassword() != null){
-            userFound = userDAO.findByUsername(user.getUsername());
+            userFound = userDAO.findByUsername(user.getUsername().toLowerCase());
         }
         return userFound;
     }
@@ -154,6 +155,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Role> findAllRole() {
         return roleDAO.findAll(Role.class);
+    }
+
+    @Override
+    public List<Company> findAllCompany() {
+        return companyDAO.findAll(Company.class);
     }
 
     @Override

@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,11 @@ public class Reception {
     @Length(min = 1, max = 45)
     @Column(name = "tax_document")
     private String taxDocument;
+
+    @NotNull
+    @Column(name = "bar_code_tax_document")
+    private Integer barCodeTaxDocument;
+
     @OneToOne(mappedBy = "reception")
     private AdditionalPurchaseOrder additionalPurchaseOrder;
 

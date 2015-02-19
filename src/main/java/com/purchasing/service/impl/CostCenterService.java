@@ -16,4 +16,6 @@ public interface CostCenterService {
     public List<CostCenter> searchByCompany(Company company);
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPagination(String sSearch);
+
+    public List<Company> findAllCompany();
 }

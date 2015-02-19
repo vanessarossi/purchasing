@@ -61,6 +61,7 @@
         <mapping class="com.purchasing.entity.RequestDelivered"/>
         <mapping class="com.purchasing.entity.Unit"/>
         <mapping class="com.purchasing.entity.PaymentInformationBudget"/>
+        <mapping class="com.purchasing.entity.Stock"/>
 
     </session-factory>
 </hibernate-configuration>

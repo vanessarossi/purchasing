@@ -1,5 +1,6 @@
 package com.purchasing.service.impl;
 
+import com.purchasing.entity.Company;
 import com.purchasing.entity.Role;
 import com.purchasing.entity.User;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public interface UserService {
 
     public User authenticate(User user);
-    public User save(User user) throws Exception;
+    public User save(User user);
     public void delete(User user);
     public User searchById(User user);
     public User searchByUsername(User user);
@@ -21,5 +22,6 @@ public interface UserService {
     public void logoff();
 
     public List<Role> findAllRole();
+    public List<Company> findAllCompany();
 
 }

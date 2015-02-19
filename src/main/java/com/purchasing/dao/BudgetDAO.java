@@ -15,4 +15,5 @@ public class BudgetDAO extends DAOImpl<Budget,Long> {
     public BudgetDAO(Session session) {
         super(session);
     }
+
 }
