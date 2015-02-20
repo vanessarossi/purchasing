@@ -12,7 +12,7 @@
             <a href="#"><span>Menu</span></a>
         </li>
     </ul>
-    
+
     <section class="top-bar-section"> <!-- Right Nav Section -->
         <ul class="right">
             <li class="active">
