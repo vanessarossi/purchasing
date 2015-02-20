@@ -40,7 +40,7 @@ public class FormPayment {
 
     @NotNull
     @Length(min = 1)
-    @Column(name = "parcels")
+    @Column(name = "interval_day")
     private Integer intervalDay;
 
     @OneToMany(mappedBy = "formPayment")

@@ -28,11 +28,11 @@ public class Company {
     private String corporateName;
 
     @Length(min = 1, max = 200)
-    @Column(name = "corporate_name")
+    @Column(name = "company_name")
     private String companyName;
 
     @Length(min = 1, max = 20)
-    @Column(name = "corporate_name")
+    @Column(name = "cnpj")
     private String cnpj;
 
     @OneToMany(mappedBy = "company")

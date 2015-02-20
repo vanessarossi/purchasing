@@ -80,4 +80,9 @@ public class CostCenterServiceImpl implements CostCenterService {
         return total;
     }
 
+    @Override
+    public List<Company> findAllCompany() {
+        return companyDAO.findAll(Company.class);
+    }
+
 }

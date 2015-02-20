@@ -14,7 +14,6 @@ import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.SolicitationService;
 import com.purchasing.service.impl.TypeServiceService;
 import com.purchasing.support.datatable.DataTableModel;
-
 import javax.inject.Inject;
 import java.io.File;
 import java.util.ArrayList;
@@ -154,6 +153,11 @@ public class SolicitationController {
             result.include("controller", this.getClass().toString());
         }
 
+    @Path("/formulario/finalizacao")
+    public void formFinalization(){
+        result.include("controller", this.getClass().toString());
+    }
+
     /** Paginação **/
     @Get("/paginar")
     public void pagination(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength){
@@ -201,7 +205,6 @@ public class SolicitationController {
 
 
     /** Alteração de status **/
-
     @Post("/aprovar")
     public  void approve(Solicitation solicitation){
            solicitationService.approval(solicitation);
@@ -231,11 +234,6 @@ public class SolicitationController {
            solicitationService.cancel(solicitation);
            result.redirectTo(this).listMissing();
        }
-
-    @Path("/formulario/finalizacao")
-    public void formFinalization(){
-        result.include("controller", this.getClass().toString());
-    }
 
     @Post("/pesquisar/finalizacao")
     public void findSolicitationFinalization(Solicitation solicitation){
