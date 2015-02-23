@@ -1,9 +1,6 @@
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="author" content=" Vanessa Rossi"/>
-<meta name="robots" content="noindex"/>
-<meta name="googlebot" content="noindex"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/vendor/normalize.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/vendor/foundation.css" type="text/css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/vendor/font-awesome.css" type="text/css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/foundation-theme.css" type="text/css"/>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/asset/images/logo/logo_unimed.png" type="image/x-icon"/>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/jquery.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/fastclick.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/modernizr.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/placeholder.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/bootstrap.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/asset/js/main.js" type="text/javascript"></script>

@@ -48,7 +48,6 @@ public class Product {
     @Column(name = "observation")
     private String observation;
 
-    @NotNull
     @Column(name = "bar_code")
     private Integer barCode;
 
