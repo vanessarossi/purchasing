@@ -1,16 +1,88 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: vanessa
-  Date: 2/23/15
-  Time: 12:52 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <title></title>
+    <title><fmt:message key="title.page.product" /> - <fmt:message key="title.purchasing" /></title>
+    <html:head />
+    <html:formAssets/>
 </head>
 <body>
+<html:template>
+    <form action='<c:url value="/produto/salvar"></c:url>' method="post" id="productForm">
+        <div class="container-fluid">
+            <div class="page-header">
+                <h3><fmt:message key="title.product" /></h3>
+            </div>
+            <div class="row">
+                            <div class="col-sm-5 col-md-5">
+                                <div class="form-group">
+                                    <label class="control-label"><fmt:message key="label.description"></fmt:message></label><span class="required"> *</span>
+                                    <input type="text" class="form-control" id="description" name="product.description" value="${product.description}"/>
+                                    <span class="redText">${errors.from('product.description')}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <div class="form-group">
+                                    <label class="control-label"><fmt:message key="label.model"></fmt:message></label>
+                                    <input type="text" class="form-control" id="model" name="product.model" value="${product.model}"/>
+                                    <span class="redText">${errors.from('product.model')}</span>
+                                </div>
+                            </div>
+                        </div>
+            <div class="row" >
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label"><fmt:message key="label.mark"></fmt:message></label>
+                                    <input type="text" class="form-control" id="mark" name="product.mark" value="${product.mark}"/>
+                                    <span class="redText">${errors.from('product.mark')}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label"><fmt:message key="label.unit"></fmt:message></label><span class="required"> *</span>
+                                    <select class="form-control" id="unit" name="product.unit.id">
+                                        <option value="" ><fmt:message key="label.select"/></option>
+                                        <c:forEach items="${units}" var="unit">
+                                            <option value="${unit.id}" <c:if test="${product.unit.id eq unit.id}">selected</c:if> >${unit.description} </option>
+                                        </c:forEach>
+                                    </select>
+                                    <span class="redText">${errors.from('product.unit')}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label"><fmt:message key="label.category"></fmt:message></label><span class="required"> *</span>
+                                    <select class="form-control" id="category" name="product.category.id">
+                                        <option value="" ><fmt:message key="label.select"/></option>
+                                        <c:forEach items="${categories}" var="category">
+                                            <option value="${category.id}" <c:if test="${product.category.id eq category.id}">selected</c:if> >${category.description} </option>
+                                        </c:forEach>
+                                    </select>
+                                    <span class="redText">${errors.from('product.category')}</span>
+                                </div>
+                            </div>
 
+                        </div>
+            <div class="row">
+                            <div class="col-sm-5 col-md-5">
+                                <div class="form-group">
+                                    <label class="control-label"><fmt:message key="label.observation"></fmt:message></label>
+                                    <textarea rows="6" cols="9" class="form-control" id="observation" name="produto.observation">${product.observation}</textarea>
+                                    <span class="redText">${errors.from('product.observation')}</span>
+                                </div>
+                            </div>
+                        </div>
+            <div class="row">
+                            <div class="col-sm-offset-9 col-md-offset-9">
+                                <div class="form-group">
+                                    <input type="hidden" name="product.id" value="${product.id}" >
+                                    <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
+                                    <a href='<c:url value="/produto"></c:url>' type="button" class="btn btn-danger"><fmt:message key="button.cancel"/></a>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+    </form>
+</html:template>
 </body>
+<html:jsAssets/>
 </html>

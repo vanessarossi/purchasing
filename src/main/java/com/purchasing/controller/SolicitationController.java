@@ -60,7 +60,7 @@ public class SolicitationController {
             solicitation.setSolicitationRequests(solicitationRequests);
         }
         solicitationService.save(solicitation);
-        result.redirectTo(this).listIndividual();
+        result.redirectTo(this).individualList();
     }
 
     @Get("/editar/{solicitation.id}")
@@ -78,7 +78,7 @@ public class SolicitationController {
             result.redirectTo(this).form();
         }else{
             result.include("messageErrorEdit","message.error.edit.solicitation");
-            result.redirectTo(this).listIndividual();
+            result.redirectTo(this).individualList();
         }
     }
 
@@ -108,7 +108,7 @@ public class SolicitationController {
         }
         result.include("type",type);
         result.include("solicitation",solicitation);
-        result.redirectTo(this).formVisualize();
+        result.redirectTo(this).visualizeForm();
      }
 
     @Get("/remover/produto/{solicitationRequest.id}/json")
@@ -131,12 +131,12 @@ public class SolicitationController {
        }
 
     @Path("/listar/individual")
-    public void listIndividual(){
+    public void individualList(){
            result.include("controller", this.getClass().toString());
        }
 
     @Path("/listar/pendente")
-    public void listMissing() {
+    public void missingList() {
            result.include("controller", this.getClass().toString());
        }
 
@@ -149,12 +149,12 @@ public class SolicitationController {
         }
 
     @Path("/visulizar")
-    public void formVisualize() {
+    public void visualizeForm() {
             result.include("controller", this.getClass().toString());
         }
 
     @Path("/formulario/finalizacao")
-    public void formFinalization(){
+    public void finalizationForm(){
         result.include("controller", this.getClass().toString());
     }
 
@@ -208,7 +208,7 @@ public class SolicitationController {
     @Post("/aprovar")
     public  void approve(Solicitation solicitation){
            solicitationService.approval(solicitation);
-           result.redirectTo(this).listMissing();
+           result.redirectTo(this).missingList();
        }
 
     @Post("/cancelar/analise")
@@ -220,19 +220,19 @@ public class SolicitationController {
     @Post("/reprovar")
     public void reject(Solicitation solicitation){
            solicitationService.reject(solicitation);
-           result.redirectTo(this).listMissing();
+           result.redirectTo(this).missingList();
        }
 
     @Post("/pedir/cancelamento")
     public void cancelationRequest(Solicitation solicitation){
            solicitationService.cancellationRequest(solicitation);
-           result.redirectTo(this).listIndividual();
+           result.redirectTo(this).individualList();
        }
 
     @Post("/confirmar/cancelamento")
     public void confirmCancelationRequest(Solicitation solicitation){
            solicitationService.cancel(solicitation);
-           result.redirectTo(this).listMissing();
+           result.redirectTo(this).missingList();
        }
 
     @Post("/pesquisar/finalizacao")
@@ -250,7 +250,7 @@ public class SolicitationController {
         }else{
             result.include("messageNotSolicitation", "message.not.solicitation");
         }
-        result.redirectTo(this).formFinalization();
+        result.redirectTo(this).finalizationForm();
     }
 
     @Post("finalizar")
@@ -266,6 +266,6 @@ public class SolicitationController {
         }
         solicitation.setSolicitationRequests(solicitationRequests);
         solicitationService.finalize(solicitation);
-        result.redirectTo(this).formFinalization();
+        result.redirectTo(this).finalizationForm();
     }
 }

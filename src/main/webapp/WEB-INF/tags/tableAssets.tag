@@ -1,2 +1,3 @@
 <%@tag trimDirectiveWhitespaces="true" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/vendor/responsive-tables.css" type="text/css"/>
+<link  href="${pageContext.request.contextPath}/asset/css/vendor/responsive-tables.css" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/asset/css/vendor/dataTables.fontAwesome.css" rel="stylesheet">
