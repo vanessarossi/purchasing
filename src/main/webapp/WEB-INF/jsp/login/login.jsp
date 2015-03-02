@@ -3,7 +3,7 @@
 <head>
     <title><fmt:message key="title.page.sign" /> - <fmt:message key="title.purchasing" /></title>
     <html:head />
-    <link href="${pageContext.request.contextPath}/asset/css/custom/login.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/asset/css/login.css" rel="stylesheet">
 </head>
 <body class="login">
 <div class="logo">

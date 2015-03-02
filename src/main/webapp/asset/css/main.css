@@ -1,0 +1,29 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.required,.redText{
+    color: #FF0000;
+}
+.redText{
+    font-size: 12px;
+}
+a:link, a:visited {
+    text-decoration: none
+}
+a:hover {
+    text-decoration: none;
+    color:black;
+}
+a:active {
+    text-decoration: none
+}
+textarea{
+    resize: none;
+}
+
+.message-error{
+    color: #FF0000;
+    font-size: 12px;
+    font-weight:bold;
+}
