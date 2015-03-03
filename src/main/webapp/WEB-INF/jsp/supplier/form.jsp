@@ -7,6 +7,7 @@
 </head>
 <body>
 <html:template>
+<form role="form" id="formSupplier" method="post" action='<c:url value="/fornecedor/salvar" ></c:url>'>
     <div class="container-fluid">
         <div class="page-header">
             <h3><fmt:message key="title.supplier" /></h3>
@@ -31,7 +32,7 @@
                             <option value="${category.id}" <c:if test="${category.id eq supplier.category.id}">selected</c:if>>${category.description}</option>
                         </c:forEach>
                     </select>
-                    <span class="redText">${errors.from('supplier.category')}</span>
+                    <span class="required">${errors.from('supplier.category')}</span>
                 </div>
             </div>
         </div>
@@ -41,22 +42,22 @@
                     <div class="form-group" id="divCpf">
                         <label for="cpf" class="control-label"><fmt:message key="label.cpf"></fmt:message></label><span class="required"> *</span>
                         <input type="text" id="cpf" class="form-control" name="naturalPerson.cpf" value="<c:if test="${person.typePerson eq 'NaturalPerson'}">${naturalPerson.cpf}</c:if>"/>
-                        <span class="redText">${errors.from('naturalPerson.cpf')}</span>
-                        <span class="redText" id="cpfEquals"><fmt:message key="message.cpfEquals"/> </span>
+                        <span class="required">${errors.from('naturalPerson.cpf')}</span>
+                        <span class="required" id="cpfEquals"><fmt:message key="message.cpfEquals"/> </span>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-2">
                     <div class="form-group" id="rgDiv">
                         <label for="rg" class="control-label"><fmt:message key="label.rg"></fmt:message></label><span class="required"> *</span>
                         <input type="text" id="rg" class="form-control" name="naturalPerson.rg" value="<c:if test="${person.typePerson eq 'NaturalPerson'}">${naturalPerson.rg}</c:if>" />
-                        <span class="redText">${errors.from('naturalPerson.rg')}</span>
+                        <span class="required">${errors.from('naturalPerson.rg')}</span>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-2">
                     <div class="form-group">
                         <label for="emittingOrga" class="control-label"><fmt:message key="label.emittingOrgan"></fmt:message></label><span class="required"> *</span>
                         <input type="text" id=emittingOrga class="form-control" name="naturalPerson.emittingOrgan" value="<c:if test="${person.typePerson eq 'NaturalPerson'}">${naturalPerson.emittingOrgan}</c:if>" />
-                        <span class="redText">${errors.from('naturalPerson.emittingOrgan')}</span>
+                        <span class="required">${errors.from('naturalPerson.emittingOrgan')}</span>
                     </div>
                 </div>
             </div>
@@ -67,15 +68,15 @@
                     <div class="form-group">
                         <label for="companyName" class="control-label"><fmt:message key="label.companyName"></fmt:message></label><span class="required"> *</span>
                         <input type="text" id="companyName" class="form-control" name="juristicPerson.companyName" value="<c:if test="${person.typePerson eq 'JuristicPerson'}">${juristicPerson.companyName}</c:if>" />
-                        <span class="redText">${errors.from('juristicPerson.companyName')}</span>
+                        <span class="required">${errors.from('juristicPerson.companyName')}</span>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-2">
                     <div class="form-group" id="cnpjDiv">
                         <label for="cnpj" class="control-label"><fmt:message key="label.cnpj"></fmt:message></label><span class="required"> *</span>
                         <input type="text" id="cnpj" class="form-control" name="juristicPerson.cnpj" value="<c:if test="${person.typePerson eq 'JuristicPerson'}">${juristicPerson.cnpj}</c:if>" />
-                        <span class="redText">${errors.from('juristicPerson.cnpj')}</span>
-                        <span class="redText" id="cnpjEquals"><fmt:message key="message.cnpjEquals"/> </span>
+                        <span class="required">${errors.from('juristicPerson.cnpj')}</span>
+                        <span class="required" id="cnpjEquals"><fmt:message key="message.cnpjEquals"/> </span>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-2">
@@ -97,21 +98,21 @@
                 <div class="form-group">
                     <label class="control-label" for="name"><fmt:message key="label.name"></fmt:message>/<fmt:message key="label.corporateName"></fmt:message></label><span class="required"> *</span>
                     <input type="text" class="form-control" id="name" name="person.name" value="${person.name}" />
-                    <span class="redText">${errors.from('person.name')}</span>
+                    <span class="required">${errors.from('person.name')}</span>
                 </div>
             </div>
             <div class="col-md-4 col-sm-4">
                 <div class="form-group">
-                    <label class="control-label" for="street"><fmt:message key="label.street"></fmt:message></label><span class="required"> *</span>
+                    <label class="control-label" for="street"><fmt:message key="label.street"></fmt:message></label>
                     <input type="text" class="form-control" id="street" name="address.street" value="${address.street}"/>
-                    <span class="redText">${errors.from('address.street')}</span>
+                    <span class="required">${errors.from('address.street')}</span>
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
                 <div class="form-group">
-                    <label class="control-label" for="number"><fmt:message key="label.number"></fmt:message></label><span class="required"> *</span>
+                    <label class="control-label" for="number"><fmt:message key="label.number"></fmt:message></label>
                     <input type="text" class="form-control" id="number" name="address.number" value="${address.number}" />
-                    <span class="redText">${errors.from('address.number')}</span>
+                    <span class="required">${errors.from('address.number')}</span>
                 </div>
             </div>
         </div>
@@ -120,14 +121,14 @@
                 <div class="form-group">
                     <label class="control-label" for="neighborhood"><fmt:message key="label.neighborhood"></fmt:message></label><span class="required"> *</span>
                     <input type="text" class="form-control" id="neighborhood" name="address.neighborhood" value="${address.neighborhood}" />
-                    <span class="redText">${errors.from('address.neighborhood')}</span>
+                    <span class="required">${errors.from('address.neighborhood')}</span>
                 </div>
             </div>
             <div class="col-md-4 col-sm-4">
                 <div class="form-group">
                     <label class="control-label" for="city"><fmt:message key="label.city"></fmt:message></label><span class="required"> *</span>
                     <input type="text" class="form-control" id="city" name="address.city" value="${address.city}" />
-                    <span class="redText">${errors.from('address.city')}</span>
+                    <span class="required">${errors.from('address.city')}</span>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3">
@@ -139,7 +140,7 @@
                             <option value="${state.id}" <c:if test="${state.id eq address.state.id}">selected</c:if>>${state.name} - ${state.acronym}</option>
                         </c:forEach>
                     </select>
-                    <span class="redText">${errors.from('address.state')}</span>
+                    <span class="required">${errors.from('address.state')}</span>
                 </div>
             </div>
         </div>
@@ -148,35 +149,35 @@
                 <div class="form-group">
                     <label  class="control-label" for="zipCode"><fmt:message key="label.zipCode"></fmt:message></label><span class="required"> *</span>
                     <input type="text" class="form-control" id="zipCode" name="address.zipCode" value="${address.zipCode}"/>
-                    <span class="redText">${errors.from('address.zipCode')}</span>
+                    <span class="required">${errors.from('address.zipCode')}</span>
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                     <label class="control-label" for="phone"><fmt:message key="label.phone"></fmt:message></label>
                     <input type="text" class="form-control" id="phone" name="contact.phone" value="${contact.phone}"/>
-                    <span class="redText">${errors.from('contact.phone')}</span>
+                    <span class="required">${errors.from('contact.phone')}</span>
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                     <label class="control-label" for="secondaryPhone"><fmt:message key="label.secondaryPhone"></fmt:message></label>
                     <input type="text" class="form-control" id="secondaryPhone" name="contact.secondaryPhone" value="${contact.secondaryPhone}"/>
-                    <span class="redText">${errors.from('contact.secondaryPhone')}</span>
+                    <span class="required">${errors.from('contact.secondaryPhone')}</span>
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                     <label class="control-label" for="cellPhone"><fmt:message key="label.cellPhone"></fmt:message></label>
                     <input type="text" class="form-control" id="cellPhone" name="contact.cellPhone" value="${contact.cellPhone}"/>
-                    <span class="redText">${errors.from('contact.cellPhone')}</span>
+                    <span class="required">${errors.from('contact.cellPhone')}</span>
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                     <label class="control-label" for="secondaryCellPhone"><fmt:message key="label.secondaryCellPhone"></fmt:message></label>
                     <input type="text" class="form-control" id="secondaryCellPhone" name="contact.secondaryCellPhone" value="${contact.secondaryCellPhone}"/>
-                    <span class="redText">${errors.from('contact.secondaryCellPhone')}</span>
+                    <span class="required">${errors.from('contact.secondaryCellPhone')}</span>
                 </div>
             </div>
         </div>
@@ -185,14 +186,14 @@
                 <div class="form-group">
                     <label class="control-label" for="email"><fmt:message key="label.email"></fmt:message></label>
                     <input type="text" class="form-control" id="email" name="contact.email" value="${contact.email}" />
-                    <span class="redText">${errors.from('contact.email')}</span>
+                    <span class="required">${errors.from('contact.email')}</span>
                 </div>
             </div>
             <div class="col-md-4 col-sm-4">
                 <div class="form-group">
                     <label class="control-label" for="website"><fmt:message key="label.website"></fmt:message></label>
                     <input type="text" class="form-control" id="website" name="contact.website" value="${contact.website}"/>
-                    <span class="redText">${errors.from('contact.website')}</span>
+                    <span class="required">${errors.from('contact.website')}</span>
                 </div>
             </div>
         </div>
@@ -201,7 +202,7 @@
                 <div class="form-group">
                     <label class="control-label" for="contactName"><fmt:message key="label.contactName"></fmt:message></label>
                     <input type="text" class="form-control" id="contactName" name="contact.contactName" value="${contact.contactName}"/>
-                    <span class="redText">${errors.from('contact.contactName')}</span>
+                    <span class="required">${errors.from('contact.contactName')}</span>
                 </div>
             </div>
         </div>
@@ -215,6 +216,7 @@
             </div>
         </div>
     </div>
+</form>
 </html:template>
 </body>
 <html:jsAssets/>
