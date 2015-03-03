@@ -81,6 +81,8 @@
             </div>
 </html:template>
 </body>
+<html:notification/>
+<html:jsAssets/>
 <html:tableJsAssets/>
 <script src="${pageContext.request.contextPath}/asset/js/custom/costCenter.js"></script>
 </html>

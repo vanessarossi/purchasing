@@ -56,7 +56,7 @@ public class CostCenterController {
     @Get("/deletar/{costCenter.id}")
     public void deletar(CostCenter costCenter){
         costCenterService.delete(costCenter);
-        result.redirectTo(this).index();
+        result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
     @Get("/pesquisar/{costCenter.id}/json")

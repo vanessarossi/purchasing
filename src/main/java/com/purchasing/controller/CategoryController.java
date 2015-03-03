@@ -50,13 +50,13 @@ public class CategoryController {
     @Get("/deletar/{category.id}")
     public void delete(Category category) {
        categoryService.delete(category);
-       result.redirectTo(this).index();
+        result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
-    @Get("/pesqisar/{category.id}/json")
+    @Get("/pesquisar/{category.id}/json")
     public void searchById(Category category){
-        Category categorySaved = categoryService.searchById(category);
-        result.use(Results.json()).withoutRoot().from(categorySaved).serialize();
+        Category categoryFound = categoryService.searchById(category);
+        result.use(Results.json()).withoutRoot().from(categoryFound).serialize();
     }
 
     @Get("/paginar")
