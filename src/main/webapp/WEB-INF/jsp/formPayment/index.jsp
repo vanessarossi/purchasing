@@ -14,14 +14,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newFormPayment">
             <fmt:message key="button.newFormPayment"/>
         </button>
-        <br/><br/>
-        <c:forEach var="error" items="${errors}">
-            <span class="label label-danger">
-                              ${error.message}
-            </span>
-            <br/>
-            <br/>
-        </c:forEach>
+        <br/>
         <table class="table table-striped table-hover table-condensed" id="formPaymentTable">
             <thead>
             <tr>
@@ -59,7 +52,7 @@
                                 <br>
                                 <div class="radio-inline">
                                     <label class="control-label">
-                                        <input ype="radio" value="true" name="formPayment.input" id="input"> <fmt:message key="label.yes"/>
+                                        <input type="radio" value="true" name="formPayment.input" id="input"> <fmt:message key="label.yes"/>
                                     </label>
                                 </div>
                                 <div class="radio-inline">
@@ -94,6 +87,8 @@
     </div>
 </html:template>
 </body>
+<html:notification/>
+<html:jsAssets/>
 <html:tableJsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/formPayment.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-payment.js"></script>
 </html>

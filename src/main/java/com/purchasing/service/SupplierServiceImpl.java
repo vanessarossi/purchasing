@@ -103,7 +103,7 @@ public class SupplierServiceImpl implements SupplierService {
                 String colName = supplier.getPerson().getName();
                 String colPhone = supplier.getContact().getPhone();
                 String colCategory = supplier.getCategory().getDescription();
-                String buttonView = "<a onclick='view("+supplier.getId()+")'><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
+                String buttonView = "<a onclick='viewSupplier("+supplier.getId()+")'><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
                 String buttonEdit = "<a href=/purchasing/fornecedor/editar/"+supplier.getId()+"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
                 String buttonRemove = "<a onclick='confirmDetele("+supplier.getId()+")'><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
                 String [] row = {

@@ -1,10 +1,6 @@
 package com.purchasing.controller;
 
-import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
 import com.purchasing.entity.FormPayment;
@@ -50,7 +46,7 @@ public class FormPaymentController {
     @Get("/deletar/{formPayment.id}")
     public void delete(FormPayment formPayment) {
        formPaymentService.delete(formPayment);
-       result.redirectTo(this).index();
+       result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
     @Get("/pesquisar/{formPayment.id}/json")

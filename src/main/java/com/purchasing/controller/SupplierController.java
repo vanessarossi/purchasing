@@ -90,7 +90,7 @@ public class SupplierController {
     @Get("/deletar/{supplier.id}")
     public void delete(Supplier supplier) {
        supplierService.delete(supplier);
-       result.redirectTo(this).list();
+        result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
     @Get("/editar/{supplier.id}")
@@ -107,6 +107,7 @@ public class SupplierController {
         }
         result.redirectTo(this).form();
     }
+
 
     @Get("/paginar")
     public void pagination(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength){

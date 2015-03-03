@@ -14,13 +14,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCostCenter">
             <fmt:message key="button.newCostCenter"/>
         </button>
-        <br/><br/>
-        <c:forEach var="error" items="${errors}">
-            <span class="label label-danger">
-                          ${error.message}
-            </span>
-            <br/><br/>
-        </c:forEach>
+        <br/>
         <table id="costCenterTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>

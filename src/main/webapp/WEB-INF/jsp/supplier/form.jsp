@@ -218,6 +218,7 @@
 </html:template>
 </body>
 <html:jsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/formPayment.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/jquery.mask.min.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-supplier.js"></script>
 </html>
 

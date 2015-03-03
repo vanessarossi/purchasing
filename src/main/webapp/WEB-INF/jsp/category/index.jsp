@@ -14,13 +14,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCategory">
               <fmt:message key="button.newCategory"/>
             </button>
-        <br/><br/>
-        <c:forEach var="error" items="${errors}">
-            <span class="label label-danger">
-                   ${error.message}
-            </span>
-            <br/>
-        </c:forEach>
+        <br/>
         <table id="categoryTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
