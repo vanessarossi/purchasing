@@ -43,7 +43,7 @@ public class Situation {
     @Column(name = "justification_disapproval")
     private String justificationDisapproval;
 
-    @OneToOne
+    @OneToOne(mappedBy ="situation")
     private Solicitation solicitation;
 
     public Long getId() {

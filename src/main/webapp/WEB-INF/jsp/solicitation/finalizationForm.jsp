@@ -8,7 +8,6 @@
 <body>
 <html:template>
     <div class="container-fluid">
-        <html:template/>
         <div class="page-header">
             <h3><fmt:message key="title.finalization" /></h3>
         </div>
@@ -134,6 +133,6 @@
 </html:template>
 </body>
 <html:jsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/finalizeSolicitation.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/solicitation-finalize.js"></script>
 </html>
 

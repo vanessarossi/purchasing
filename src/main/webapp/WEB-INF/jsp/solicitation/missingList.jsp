@@ -30,6 +30,6 @@
 </html:template>
 </body>
 <html:jsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/solicitationMissing.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/solicitation-missing.js"></script>
 </html>
 

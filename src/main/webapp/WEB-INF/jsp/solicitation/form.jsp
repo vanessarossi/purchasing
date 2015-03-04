@@ -217,7 +217,7 @@
 </body>
 <html:jsAssets/>
 <html:searchProduct/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/formSolicitation.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-solicitation.js"></script>
 <script src="${pageContext.request.contextPath}/asset/js/custom/modalSearchProduct.js"></script>
 </html>
 

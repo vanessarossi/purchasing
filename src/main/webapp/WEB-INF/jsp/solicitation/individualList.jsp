@@ -8,7 +8,6 @@
 <body>
 <html:template>
     <div class="container-fluid">
-        <html:template/>
         <div class="page-header">
             <h3><fmt:message key="title.solicitations" /></h3>
         </div>
@@ -67,6 +66,9 @@
     </div>
 </html:template>
 </body>
+<html:notification/>
 <html:jsAssets/>
+<html:tableJsAssets/>
+<script src="${pageContext.request.contextPath}/asset/js/custom/solicitation-individual.js"></script>
 </html>
 
