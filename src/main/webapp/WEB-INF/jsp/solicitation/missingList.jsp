@@ -3,7 +3,7 @@
 <head>
     <title><fmt:message key="title.page.solicitation" /> - <fmt:message key="title.purchasing" /></title>
     <html:head />
-    <html:formAssets/>
+    <html:tableAssets/>
 </head>
 <body>
 <html:template>
@@ -29,7 +29,9 @@
     </div>
 </html:template>
 </body>
+<html:notification/>
 <html:jsAssets/>
+<html:tableJsAssets/>
 <script src="${pageContext.request.contextPath}/asset/js/custom/solicitation-missing.js"></script>
 </html>
 
