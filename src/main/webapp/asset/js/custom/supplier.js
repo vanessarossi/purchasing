@@ -29,7 +29,6 @@ function fillTable(){
   });
 };
 
-
 function viewSupplier(supplier) {
     $.ajax({
       type: "GET",

@@ -65,8 +65,8 @@ public class ProductController {
 
     @Get("/deletar/{product.id}")
     public void delete(Product product) {
-          productService.delete(product);
-          result.redirectTo(this).list();
+        productService.delete(product);
+        result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
     @Get("/editar/{product.id}")

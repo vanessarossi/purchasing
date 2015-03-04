@@ -67,7 +67,7 @@ public class UnitServiceImpl implements UnitService{
 
     @Override
     public List<Unit> findAllOrderDescription() {
-        return null;
+        return unitDAO.findAll(Unit.class);
     }
 
 }

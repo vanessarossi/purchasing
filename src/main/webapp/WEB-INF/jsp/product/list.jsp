@@ -73,6 +73,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" >
+                        <div class="col-sm-2 col-md-2">
+                            <div class="form-group">
+                                <label class="control-label"><fmt:message key="label.minimumStock"></fmt:message></label><br>
+                                <span id="minimumStock"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <div class="form-group">
+                                <label class="control-label"><fmt:message key="label.barCode"></fmt:message></label><br>
+                                <span id="barCode"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-5 col-md-5">
                             <div class="form-group">
@@ -90,6 +104,8 @@
     </div>
 </html:template>
 </body>
+<html:notification/>
+<html:jsAssets/>
 <html:tableJsAssets/>
 <script src="${pageContext.request.contextPath}/asset/js/custom/product.js"></script>
 </html>

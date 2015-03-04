@@ -3,18 +3,8 @@ package com.purchasing.entity;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -33,7 +23,6 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @NotBlank
     @Length(min = 1, max = 200)
     @Column(name = "model")
     private String model;
@@ -42,14 +31,14 @@ public class Product {
     @Length(min = 1, max = 100)
     @Column(name = "mark")
     private String mark;
-    
-    @NotBlank
+
     @Length(min = 1, max = 100)
     @Column(name = "observation")
     private String observation;
 
+    @Length(min = 1, max = 45)
     @Column(name = "bar_code")
-    private Integer barCode;
+    private String barCode;
 
     @Digits(integer = 10, fraction = 2)
     @Column(name = "minimum_stock")
@@ -68,6 +57,7 @@ public class Product {
 
     @OneToOne(mappedBy = "product")
     private Stock stock;
+
 
     public Long getId() {
         return id;
@@ -109,11 +99,11 @@ public class Product {
         this.observation = observation;
     }
 
-    public Integer getBarCode() {
+    public String getBarCode() {
         return barCode;
     }
 
-    public void setBarCode(Integer barCode) {
+    public void setBarCode(String barCode) {
         this.barCode = barCode;
     }
 
