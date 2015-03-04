@@ -34,7 +34,7 @@ $('#code').blur(function () {
     var id = $('#code').val();
     if (id != null && id != '') {
         $.ajax({
-            url: getContextPath()+'produto/pesquisarPorCodigo/'+id,
+            url: getContextPath()+'produto/pesquisar/'+id+'/json',
             type: "GET",
             dataType: 'json',
             beforeSend: function(){
@@ -67,7 +67,6 @@ $('#code').blur(function () {
         $('#unit').val('');
     }
 });
-
 
 function addProduct() {
     var product = $('#product').val();
@@ -161,7 +160,7 @@ function editProduct(index,code){
     $('#code').val(product);
     var id = $('#code').val();
     $.ajax({
-        url: getContextPath()+'produto/pesquisarPorCodigo/'+id,
+        url: getContextPath()+'produto/pesquisar/'+id+'/json',
         type: "GET",
         dataType: 'json',
         beforeSend: function(){

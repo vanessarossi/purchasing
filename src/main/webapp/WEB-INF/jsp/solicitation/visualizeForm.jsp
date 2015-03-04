@@ -3,158 +3,175 @@
 <head>
     <title><fmt:message key="title.page.solicitation" /> - <fmt:message key="title.purchasing" /></title>
     <html:head />
-    <html:formAssets/>
+    <html:tableAssets/>
 </head>
 <body>
 <html:template>
     <div class="container-fluid">
         <div class="page-header">
-            <h3><fmt:message key="title.solititation" /></h3>
+            <h3><fmt:message key="title.solicitation" /></h3>
         </div>
-        <div class="row">
-            <div class="col-md-2 col-sm-2">
-                <div class="form-group">
-                    <label  class="control-label"><fmt:message key="label.code"/></label><br>
-                    <span id="idSolicitation">${solicitation.id}</span>
-                </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><fmt:message key="title.general.information" /></h3>
             </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="form-group">
-                    <label  class="control-label"><fmt:message key="label.type.solicitation"/></label><br>
-                    <span>${solicitation.type.description}</span>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <div class="form-group">
-                    <label  class="control-label" ><fmt:message key="label.name"/></label><br>
-                    <span>${solicitation.user.name}</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="form-group">
-                    <label  class="control-label"><fmt:message key="label.costCenter"/></label><br>
-                           ${solicitation.costCenter.description}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-3">
-                <div class="form-group">
-                    <label class="control-label"><fmt:message key="label.urgency"/></label><br>
-                    <c:choose>
-                        <c:when test="${solicitation.urgency== true}"><span>Sim</span>
-                            <br />
-                        </c:when>
-                        <c:when test="${solicitation.urgency== false}"><span>Não</span>
-                            <br />
-                        </c:when>
-                        <c:otherwise><span></span>
-                            <br />
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="form-group">
-                    <label class="control-label"><fmt:message key="label.emergency"/></label><br>
-                    <c:choose>
-                        <c:when test="${solicitation.emergency== true}"><span>Sim</span>
-                            <br />
-                        </c:when>
-                        <c:when test="${solicitation.urgency== false}"><span>Não</span>
-                            <br />
-                        </c:when>
-                        <c:otherwise><span>Não</span>
-                            <br />
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="form-group">
-                    <label class="control-label"><fmt:message key="label.status"/></label><br>
-                    <span>${solicitation.situation.status.description}</span>
-                </div>
-            </div>
-        </div>
-        <c:if test="${solicitation.type eq 'Service' or solicitation.type eq 'MaterialService'}">
-            <div id="divService">
+            <div class="panel-body">
                 <div class="row">
-                    <h4><fmt:message key="title.solicitation.service" /></h4>
-                    <hr/>
+                    <div class="col-md-2 col-sm-2">
+                        <div class="form-group">
+                            <label  class="control-label"><fmt:message key="label.code"/></label><br>
+                            <span id="idSolicitation">${solicitation.id}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="form-group">
+                            <label  class="control-label"><fmt:message key="label.type.solicitation"/></label><br>
+                            <span>${solicitation.type.description}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="form-group">
+                            <label  class="control-label" ><fmt:message key="label.name"/></label><br>
+                            <span>${solicitation.user.name}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="form-group">
+                            <label  class="control-label"><fmt:message key="label.costCenter"/></label><br>
+                                ${solicitation.costCenter.description}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
-                            <label  class="control-label"><fmt:message key="label.typeService"/></label><br>
-                            <span>${solicitationRequest.service.typeService.description}</span>
+                            <label class="control-label"><fmt:message key="label.urgency"/></label><br>
+                            <c:choose>
+                                <c:when test="${solicitation.urgency== true}"><span>Sim</span>
+                                    <br />
+                                </c:when>
+                                <c:when test="${solicitation.urgency== false}"><span>Não</span>
+                                    <br />
+                                </c:when>
+                                <c:otherwise><span></span>
+                                    <br />
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
-                    <div class="col-md-9 col-sm-9">
+                    <div class="col-md-3 col-sm-3">
                         <div class="form-group">
-                            <label  class="control-label"><fmt:message key="label.description"/></label><br>
-                            <span>${solicitationRequest.service.description}</span>
+                            <label class="control-label"><fmt:message key="label.emergency"/></label><br>
+                            <c:choose>
+                                <c:when test="${solicitation.emergency== true}"><span>Sim</span>
+                                    <br />
+                                </c:when>
+                                <c:when test="${solicitation.urgency== false}"><span>Não</span>
+                                    <br />
+                                </c:when>
+                                <c:otherwise><span>Não</span>
+                                    <br />
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label"><fmt:message key="label.status"/></label><br>
+                            <span>${solicitation.situation.status.description}</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </c:if>
-        <c:if test="${solicitation.type eq 'Material' or solicitation.type eq 'MaterialService'}">
-            <div id="divMaterial">
                 <div class="row">
-                    <h4><fmt:message key="title.solicitation.products" /></h4>
-                    <hr/>
-                </div>
-                <div class="row">
-                    <table class="table" id="tableProductSolicitation">
-                        <thead>
-                        <tr>
-                            <th style="width:1%"><fmt:message key="table.code"/></th>
-                            <th style="width:50%"><fmt:message key="table.product"/></th>
-                            <th style="width:5%"><fmt:message key="table.abbreviatedQuantity"/></th>
-                            <th style="width:6%"><fmt:message key="table.unit"/></th>
-                            <th style="width:1%"><fmt:message key="table.status"/></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </c:if>
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div class="form-group">
-                    <label  class="control-label" ><fmt:message key="label.observation"/></label><br>
-                    <span>${solicitation.observation}</span>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label  class="control-label" ><fmt:message key="label.observation"/></label><br>
+                            <span>${solicitation.observation}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <c:if test="${solicitation.situation.justificationCancellation != null }">
-            <div class="row">
-                <h4><fmt:message key="title.justification.cancellation" /></h4>
-                <hr/>
+
+        <c:if test="${solicitation.type eq 'Service' or solicitation.type eq 'MaterialService'}">
+            <div class="panel panel-default divService">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><fmt:message key="title.solicitation.service" /></h3>
+                </div>
+                <div class="panel-body">
+                   <div class="row">
+                       <div class="col-md-3 col-sm-3">
+                                <div class="form-group">
+                                    <label  class="control-label"><fmt:message key="label.typeService"/></label><br>
+                                    <span>${solicitationRequest.service.typeService.description}</span>
+                                </div>
+                            </div>
+                       <div class="col-md-9 col-sm-9">
+                           <div class="form-group">
+                               <label  class="control-label"><fmt:message key="label.description"/></label><br>
+                               <span>${solicitationRequest.service.description}</span>
+                           </div>
+                       </div>
+                   </div>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-md-11 col-sm-11">
-                    <div class="form-group">
-                        <label  class="control-label"><fmt:message key="label.justification"/></label><br>
-                        <span>${solicitation.situation.justificationCancellation}</span>
+        </c:if>
+
+        <c:if test="${solicitation.type eq 'Material' or solicitation.type eq 'MaterialService'}">
+            <div class="panel panel-default divMaterial">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><fmt:message key="title.solicitation.products" /></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <table class="table" id="tableProductSolicitation">
+                            <thead>
+                            <tr>
+                                <th style="width:1%"><fmt:message key="table.code"/></th>
+                                <th style="width:50%"><fmt:message key="table.product"/></th>
+                                <th style="width:5%"><fmt:message key="table.abbreviatedQuantity"/></th>
+                                <th style="width:6%"><fmt:message key="table.unit"/></th>
+                                <th style="width:1%"><fmt:message key="table.status"/></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </c:if>
-        <c:if test="${solicitation.situation.justificationDisapproval != null }">
-            <div id="divService">
-                <div class="row">
-                    <h4><fmt:message key="title.justification.disapproval" /></h4>
-                    <hr/>
+
+        <c:if test="${solicitation.situation.justificationCancellation != null }">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><fmt:message key="title.justification.cancellation" /></h3>
                 </div>
-                <div class="row">
-                    <div class="col-md-11 col-sm-11">
-                        <div class="form-group">
-                            <label  class="control-label"><fmt:message key="label.justification"/></label><br>
-                            <span>${solicitation.situation.justificationDisapproval}</span>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-11 col-sm-11">
+                            <div class="form-group">
+                                <label  class="control-label"><fmt:message key="label.justification"/></label><br>
+                                <span>${solicitation.situation.justificationCancellation}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
+        <c:if test="${solicitation.situation.justificationDisapproval != null }">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><fmt:message key="title.justification.disapproval" /></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-11 col-sm-11">
+                            <div class="form-group">
+                                <label  class="control-label"><fmt:message key="label.justification"/></label><br>
+                                <span>${solicitation.situation.justificationDisapproval}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -228,7 +245,9 @@
     </div>
 </html:template>
 </body>
+<html:notification/>
 <html:jsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/solicitationMissing.js"></script>
+<html:tableJsAssets/>
+<script src="${pageContext.request.contextPath}/asset/js/custom/visualize-solicitation.js"></script>
 </html>
 
