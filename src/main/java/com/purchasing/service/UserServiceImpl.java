@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserService {
             String colUsername = user.getUsername() ;
             String colRole = user.getRole().getDescription() ;
             String colActive = user.getActive() == true ? "Sim" : "Não";
-            String buttonView = "<a onclick='view("+user.getId()+")'><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
+            String buttonView = "<a onclick='viewUser("+user.getId()+")'><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
             String buttonEdit = "<a href=/purchasing/usuario/editar/"+user.getId()+"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
             String buttonRemove = "<a onclick='confirmDetele("+user.getId()+")'><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String [] row = {

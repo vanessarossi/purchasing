@@ -85,3 +85,8 @@ $('#btn-confirm').click(function(){
 $('#btn-cancel').click(function(){
     $('#modalConfirm').modal('hide');
 });
+
+$('#newCategory').on('hide.bs.modal', function (e) {
+    $('#description').val("");
+    $('#id').val(""); 
+});

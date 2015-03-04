@@ -17,8 +17,8 @@
                 <li><a href="<c:url value="/formaPagamento" ></c:url>"><fmt:message key="submenu.formPayment"/></a></li>
                 <li><a href="<c:url value="/fornecedor" ></c:url>"><fmt:message key="submenu.supplier"/></a></li>
                 <li><a href="<c:url value="/produto" ></c:url>"><fmt:message key="submenu.product"/></a></li>
-                <li><a href="<c:url value="/unidade" ></c:url>"><fmt:message key="submenu.unit"/></a></li>
                 <li><a href="<c:url value="/tipoServico" ></c:url>"><fmt:message key="submenu.typeService"/></a></li>
+                <li><a href="<c:url value="/unidade" ></c:url>"><fmt:message key="submenu.unit"/></a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header"><fmt:message key="submenu.headerConfiguration"/></li>
                 <li><a href="<c:url value="/usuario" ></c:url>"><fmt:message key="submenu.user"/></a></li>

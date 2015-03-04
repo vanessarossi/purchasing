@@ -29,7 +29,6 @@ function fillTable(){
   });
 };
 
-
 function viewProduct(product) {
     $.ajax({
       type: "GET",

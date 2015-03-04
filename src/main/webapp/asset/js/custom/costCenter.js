@@ -77,13 +77,6 @@ $('#newCostCenter').on('show.bs.modal', function (e) {
   });           
 });
 
-$('#newCostCenter').on('hide.bs.modal', function (e) {
-    $('#description').val("");
-    $('#code').val("");
-    $('#id').val("");
-    $("#company option").remove();       
-});
-
 function confirmDetele(id) {
     $('#code').val(id);
     $('#modalConfirm').modal('show');

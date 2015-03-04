@@ -50,7 +50,7 @@ public class TypeServiceController {
     @Get("/deletar/{typeService.id}")
     public void delete(TypeService typeService) {
        typeServiceService.delete(typeService);
-       result.redirectTo(this).index();
+        result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
     @Get("/pesquisar/{typeService.id}/json")

@@ -58,8 +58,8 @@ public class UserController {
 
     @Get("/deletar/{user.id}")
     public void delete(User user) {
-           userService.delete(user);
-           result.redirectTo(this).list();
+        userService.delete(user);
+        result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
     @Get("/editar/{user.id}")
