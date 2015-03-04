@@ -139,6 +139,6 @@
 </html:template>
 </body>
 <html:jsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/formUser.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-user.js"></script>
 </html>
 
