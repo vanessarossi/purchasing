@@ -89,4 +89,28 @@ public class ContractController {
                dataTableModel.setAaData(contractObjects.toArray());
            result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
        }
+
+
+    /** renovação **/
+
+    @Post("/salvar")
+    public void salvarRene(@Valid Contract contract, UploadedFile uploadedFile) {
+        validator.ensure(contract.getSupplier().getId()!= null , new I18nMessage("contract.supplier", "message.error.null"));
+        validator.onErrorForwardTo(this).form();
+        contractService.save(contract,uploadedFile);
+        result.redirectTo(this).list();
+    }
+
+    @Get("/deletar/{contract.id}")
+    public void deleteRene(Contract contract) {
+        contractService.delete(contract);
+        result.redirectTo(this).list();
+    }
+
+    @Get("/editar/{contract.id}")
+    public void editRene(Contract contract){
+        Contract contractFound = contractService.searchById(contract);
+        result.include("contract",contractFound);
+        result.redirectTo(this).form();
+    }
 }
