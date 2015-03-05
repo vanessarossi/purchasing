@@ -1,5 +1,6 @@
-package com.purchasing.printer;
+package com.purchasing.printer.impl;
 
+import com.purchasing.printer.base.BasePrinter;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;

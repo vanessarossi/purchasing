@@ -1,4 +1,6 @@
-package com.purchasing.printer;
+package com.purchasing.printer.impl;
+
+import com.purchasing.printer.base.Printer;
 
 import java.io.File;
 

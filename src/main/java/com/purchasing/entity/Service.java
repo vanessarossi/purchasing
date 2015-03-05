@@ -1,17 +1,8 @@
 package com.purchasing.entity;
 
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -26,7 +17,6 @@ public class Service {
     private Long id;
 
     @NotBlank
-    @Length(min = 1, max = 100)
     @Column(name = "description")
     private String description;
 

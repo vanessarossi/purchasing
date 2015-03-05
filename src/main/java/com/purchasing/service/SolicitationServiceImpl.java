@@ -1,18 +1,10 @@
 package com.purchasing.service;
 
-import com.purchasing.dao.CostCenterDAO;
-import com.purchasing.dao.ServiceDAO;
-import com.purchasing.dao.SituationDAO;
-import com.purchasing.dao.SolicitationDAO;
-import com.purchasing.dao.SolicitationRequestDAO;
-import com.purchasing.entity.Product;
-import com.purchasing.entity.Service;
-import com.purchasing.entity.Situation;
-import com.purchasing.entity.Solicitation;
-import com.purchasing.entity.SolicitationRequest;
-import com.purchasing.entity.User;
+import com.purchasing.dao.*;
+import com.purchasing.entity.*;
 import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.enumerator.TypeEnum;
+import com.purchasing.printer.SolicitationPrinter;
 import com.purchasing.service.impl.SolicitationService;
 import com.purchasing.support.date.Conversor;
 
@@ -30,7 +22,7 @@ import java.util.List;
 public class SolicitationServiceImpl implements SolicitationService {
 
     @Inject private HttpSession httpSession;
-   // @Inject private SolicitationPrinter solicitationPrinter;
+    @Inject private SolicitationPrinter solicitationPrinter;
     @Inject private SituationDAO situationDAO;
     @Inject private SolicitationDAO solicitationDAO;
     @Inject private SolicitationRequestDAO solicitationRequestDAO;
@@ -141,7 +133,7 @@ public class SolicitationServiceImpl implements SolicitationService {
 
     @Override
     public File generateFile(Solicitation solicitation) {
-        return null;
+        return solicitationPrinter.generate(solicitation.getId());
     }
 
     @Override
