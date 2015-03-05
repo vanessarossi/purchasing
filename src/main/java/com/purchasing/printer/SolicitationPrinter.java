@@ -56,7 +56,7 @@ public class SolicitationPrinter extends PrinterImpl implements BasePrinter {
         Map map = new HashMap();
         Image img = new ImageIcon(getClass().getResource("/jasper/img/img.jpg")).getImage();
         String number = solicitation.getId().toString();
-        String date = Conversor.converterDateInString(solicitation.getInitialDate());
+        String date = Conversor.converterDateTimeInString(solicitation.getInitialDate());
         String user = solicitation.getUser().getName();
         String costCenter = solicitation.getCostCenter().getCode()+" "+solicitation.getCostCenter().getDescription();
         String priority="";

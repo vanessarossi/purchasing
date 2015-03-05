@@ -157,6 +157,7 @@ public class SolicitationController {
         result.include("controller", this.getClass().toString());
     }
 
+
     /** Paginação **/
     @Get("/paginar")
     public void pagination(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength){
