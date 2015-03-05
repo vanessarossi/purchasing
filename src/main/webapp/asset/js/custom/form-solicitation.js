@@ -31,7 +31,7 @@ $('#type').change(function(){
 });
 
 $('#code').blur(function () {
-    var id = $('#code').val();
+    var id = $('#code').val().trim();
     if (id != null && id != '') {
         $.ajax({
             url: getContextPath()+'produto/pesquisar/'+id+'/json',

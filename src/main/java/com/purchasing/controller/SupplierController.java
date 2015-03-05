@@ -8,14 +8,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
-import com.purchasing.entity.Address;
-import com.purchasing.entity.Category;
-import com.purchasing.entity.Contact;
-import com.purchasing.entity.JuristicPerson;
-import com.purchasing.entity.NaturalPerson;
-import com.purchasing.entity.Person;
-import com.purchasing.entity.State;
-import com.purchasing.entity.Supplier;
+import com.purchasing.entity.*;
 import com.purchasing.enumerator.TypePersonEnum;
 import com.purchasing.service.impl.CategoryService;
 import com.purchasing.service.impl.SupplierService;
@@ -123,7 +116,11 @@ public class SupplierController {
     @Get("/pesquisar/{supplier.id}/json")
     public void searchById(Supplier supplier){
         Supplier supplierFound = supplierService.searchById(supplier);
-        result.use(Results.json()).withoutRoot().from(supplierFound).include("person").include("person.typePerson").include("contact").include("address").include("address.state").include("category").serialize();
+        if(supplierFound != null){
+            result.use(Results.json()).withoutRoot().from(supplierFound).include("person").include("person.typePerson").include("contact").include("address").include("address.state").include("category").serialize();
+        }else{
+            result.use(Results.json()).withoutRoot().from(false).serialize();
+        }
     }
 
     @Post("/pesquisar/cnpj/json")
@@ -144,5 +141,11 @@ public class SupplierController {
         }else{
             result.use(Results.json()).withoutRoot().from(false).serialize();
         }
+    }
+
+    @Post("/pesquisar/json")
+    public void search(String text){
+        List<Supplier> suppliers = supplierService.search(text);
+        result.use(Results.json()).withoutRoot().from(suppliers).include("person").include("person.juristicPerson").serialize();
     }
 }

@@ -58,15 +58,13 @@ public class ContractServiceImpl implements ContractService {
                 String colInitialDate = Conversor.converterDateInString(contract.getInitialDate());
                 String colFinalDate = Conversor.converterDateInString(contract.getFinalDate());
                 String buttonDownload = "<a href=/purchasing/contrato/download/"+contract.getId()+"><span class=\"fa fa-print btn btn-default btn-xs\"></span></a>";
-                String buttonView = "<a onclick='view("+contract.getId()+")'><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
                 String buttonEdit = "<a href=/purchasing/contrato/editar/"+contract.getId()+"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
                 String buttonRemove = "<a onclick='confirmDetele("+contract.getId()+")'><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
                 String [] row = {
-                        colSupplier,
                         colInitialDate,
                         colFinalDate,
+                        colSupplier,
                         buttonDownload,
-                        buttonView,
                         buttonEdit,
                         buttonRemove
                 };

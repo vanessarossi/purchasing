@@ -88,4 +88,12 @@ public class Person {
     public void setJuristicPerson(JuristicPerson juristicPerson) {
         this.juristicPerson = juristicPerson;
     }
+
+    public String getCnpj(){
+        return this.getJuristicPerson().getCnpj();
+    }
+
+    public String getCpf(){
+        return this.getNaturalPerson().getCpf();
+    }
 }

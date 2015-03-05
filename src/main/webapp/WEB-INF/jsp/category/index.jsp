@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="page-header">
                 <h3><fmt:message key="title.categories" /></h3>
-            </div>
+        </div>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCategory">
               <fmt:message key="button.newCategory"/>
             </button>
@@ -26,7 +26,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
     </div>
         <div class="modal fade" id="newCategory" tabindex="-1" role="dialog" aria-labelledby="newCategory" aria-hidden="true">
           <div class="modal-dialog">

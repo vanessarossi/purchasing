@@ -1,16 +1,154 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: vanessa
-  Date: 2/23/15
-  Time: 12:43 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <title></title>
+    <title><fmt:message key="title.page.contract" /> - <fmt:message key="title.purchasing" /></title>
+    <html:head />
+    <html:formAssets/>
 </head>
 <body>
+<html:template>
+    <form action='<c:url value="/contrato/salvar"></c:url>' method="post" id="contractForm" enctype="multipart/form-data">
+        <div class="container-fluid">
+            <div class="page-header">
+                <h3><fmt:message key="title.contract" /></h3>
+            </div>
+            <div class="row">
+                <div class="col-md-1 col-sm-1">
+                    <div class="form-group">
+                        <label class="control-label"  for="code"><fmt:message key="label.code"/></label>
+                        <input type="text" class="form-control" id="code" name="contract.supplier.id" >
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-7">
+                    <div class="form-group">
+                        <label class="control-label" for="supplier"><fmt:message key="label.supplier"/></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="supplier" readonly>
+                            <span class="input-group-btn"><button class="btn btn-default" type="button" data-toggle="modal" data-target="#searchSupplier"><span class="fa fa-search"></span></button></span>
+                        </div>
+                        <span class="required">${errors.from('contract.supplier')}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label" for="initialDate"><fmt:message key="label.initialDate"></fmt:message></label><span class="required"> *</span>
+                        <fmt:formatDate pattern="dd/MM/yyyy" value="${contract.initialDate}" var="initialDate"/>
+                        <input type="text" class="form-control date" name="contract.initialDate" id="initialDate" value="${initialDate}">
+                        <span class="required">${errors.from('contract.initialDate')}</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label" for="finalDate"><fmt:message key="label.finalDate"></fmt:message></label><span class="required"> *</span>
+                        <fmt:formatDate pattern="dd/MM/yyyy" value="${contract.finalDate}" var="finalDate"/>
+                        <input type="text" class="form-control date" name="contract.finalDate" id="finalDate" value="${finalDate}">
+                        <span class="required">${errors.from('contract.finalDate')}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-11 col-md-11 col-sm-11">
+                    <div class="form-group">
+                        <label class="control-label" for="observation"><fmt:message key="label.observation"></fmt:message></label>
+                        <textarea rows="5" cols="1" class="form-control" name="contract.observation" id="observation">${contract.observation}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="uploadedFile"><fmt:message key="label.file"></fmt:message></label><span class="required"> *</span>
+                        <input type="file" class="form-control" name="uploadedFile" id="uploadedFile"/>
+                        <span class="requiredText">${errors.from('file')}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-7 col-md-offset-7">
+                    <div class="form-group">
+                        <input type="hidden" name="contract.id" value="${contract.id}" >
+                        <a onclick="renewal()" type="button" class="btn btn-primary"><fmt:message key="button.renewal"/></a>
+                        <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
+                        <a href='<c:url value="/contrato"></c:url>' type="button" class="btn btn-danger"><fmt:message key="button.cancel"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
+    <form action='<c:url value="/contrato/renovacao/salvar"></c:url>' method="post" id="renewalForm" enctype="multipart/form-data">
+        <div class="container-fluid">
+            <div class="page-header">
+                <h3><fmt:message key="title.renewal" /></h3>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label"><fmt:message key="label.contract"/></label>
+                        <input type="text" class="form-control" value="${contract.id}"  readonly >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 col-sm-1">
+                    <div class="form-group">
+                        <label class="control-label"><fmt:message key="label.code"/></label>
+                        <input type="text" class="form-control" value="${contract.supplier.id}"  readonly >
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-7">
+                    <div class="form-group">
+                        <label class="control-label" for="supplier"><fmt:message key="label.supplier"/></label>
+                        <input type="text" class="form-control" value="${contract.supplier.person.name}"  readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label" for="initialDate"><fmt:message key="label.initialDate"></fmt:message></label><span class="required"> *</span>
+                        <fmt:formatDate pattern="dd/MM/yyyy" value="${contract.initialDate}" var="initialDate"/>
+                        <input type="text" class="form-control date" name="contract.initialDate" id="initialDate" value="${initialDate}">
+                        <span class="required">${errors.from('contract.initialDate')}</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label" for="finalDate"><fmt:message key="label.finalDate"></fmt:message></label><span class="required"> *</span>
+                        <fmt:formatDate pattern="dd/MM/yyyy" value="${contract.finalDate}" var="finalDate"/>
+                        <input type="text" class="form-control date" name="contract.finalDate" id="finalDate" value="${finalDate}">
+                        <span class="required">${errors.from('contract.finalDate')}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="renewalUploadedFile"><fmt:message key="label.file"></fmt:message></label><span class="required"> *</span>
+                        <input type="file" class="form-control" name="renewalUploadedFile" id="renewalUploadedFile" />
+                        <span class="requiredText">${errors.from('file')}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-9 col-md-offset-9">
+                    <div class="form-group">
+                        <input type="hidden" name="contract.id" value="${contract.id}" >
+                        <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
+                        <a onclick="cancelRenewal()" type="button" class="btn btn-danger"><fmt:message key="button.cancel"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</html:template>
 </body>
+<html:jsAssets/>
+<html:searchSupplier/>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/jquery.mask.min.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-contract.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/modalSearchSupplier.js"></script>
 </html>
+
