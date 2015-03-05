@@ -1,37 +1,41 @@
 package com.purchasing.enumerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author vanessa
  */
 public enum StatusEnum {
 
-        Open("Aberta",true,true,true,false),
-        WaitingApproval("Aguardando aprovação",true,true,false,false),
-        Approved("Aprovada",true,true,false,false),
-        Reject("Recusada",true,true,false,false),
-        PreAnalysisReject("Pré analise recusada",true,false,false,false),
-        InAnalysis("Em analise",true,false,false,false),
-        QuotingProcess("Processo de cotação",true,false,true,false),
-        AnalysisQuote("Cotação em analise",true,false,true,false),
-        QuoteApproved("Cotação aprovada",true,false,true,false),
-        QuoteReject("Cotação recusada",true,false,true,false),
-        PartiallyQuoteApproved("Cotação parcialmente aprovada",true,false,true,false),
-        PartiallyQuoteReject("Cotação parcialmente recusada",true,false,true,false),
-        BuyingProcess("Em processo de compra",true,true,false,false),
-        PurchaseMade("Compra realizada",true,true,false,true),
-        PartiallyPurchaseMade("Compra realizada parcialmente",true,true,false,true),
-        Delivered("Entregue",false,false,false,true),
-        PartiallyDelivered("Entregue parcialmente",true,false,false,true),
-        Finished("Finalizada",true,false,false,true),
-        PartiallyCompleted("Finalizado parcialmente",true,false,false,false),
-        CancellationRequest("Pedido de cancelamento",true,false,false,false),
-        Canceled("Cancelada",true,false,false,false);
+    Open("Aberta",false,true,true,false),
+    WaitingApproval("Aguardando aprovação",true,false,true,false),
+    Approved("Aprovada",true,false,true,false),
+    Reject("Recusada",true,false,true,false),
+    PreAnalysisReject("Pré analise recusada",true,false,false,false),
+    InAnalysis("Em analise",true,false,true,false),
+    QuotingProcess("Processo de cotação",true,false,false,false),
+    AnalysisQuote("Cotação em analise",true,false,false,false),
+    QuoteApproved("Cotação aprovada",true,false,true,false),
+    QuoteReject("Cotação recusada",true,false,true,false),
+    PartiallyQuoteApproved("Cotação parcialmente aprovada",true,false,true,false),
+    BuyingProcess("Em processo de compra",true,false,false,false),
+    PurchaseMade("Compra realizada",true,false,false,false),
+    Reproved("Reprovado",false,false,false,true),
+    Delivered("Entregue",false,false,false,true),
+    PartiallyDelivered("Entregue parcialmente",false,false,false,true),
+    Conferred("Conferida",true,false,true,false),
+    ConferredReproved("Conferencia reprovada",true,false,true,false),
+    Finished("Finalizada",true,false,true,false),
+    PartiallyFinished("Finalizado parcialmente",true,false,true,false),
+    CancellationRequest("Pedido de cancelamento",true,false,false,false),
+    Canceled("Cancelada",true,false,false,false);
 
-        private String description;
-        private Boolean hasOnSolicitation;
-        private Boolean hasOnQuotation;
-        private Boolean hasOnPurchaseOrder;
-        private Boolean hasOnProduct;
+    private String description;
+    private Boolean hasOnSolicitation;
+    private Boolean hasOnQuotation;
+    private Boolean hasOnPurchaseOrder;
+    private Boolean hasOnProduct;
 
     StatusEnum(String description, Boolean hasOnSolicitation, Boolean hasOnQuotation, Boolean hasOnPurchaseOrder,Boolean hasOnProduct) {
         this.description = description;
@@ -80,4 +84,36 @@ public enum StatusEnum {
     public void setHasOnProduct(Boolean hasOnProduct) {
         this.hasOnProduct = hasOnProduct;
     }
+
+    /** Status para algumas pesquisas realizadas nas listagens  **/
+    public static List<StatusEnum> getStatusSolicitation(){
+        List<StatusEnum> statusEnumList = new ArrayList<>();
+        for (StatusEnum statusEnum : StatusEnum.values()) {
+            if (statusEnum.hasOnSolicitation){
+                statusEnumList.add(statusEnum);
+            }
+        }
+        return statusEnumList;
+    }
+
+    public static List<StatusEnum> getStatusQuotation(){
+        List<StatusEnum> statusEnumList = new ArrayList<>();
+        for (StatusEnum statusEnum : StatusEnum.values()) {
+            if (statusEnum.hasOnQuotation){
+                statusEnumList.add(statusEnum);
+            }
+        }
+        return statusEnumList;
+    }
+
+    public static List<StatusEnum> getStatusPurchaseOrder(){
+        List<StatusEnum> statusEnumList = new ArrayList<>();
+        for (StatusEnum statusEnum : StatusEnum.values()) {
+            if (statusEnum.hasOnPurchaseOrder){
+                statusEnumList.add(statusEnum);
+            }
+        }
+        return statusEnumList;
+    }
+
 }

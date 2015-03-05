@@ -3,7 +3,7 @@
 <head>
     <title><fmt:message key="title.page.solicitation" /> - <fmt:message key="title.purchasing" /></title>
     <html:head />
-    <html:formAssets/>
+    <html:tableAssets/>
 </head>
 <body>
 <html:template>
@@ -24,7 +24,7 @@
             <tr>
                 <th style="width: 3%"><fmt:message key="table.code" /></th>
                 <th style="width: 10%" ><fmt:message key="table.initialDate" /></th>
-                <th style="width: 18%" ><fmt:message key="table.costCenter" /></th>
+                <th style="width: 15%" ><fmt:message key="table.costCenter" /></th>
                 <th style="width: 22%"><fmt:message key="table.user" /></th>
                 <th style="width: 18%"><fmt:message key="table.status" /></th>
                 <th style="width: 2%" ><fmt:message key="table.##" /></th>

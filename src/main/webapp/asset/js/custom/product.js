@@ -22,7 +22,7 @@ function fillTable(){
     "bJQueryUI": false,
     "sPaginationType": "full_numbers",
     "iDisplayLength":  10,
-    "aLengthMenu": [[10, 100, -1], [10, 100, "All"]],
+    "aLengthMenu": [[5, 10, 100], [5,10, 100]],
     "bProcessing": false,
     "bServerSide": true,
     "sAjaxSource": getContextPath()+'produto/paginar',

@@ -46,7 +46,6 @@ public class SolicitationController {
         validator.addIf(solicitation.getType().equals(TypeEnum.Material) && solicitation.getSolicitationRequests() == null, new I18nMessage("message.error.solicitiation.material", "message.error.solicitiation.material"));
         validator.addIf(solicitation.getType().equals(TypeEnum.Service) && solicitationRequest.getService().getDescription() == null, new I18nMessage("message.error.solicitiation.service", "message.error.solicitiation.service"));
         validator.addIf(solicitation.getType().equals(TypeEnum.MaterialService) && (solicitationRequest.getService().getDescription() == null || solicitation.getSolicitationRequests() == null) , new I18nMessage("message.error.solicitiation.service.material","message.error.solicitiation.service.material"));
-
         validator.onErrorForwardTo(this).form();
 
         if (solicitation.getType() !=  TypeEnum.Material){
