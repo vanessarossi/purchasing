@@ -17,8 +17,8 @@ public class BasePrinterImpl implements BasePrinter {
     File folder;
 
     public BasePrinterImpl() {
-           //catalina.home
-        String folderPath = System.getProperty("catalina.base") + "/webapps/relatorios";
+           //catalina.base
+        String folderPath = System.getProperty("catalina.home") + "/webapps/relatorios";
         folder = new File(folderPath);
         if (!folder.exists()){
             folder.mkdir();

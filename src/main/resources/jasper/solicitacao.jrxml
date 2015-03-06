@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitacao" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55eef0e8-5721-44e4-bfe9-15466fc60979">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="68"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="img" class="java.awt.Image"/>
 	<parameter name="number" class="java.lang.String"/>
 	<parameter name="date" class="java.lang.String"/>
@@ -107,14 +107,14 @@
 				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="41" y="23" width="436" height="20" uuid="59a80ace-cfde-4254-8da2-a0a412979116"/>
+				<reportElement x="41" y="23" width="426" height="20" uuid="59a80ace-cfde-4254-8da2-a0a412979116"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Produto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="477" y="23" width="31" height="20" uuid="6f2c7392-d060-49c0-9523-1ffb54043512"/>
+				<reportElement x="467" y="23" width="41" height="20" uuid="6f2c7392-d060-49c0-9523-1ffb54043512"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -146,11 +146,11 @@
 				<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="41" y="0" width="436" height="20" uuid="89b73e5b-c5da-4a54-b4e7-9cf19cb022de"/>
+				<reportElement x="41" y="0" width="426" height="20" uuid="89b73e5b-c5da-4a54-b4e7-9cf19cb022de"/>
 				<textFieldExpression><![CDATA[$F{product}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="477" y="1" width="31" height="20" uuid="4f6b69b4-b863-4669-82de-04abedc00e6c"/>
+				<reportElement x="467" y="1" width="41" height="20" uuid="4f6b69b4-b863-4669-82de-04abedc00e6c"/>
 				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -175,7 +175,7 @@
 				<text><![CDATA[Serviço]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="2" y="62" width="550" height="63" uuid="da3d8745-c9f7-4614-91bb-4794e68c208d"/>
+				<reportElement x="2" y="62" width="550" height="14" uuid="da3d8745-c9f7-4614-91bb-4794e68c208d"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$P{service}]]></textFieldExpression>
 			</textField>
@@ -202,11 +202,11 @@
 				<reportElement x="1" y="21" width="552" height="1" uuid="ad10ff67-a57c-43c3-ab15-55804009679c"/>
 			</line>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="3" y="159" width="551" height="39" uuid="4feee728-ef2d-4e89-92d2-a4bb2bbfe91b"/>
+				<reportElement x="4" y="119" width="551" height="20" uuid="4feee728-ef2d-4e89-92d2-a4bb2bbfe91b"/>
 				<textFieldExpression><![CDATA[$P{observation}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="2" y="139" width="552" height="20" uuid="06bdfb55-0a79-4387-941d-14b7e824a100"/>
+				<reportElement x="3" y="99" width="552" height="20" uuid="06bdfb55-0a79-4387-941d-14b7e824a100"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
