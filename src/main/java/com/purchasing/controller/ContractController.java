@@ -62,7 +62,7 @@ public class ContractController {
     @Get("/deletar/{contract.id}")
     public void delete(Contract contract) {
         contractService.delete(contract);
-        result.redirectTo(this).list();
+        result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
     @Get("/editar/{contract.id}")
@@ -116,14 +116,7 @@ public class ContractController {
     @Get("/renovacao/deletar/{renewalContract.id}")
     public void deleteRenewal(RenewalContract renewalContract) {
         contractService.deleteRenewal(renewalContract);
-        result.redirectTo(this).list();
-    }
-
-    @Get("/renovacao/editar/{renewalContract.id}")
-    public void editRenewal(RenewalContract renewalContract){
-        RenewalContract renewalContractFound = contractService.searchRenewalById(renewalContract);
-        result.include("contract",renewalContract);
-        result.redirectTo(this).form();
+        result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
     @Get("/renovacao/download/{renewalContract.id}")

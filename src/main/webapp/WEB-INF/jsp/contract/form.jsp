@@ -89,7 +89,7 @@
                             <td>${renewalInitialDate}</td>
                             <td>${renewalFinalDate}</td>
                             <td><a href="/purchasing/contrato/renovacao/download/${renewal.id}"  target="_blank"><span class="fa fa-print btn btn-default btn-xs"></span></a></td>
-                            <td><a onclick=confirmDeteleRenewal(${renewal.id})><span class="fa fa-trash-o btn btn-default btn-xs"></span></a></td>
+                            <td><a onclick=confirmDetele(${renewal.id})><span class="fa fa-trash-o btn btn-default btn-xs"></span></a></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -181,6 +181,7 @@
 </body>
 <html:jsAssets/>
 <html:searchSupplier/>
+<html:notification/>
 <script src="${pageContext.request.contextPath}/asset/js/vendor/jquery.mask.min.js"></script>
 <script src="${pageContext.request.contextPath}/asset/js/custom/form-contract.js"></script>
 <script src="${pageContext.request.contextPath}/asset/js/custom/modalSearchSupplier.js"></script>

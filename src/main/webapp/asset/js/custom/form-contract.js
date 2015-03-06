@@ -50,3 +50,38 @@ function cancelRenewal(){
     $('#renewalForm').hide();
     $('#contractForm').show();
 };
+
+function confirmDetele(id) {
+    $('#code').val(id);
+    $('#modalConfirm').modal('show');
+};
+
+$('#btn-confirm').click(function(){
+    var id = $('#code').val();
+        $.ajax({
+            type: "GET",
+            url: getContextPath()+'contrato/renovacao/deletar/'+id,
+            dataType: "json",
+            beforeSend: function(){
+            },
+            success: function (result) {
+              $('#modalConfirm').modal('hide');
+              $('#modalSuccess').modal('show');
+              setTimeout(function () {
+                       $("#modalSuccess").modal('hide');
+                   }, 1050)
+
+            },
+            error: function () {
+              $('#modalConfirm').modal('hide');
+              $('#modalError').modal('show');
+              setTimeout(function () {
+                    $("#modalError").modal('hide');
+              }, 1050)
+            }
+        });
+});
+
+$('#btn-cancel').click(function(){
+    $('#modalConfirm').modal('hide');
+});
