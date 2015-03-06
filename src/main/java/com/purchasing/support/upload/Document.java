@@ -13,6 +13,19 @@ import java.io.IOException;
 
 /**
  * @author vanessa
+ *
+ *
+ * O contrato é salvo :
+ *              DATAFINAL
+ * IDFORNECEDOR_01012015
+ *
+ * A Renovação é salva :
+ *            DATAFINAL
+ * IDCONTRATO_01012015
+ *
+ *
+ *
+ *
  */
 
 @RequestScoped
@@ -21,8 +34,8 @@ public class Document {
     private File documentFolder;
 
     public Document() {
-           //catalina.home
-        String caminhoPasta = System.getProperty("catalina.base") + "/webapps/contract";
+           //catalina.base
+        String caminhoPasta = System.getProperty("catalina.home") + "/webapps/contract/";
         documentFolder = new File(caminhoPasta);
         if (!documentFolder.exists()) {
             documentFolder.mkdir();
@@ -30,7 +43,7 @@ public class Document {
     }
 
     public String uploadContract(UploadedFile uploadedFile,Contract contract ) {
-        File destinationFolder = new File(documentFolder, "");
+        File destinationFolder = new File(documentFolder,  "contract" + contract.getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(contract.getInitialDate()) + ".pdf");
         String fileName;
         try {
             IOUtils.copy(uploadedFile.getFile(), new FileOutputStream(destinationFolder));
@@ -42,24 +55,27 @@ public class Document {
     }
 
     public File downloadContract(Contract contract) {
-        File file = new File(documentFolder, "/contract" + contract.getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(contract.getInitialDate()) + ".pdf");
-        return (file.exists()) ? file : new File(documentFolder, "/contract" + contract.getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(contract.getInitialDate()) + ".pdf");
+        File file = new File(documentFolder, "contract" + contract.getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(contract.getInitialDate()) + ".pdf");
+        return (file.exists()) ? file : new File(documentFolder, "contract" + contract.getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(contract.getInitialDate()) + ".pdf");
     }
 
     public void deleteContract(Contract contract) {
-        String path = documentFolder + "/contract" + contract.getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(contract.getInitialDate()) + ".pdf";
+        String path = documentFolder + "contract" + contract.getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(contract.getInitialDate()) + ".pdf";
         File file = new File(path);
         if (file.exists()) {
             file.delete();
         }
     }
 
+
+    /*  renewal */
+
     public String uploadRenewalContract(UploadedFile uploadedFile, RenewalContract renewalContract ) {
-        File destinationFolder = new File(documentFolder, "");
+        File destinationFolder = new File(documentFolder, "renewal" + renewalContract.getContract().getId() + "_" + Conversor.converterDateInStringForDocument(renewalContract.getInitialDate()) + ".pdf");
         String fileName;
         try {
             IOUtils.copy(uploadedFile.getFile(), new FileOutputStream(destinationFolder));
-            fileName = "contract" + renewalContract.getContract().getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(renewalContract.getInitialDate()) + ".pdf";
+            fileName = "renewal" + renewalContract.getContract().getId() + "_" + Conversor.converterDateInStringForDocument(renewalContract.getInitialDate()) + ".pdf";
         } catch (IOException e) {
             throw new RuntimeException("Erro ao copiar imagem", e);
         }
@@ -67,12 +83,12 @@ public class Document {
     }
 
     public File downloadRenewalContract(RenewalContract renewalContract) {
-        File file = new File(documentFolder, "/contract" + renewalContract.getContract().getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(renewalContract.getInitialDate()) + ".pdf");
-        return (file.exists()) ? file : new File(documentFolder, "/contract" + renewalContract.getContract().getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(renewalContract.getInitialDate()) + ".pdf");
+        File file = new File(documentFolder, "renewal" + renewalContract.getContract().getId() + "_" + Conversor.converterDateInStringForDocument(renewalContract.getInitialDate()) + ".pdf");
+        return (file.exists()) ? file : new File(documentFolder, "renewal" + renewalContract.getContract().getId() + "_" + Conversor.converterDateInStringForDocument(renewalContract.getInitialDate()) + ".pdf");
     }
 
-    public void deleteRenewalContract(Contract contract) {
-        String path = documentFolder + "/contract" + contract.getSupplier().getId() + "_" + Conversor.converterDateInStringForDocument(contract.getInitialDate()) + ".pdf";
+    public void deleteRenewalContract(RenewalContract renewalContract) {
+        String path = documentFolder + "renewal" + renewalContract.getContract().getId() + "_" + Conversor.converterDateInStringForDocument(renewalContract.getInitialDate()) + ".pdf";
         File file = new File(path);
         if (file.exists()) {
             file.delete();

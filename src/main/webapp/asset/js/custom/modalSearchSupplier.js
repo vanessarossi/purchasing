@@ -41,6 +41,6 @@ $("#text").keydown(function (event) {
 });
 
 $('#searchProduct').on('hide.bs.modal', function (e) {
-    $('#tableSearchProduct > tbody > tr').remove();
+    $('#tableSearchSupplier > tbody > tr').remove();
     $('#text').val('');
 });

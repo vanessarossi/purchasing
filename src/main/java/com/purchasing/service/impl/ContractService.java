@@ -20,9 +20,9 @@ public interface ContractService {
     public Integer totalPagination(String sSearch);
 
     /* Renewal contract  */
-    public void save(RenewalContract renewalContract, UploadedFile uploadedFile);
-    public void delete(RenewalContract renewalContract);
-    public File download(RenewalContract renewalContract);
-    public RenewalContract searchById(RenewalContract renewalContract);
-    public List<RenewalContract> findByContract(Contract contract);
+    public void saveRenewal(RenewalContract renewalContract, UploadedFile uploadedFile);
+    public void deleteRenewal(RenewalContract renewalContract);
+    public File downloadRenewal(RenewalContract renewalContract);
+    public RenewalContract searchRenewalById(RenewalContract renewalContract);
+    public List<RenewalContract> findRenewalByContract(Contract contract);
 }

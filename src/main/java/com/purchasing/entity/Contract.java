@@ -37,7 +37,6 @@ public class Contract {
     @Temporal(TemporalType.DATE)
     private Date finalDate;
 
-    @Length(min = 1, max = 1000)
     @Column(name = "observation")
     private String observation;
 

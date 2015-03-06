@@ -40,6 +40,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public File download(Contract contract) {
+        contract = contractDAO.findById(Contract.class,contract.getId());
         return document.downloadContract(contract);
     }
 
@@ -57,7 +58,7 @@ public class ContractServiceImpl implements ContractService {
                 String colSupplier = contract.getSupplier().getPerson().getName();
                 String colInitialDate = Conversor.converterDateInString(contract.getInitialDate());
                 String colFinalDate = Conversor.converterDateInString(contract.getFinalDate());
-                String buttonDownload = "<a href=/purchasing/contrato/download/"+contract.getId()+"><span class=\"fa fa-print btn btn-default btn-xs\"></span></a>";
+                String buttonDownload = "<a href=/purchasing/contrato/download/"+contract.getId()+" target=\"_blank\"><span class=\"fa fa-print btn btn-default btn-xs\"></span></a>";
                 String buttonEdit = "<a href=/purchasing/contrato/editar/"+contract.getId()+"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
                 String buttonRemove = "<a onclick='confirmDetele("+contract.getId()+")'><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
                 String [] row = {
@@ -85,31 +86,32 @@ public class ContractServiceImpl implements ContractService {
     /* Renewal Contract  */
 
     @Override
-    public void save(RenewalContract renewalContract, UploadedFile uploadedFile) {
+    public void saveRenewal(RenewalContract renewalContract, UploadedFile uploadedFile) {
         String fileName = document.uploadRenewalContract(uploadedFile, renewalContract);
         renewalContract.setFileName(fileName);
         renewalContractDAO.save(renewalContract);
     }
 
     @Override
-    public void delete(RenewalContract renewalContract) {
+    public void deleteRenewal(RenewalContract renewalContract) {
         renewalContract = renewalContractDAO.findById(RenewalContract.class, renewalContract.getId());
         document.downloadRenewalContract(renewalContract);
         renewalContractDAO.delete(renewalContract);
     }
 
     @Override
-    public File download(RenewalContract renewalContract) {
+    public File downloadRenewal(RenewalContract renewalContract) {
+        renewalContract = renewalContractDAO.findById(RenewalContract.class,renewalContract.getId());
         return document.downloadRenewalContract(renewalContract);
     }
 
     @Override
-    public RenewalContract searchById(RenewalContract renewalContract) {
+    public RenewalContract searchRenewalById(RenewalContract renewalContract) {
         return renewalContractDAO.findById(RenewalContract.class,renewalContract.getId());
     }
 
     @Override
-    public List<RenewalContract> findByContract(Contract contract) {
+    public List<RenewalContract> findRenewalByContract(Contract contract) {
         return renewalContractDAO.findByContract(contract);
     }
 }

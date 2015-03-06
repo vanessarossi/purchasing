@@ -17,21 +17,21 @@
                     <div class="form-group">
                         <label class="control-label"><fmt:message key="label.name"></fmt:message></label><span class="required"> *</span>
                         <input type="text" class="form-control" id="name" name="user.name" value="${user.name}" />
-                        <span class="redText">${errors.from('user.name')}</span>
+                        <span class="required">${errors.from('user.name')}</span>
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-3">
                     <div class="form-group">
                         <label class="control-label"><fmt:message key="label.username"></fmt:message></label><span class="required"> *</span>
                         <input type="text" class="form-control" id="username" name="user.username" value="${user.username}" />
-                        <span class="redText">${errors.from('user.username')}</span>
+                        <span class="required">${errors.from('user.username')}</span>
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-3">
                     <div class="form-group">
                         <label class="control-label"><fmt:message key="label.password"></fmt:message></label>
                         <input type="password" class="form-control" id="password" name="user.password"/>
-                        <span class="redText">${errors.from('user.password')}</span>
+                        <span class="required">${errors.from('user.password')}</span>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label class="control-label"><fmt:message key="label.email"></fmt:message></label><span class="required"> *</span>
                         <input type="text" class="form-control" id="email" name="user.email" value="${user.email}" />
-                        <span class="redText">${errors.from('user.email')}</span>
+                        <span class="required">${errors.from('user.email')}</span>
                     </div>
                 </div>
                 <div class="col-sm-2 col-md-2">
@@ -58,7 +58,7 @@
                             </label>
                         </div>
                         <br>
-                        <span class="redText">${errors.from('user.active')}</span>
+                        <span class="required">${errors.from('user.active')}</span>
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-3">

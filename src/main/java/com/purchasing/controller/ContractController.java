@@ -10,11 +10,13 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
 import com.purchasing.entity.Contract;
+import com.purchasing.entity.RenewalContract;
 import com.purchasing.service.impl.ContractService;
 import com.purchasing.support.datatable.DataTableModel;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -33,8 +35,9 @@ public class ContractController {
     @Deprecated ContractController(){};
 
     @Inject
-    public ContractController(Result result, ContractService contractService){
+    public ContractController(Result result, Validator validator, ContractService contractService){
         this.result = result;
+        this.validator = validator;
         this.contractService = contractService;
     }
 
@@ -50,7 +53,7 @@ public class ContractController {
 
     @Post("/salvar")
     public void salvar(@Valid Contract contract, UploadedFile uploadedFile) {
-        validator.ensure(contract.getSupplier().getId()!= null , new I18nMessage("contract.supplier", "message.error.null"));
+        validator.ensure(contract.getSupplier().getId() != null, new I18nMessage("contract.supplier", "message.error.null"));
         validator.onErrorForwardTo(this).form();
         contractService.save(contract,uploadedFile);
         result.redirectTo(this).list();
@@ -65,7 +68,9 @@ public class ContractController {
     @Get("/editar/{contract.id}")
     public void edit(Contract contract){
         Contract contractFound = contractService.searchById(contract);
+        List<RenewalContract> renewalContracts = contractService.findRenewalByContract(contractFound);
         result.include("contract",contractFound);
+        result.include("renewalContracts",renewalContracts);
         result.redirectTo(this).form();
     }
 
@@ -88,29 +93,45 @@ public class ContractController {
                dataTableModel.setiTotalDisplayRecords(contractService.totalPagination(sSearch));
                dataTableModel.setAaData(contractObjects.toArray());
            result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
-       }
+    }
 
+    @Get("/download/{contract.id}")
+    public File download (Contract contract){
+        if(contract.getId() == null){
+            result.include("message","Ocorreu um para realizar o download do contrato").redirectTo(this).list();
+        }
+        return contractService.download(contract);
+    }
 
     /** renovação **/
 
-    @Post("/salvar")
-    public void salvarRene(@Valid Contract contract, UploadedFile uploadedFile) {
-        validator.ensure(contract.getSupplier().getId()!= null , new I18nMessage("contract.supplier", "message.error.null"));
+    @Post("/renovacao/salvar")
+    public void salvarRenewal(@Valid RenewalContract renewalContract, UploadedFile renewalUploadedFile) {
+        validator.ensure(renewalContract.getContract().getId() != null , new I18nMessage("renewalContract.contract", "message.error.null"));
         validator.onErrorForwardTo(this).form();
-        contractService.save(contract,uploadedFile);
+        contractService.saveRenewal(renewalContract, renewalUploadedFile);
         result.redirectTo(this).list();
     }
 
-    @Get("/deletar/{contract.id}")
-    public void deleteRene(Contract contract) {
-        contractService.delete(contract);
+    @Get("/renovacao/deletar/{renewalContract.id}")
+    public void deleteRenewal(RenewalContract renewalContract) {
+        contractService.deleteRenewal(renewalContract);
         result.redirectTo(this).list();
     }
 
-    @Get("/editar/{contract.id}")
-    public void editRene(Contract contract){
-        Contract contractFound = contractService.searchById(contract);
-        result.include("contract",contractFound);
+    @Get("/renovacao/editar/{renewalContract.id}")
+    public void editRenewal(RenewalContract renewalContract){
+        RenewalContract renewalContractFound = contractService.searchRenewalById(renewalContract);
+        result.include("contract",renewalContract);
         result.redirectTo(this).form();
     }
+
+    @Get("/renovacao/download/{renewalContract.id}")
+    public File download (RenewalContract renewalContract){
+        if(renewalContract.getId() == null){
+            result.include("message","Ocorreu um para realizar o download do contrato").redirectTo(this).list();
+        }
+        return contractService.downloadRenewal(renewalContract);
+    }
+
 }
