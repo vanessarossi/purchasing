@@ -1,11 +1,6 @@
 package com.purchasing.service.impl;
 
-import com.purchasing.entity.Budget;
-import com.purchasing.entity.PaymentInformation;
-import com.purchasing.entity.Product;
-import com.purchasing.entity.Quotation;
-import com.purchasing.entity.QuotationRequest;
-import com.purchasing.entity.SolicitationRequest;
+import com.purchasing.entity.*;
 
 import java.util.List;
 
@@ -32,12 +27,4 @@ public interface QuotationService {
     public List<QuotationRequest> searchQuotationRequestServiceByQuotation(Quotation quotation);
 
     public List<QuotationRequest> groupByProduct(Quotation quotation);
-
-    /**  Budget **/
-    public void saveBudget(Budget budget);
-    public Budget searchBudget(Budget budget);
-    public void removeBudget(Budget budget);
-
-    /** Payment Information **/
-    public PaymentInformation findPaymentInformationById(PaymentInformation paymentInformation);
 }
