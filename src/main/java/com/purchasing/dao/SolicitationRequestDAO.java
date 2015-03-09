@@ -113,4 +113,33 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
         solicitationRequests = criteria.list();
         return solicitationRequests;
     }
+
+    public Integer totalSolicitationRequestAddQuotationBySolicitation(Solicitation solicitation){
+        Integer total = 0;
+        Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
+        criteria.add(Restrictions.eq("solicitation", solicitation));
+        criteria.add(Restrictions.eq("addQuotation",true));
+        criteria.setProjection(Projections.rowCount());
+        total =  Integer.parseInt(criteria.uniqueResult().toString());
+        return total;
+    }
+
+    public Integer totalSolicitationRequestNotAddQuotationBySolicitation(Solicitation solicitation){
+        Integer total = 0;
+        Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
+        criteria.add(Restrictions.eq("solicitation", solicitation));
+        criteria.add(Restrictions.eq("addQuotation",false));
+        criteria.setProjection(Projections.rowCount());
+        total =  Integer.parseInt(criteria.uniqueResult().toString());
+        return total;
+    }
+
+    public Integer totalSolicitationRequestBySolicitation(Solicitation solicitation){
+        Integer total = 0;
+        Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
+        criteria.add(Restrictions.eq("solicitation", solicitation));
+        criteria.setProjection(Projections.rowCount());
+        total =  Integer.parseInt(criteria.uniqueResult().toString());
+        return total;
+    }
 }

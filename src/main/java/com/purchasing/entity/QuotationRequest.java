@@ -32,4 +32,36 @@ public class QuotationRequest {
     @OneToOne
     @JoinColumn(name = "solicitation_request_id", referencedColumnName = "id")
     private SolicitationRequest solicitationRequest;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<BudgetQuotation> getBudgetQuotations() {
+        return budgetQuotations;
+    }
+
+    public void setBudgetQuotations(List<BudgetQuotation> budgetQuotations) {
+        this.budgetQuotations = budgetQuotations;
+    }
+
+    public Quotation getQuotation() {
+        return quotation;
+    }
+
+    public void setQuotation(Quotation quotation) {
+        this.quotation = quotation;
+    }
+
+    public SolicitationRequest getSolicitationRequest() {
+        return solicitationRequest;
+    }
+
+    public void setSolicitationRequest(SolicitationRequest solicitationRequest) {
+        this.solicitationRequest = solicitationRequest;
+    }
 }

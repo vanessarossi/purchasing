@@ -1,6 +1,7 @@
 package com.purchasing.service.impl;
 
 import com.purchasing.entity.*;
+import com.purchasing.support.quotation.QuotationRequestProductView;
 
 import java.util.List;
 
@@ -23,8 +24,10 @@ public interface QuotationService {
     public void removeQuotationRequest(QuotationRequest quotationRequest);
 
     public List<QuotationRequest> searchQuotationRequestProductByQuotation(Quotation quotation);
-    public List<QuotationRequest> searchQuotationRequestProductByProduct(Product product);
+
+    public List<QuotationRequest> searchQuotationRequestProductByProduct(Quotation quotation, Product product);
+
     public List<QuotationRequest> searchQuotationRequestServiceByQuotation(Quotation quotation);
 
-    public List<QuotationRequest> groupByProduct(Quotation quotation);
+    public List<QuotationRequestProductView> groupByProduct(Quotation quotation);
 }

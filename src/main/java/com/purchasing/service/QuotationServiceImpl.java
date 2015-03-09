@@ -1,74 +1,223 @@
 package com.purchasing.service;
 
+import com.purchasing.dao.*;
 import com.purchasing.entity.*;
+import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.service.impl.QuotationService;
+import com.purchasing.support.date.Conversor;
+import com.purchasing.support.quotation.QuotationRequestProductView;
 
-import java.util.List;
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * @author vanessa
  */
 public class QuotationServiceImpl implements QuotationService {
 
+    @Inject private HttpSession httpSession;
+    @Inject private QuotationDAO quotationDAO;
+    @Inject private SolicitationRequestDAO solicitationRequestDAO;
+    @Inject private QuotationRequestDAO quotationRequestDAO;
+    @Inject private SolicitationDAO solicitationDAO;
+    @Inject private SituationDAO situationDAO;
 
     @Override
     public Quotation save(Quotation quotation) {
-        return null;
+        quotation.setUser(getUserLogged());
+        quotation.setInitialDate(new Timestamp(new Date().getTime()));
+        quotation.setStatus(StatusEnum.Open);
+        Quotation quotationSaved = quotationDAO.save(quotation);
+        return quotationSaved;
     }
 
     @Override
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength) {
-        return null;
+        String search = sSearch == null ? "" : sSearch;
+        List<Quotation> quotations = quotationDAO.pagination(search,iDisplayStart,iDisplayLength);
+        List<Object[]> quotationList = new ArrayList<>();
+
+        for (Quotation quotation : quotations){
+            String colNumber = quotation.getId().toString();
+            String colType = quotation.getType().getDescription();
+            String colUser = quotation.getUser().getName();
+            String colInitialDate = Conversor.converterDateTimeInString(quotation.getInitialDate());
+            String colFinalDate = Conversor.converterDateTimeInString(quotation.getFinalDate());
+            String buttonView = "<a href=/purchasing/cotacao/editar/"+quotation.getId()+"><span class=\"fa fa-pencil-square-o btn btn-default btn-xs\"></span></a>";
+            String [] row = {
+                    colNumber,
+                    colType,
+                    colUser,
+                    colInitialDate,
+                    colFinalDate,
+                    buttonView
+            };
+            quotationList.add(row);
+        }
+        return quotationList;
     }
 
     @Override
     public Integer totalPagination(String sSearch) {
-        return null;
+        String search = sSearch == null ? "" : sSearch;
+        return quotationDAO.totalPagination(search);
     }
 
     @Override
     public Quotation searchById(Quotation quotation) {
-        return null;
+        if (quotation.getId() != null){
+            quotation  = quotationDAO.findById(Quotation.class,quotation.getId());
+        }else{
+            quotation = new Quotation();
+        }
+        return  quotation;
     }
 
     @Override
     public void addQuotationRequestProduct(Quotation quotation, List<SolicitationRequest> solicitationRequests) {
+        for (SolicitationRequest solicitationRequest : solicitationRequests){
+            if (solicitationRequest.getAddQuotation() != null && solicitationRequest.getAddQuotation() == true){
+                QuotationRequest quotationRequest = new QuotationRequest();
+                quotationRequest.setQuotation(quotation);
+                quotationRequest.setSolicitationRequest(solicitationRequest);
+                quotationRequestDAO.save(quotationRequest);
 
+                SolicitationRequest solicitationRequestFound = solicitationRequestDAO.findById(SolicitationRequest.class,solicitationRequest.getId());
+                solicitationRequestFound.setAddQuotation(true);
+                solicitationRequestDAO.save(solicitationRequestFound);
+
+                updateStatusSituationSolicitation(solicitationRequestFound.getSolicitation());
+            }
+        }
     }
 
     @Override
     public void addQuotationRequestService(Quotation quotation, SolicitationRequest solicitationRequest) {
+        QuotationRequest quotationRequest = new QuotationRequest();
+        quotationRequest.setQuotation(quotation);
+        quotationRequest.setSolicitationRequest(solicitationRequest);
+        quotationRequestDAO.save(quotationRequest);
 
+        SolicitationRequest solicitationRequestFound = solicitationRequestDAO.findById(SolicitationRequest.class,solicitationRequest.getId());
+
+        solicitationRequestFound.setAddQuotation(true);
+        solicitationRequestDAO.save(solicitationRequestFound);
+
+        updateStatusSituationSolicitation(solicitationRequestFound.getSolicitation());
     }
 
     @Override
     public void removeQuotationRequestByProduct(Quotation quotation, Product product) {
+        List<QuotationRequest> quotationRequests = searchQuotationRequestProductByProduct(quotation,product);
+        for (QuotationRequest quotationRequest : quotationRequests){
+            SolicitationRequest solicitationRequest = quotationRequest.getSolicitationRequest();
+            solicitationRequest.setAddQuotation(false);
+            solicitationRequestDAO.save(solicitationRequest);
 
+            quotationRequestDAO.delete(quotationRequest);
+
+            updateStatusSituationSolicitation(solicitationRequest.getSolicitation());
+        }
     }
 
     @Override
     public void removeQuotationRequest(QuotationRequest quotationRequest) {
+        SolicitationRequest solicitationRequestFound = solicitationRequestDAO.findById(SolicitationRequest.class,quotationRequest.getSolicitationRequest().getId());
+            solicitationRequestFound.setAddQuotation(false);
+        solicitationRequestDAO.save(solicitationRequestFound);
+
+        quotationRequestDAO.delete(quotationRequest);
+
+        updateStatusSituationSolicitation(solicitationRequestFound.getSolicitation());
     }
 
     @Override
     public List<QuotationRequest> searchQuotationRequestProductByQuotation(Quotation quotation) {
-        return null;
-    }
-
-    @Override
-    public List<QuotationRequest> searchQuotationRequestProductByProduct(Product product) {
-        return null;
+        return quotationRequestDAO.findQuotationRequestProduct(quotation);
     }
 
     @Override
     public List<QuotationRequest> searchQuotationRequestServiceByQuotation(Quotation quotation) {
-        return null;
+        return quotationRequestDAO.findQuotationRequestService(quotation);
     }
 
     @Override
-    public List<QuotationRequest> groupByProduct(Quotation quotation) {
-        return null;
+    public List<QuotationRequest> searchQuotationRequestProductByProduct(Quotation quotation, Product product) {
+        return quotationRequestDAO.findQuotationRequestProductByProduct(quotation,product);
     }
 
+    @Override
+    public List<QuotationRequestProductView> groupByProduct(Quotation quotation) {
+        quotation = quotationDAO.findById(Quotation.class,quotation.getId());
+        List<QuotationRequest> quotationRequests = searchQuotationRequestProductByQuotation(quotation);
+        List<QuotationRequestProductView> quotationRequestProductViewList = new ArrayList<>();
+        List<QuotationRequestProductView> quotationRequestProductViews = new ArrayList<>();
+
+        Collections.sort(quotationRequestProductViews,new QuotationRequestProductView());
+        Map<Long,QuotationRequestProductView> map = new HashMap<>();
+
+            quotationRequestProductViewList = new QuotationRequestProductView().generateList(quotationRequests);
+
+            for (QuotationRequestProductView quotationRequestProductView : quotationRequestProductViewList){
+                Long idProduct = quotationRequestProductView.getProduct().getId();
+                if (!map.containsKey(idProduct)){
+                    map.put(quotationRequestProductView.getProduct().getId(),quotationRequestProductView);
+                }else{
+                    QuotationRequestProductView quotationRequestProductV = map.get(idProduct);
+                    if (quotationRequestProductView.getQuantity() == null){
+                        quotationRequestProductView.setQuantity(0f);
+                    }
+                    Float quantity = quotationRequestProductView.getQuantity() + quotationRequestProductV.getQuantity();
+                    quotationRequestProductV.setQuantity(quantity);
+                }
+            }
+
+        for (Long key : map.keySet()){
+            QuotationRequestProductView quotationRequestProductView = map.get(key);
+            quotationRequestProductViews.add(quotationRequestProductView);
+        }
+
+        return quotationRequestProductViews;
+    }
+
+    public User getUserLogged(){
+        User user = (User) httpSession.getAttribute("userLogged");
+        return  user;
+    }
+
+    public void updateStatusFinalize(Quotation quotation){
+        quotation = quotationDAO.findById(Quotation.class,quotation.getId());
+        quotation.setStatus(StatusEnum.Finished);
+        quotation.setFinalDate(new Timestamp(new Date().getTime()));
+        quotationDAO.save(quotation);
+    }
+
+    public void updateStatusSituationSolicitation(Solicitation solicitation){
+        Integer totalAdd = getTotalAddQuotation(solicitation);
+
+        if (totalAdd == 0){
+            solicitation = solicitationDAO.findById(Solicitation.class,solicitation.getId());
+            Situation situation = solicitation.getSituation();
+            situation.setStatus(StatusEnum.Approved);
+        } if (totalAdd > 0) {
+            solicitation = solicitationDAO.findById(Solicitation.class,solicitation.getId());
+            Situation situation = solicitation.getSituation();
+            situation.setStatus(StatusEnum.InAnalysis);
+        }
+    }
+
+    public Integer getTotalAddQuotation(Solicitation solicitation){
+        return solicitationRequestDAO.totalSolicitationRequestAddQuotationBySolicitation(solicitation);
+    }
+
+    public Integer getTotalNotAddQuotation(Solicitation solicitation){
+        return solicitationRequestDAO.totalSolicitationRequestNotAddQuotationBySolicitation(solicitation);
+    }
+
+    public Integer getTotalSolicitationRequest(Solicitation solicitation){
+        return solicitationRequestDAO.totalSolicitationRequestBySolicitation(solicitation);
+    }
 
 }

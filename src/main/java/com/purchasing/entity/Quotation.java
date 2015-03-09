@@ -69,4 +69,92 @@ public class Quotation {
 
     @OneToMany(mappedBy = "quotation")
     private List<QuotationRequest> quotationRequests;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TypeEnum getType() {
+        return type;
+    }
+
+    public void setType(TypeEnum type) {
+        this.type = type;
+    }
+
+    public Date getInitialDate() {
+        return initialDate;
+    }
+
+    public void setInitialDate(Date initialDate) {
+        this.initialDate = initialDate;
+    }
+
+    public Date getFinalDate() {
+        return finalDate;
+    }
+
+    public void setFinalDate(Date finalDate) {
+        this.finalDate = finalDate;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
+    public Boolean getExclusiveSupplier() {
+        return exclusiveSupplier;
+    }
+
+    public void setExclusiveSupplier(Boolean exclusiveSupplier) {
+        this.exclusiveSupplier = exclusiveSupplier;
+    }
+
+    public String getJustification() {
+        return justification;
+    }
+
+    public void setJustification(String justification) {
+        this.justification = justification;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Budget> getBudgets() {
+        return budgets;
+    }
+
+    public void setBudgets(List<Budget> budgets) {
+        this.budgets = budgets;
+    }
+
+    public List<QuotationRequest> getQuotationRequests() {
+        return quotationRequests;
+    }
+
+    public void setQuotationRequests(List<QuotationRequest> quotationRequests) {
+        this.quotationRequests = quotationRequests;
+    }
 }
