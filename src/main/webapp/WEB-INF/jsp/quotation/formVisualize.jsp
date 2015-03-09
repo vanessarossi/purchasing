@@ -1,16 +1,20 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: vanessa
-  Date: 3/9/15
-  Time: 12:47 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <title></title>
+    <title><fmt:message key="title.page.quotation" /> - <fmt:message key="title.purchasing" /></title>
+    <html:head />
+    <html:formAssets/>
 </head>
 <body>
+<html:template>
+    <div class="container-fluid">
+        <div class="page-header">
+            <h3><fmt:message key="title.information.quotation" /></h3>
+        </div>
 
+    </div>
+</html:template>
 </body>
+<html:jsAssets/>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-quotation.js"></script>
 </html>

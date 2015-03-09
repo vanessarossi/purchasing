@@ -28,6 +28,7 @@ public class QuotationServiceImpl implements QuotationService {
     public Quotation save(Quotation quotation) {
         quotation.setUser(getUserLogged());
         quotation.setInitialDate(new Timestamp(new Date().getTime()));
+        quotation.setUser(getUserLogged());
         quotation.setStatus(StatusEnum.Open);
         Quotation quotationSaved = quotationDAO.save(quotation);
         return quotationSaved;

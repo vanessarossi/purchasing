@@ -62,7 +62,6 @@ public class BudgetServiceImpl implements BudgetService {
             paymentInformationBudgetDAO.save(newPaymentInformationBudget);
 
         }
-
     }
 
     @Override

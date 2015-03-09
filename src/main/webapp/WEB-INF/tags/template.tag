@@ -39,8 +39,8 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.quotation"/> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="<c:url value="/cotacao" ></c:url>"><fmt:message key="submenu.new"/></a></li>
-                <li><a href="<c:url value="/cotacao/listagem" ></c:url>"><fmt:message key="submenu.list"/></a></li>
+                <li><a href="<c:url value="/cotacao/formulario" ></c:url>"><fmt:message key="submenu.new"/></a></li>
+                <li><a href="<c:url value="/cotacao" ></c:url>"><fmt:message key="submenu.list"/></a></li>
             </ul>
         </li>
         <li class="dropdown">

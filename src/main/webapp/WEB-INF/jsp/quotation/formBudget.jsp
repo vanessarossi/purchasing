@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title><fmt:message key="title.page.quotation" /> - <fmt:message key="title.purchasing" /></title>
+    <title><fmt:message key="title.page.budget" /> - <fmt:message key="title.purchasing" /></title>
     <html:head />
     <html:formAssets/>
 </head>
@@ -11,16 +11,10 @@
         <div class="page-header">
             <h3><fmt:message key="title.quotation" /></h3>
         </div>
-        <form action='<c:url value="/cotacao/salvar"></c:url>' method="post" id="quotationForm">
-
-        </form>
-
-        <form action='<c:url value="/cotacao/salvar"></c:url>' method="post" id="requestQuotationForm">
+        <form action='<c:url value="/cotacao/adicionar/orcamento"></c:url>' method="post" id="budgetForm">
 
         </form>
     </div>
-
-
 </html:template>
 </body>
 <html:jsAssets/>
