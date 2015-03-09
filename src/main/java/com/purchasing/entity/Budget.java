@@ -56,6 +56,75 @@ public class Budget {
     @OneToMany(mappedBy = "budget")
     private List<PaymentInformationBudget> paymentInformationBudgets;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Boolean getChosenBudget() {
+        return chosenBudget;
+    }
+
+    public void setChosenBudget(Boolean chosenBudget) {
+        this.chosenBudget = chosenBudget;
+    }
+
+    public String getNumberBudget() {
+        return numberBudget;
+    }
+
+    public void setNumberBudget(String numberBudget) {
+        this.numberBudget = numberBudget;
+    }
+
+    public Integer getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Integer deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
+    public Quotation getQuotation() {
+        return quotation;
+    }
+
+    public void setQuotation(Quotation quotation) {
+        this.quotation = quotation;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public List<BudgetQuotation> getBudgetQuotations() {
+        return budgetQuotations;
+    }
+
+    public void setBudgetQuotations(List<BudgetQuotation> budgetQuotations) {
+        this.budgetQuotations = budgetQuotations;
+    }
+
+    public List<PaymentInformationBudget> getPaymentInformationBudgets() {
+        return paymentInformationBudgets;
+    }
+
+    public void setPaymentInformationBudgets(List<PaymentInformationBudget> paymentInformationBudgets) {
+        this.paymentInformationBudgets = paymentInformationBudgets;
+    }
 }

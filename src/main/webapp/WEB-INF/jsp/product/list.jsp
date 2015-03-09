@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title><fmt:message key="title.page.home" /> - <fmt:message key="title.purchasing" /></title>
+    <title><fmt:message key="title.page.product" /> - <fmt:message key="title.purchasing" /></title>
     <html:head />
     <html:tableAssets/>
 </head>

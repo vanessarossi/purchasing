@@ -39,4 +39,52 @@ public class BudgetQuotation {
     
     @OneToOne
     private OrderRequest orderRequest;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Boolean getChosenBudget() {
+        return chosenBudget;
+    }
+
+    public void setChosenBudget(Boolean chosenBudget) {
+        this.chosenBudget = chosenBudget;
+    }
+
+    public BigDecimal getUnityPrice() {
+        return unityPrice;
+    }
+
+    public void setUnityPrice(BigDecimal unityPrice) {
+        this.unityPrice = unityPrice;
+    }
+
+    public Budget getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Budget budget) {
+        this.budget = budget;
+    }
+
+    public QuotationRequest getQuotationRequest() {
+        return quotationRequest;
+    }
+
+    public void setQuotationRequest(QuotationRequest quotationRequest) {
+        this.quotationRequest = quotationRequest;
+    }
+
+    public OrderRequest getOrderRequest() {
+        return orderRequest;
+    }
+
+    public void setOrderRequest(OrderRequest orderRequest) {
+        this.orderRequest = orderRequest;
+    }
 }
