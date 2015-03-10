@@ -44,6 +44,7 @@ public class QuotationServiceImpl implements QuotationService {
             String colNumber = quotation.getId().toString();
             String colType = quotation.getType().getDescription();
             String colUser = quotation.getUser().getName();
+            String colStatus = quotation.getStatus().getDescription();
             String colInitialDate = Conversor.converterDateTimeInString(quotation.getInitialDate());
             String colFinalDate = Conversor.converterDateTimeInString(quotation.getFinalDate());
             String buttonView = "<a href=/purchasing/cotacao/editar/"+quotation.getId()+"><span class=\"fa fa-pencil-square-o btn btn-default btn-xs\"></span></a>";
@@ -51,6 +52,7 @@ public class QuotationServiceImpl implements QuotationService {
                     colNumber,
                     colType,
                     colUser,
+                    colStatus,
                     colInitialDate,
                     colFinalDate,
                     buttonView
@@ -70,6 +72,16 @@ public class QuotationServiceImpl implements QuotationService {
     public Quotation searchById(Quotation quotation) {
         if (quotation.getId() != null){
             quotation  = quotationDAO.findById(Quotation.class,quotation.getId());
+        }else{
+            quotation = new Quotation();
+        }
+        return  quotation;
+    }
+
+    @Override
+    public Quotation searchOpenById(Quotation quotation) {
+        if (quotation.getId() != null){
+            quotation  = quotationDAO.findOpenById(quotation);
         }else{
             quotation = new Quotation();
         }

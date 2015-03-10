@@ -73,7 +73,7 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
         return solicitationRequests;
     }
 
-    public List<SolicitationRequest> findSolicitationRequestByProduct(Product product){
+    public List<SolicitationRequest> findSolicitationRequestProductByProduct(Product product){
         List<StatusEnum>status = new ArrayList<>();
             status.add(StatusEnum.Approved);
             status.add(StatusEnum.InAnalysis);
@@ -93,7 +93,7 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
         return solicitationRequests;
     }
 
-    public List<SolicitationRequest> findSolicitationRequestBySolicitation(Solicitation solicitation){
+    public List<SolicitationRequest> findSolicitationRequestProductBySolicitation(Solicitation solicitation){
         List<StatusEnum>status = new ArrayList<>();
             status.add(StatusEnum.Approved);
             status.add(StatusEnum.InAnalysis);
@@ -109,9 +109,29 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
             criteria.add(Restrictions.isNotNull("product"));
         Criterion criterion = Restrictions.and(Restrictions.in("situation.status", status));
             criteria.add(criterion);
-            criteria.addOrder(Order.desc("id"));
         solicitationRequests = criteria.list();
         return solicitationRequests;
+    }
+
+    public SolicitationRequest findSolicitationRequestServiceBySolicitation(Solicitation solicitation){
+        List<StatusEnum>status = new ArrayList<>();
+        status.add(StatusEnum.Approved);
+        status.add(StatusEnum.InAnalysis);
+        status.add(StatusEnum.QuotingProcess);
+
+        SolicitationRequest solicitationRequest = new SolicitationRequest();
+        Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
+        criteria.createAlias("solicitation","s");
+        criteria.createAlias("s.situation","situation");
+        criteria.add(Restrictions.eq("solicitation",solicitation));
+        criteria.add(Restrictions.eq("addQuotation",false));
+        criteria.add(Restrictions.isNull("status"));
+        criteria.add(Restrictions.isNotNull("service"));
+        Criterion criterion = Restrictions.and(Restrictions.in("situation.status", status));
+        criteria.add(criterion);
+        criteria.addOrder(Order.desc("id"));
+        solicitationRequest = (SolicitationRequest) criteria.uniqueResult();
+        return solicitationRequest;
     }
 
     public Integer totalSolicitationRequestAddQuotationBySolicitation(Solicitation solicitation){

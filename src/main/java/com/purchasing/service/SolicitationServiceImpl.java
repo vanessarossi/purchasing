@@ -402,18 +402,25 @@ public class SolicitationServiceImpl implements SolicitationService {
     }
 
     @Override
-    public List<SolicitationRequest> searchSolicitationRequestByProduct(Product product) {
+    public List<SolicitationRequest> searchSolicitationRequestProductByProduct(Product product) {
         List<SolicitationRequest>  solicitationRequests  = new ArrayList<>();
-        solicitationRequests = solicitationRequestDAO.findSolicitationRequestByProduct(product);
+        solicitationRequests = solicitationRequestDAO.findSolicitationRequestProductByProduct(product);
         return solicitationRequests;
 
     }
 
     @Override
-    public List<SolicitationRequest> searchSolicitationRequestBySolicitation(Solicitation solicitation) {
+    public List<SolicitationRequest> searchSolicitationRequestProductBySolicitation(Solicitation solicitation) {
         List<SolicitationRequest>  solicitationRequests  = new ArrayList<>();
-        solicitationRequests = solicitationRequestDAO.findSolicitationRequestBySolicitation(solicitation);
+        solicitationRequests = solicitationRequestDAO.findSolicitationRequestProductBySolicitation(solicitation);
         return solicitationRequests;
+    }
+
+    @Override
+    public SolicitationRequest searchSolicitationRequestServiceBySolicitation(Solicitation solicitation) {
+        SolicitationRequest solicitationRequest = new SolicitationRequest();
+        solicitationRequest = solicitationRequestDAO.findSolicitationRequestServiceBySolicitation(solicitation);
+        return solicitationRequest;
     }
 
     @Override

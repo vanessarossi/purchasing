@@ -4,6 +4,7 @@ import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
 import com.purchasing.entity.Quotation;
+import com.purchasing.entity.SolicitationRequest;
 import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.BudgetService;
 import com.purchasing.service.impl.QuotationService;
@@ -43,6 +44,41 @@ public class QuotationController {
        Quotation quotationSaved =  quotationService.save(quotation);
         result.include("quotation",quotationSaved);
         result.redirectTo(this).formQuotation();
+    }
+
+    @Post("/salvar/pedido/material")
+    public void saveRequestMaterial(Quotation quotation, List<SolicitationRequest> solicitationRequests) {
+        Quotation quotationSaved = quotationService.searchById(quotation);
+        quotationService.addQuotationRequestProduct(quotation,solicitationRequests);
+        result.include("quotation",quotationSaved);
+        result.redirectTo(this).formQuotation();
+    }
+
+    @Post("/salvar/pedido/servico")
+    public void saveRequestService(Quotation quotation, SolicitationRequest solicitationRequest) {
+        Quotation quotationSaved = quotationService.searchById(quotation);
+        quotationService.addQuotationRequestService(quotation,solicitationRequest);
+        result.include("quotation",quotationSaved);
+        result.redirectTo(this).formQuotation();
+    }
+
+    @Get("/formulario/adicionar/{quotation.id}")
+    public void addRequest(Quotation quotation) {
+        quotation = quotationService.searchById(quotation);
+        result.include("quotation",quotation);
+        result.redirectTo(this).formQuotationAddRequest();
+    }
+
+    @Get("/editar/{quotation.id}")
+    public void edit(Quotation quotation) {
+        quotation = quotationService.searchOpenById(quotation);
+       if (quotation == null){
+           result.include("errorQuotatioFinalized","message.error.quotation.finalized");
+           result.redirectTo(this).list();
+       }else{
+           result.include("quotation",quotation);
+           result.redirectTo(this).formQuotation();
+       }
     }
 
 

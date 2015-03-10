@@ -2,6 +2,7 @@ package com.purchasing.dao;
 
 import com.purchasing.dao.base.DAOImpl;
 import com.purchasing.entity.Quotation;
+import com.purchasing.enumerator.StatusEnum;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
@@ -45,5 +46,15 @@ public class QuotationDAO extends DAOImpl<Quotation,Long> {
         criteria.setProjection(Projections.rowCount());
         total =  Integer.parseInt(criteria.uniqueResult().toString());
         return total;
+    }
+
+
+    public Quotation findOpenById(Quotation quotation){
+        Criteria criteria = getSession().createCriteria(Quotation.class);
+        criteria.add(Restrictions.eq("id",quotation.getId()));
+        criteria.add(Restrictions.eq("status", StatusEnum.Open));
+        Quotation quotationFound = new Quotation();
+        quotationFound = (Quotation) criteria.uniqueResult();
+        return quotationFound;
     }
 }

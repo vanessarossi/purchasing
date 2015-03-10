@@ -42,8 +42,9 @@ public interface SolicitationService {
     public void finalize(Solicitation solicitation);
 
     /** Help in quotation  **/
-    public List<SolicitationRequest> searchSolicitationRequestByProduct(Product product);
-    public List<SolicitationRequest> searchSolicitationRequestBySolicitation(Solicitation solicitation);
+    public List<SolicitationRequest> searchSolicitationRequestProductByProduct(Product product);
+    public List<SolicitationRequest> searchSolicitationRequestProductBySolicitation(Solicitation solicitation);
+    public SolicitationRequest searchSolicitationRequestServiceBySolicitation(Solicitation solicitation);
 
     /** Help finalization **/
     public Solicitation findByApprovedPartiallyDelivered(Solicitation solicitation);

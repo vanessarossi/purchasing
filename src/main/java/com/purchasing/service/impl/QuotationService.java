@@ -1,6 +1,9 @@
 package com.purchasing.service.impl;
 
-import com.purchasing.entity.*;
+import com.purchasing.entity.Product;
+import com.purchasing.entity.Quotation;
+import com.purchasing.entity.QuotationRequest;
+import com.purchasing.entity.SolicitationRequest;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 
 import java.util.List;
@@ -16,6 +19,8 @@ public interface QuotationService {
     public Integer totalPagination(String sSearch);
 
     public Quotation searchById(Quotation quotation);
+
+    public Quotation searchOpenById(Quotation quotation);
 
     public void addQuotationRequestProduct(Quotation quotation,List<SolicitationRequest> solicitationRequests);
     public void addQuotationRequestService(Quotation quotation,SolicitationRequest solicitationRequest);

@@ -8,7 +8,9 @@
 <body>
 <html:template>
     <div class="container-fluid">
-        <h2><fmt:message key="title.quotation" /></h2>
+        <div class="page-header">
+            <h2><fmt:message key="title.quotation" /></h2>
+         </div>
         <c:if test="${quotation.id == null}">
             <form action='<c:url value="/cotacao/salvar"></c:url>' method="post" id="quotationForm">
                 <div class="row">
@@ -73,7 +75,7 @@
                 </div>
         </br>
                 <c:if test="${quotation.type == 'Material'}">
-                    <a href="<c:url value="/cotacao/formulario/adicionar"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addProduct"  /> </a>
+                    <a href="<c:url value="/cotacao/formulario/adicionar/${quotation.id}"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addProduct"  /> </a>
                     </br></br>
                     <table id="quotationMaterialTable" class="table table-striped table-hover table-condensed">
                         <thead>
@@ -91,7 +93,7 @@
                 </c:if>
 
                 <c:if test="${quotation.type == 'Service'}">
-                    <a href="<c:url value="/cotacao/formulario/adicionar"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addService"  /> </a>
+                    <a href="<c:url value="/cotacao/formulario/adicionar/${quotation.id}"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addService"  /> </a>
                     </br></br>
                     <table id="quotationServiceTable" class="table table-striped table-hover table-condensed">
                         <thead>

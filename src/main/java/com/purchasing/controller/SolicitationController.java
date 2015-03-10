@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.entity.Product;
 import com.purchasing.entity.Solicitation;
 import com.purchasing.entity.SolicitationRequest;
 import com.purchasing.enumerator.TypeEnum;
@@ -268,4 +269,38 @@ public class SolicitationController {
         solicitationService.finalize(solicitation);
         result.redirectTo(this).finalizationForm();
     }
+
+    /** Pesquisa de pedido de solicitação json  **/
+
+    @Get("/pesquisar/pedido/produto/{product.id}/json")
+    public void searchSolicitationRequestProductByProduct(Product product){
+        List<SolicitationRequest> solicitationRequests = solicitationService.searchSolicitationRequestProductByProduct(product);
+        if (solicitationRequests != null){
+            result.use(Results.json()).withoutRoot().from(solicitationRequests).include("solicitation").include("solicitation.costCenter").include("product").include("product.unit").serialize();
+        }else{
+            result.use(Results.json()).withoutRoot().from(false).serialize();
+        }
+    }
+
+    @Get("/pesquisar/pedido/solicitacao/{solicitation.id}/json")
+    public void searchSolicitationRequestProductBySolicitationId(Solicitation solicitation){
+        List<SolicitationRequest> solicitationRequests = solicitationService.searchSolicitationRequestProductBySolicitation(solicitation);
+        if (solicitationRequests != null){
+            result.use(Results.json()).withoutRoot().from(solicitationRequests).include("solicitation").include("solicitation.costCenter").include("product").include("product.unit").serialize();
+        }else{
+            result.use(Results.json()).withoutRoot().from(false).serialize();
+        }
+    }
+
+    @Get("/pesquisar/pedido/servico/solicitacao/{solicitation.id}/json")
+    public void searchSolicitationRequestServiceBySolicitationId(Solicitation solicitation){
+        SolicitationRequest solicitationRequest = solicitationService.searchSolicitationRequestServiceBySolicitation(solicitation);
+        if (solicitationRequest != null){
+            result.use(Results.json()).withoutRoot().from(solicitationRequest).include("solicitation").include("solicitation.costCenter").include("service").include("service.typeService").serialize();
+        }else{
+            result.use(Results.json()).withoutRoot().from(false).serialize();
+        }
+    }
+
+
 }
