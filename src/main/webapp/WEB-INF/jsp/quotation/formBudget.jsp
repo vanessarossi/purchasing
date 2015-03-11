@@ -104,6 +104,15 @@
                                 <td><input type="text" id="totalPrice${i.index}" readonly></td>
                             </tr>
                         </c:forEach>
+                        <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Total un</th>
+                            <th>Total total</th>
+                        </tr>
+                        </tfoot>
                     </tbody>
                 </table>
             </c:if>
@@ -125,10 +134,67 @@
                                 </td>
                                 <td><input type="text" id="totalPrice${i.index}" readonly></td>
                             </tr>
+                    <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Total un</th>
+                        <th>Total total</th>
+                    </tr>
+                    </tfoot>
                         </c:forEach>
                     </tbody>
                 </table>
             </c:if>
+
+            <hr>
+                <h2><fmt:message key="title.information.payment" /></h2>
+            <hr>
+            <div class="row">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    <fmt:message key="title.list.information.payment.one" />
+                                </a><i class="indicator fa fa-angle-double-down"></i>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                CRIAR FORM
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    <fmt:message key="title.list.information.payment.two" />
+                                </a><i class="indicator fa fa-angle-double-up"></i>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                CRIAR FORM
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    <fmt:message key="title.list.information.payment.three" />
+                                </a><i class="indicator fa fa fa-angle-double-up"></i>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                CRIAR FORM
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </html:template>

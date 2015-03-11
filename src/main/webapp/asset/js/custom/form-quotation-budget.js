@@ -43,3 +43,12 @@ function chooseSupplier(code,name){
     $('#code').val(code);
     $('#searchSupplier').modal('hide');
 };
+
+function toggleChevron(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('fa-angle-double-down fa-angle-double-up');
+}
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
