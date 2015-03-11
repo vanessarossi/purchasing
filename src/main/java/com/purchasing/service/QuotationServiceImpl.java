@@ -139,12 +139,11 @@ public class QuotationServiceImpl implements QuotationService {
 
     @Override
     public void removeQuotationRequest(QuotationRequest quotationRequest) {
-        SolicitationRequest solicitationRequestFound = solicitationRequestDAO.findById(SolicitationRequest.class,quotationRequest.getSolicitationRequest().getId());
+        QuotationRequest quotationRequestFound = quotationRequestDAO.findById(QuotationRequest.class,quotationRequest.getId());
+        SolicitationRequest solicitationRequestFound = quotationRequestFound.getSolicitationRequest();
             solicitationRequestFound.setAddQuotation(false);
         solicitationRequestDAO.save(solicitationRequestFound);
-
-        quotationRequestDAO.delete(quotationRequest);
-
+        quotationRequestDAO.delete(quotationRequestFound);
         updateStatusSituationSolicitation(solicitationRequestFound.getSolicitation());
     }
 

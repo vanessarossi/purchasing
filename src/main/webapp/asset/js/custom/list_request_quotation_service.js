@@ -30,7 +30,7 @@ function fillTable() {
 	                            row += "<td>"+costCenter+"</td>";
 	                            row += "<td>"+description+"</td>";
 	                            row += "<td>";
-	                            row += '<a onclick="removedService('+id+')"><span class="fa fa-trash-o btn btn-default btn-xs"></span></a>';
+	                            row += '<a onclick="confirmDetele('+id+')"><span class="fa fa-trash-o btn btn-default btn-xs"></span></a>';
 	                            row += "</td>";
 	                            row += "</tr>";
 
@@ -45,6 +45,44 @@ function fillTable() {
     }
 };
 
-function removedService(id){
-	alert("Remover");
+
+var codeQuotationRequest=0;
+
+
+function confirmDetele(id){
+	codeQuotationRequest = id;
+    $('#modalConfirm').modal('show');
 };
+
+$('#btn-confirm').click(function(){
+    if (codeQuotationRequest != 0) {
+        $.ajax({
+            type: "GET",                
+            url: getContextPath()+'cotacao/deletar/pedido/'+codeQuotationRequest+'/json',
+            dataType: "json",
+            beforeSend: function(){
+            },
+            success: function (result) {
+              $('#modalConfirm').modal('hide');
+              $('#modalSuccess').modal('show');
+              setTimeout(function () {
+                       $("#modalSuccess").modal('hide');
+                       location.href=getContextPath()+'cotacao/pesquisar/'+codeQuotationRequest; 
+                   }, 1050)
+
+            },
+            error: function () {
+              $('#modalConfirm').modal('hide');
+              $('#modalError').modal('show');
+              setTimeout(function () {
+                    $("#modalError").modal('hide');
+                     location.href=getContextPath()+'cotacao/pesquisar/'+codeQuotationRequest; 
+              }, 1050)
+            }
+        });
+    };
+});
+
+$('#btn-cancel').click(function(){
+    $('#modalConfirm').modal('hide');
+});

@@ -3,7 +3,9 @@ package com.purchasing.controller;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.entity.Product;
 import com.purchasing.entity.Quotation;
+import com.purchasing.entity.QuotationRequest;
 import com.purchasing.entity.SolicitationRequest;
 import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.BudgetService;
@@ -11,7 +13,6 @@ import com.purchasing.service.impl.QuotationService;
 import com.purchasing.support.datatable.DataTableModel;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 import com.purchasing.support.quotation.QuotationRequestServiceView;
-
 import javax.inject.Inject;
 import java.util.List;
 
@@ -115,13 +116,32 @@ public class QuotationController {
     @Get("/editar/{quotation.id}")
     public void edit(Quotation quotation) {
         quotation = quotationService.searchOpenById(quotation);
-       if (quotation == null){
-           result.include("errorQuotatioFinalized","message.error.quotation.finalized");
-           result.redirectTo(this).list();
-       }else{
+        if (quotation == null){
+            result.include("errorQuotatioFinalized","message.error.quotation.finalized");
+            result.redirectTo(this).list();
+        }else{
+            result.include("quotation",quotation);
+            result.redirectTo(this).formQuotation();
+        }
+    }
+
+    @Get("/pesquisar/{quotation.id}")
+    public void searchById(Quotation quotation) {
+        quotation = quotationService.searchById(quotation);
            result.include("quotation",quotation);
            result.redirectTo(this).formQuotation();
-       }
+    }
+
+    @Get("/deletar/pedido/material/total/{quotation.id}/{product.id}/json")
+    public void removeQuotationRequestProductByProduct(Quotation quotation,Product product) {
+        quotationService.removeQuotationRequestByProduct(quotation,product);
+        result.use(Results.json()).withoutRoot().from(true).serialize();
+    }
+
+    @Get("/deletar/pedido/{quotationRequest.id}/json")
+    public void removeQuotationRequestServiceById(QuotationRequest quotationRequest) {
+        quotationService.removeQuotationRequest(quotationRequest);
+        result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
 
@@ -157,7 +177,6 @@ public class QuotationController {
         result.include("controller", this.getClass().toString());
     }
 
-
     /** Paginação **/
     @Get("/paginar")
     public void pagination(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength){
@@ -169,7 +188,6 @@ public class QuotationController {
         dataTableModel.setAaData(quotationObjects.toArray());
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }
-
 
     /** Listagem total de produtos e serviços **/
     @Get("/listagem/total/material/{quotation.id}/json")
@@ -187,6 +205,16 @@ public class QuotationController {
         List<QuotationRequestServiceView> quotationRequestsService = new QuotationRequestServiceView().generateList(quotationService.searchQuotationRequestServiceByQuotation(quotation));
         if (quotationRequestsService != null){
             result.use(Results.json()).withoutRoot().from(quotationRequestsService).include("solicitation").include("costCenter").include("typeService").serialize();
+        }else{
+            result.use(Results.json()).withoutRoot().from(false).serialize();
+        }
+    }
+
+    @Get("/listagem/detalhada/material/{quotation.id}/{product.id}/json")
+    public void listRequestMaterialDetail(Quotation quotation,Product product) {
+        List<QuotationRequest> quotationRequests = quotationService.searchQuotationRequestProductByProduct(quotation,product);
+        if (quotationRequests != null){
+            result.use(Results.json()).withoutRoot().from(quotationRequests).include("solicitationRequest").include("solicitationRequest.solicitation").include("solicitationRequest.solicitation.costCenter").include("solicitationRequest.product").include("solicitationRequest.product.unit").serialize();
         }else{
             result.use(Results.json()).withoutRoot().from(false).serialize();
         }

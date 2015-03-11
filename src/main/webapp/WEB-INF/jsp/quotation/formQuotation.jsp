@@ -31,7 +31,6 @@
             </form>
         </c:if>
         <c:if test="${quotation.id != null}">
-
         <div class="panel-body well well-sm">
             <div class="col-md-3 col-sm-3">
                 <a class="btn btn-default" href="<c:url value="/cotacao/editar/${quotation.id}"></c:url>"><fmt:message key="button.menu.quotation" /> </a>
@@ -46,7 +45,6 @@
                 <a class="btn btn-default" href="<c:url value="/cotacao/formulario/iniciar/ordem/${quotation.id}"></c:url>"><fmt:message key="button.menu.init.purchase.order" /> </a>
             </div>
         </div>
-
         </br>
             <div class="row">
                 <div class="col-md-2 col-sm-2">
@@ -89,6 +87,20 @@
                     <tbody>
                     </tbody>
                 </table>
+
+                <table id="quotationMaterialDetailTable" class="table table-striped table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th style="width: 3%"><fmt:message key="table.solicitation" /></th>
+                        <th style="width: 50%"><fmt:message key="table.product" /></th>
+                        <th style="width: 10%" ><fmt:message key="table.quantity" /></th>
+                        <th style="width: 18%" ><fmt:message key="table.unit" /></th>
+                        <th style="width: 2%" ><fmt:message key="table.##" /></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </c:if>
             <c:if test="${quotation.type == 'Service'}">
                 <a href="<c:url value="/cotacao/formulario/adicionar/${quotation.id}"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addService"  /> </a>
@@ -111,6 +123,7 @@
     </div>
 </html:template>
 </body>
+<html:notification/>
 <html:jsAssets/>
 <c:if test="${quotation.type == 'Material'}">
     <script src="${pageContext.request.contextPath}/asset/js/custom/list_request_quotation_material.js"></script>

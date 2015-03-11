@@ -113,11 +113,10 @@
                         </table>
                     </div>
                     <div class="row">
-                        <div class="col-sm-offset-10 col-md-offset-10">
+                        <div class="col-sm-offset-11 col-md-offset-11">
                             <div class="form-group">
                                 <input type="hidden" name="quotation.id" value="${quotation.id}" >
                                 <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
-                                <a href='<c:url value="/cotacao"></c:url>' type="button" class="btn btn-danger"><fmt:message key="button.cancel"/></a>
                             </div>
                         </div>
                     </div>
@@ -158,7 +157,7 @@
                             </table>
                         </div>
                     <div class="row">
-                        <div class="col-sm-offset-10 col-md-offset-10">
+                        <div class="col-sm-offset-11 col-md-offset-11">
                             <div class="form-group">
                                 <input type="hidden" name="quotation.id" value="${quotation.id}" >
                                 <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
