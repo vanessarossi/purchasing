@@ -48,16 +48,16 @@ public class QuotationController {
 
     @Post("/salvar/pedido/material")
     public void saveRequestMaterial(Quotation quotation, List<SolicitationRequest> solicitationRequests) {
-        Quotation quotationSaved = quotationService.searchById(quotation);
         quotationService.addQuotationRequestProduct(quotation,solicitationRequests);
+        Quotation quotationSaved = quotationService.searchById(quotation);
         result.include("quotation",quotationSaved);
         result.redirectTo(this).formQuotation();
     }
 
     @Post("/salvar/pedido/servico")
     public void saveRequestService(Quotation quotation, SolicitationRequest solicitationRequest) {
-        Quotation quotationSaved = quotationService.searchById(quotation);
         quotationService.addQuotationRequestService(quotation,solicitationRequest);
+        Quotation quotationSaved = quotationService.searchById(quotation);
         result.include("quotation",quotationSaved);
         result.redirectTo(this).formQuotation();
     }
@@ -83,7 +83,6 @@ public class QuotationController {
 
 
     /** Formulários **/
-
     @Path("/")
     public void list() {
         result.include("controller", this.getClass().toString());
@@ -114,7 +113,6 @@ public class QuotationController {
     public void formQuotationAddRequest() {
         result.include("controller", this.getClass().toString());
     }
-
 
 
     /** Paginação **/

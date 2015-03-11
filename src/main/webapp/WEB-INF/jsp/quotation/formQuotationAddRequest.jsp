@@ -35,7 +35,7 @@
                     </div>
                 </div>
         </div>
-        <form action='<c:url value="/cotacao/salvar"></c:url>' method="post" id="addRequestQuotationMaterialForm">
+        <form action='<c:url value="/cotacao/salvar/pedido/material"></c:url>' method="post" id="addRequestQuotationMaterialForm">
             <c:if test="${quotation.type == 'Material'}">
                 <div  id="divMaterial">
                     <h3><fmt:message key="title.products" /></h3>
@@ -110,7 +110,7 @@
                 </div>
             </c:if>
         </form>
-        <form action='<c:url value="/cotacao/salvar"></c:url>' method="post" id="addRequestQuotationServiceForm">
+        <form action='<c:url value="/cotacao/salvar/pedido/servico"></c:url>' method="post" id="addRequestQuotationServiceForm">
             <c:if test="${quotation.type == 'Service'}">
                 <div  id="divService">
                     <h3><fmt:message key="title.services" /></h3>

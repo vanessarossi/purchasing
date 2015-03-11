@@ -108,17 +108,19 @@ public class QuotationServiceImpl implements QuotationService {
 
     @Override
     public void addQuotationRequestService(Quotation quotation, SolicitationRequest solicitationRequest) {
-        QuotationRequest quotationRequest = new QuotationRequest();
-        quotationRequest.setQuotation(quotation);
-        quotationRequest.setSolicitationRequest(solicitationRequest);
-        quotationRequestDAO.save(quotationRequest);
+        if (solicitationRequest.getAddQuotation() != null && solicitationRequest.getAddQuotation() == true) {
+            QuotationRequest quotationRequest = new QuotationRequest();
+            quotationRequest.setQuotation(quotation);
+            quotationRequest.setSolicitationRequest(solicitationRequest);
+            quotationRequestDAO.save(quotationRequest);
 
-        SolicitationRequest solicitationRequestFound = solicitationRequestDAO.findById(SolicitationRequest.class,solicitationRequest.getId());
+            SolicitationRequest solicitationRequestFound = solicitationRequestDAO.findById(SolicitationRequest.class, solicitationRequest.getId());
 
-        solicitationRequestFound.setAddQuotation(true);
-        solicitationRequestDAO.save(solicitationRequestFound);
+            solicitationRequestFound.setAddQuotation(true);
+            solicitationRequestDAO.save(solicitationRequestFound);
 
-        updateStatusSituationSolicitation(solicitationRequestFound.getSolicitation());
+            updateStatusSituationSolicitation(solicitationRequestFound.getSolicitation());
+        }
     }
 
     @Override

@@ -61,33 +61,37 @@ function searchProductByProduct() {
             },
             success: function (result) {
                 $('#materialTable > tbody >tr').remove();
-                for (var i = 0; i < result.length; i++) {
-                    var solicitation = result[i]["solicitation"]["id"];
-                    var costCenter = result[i]["solicitation"]["costCenter"]["description"];
+                   if (result != false) {
+                     for (var i = 0; i < result.length; i++) {
+                            var solicitation = result[i]["solicitation"]["id"];
+                            var costCenter = result[i]["solicitation"]["costCenter"]["description"];
 
-                    var description = result[i]["product"]["description"];
-                    var model = ((result[i]["product"]["model"] == null) ? '' : result[i]["product"]["model"]);
-                    var mark = ((result[i]["product"]["mark"] == null) ? '' : result[i]["product"]["mark"]);
-                    var unit = result[i]["product"]["unit"]["description"];
-                    
-                    var quantity = result[i]["quantity"];
-                    
-                    var product = description+" "+model+" "+mark;
+                            var description = result[i]["product"]["description"];
+                            var model = ((result[i]["product"]["model"] == null) ? '' : result[i]["product"]["model"]);
+                            var mark = ((result[i]["product"]["mark"] == null) ? '' : result[i]["product"]["mark"]);
+                            var unit = result[i]["product"]["unit"]["description"];
+                            
+                            var quantity = result[i]["quantity"];
+                            
+                            var product = description+" "+model+" "+mark;
 
-                    var row = '<tr>';
-                    row += "<td>"+solicitation+"</td>";
-                    row += "<td>"+costCenter+"</td>";
-                    row += "<td>"+product+"</td>";
-                    row += "<td>"+quantity+"</td>";
-                    row += "<td>"+unit+"</td>";
-                    row += "<td>";
-                    row += '<input type="hidden" name="solicitationRequests['+i+'].id"  value='+result[i]['id']+' />';
-                    row += '<input type="checkbox" name="solicitationRequests['+i+'].addQuotation" id="addQuotation'+i+'"  onclick="actionChecked('+i+')"  value='+result[i]['addQuotation']+' />';
-                    row += "</td>";
-                    row += "</tr>";
+                            var row = '<tr>';
+                            row += "<td>"+solicitation+"</td>";
+                            row += "<td>"+costCenter+"</td>";
+                            row += "<td>"+product+"</td>";
+                            row += "<td>"+quantity+"</td>";
+                            row += "<td>"+unit+"</td>";
+                            row += "<td>";
+                            row += '<input type="hidden" name="solicitationRequests['+i+'].id"  value='+result[i]['id']+' />';
+                            row += '<input type="checkbox" name="solicitationRequests['+i+'].addQuotation" id="addQuotation'+i+'"  onclick="actionChecked('+i+')"  value='+result[i]['addQuotation']+' />';
+                            row += "</td>";
+                            row += "</tr>";
 
-                    $('#materialTable > tbody').append(row);
-                }  
+                            $('#materialTable > tbody').append(row);
+                        }else{
+                            /** adicionar mensagem por falta de solicitaçnao **/
+                        }  
+                   };
                 $('#code').val("");
                 $('#product').val("");
                 $('#unit').val("");
@@ -111,34 +115,38 @@ function searchProductBySolicitation() {
             },
             success: function (result) {
                 $('#materialTable > tbody >tr').remove();
-                for (var i = 0; i < result.length; i++) {
-                    var solicitation = result[i]["solicitation"]["id"];
-                    var costCenter = result[i]["solicitation"]["costCenter"]["description"];
+                if (result != false) {
+                    for (var i = 0; i < result.length; i++) {
+                        var solicitation = result[i]["solicitation"]["id"];
+                        var costCenter = result[i]["solicitation"]["costCenter"]["description"];
 
-                    var description = result[i]["product"]["description"];
-                    var model = ((result[i]["product"]["model"] == null) ? '' : result[i]["product"]["model"]);
-                    var mark = ((result[i]["product"]["mark"] == null) ? '' : result[i]["product"]["mark"]);
-                    var unit = result[i]["product"]["unit"]["description"];
+                        var description = result[i]["product"]["description"];
+                        var model = ((result[i]["product"]["model"] == null) ? '' : result[i]["product"]["model"]);
+                        var mark = ((result[i]["product"]["mark"] == null) ? '' : result[i]["product"]["mark"]);
+                        var unit = result[i]["product"]["unit"]["description"];
 
-                    var quantity = result[i]["quantity"];
-                    
+                        var quantity = result[i]["quantity"];
+                        
 
-                    var product = description+" "+model+" "+mark;
+                        var product = description+" "+model+" "+mark;
 
-                    var row = '<tr>';
-                    row += "<td>"+solicitation+"</td>";
-                    row += "<td>"+costCenter+"</td>";
-                    row += "<td>"+product+"</td>";
-                    row += "<td>"+quantity+"</td>";
-                    row += "<td>"+unit+"</td>";
-                    row += "<td>";
-                    row += '<input type="hidden" name="solicitationRequests['+i+'].id"  value='+result[i]['id']+' />';
-                    row += '<input type="checkbox" name="solicitationRequests['+i+'].addQuotation" id="addQuotation'+i+'"  onclick="actionChecked('+i+')"  value='+result[i]['addQuotation']+' />';
-                    row += "</td>";
-                    row += "</tr>";
+                        var row = '<tr>';
+                        row += "<td>"+solicitation+"</td>";
+                        row += "<td>"+costCenter+"</td>";
+                        row += "<td>"+product+"</td>";
+                        row += "<td>"+quantity+"</td>";
+                        row += "<td>"+unit+"</td>";
+                        row += "<td>";
+                        row += '<input type="hidden" name="solicitationRequests['+i+'].id"  value='+result[i]['id']+' />';
+                        row += '<input type="checkbox" name="solicitationRequests['+i+'].addQuotation" id="addQuotation'+i+'"  onclick="actionChecked('+i+')"  value='+result[i]['addQuotation']+' />';
+                        row += "</td>";
+                        row += "</tr>";
 
-                    $('#materialTable > tbody').append(row);
-                }  
+                        $('#materialTable > tbody').append(row);
+                    }  
+                }else{
+                    /** adicionar mensagem de falta de solicitação**/
+                }
                 $('#solicitationCode').val('');
             },
             error: function (result) {
@@ -160,25 +168,27 @@ function searchServiceBySolicitation() {
             },
             success: function (result) {
                 $('#serviceTable > tbody >tr').remove();
-                
-                    var solicitation = result["solicitation"]["id"];
-                    var type = result["service"]["typeService"]["description"];
-                    var costCenter = result["solicitation"]["costCenter"]["description"];  
-                    var description = result["service"]["description"];
+                    if (result != false) {
+                        var solicitation = result["solicitation"]["id"];
+                        var type = result["service"]["typeService"]["description"];
+                        var costCenter = result["solicitation"]["costCenter"]["description"];  
+                        var description = result["service"]["description"];
 
-                    var row = '<tr>';
-                    row += "<td>"+solicitation+"</td>";
-                    row += "<td>"+type+"</td>";
-                    row += "<td>"+costCenter+"</td>";
-                    row += "<td>"+description+"</td>";
-                    row += "<td>";
-                    row += '<input type="hidden" name="solicitationRequests[0].id"  value='+result['id']+' />';
-                    row += '<input type="checkbox" name="solicitationRequests[0].addQuotation" id="addQuotation0"  onclick="actionChecked(0)"  value='+result['addQuotation']+' />';
-                    row += "</td>";
-                    row += "</tr>";
+                        var row = '<tr>';
+                        row += "<td>"+solicitation+"</td>";
+                        row += "<td>"+type+"</td>";
+                        row += "<td>"+costCenter+"</td>";
+                        row += "<td>"+description+"</td>";
+                        row += "<td>";
+                        row += '<input type="hidden" name="solicitationRequest.id"  value='+result['id']+' />';
+                        row += '<input type="checkbox" name="solicitationRequest.addQuotation" id="addQuotation0"  onclick="actionChecked(0)"  value='+result['addQuotation']+' />';
+                        row += "</td>";
+                        row += "</tr>";
 
-                    $('#serviceTable > tbody').append(row);
-             
+                        $('#serviceTable > tbody').append(row);
+                    }else{
+                        /** adicionar a mensagem que não possui solicitação **/
+                    }
                 $('#solicitationServiceCode').val('');
             },
             error: function (result) {
