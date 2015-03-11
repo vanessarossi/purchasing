@@ -24,8 +24,9 @@ public class QuotationRequestDAO extends DAOImpl<QuotationRequest,Long> {
 
     public List<QuotationRequest> findQuotationRequestProduct(Quotation quotation){
             Criteria criteria = getSession().createCriteria(QuotationRequest.class);
-                     criteria.createAlias("sr","solicitationRequest");
+                     criteria.createAlias("solicitationRequest","sr");
                      criteria.add(Restrictions.isNotNull("sr.product"));
+                     criteria.add(Restrictions.eq("quotation",quotation));
             List<QuotationRequest>quotationRequests = new ArrayList<>();
             quotationRequests.addAll(criteria.list());
         return quotationRequests;
@@ -33,8 +34,9 @@ public class QuotationRequestDAO extends DAOImpl<QuotationRequest,Long> {
 
     public List<QuotationRequest> findQuotationRequestService(Quotation quotation){
             Criteria criteria = getSession().createCriteria(QuotationRequest.class);
-            criteria.createAlias("sr","solicitationRequest");
+            criteria.createAlias("solicitationRequest","sr");
             criteria.add(Restrictions.isNotNull("sr.service"));
+            criteria.add(Restrictions.eq("quotation",quotation));
             List<QuotationRequest>quotationRequests = new ArrayList<>();
             quotationRequests.addAll(criteria.list());
         return quotationRequests;
@@ -42,7 +44,7 @@ public class QuotationRequestDAO extends DAOImpl<QuotationRequest,Long> {
 
     public List<QuotationRequest> findQuotationRequestProductByProduct(Quotation quotation,Product product){
         Criteria criteria = getSession().createCriteria(QuotationRequest.class);
-        criteria.createAlias("sr","solicitationRequest");
+        criteria.createAlias("solicitationRequest","sr");
         criteria.add(Restrictions.eq("sr.product", product));
         criteria.add(Restrictions.eq("quotation",quotation));
         List<QuotationRequest>quotationRequests = new ArrayList<>();

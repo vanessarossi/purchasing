@@ -12,9 +12,17 @@ import java.util.List;
  */
 public class QuotationRequestProductView  implements Comparator<QuotationRequestProductView> {
 
+    private Long id;
     private Product product;
     private Float quantity;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Product getProduct() {
         return product;
@@ -41,6 +49,7 @@ public class QuotationRequestProductView  implements Comparator<QuotationRequest
         List<QuotationRequestProductView> requestProductViews = new ArrayList<>();
         for (QuotationRequest quotationRequest : quotationRequests){
             QuotationRequestProductView quotationRequestProductView = new QuotationRequestProductView();
+                quotationRequestProductView.setId(quotationRequest.getId());
                 quotationRequestProductView.setProduct(quotationRequest.getSolicitationRequest().getProduct());
                 quotationRequestProductView.setQuantity(quotationRequest.getSolicitationRequest().getQuantity());
             requestProductViews.add(quotationRequestProductView);

@@ -62,10 +62,12 @@ public class QuotationRequestServiceView {
     public List<QuotationRequestServiceView> generateList(List<QuotationRequest> quotationRequests){
         List<QuotationRequestServiceView> quotationRequestServiceViews = new ArrayList<>();
             for (QuotationRequest quotationRequest : quotationRequests){
+
                 QuotationRequestServiceView quotationRequestServiceView = new QuotationRequestServiceView();
                 quotationRequestServiceView.setId(quotationRequest.getId());
                 quotationRequestServiceView.setSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
                 quotationRequestServiceView.setCostCenter(quotationRequest.getSolicitationRequest().getSolicitation().getCostCenter());
+                quotationRequestServiceView.setTypeService(quotationRequest.getSolicitationRequest().getService().getTypeService());
 
                 Integer length = 0;
                 if (quotationRequest.getSolicitationRequest().getService().getDescription().length() >= 70){

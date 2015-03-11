@@ -88,10 +88,10 @@ function searchProductByProduct() {
                             row += "</tr>";
 
                             $('#materialTable > tbody').append(row);
-                        }else{
-                            /** adicionar mensagem por falta de solicitaçnao **/
-                        }  
-                   };
+                        }
+                   }else{
+                       /** adicionar mensagem por falta de solicitaçnao **/
+                   }
                 $('#code').val("");
                 $('#product').val("");
                 $('#unit').val("");
@@ -105,7 +105,6 @@ function searchProductByProduct() {
 
 function searchProductBySolicitation() {
     var solicitation = $('#solicitationCode').val().trim();
-    alert(solicitation);
     if (solicitation != null && solicitation != '') {
       $.ajax({
             url: getContextPath() + 'solicitacao/pesquisar/pedido/solicitacao/'+solicitation+'/json',

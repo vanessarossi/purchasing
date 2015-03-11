@@ -9,7 +9,21 @@
 <html:template>
     <div class="container-fluid">
         <div class="page-header">
-            <h3><fmt:message key="title.quotation" /></h3>
+            <h2><fmt:message key="title.quotation" /> - <fmt:message key="title.include.material.service" /> </h2>
+        </div>
+        <div class="panel-body well well-sm">
+            <div class="col-md-3 col-sm-3">
+                <a class="btn btn-default" href="<c:url value="/cotacao/editar/${quotation.id}"></c:url>"><fmt:message key="button.menu.quotation" /> </a>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <a class="btn btn-default" href="<c:url value="/cotacao/formulario/adicionar/orcamento/${quotation.id}"></c:url>"><fmt:message key="button.menu.add.budget" /> </a>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <a class="btn btn-default" href="<c:url value="/cotacao/formulario/visualizar/detalhes/${quotation.id}"></c:url>"><fmt:message key="button.menu.viewDetails" /> </a>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <a class="btn btn-default" href="<c:url value="/cotacao/formulario/iniciar/ordem/${quotation.id}"></c:url>"><fmt:message key="button.menu.init.purchase.order" /> </a>
+            </div>
         </div>
         <div class="row">
                 <div class="col-md-2 col-sm-2">
@@ -148,7 +162,6 @@
                             <div class="form-group">
                                 <input type="hidden" name="quotation.id" value="${quotation.id}" >
                                 <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
-                                <a href='<c:url value="/cotacao"></c:url>' type="button" class="btn btn-danger"><fmt:message key="button.cancel"/></a>
                             </div>
                         </div>
                     </div>
