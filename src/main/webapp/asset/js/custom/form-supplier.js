@@ -1,14 +1,6 @@
 $(document).ready(function() {
    actionTypePerson();
 
-  $("#zipCode").mask("99999-999");
-  $("#phone").mask("(99) 9999-9999");
-  $("#secondaryPhone").mask("(99) 9999-9999");
-  $("#cellPhone").mask("(99) 99999-999?9");
-  $("#secondaryCellPhone").mask("(99) 99999-999?9");
-  $("#cnpj").mask("99.999.999/9999-99");
-  $("#cpf").mask("999.999.999-99");
-  $("#rg").mask("99.999.999-9");
   $('#cpfEquals').hide();
   $('#cnpjEquals').hide();
 });

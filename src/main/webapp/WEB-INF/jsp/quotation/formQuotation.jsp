@@ -70,7 +70,6 @@
                     </div>
                 </div>
             </div>
-        </b>
             <c:if test="${quotation.type == 'Material'}">
                 <a href="<c:url value="/cotacao/formulario/adicionar/${quotation.id}"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addProduct"  /> </a>
                 </br></br>
@@ -87,7 +86,6 @@
                     <tbody>
                     </tbody>
                 </table>
-
                 <table id="quotationMaterialDetailTable" class="table table-striped table-hover table-condensed">
                     <thead>
                     <tr>
