@@ -111,7 +111,7 @@
                         <tfoot>
                         <tr>
                             <th style="width: 50%"></th>
-                            <th style="width: 10%"><input type="hidden" id="totalMaterial" value="${fn:length(quotationRequests)-1}" ></th>
+                            <th style="width: 10%"><input type="hidden" id="totalMaterial" value="${fn:length(quotationRequests)}" ></th>
                             <th style="width: 10%"><fmt:message key="table.finalValue" /></th>
                             <th style="width: 10%"><input type="text" id="totalUnitPriceMaterial" readonly></th>
                             <th style="width: 10%"><input type="text" id="finalPriceMaterial"readonly></th>
