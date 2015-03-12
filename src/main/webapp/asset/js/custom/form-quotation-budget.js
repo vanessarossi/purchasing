@@ -1,11 +1,8 @@
 $(document).ready(function(){
-    $('input').keypress(function (e) {
-        var code = null;
-        code = (e.keyCode ? e.keyCode : e.which);
-        return (code == 13) ? false : true;
-    });
 });
 
+    var totalUnitPriceMaterial = 0;
+    var finalPriceMaterial = 0;
 
 $('#code').blur(function () {
     var id = $('#code').val().trim();
@@ -37,7 +34,6 @@ $('#code').blur(function () {
     }
 });
 
-
 function chooseSupplier(code,name){
     $('#supplier').val(name);
     $('#code').val(code);
@@ -52,3 +48,115 @@ function toggleChevron(e) {
 }
 $('#accordion').on('hidden.bs.collapse', toggleChevron);
 $('#accordion').on('shown.bs.collapse', toggleChevron);
+
+
+function calculateTotalPriceMaterial(i){
+    $('#unityPrice'+i).keypress(function(e) {
+         quantity = $('#quantity'+i).val();
+         unityPrice = $('#unityPrice'+i).val();
+         totalMaterial = $('#totalMaterial'+i).val();
+        alert(unityPrice);
+        if (unityPrice != " "  && unityPrice != null && unityPrice.length >= 3) {
+            while (quantity.indexOf(',') != -1)
+                quantity = quantity.replace(',', '.');
+            while (unityPrice.indexOf(',') != -1)
+                unityPrice = unityPrice.replace(',', '.');
+
+                totalPrice = parseFloat(quantity) * parseFloat(unityPrice);
+                $('#totalPrice'+i).val(totalPrice.toFixed(2).replace(".", ","));
+                $('#totalPrice'+i).priceFormat({
+                    prefix: 'R$ ',
+                    centsSeparator: ',',
+                    thousandsSeparator: '.'
+                });
+            }
+
+
+            if (i == totalMaterial) {
+                for (var i = 0; i <= totalMaterial; i++) {
+                        quantity = $('#quantity'+i).val();
+                        unityPrice = $('#unityPrice'+i).val();
+                            while (quantity.indexOf(',') != -1)
+                                quantity = quantity.replace(',', '.');
+                            while (unityPrice.indexOf(',') != -1)
+                                unityPrice = unityPrice.replace(',', '.');
+
+                            totalPrice = parseFloat(quantity) * parseFloat(unityPrice);
+                        
+                        totalUnitPriceMaterial = parseFloat(totalUnitPriceMaterial) + parseFloat($('#unityPrice'+i).val());
+                        finalPriceMaterial = parseFloat(finalPriceMaterial) + parseFloat(totalPrice) ;
+                };
+                $('#totalUnitPriceMaterial').val(totalUnitPriceMaterial.toFixed(2).replace(".", ","));
+                $('#totalUnitPriceMaterial').priceFormat({
+                    prefix: 'R$ ',
+                    centsSeparator: ',',
+                    thousandsSeparator: '.'
+                });
+                $('#finalPriceMaterial').val(finalPriceMaterial.toFixed(2).replace(".", ","));
+                $('#finalPriceMaterial').priceFormat({
+                    prefix: 'R$ ',
+                    centsSeparator: ',',
+                    thousandsSeparator: '.'
+                });
+                $('#totalPrice').val(finalPriceMaterial.toFixed(2).replace(".", ","));
+                $('#totalPriceTwo').val(finalPriceMaterial.toFixed(2).replace(".", ","));
+                $('#totalPriceThree').val(finalPriceMaterial.toFixed(2).replace(".", ","));
+            }      
+    });
+};
+
+$('#formPayment').change(function(){
+    formPaymentId = $('#formPayment').val();
+    $.ajax({
+        type: "GET",
+        url: getContextPath()+'cotacao/pesquisar/detalhes/pagamento/'+formPaymentId+'/json',
+        dataType: "json",
+        beforeSend: function(){
+        },
+        success: function (result) {
+           if (result != false) {
+                var input = result["input"];
+                var parcels = result["parcels"];
+                var intervalDay = result["intervalDay"];
+
+                if (input == false && intervalDay == 0) {
+                    /** True **/
+                    $('#dateInput').attr("readonly",true);
+                    $('#dateFirstInstallment').attr("readonly",true);
+                    $('#dateLastInstallment').attr("readonly",true);
+                    $('#inputPrice').attr("readonly",true);
+
+                    /** alter false **/
+                    $('#expirationDate').attr("readonly",false);
+
+                }else if(input == false && intervalDay > 0){
+                    $('#dateInput').attr("readonly",true);
+                    $('#dateFirstInstallment').attr("readonly",true);
+                    $('#dateLastInstallment').attr("readonly",true);
+                    $('#expirationDate').attr("readonly",true);
+                    $('#inputPrice').attr("readonly",true);
+                }else if (input == true) {
+
+                    $('#dateLastInstallment').attr("readonly",true);
+
+                    $('#dateInput').attr("readonly",false);
+                    $('#dateFirstInstallment').attr("readonly",false);
+                    $('#expirationDate').attr("readonly",false);
+                    $('#inputPrice').attr("readonly",false);
+                };
+           };
+        },
+        error: function () {
+            alert("Ocorreu um erro no processamento dos dados.");
+        }
+    });   
+
+});
+
+$('#formPaymentTwo').change(function(){
+    formPaymentId = $('#formPaymentTwo').val();
+});
+
+$('#formPaymentThree').change(function(){
+    formPaymentId = $('#formPaymentThree').val();
+});

@@ -14,4 +14,5 @@ public interface FormPaymentService {
     public FormPayment searchById(FormPayment formPayment);
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPagination(String sSearch);
+    public List<FormPayment> findAll();
 }

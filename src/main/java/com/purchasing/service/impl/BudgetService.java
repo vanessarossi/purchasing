@@ -9,7 +9,7 @@ import com.purchasing.entity.Solicitation;
  */
 public interface BudgetService {
 
-    public void saveBudget(Budget budget);
+    public Budget saveBudget(Budget budget);
     public Budget searchBudget(Budget budget);
 
     /** Payment Information **/

@@ -3,16 +3,16 @@ package com.purchasing.controller;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
-import com.purchasing.entity.Product;
-import com.purchasing.entity.Quotation;
-import com.purchasing.entity.QuotationRequest;
-import com.purchasing.entity.SolicitationRequest;
+import com.purchasing.entity.*;
+import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.BudgetService;
+import com.purchasing.service.impl.FormPaymentService;
 import com.purchasing.service.impl.QuotationService;
 import com.purchasing.support.datatable.DataTableModel;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 import com.purchasing.support.quotation.QuotationRequestServiceView;
+
 import javax.inject.Inject;
 import java.util.List;
 
@@ -26,6 +26,7 @@ public class QuotationController {
 
     private Result result;
     private QuotationService quotationService;
+    private FormPaymentService formPaymentService;
     private BudgetService budgetService;
     private Validator validator;
 
@@ -33,9 +34,10 @@ public class QuotationController {
     public QuotationController() {}
 
     @Inject
-    public QuotationController(Result result, QuotationService quotationService, BudgetService budgetService, Validator validator) {
+    public QuotationController(Result result, QuotationService quotationService, FormPaymentService formPaymentService, BudgetService budgetService, Validator validator) {
         this.result = result;
         this.quotationService = quotationService;
+        this.formPaymentService = formPaymentService;
         this.budgetService = budgetService;
         this.validator = validator;
     }
@@ -64,6 +66,14 @@ public class QuotationController {
         result.redirectTo(this).formQuotation();
     }
 
+    @Post("/salvar/orcamento")
+    public void saveBudget(Budget budget) {
+        budget = budgetService.saveBudget(budget);
+        Quotation quotation = budget.getQuotation();
+        result.include("quotation",quotation);
+        result.redirectTo(this).formQuotation();
+    }
+
     @Get("/formulario/adicionar/{quotation.id}")
     public void addRequest(Quotation quotation) {
         quotation = quotationService.searchById(quotation);
@@ -81,6 +91,8 @@ public class QuotationController {
             List<QuotationRequestServiceView> quotationRequests = new QuotationRequestServiceView().generateList(quotationService.searchQuotationRequestServiceByQuotation(quotation));
             result.include("quotationRequests",quotationRequests);
         }
+        result.include("formsPayment",formPaymentService.findAll());
+        result.include("meansPayment", MeanPaymentEnum.values());
         result.include("quotation",quotation);
         result.redirectTo(this).formBudget();
     }
@@ -189,6 +201,7 @@ public class QuotationController {
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }
 
+
     /** Listagem total de produtos e serviços **/
     @Get("/listagem/total/material/{quotation.id}/json")
     public void listRequestMaterial(Quotation quotation) {
@@ -215,6 +228,17 @@ public class QuotationController {
         List<QuotationRequest> quotationRequests = quotationService.searchQuotationRequestProductByProduct(quotation,product);
         if (quotationRequests != null){
             result.use(Results.json()).withoutRoot().from(quotationRequests).include("solicitationRequest").include("solicitationRequest.solicitation").include("solicitationRequest.solicitation.costCenter").include("solicitationRequest.product").include("solicitationRequest.product.unit").serialize();
+        }else{
+            result.use(Results.json()).withoutRoot().from(false).serialize();
+        }
+    }
+
+    /** Pesquisa  **/
+    @Get("/pesquisar/detalhes/pagamento/{formPayment.id}/json")
+    public void searchDetailFormPayment(FormPayment formPayment) {
+        FormPayment formPaymentFound = formPaymentService.searchById(formPayment);
+        if (formPaymentFound != null){
+            result.use(Results.json()).withoutRoot().from(formPaymentFound).serialize();
         }else{
             result.use(Results.json()).withoutRoot().from(false).serialize();
         }

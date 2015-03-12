@@ -64,4 +64,9 @@ public class FormPaymentServiceImpl implements FormPaymentService {
         return total;
     }
 
+    @Override
+    public List<FormPayment> findAll() {
+        return formPaymentDAO.findAll(FormPayment.class);
+    }
+
 }

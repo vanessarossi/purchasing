@@ -19,7 +19,7 @@ public class BudgetServiceImpl implements BudgetService {
     @Inject private QuotationRequestDAO quotationRequestDAO;
 
     @Override
-    public void saveBudget(Budget budget) {
+    public Budget saveBudget(Budget budget) {
 
         Budget budgetSaved = budgetDAO.save(budget);
 
@@ -62,6 +62,7 @@ public class BudgetServiceImpl implements BudgetService {
             paymentInformationBudgetDAO.save(newPaymentInformationBudget);
 
         }
+        return budgetSaved;
     }
 
     @Override
