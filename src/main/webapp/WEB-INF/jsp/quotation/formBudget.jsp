@@ -112,7 +112,7 @@
                         <tr>
                             <th style="width: 50%"></th>
                             <th style="width: 10%"><input type="hidden" id="totalMaterial" value="${fn:length(quotationRequests)}" ></th>
-                            <th style="width: 10%"><fmt:message key="table.finalValue" /></th>
+                            <th style="width: 10%"></th>
                             <th style="width: 10%"><input type="text" id="totalUnitPriceMaterial" readonly></th>
                             <th style="width: 10%"><input type="text" id="finalPriceMaterial"readonly></th>
                         </tr>
@@ -140,7 +140,7 @@
                             </tr>
                     <tfoot>
                     <tr>
-                        <th style="width: 80%" ><fmt:message key="table.finalValue" /></th>
+                        <th style="width: 80%" ></th>
                         <th style="width: 10%"><input type="text" class="totalUnitPriceMaterial" readonly></th>
                         <th style="width: 10%"><input type="text" class="finalPriceMaterial"readonly></th>
                     </tr>
@@ -202,6 +202,7 @@
                                         <div class="form-group">
                                             <label  class="control-label" for="formPayment"><fmt:message key="label.formPayment"/></label>
                                             <select class="form-control" id="formPayment" name="budget.getPaymentInformationBudgets[0].paymentInformation.formPayment.id">
+                                                <option><fmt:message key="label.select" /> </option>
                                                 <c:forEach items="${formsPayment}" var="formPayment">
                                                     <option value="${formPayment.id}" >${formPayment.description}</option>
                                                 </c:forEach>
@@ -318,6 +319,7 @@
                                         <div class="form-group">
                                             <label  class="control-label" for="formPaymentTwo"><fmt:message key="label.formPayment"/></label>
                                             <select class="form-control" id="formPaymentTwo" name="budget.getPaymentInformationBudgets[1].paymentInformation.formPayment.id">
+                                                <option><fmt:message key="label.select" /> </option>
                                                 <c:forEach items="${formsPayment}" var="formPayment">
                                                     <option value="${formPayment.id}" >${formPayment.description}</option>
                                                 </c:forEach>
@@ -434,6 +436,7 @@
                                         <div class="form-group">
                                             <label  class="control-label" for="formPaymentThree"><fmt:message key="label.formPayment"/></label>
                                             <select class="form-control" id="formPaymentThree" name="budget.getPaymentInformationBudgets[2].paymentInformation.formPayment.id">
+                                                <option><fmt:message key="label.select" /> </option>
                                                 <c:forEach items="${formsPayment}" var="formPayment">
                                                     <option value="${formPayment.id}" >${formPayment.description}</option>
                                                 </c:forEach>
