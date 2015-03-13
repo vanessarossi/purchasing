@@ -127,14 +127,9 @@ public class QuotationController {
 
     @Get("/editar/{quotation.id}")
     public void edit(Quotation quotation) {
-        quotation = quotationService.searchOpenById(quotation);
-        if (quotation == null){
-            result.include("errorQuotatioFinalized","message.error.quotation.finalized");
-            result.redirectTo(this).list();
-        }else{
-            result.include("quotation",quotation);
-            result.redirectTo(this).formQuotation();
-        }
+        quotation = quotationService.searchById(quotation);
+        result.include("quotation",quotation);
+        result.redirectTo(this).formQuotation();
     }
 
     @Get("/pesquisar/{quotation.id}")

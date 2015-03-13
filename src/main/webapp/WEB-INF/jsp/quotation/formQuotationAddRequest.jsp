@@ -80,7 +80,7 @@
                                     <br>
                                     <a class="btn btn-primary" onclick="searchProductByProduct()"><fmt:message key="button.search" /></a>
                                 </div>
-                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-2 col-sm-2">
@@ -112,14 +112,16 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-offset-11 col-md-offset-11">
-                            <div class="form-group">
-                                <input type="hidden" name="quotation.id" value="${quotation.id}" >
-                                <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
+                    <c:if test="${quotation.status eq 'Open'}">
+                        <div class="row">
+                            <div class="col-sm-offset-11 col-md-offset-11">
+                                <div class="form-group">
+                                    <input type="hidden" name="quotation.id" value="${quotation.id}" >
+                                    <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </c:if>
                 </div>
             </c:if>
         </form>
@@ -140,7 +142,7 @@
                                     <a class="btn btn-primary" onclick="searchServiceBySolicitation()"><fmt:message key="button.search" /></a>
                                 </div>
                             </div>
-                        </div>
+                    </div>
                     <div class="row">
                             <table id="serviceTable" class="table table-striped table-hover table-condensed">
                                 <thead>
@@ -155,15 +157,17 @@
                                 <tbody>
                                 </tbody>
                             </table>
-                        </div>
-                    <div class="row">
-                        <div class="col-sm-offset-11 col-md-offset-11">
-                            <div class="form-group">
-                                <input type="hidden" name="quotation.id" value="${quotation.id}" >
-                                <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
+                    </div>
+                    <c:if test="${quotation.status eq 'Open'}">
+                        <div class="row">
+                            <div class="col-sm-offset-11 col-md-offset-11">
+                                <div class="form-group">
+                                    <input type="hidden" name="quotation.id" value="${quotation.id}" >
+                                    <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </c:if>
                 </div>
             </c:if>
         </form>

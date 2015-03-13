@@ -7,6 +7,8 @@ $(document).ready(function(){
     var unityPrice = 0;
     var totalMaterial = $('#totalMaterial').val() - 1;
     var totalPrice = 0;
+    var totalFinalPrice = 0;
+    var percentage = 0;
 
 $('#code').blur(function () {
     var id = $('#code').val().trim();
@@ -53,7 +55,6 @@ function toggleChevron(e) {
 $('#accordion').on('hidden.bs.collapse', toggleChevron);
 $('#accordion').on('shown.bs.collapse', toggleChevron);
 
-
 function calculateTotalPriceMaterial(i){
     $('#unityPrice'+i).keypress(function(e) { 
         quantity = $('#quantity'+i).val();
@@ -71,7 +72,6 @@ function calculateTotalPriceMaterial(i){
                     centsSeparator: ',',
                     thousandsSeparator: ''
             });        
-            
             if (parseInt(i) === parseInt(totalMaterial)) {
                 for (var j = 0; j <= parseInt(totalMaterial); j++) {
                     auxQuantity = $('#quantity'+j).val();
@@ -120,30 +120,29 @@ $('#formPayment').change(function(){
                 var parcels = result["parcels"];
                 var intervalDay = result["intervalDay"];
 
-                if (input == false &&  parcels == 0 && intervalDay == 0){
+                if (input == false &&  parcels == 0 && (intervalDay == 0 || intervalDay > 0)){
                     $('#dateInput').attr("readonly",true);
                     $('#dateFirstInstallment').attr("readonly",true);
                     $('#dateLastInstallment').attr("readonly",true);
                     $('#inputPrice').attr("readonly",true);
-
                     $('#expirationDate').attr("readonly",false);
-                }else if (input == false &&  parcels == 0 && intervalDay > 0){
-                    $('#dateInput').attr("readonly",true);
-                    $('#dateFirstInstallment').attr("readonly",true);
-                    $('#dateLastInstallment').attr("readonly",true);
-                    $('#inputPrice').attr("readonly",true);
-          
+
+                    $('#discountPercentage').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
+
                 }else if (input == true &&  parcels > 0 && intervalDay > 0){
                     $('#dateInput').attr("readonly",false);
                     $('#dateFirstInstallment').attr("readonly",false);
                     $('#inputPrice').attr("readonly",false);
-
                     $('#dateLastInstallment').attr("readonly",true);
+
+                    $('#discountPercentage').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
                     $('#dateInput').attr("readonly",true);
                     $('#dateFirstInstallment').attr("readonly",false);
                     $('#inputPrice').attr("readonly",true);
                     $('#dateLastInstallment').attr("readonly",true);
+
+                    $('#discountPercentage').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
                 }
            };
         },
@@ -161,6 +160,68 @@ $('#formPaymentThree').change(function(){
     formPaymentId = $('#formPaymentThree').val();
 });
 
-function calculateFirstFormPayment(intervalDay);
-function calculateSecondFormPayment(parcel,intervalDay);
-function calculateThirdFormPayment(parcel,intervalDay);
+
+/** Calculo de valor final sem parcelas e entrada   **/
+function calculateFirstFormPayment(intervalDay){
+    if( finalPriceMaterial != 0 && percentage != '' ){
+        percentage = $('#discountPercentage').val();
+        totalFinalPrice =  parseFloat(finalPriceMaterial) - ((parseFloat(finalPriceMaterial) * parseFloat(percentage))/100);
+        $('#totalFinalPrice').val(totalFinalPrice);
+    }else{
+        $('#totalFinalPrice').val("");
+    }
+};
+
+function calculateFirstFormPaymentTwo(intervalDay){
+    if( finalPriceMaterial != 0 && percentage != '' ){
+        percentage = $('#discountPercentageTwo').val();
+        totalFinalPrice =  parseFloat(finalPriceMaterial) - ((parseFloat(finalPriceMaterial) * parseFloat(percentage))/100);
+        $('#totalFinalPriceTwo').val(totalFinalPrice);
+    }else{
+        $('#totalFinalPriceTwo').val("");
+    }
+};
+
+function calculateFirstFormPaymentThree(intervalDay){
+    if( finalPriceMaterial != 0 && percentage != '' ){
+        percentage = $('#discountPercentageThree').val();
+        totalFinalPrice =  parseFloat(finalPriceMaterial) - ((parseFloat(finalPriceMaterial) * parseFloat(percentage))/100);
+        $('#totalFinalPriceThree').val(totalFinalPrice);
+    }else{
+        $('#totalFinalPriceThree').val("");
+    }
+};
+
+/** Calculo de valor final com parcela e sem entrada  **/
+function calculateSecondFormPayment(parcel,intervalDay){
+    dateFirstInstallment = $('#dateFirstInstallment').val();
+    if( finalPriceMaterial != 0 && percentage != '' && dateFirstInstallment != ''){
+        
+        percentage = $('#discountPercentage').val();
+        finalPriceMaterial =  parseFloat(finalPriceMaterial) - ((parseFloat(finalPriceMaterial) * parseFloat(percentage))/100);
+        $('#totalFinalPrice').val(finalPriceMaterial);
+
+        valueParcel = parseFloat(totalFinalPrice) / parseFloat(parcel);
+        $('#sharePrice').val(valueParcel);
+
+    }else{
+        $('#totalFinalPrice').val("");
+    }
+};
+
+function calculateSecondFormPaymentTwo(parcel,intervalDay){
+};
+
+function calculateSecondFormPaymentThree(parcel,intervalDay){
+};
+
+/** Calculo de valor final com parcela e  entrada  **/
+function calculateValueParcelWithInput(input,parcel,intervalDay){
+};
+
+function calculateValueParcelWithInputTwo(input,parcel,intervalDay){
+};
+
+function calculateValueParcelWithInputThree(input,parcel,intervalDay){
+};
+

@@ -71,7 +71,9 @@
                 </div>
             </div>
             <c:if test="${quotation.type == 'Material'}">
-                <a href="<c:url value="/cotacao/formulario/adicionar/${quotation.id}"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addProduct"  /> </a>
+                <c:if test="${quotation.status eq 'Open'}">
+                    <a href="<c:url value="/cotacao/formulario/adicionar/${quotation.id}"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addProduct"  /> </a>
+                </c:if>
                 </br></br>
                 <table id="quotationMaterialTable" class="table table-striped table-hover table-condensed">
                     <thead>
@@ -101,8 +103,10 @@
                 </table>
             </c:if>
             <c:if test="${quotation.type == 'Service'}">
-                <a href="<c:url value="/cotacao/formulario/adicionar/${quotation.id}"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addService"  /> </a>
-                </br></br>
+                <c:if test="${quotation.status eq 'Open'}">
+                    <a href="<c:url value="/cotacao/formulario/adicionar/${quotation.id}"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addService"  /> </a>
+                </c:if>
+                    </br></br>
                 <table id="quotationServiceTable" class="table table-striped table-hover table-condensed">
                     <thead>
                     <tr>
