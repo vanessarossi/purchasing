@@ -90,7 +90,7 @@
                         <th style="width: 10%" ><fmt:message key="table.quantity" /></th>
                         <th style="width: 10%" ><fmt:message key="table.unit" /></th>
                         <th style="width: 10%" ><fmt:message key="table.unitary.price" /></th>
-                        <th style="width: 10%" ><fmt:message key="table.total.price##" /></th>
+                        <th style="width: 10%" ><fmt:message key="table.total.price" /></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -105,16 +105,16 @@
                                     <input type="hidden"  name="budget.budgetQuotation[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
                                     <input type="text"  name="budget.budgetQuotation[${i.index}].unityPrice"  id="unityPrice${i.index}" onclick="calculateTotalPriceMaterial(${i.index})">
                                 </td>
-                                <td><input type="text" id="totalPrice${i.index}" readonly></td>
+                                <td><input type="text" id="totalPriceMaterial${i.index}" readonly></td>
                             </tr>
                         </c:forEach>
                         <tfoot>
                         <tr>
                             <th style="width: 50%"></th>
-                            <th style="width: 10%"><input type="hidden" id="totalMaterial" value="${fn:length(quotationRequests)}" ></th>
+                            <th style="width: 10%"><input type="hidden" id="numberRequestMaterial" value="${fn:length(quotationRequests)}" ></th>
                             <th style="width: 10%"></th>
-                            <th style="width: 10%"><input type="text" id="totalUnitPriceMaterial" readonly></th>
-                            <th style="width: 10%"><input type="text" id="finalPriceMaterial"readonly></th>
+                            <th style="width: 10%"></th>
+                            <th style="width: 10%"><input type="text" id="totalFinalPriceMaterial"readonly></th>
                         </tr>
                         </tfoot>
                     </tbody>
@@ -396,7 +396,6 @@
                                 </a><i class="indicator fa fa fa-angle-double-up"></i>
                             </h4>
                         </div>
-
                         <div id="collapseThree" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <div class="row">
@@ -528,5 +527,6 @@
 <script src="${pageContext.request.contextPath}/asset/js/custom/modalSearchSupplier.js"></script>
 <script src="${pageContext.request.contextPath}/asset/js/commons/formCommons.js"></script>
 <script src="${pageContext.request.contextPath}/asset/js/vendor/price_format.2.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/moment.js"></script>
 <script src="${pageContext.request.contextPath}/asset/js/custom/form-quotation-budget.js"></script>
 </html>
