@@ -29,8 +29,10 @@ public class Budget {
     private Long id;
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "date")
     private Date date;
 
+    @Column(name = "chosen_budget")
     private Boolean chosenBudget;
 
     @NotBlank
@@ -38,7 +40,6 @@ public class Budget {
     @Column(name = "number_budget")
     private String numberBudget;
 
-    @Length(min = 1, max = 2)
     @Column(name = "delivery_time")
     private Integer deliveryTime;
 

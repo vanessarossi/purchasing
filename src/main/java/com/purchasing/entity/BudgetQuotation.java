@@ -23,6 +23,7 @@ public class BudgetQuotation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "chosen_budget")
     private Boolean chosenBudget;
 
     @Digits(integer = 10, fraction = 2)

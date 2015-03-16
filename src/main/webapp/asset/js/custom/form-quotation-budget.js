@@ -133,14 +133,14 @@ $('#formPayment').change(function(){
                     $('#inputPrice').attr("readonly",false);
                     $('#dateLastInstallment').attr("readonly",true);
 
-                    $('#discountPercentage').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
+                    $('#dateFirstInstallment').attr('onblur', 'calculateValueParcelWithInput('+parcels+','+intervalDay+')');
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
                     $('#dateInput').attr("readonly",true);
                     $('#dateFirstInstallment').attr("readonly",false);
                     $('#inputPrice').attr("readonly",true);
                     $('#dateLastInstallment').attr("readonly",true);
 
-                     $('#dateFirstInstallment').attr('onblur', 'calculateSecondFormPayment('+parcels+','+intervalDay+')');  
+                     $('#dateFirstInstallment').attr('onblur', 'calculateSecondFormPayment('+parcels+','+intervalDay+')');
                 }
            };
         },
@@ -179,7 +179,7 @@ $('#formPaymentTwo').change(function(){
                     $('#inputPriceTwo').attr("readonly",false);
                     $('#dateLastInstallmentTwo').attr("readonly",true);
 
-                    $('#discountPercentageTwo').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
+                     $('#dateFirstInstallmentTwo').attr('onblur', 'calculateValueParcelWithInputTwo('+parcels+','+intervalDay+')');
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
                     $('#dateInputTwo').attr("readonly",true);
                     $('#dateFirstInstallmentTwo').attr("readonly",false);
@@ -225,7 +225,7 @@ $('#formPaymentThree').change(function(){
                     $('#inputPriceThree').attr("readonly",false);
                     $('#dateLastInstallmentThree').attr("readonly",true);
 
-                    $('#discountPercentageThree').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
+                     $('#dateFirstInstallmentThree').attr('onblur', 'calculateValueParcelWithInputThree('+parcels+','+intervalDay+')');
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
                     $('#dateInputThree').attr("readonly",true);
                     $('#dateFirstInstallmentThree').attr("readonly",false);
@@ -350,12 +350,87 @@ function calculateSecondFormPaymentThree(parcel,intervalDay){
 };
 
 /** Calculo de valor final com parcela e  entrada  **/
-function calculateValueParcelWithInput(input,parcel,intervalDay){
+function calculateValueParcelWithInput(parcel,intervalDay){
+    inputValue = $('#inputPrice').val();
+    dateFirstInstallment = $('#dateFirstInstallment').val();
+    
+    if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && inputValue != ''){
+        percentage = $('#discountPercentage').val();
+        totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
+        $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
+        
+        totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(".", ","));
+       
+        valueParcel = parseFloat(totalPriceLessInput) / parseFloat(parcel);
+        $('#sharePrice').val(parseFloat(valueParcel).toFixed(2).replace(".", ","));
+
+        dateLastInstallment = "";
+        if (intervalDay == 30 || intervalDay == 31) {
+            dateLastInstallment =  moment(dateFirstInstallment,"DD-MM-YYYY").add(parseInt(parcel-1), 'months');
+        }else{
+            days = parseInt(parcel-1) * parseInt(intervalDay);
+            dateLastInstallment =  moment(dateFirstInstallment,"DD-MM-YYYY").add(parseInt(days), 'days');
+        }   
+        dateLastInstallmentConvert = moment(dateLastInstallment).format('DD/MM/YYYY');    ;
+        $('#dateLastInstallment').val(dateLastInstallmentConvert);
+    }else{
+        $('#totalFinalPrice').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
+    } 
 };
 
-function calculateValueParcelWithInputTwo(input,parcel,intervalDay){
+function calculateValueParcelWithInputTwo(parcel,intervalDay){
+    inputValue = $('#inputPriceTwo').val();
+    dateFirstInstallment = $('#dateFirstInstallmentTwo').val();
+    
+    if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && inputValue != ''){
+        percentage = $('#discountPercentageTwo').val();
+        totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
+        $('#totalFinalPriceTwo').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
+        
+        totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(".", ","));
+       
+        valueParcel = parseFloat(totalPriceLessInput) / parseFloat(parcel);
+        $('#sharePriceTwo').val(parseFloat(valueParcel).toFixed(2).replace(".", ","));
+
+        dateLastInstallment = "";
+        if (intervalDay == 30 || intervalDay == 31) {
+            dateLastInstallment =  moment(dateFirstInstallment,"DD-MM-YYYY").add(parseInt(parcel-1), 'months');
+        }else{
+            days = parseInt(parcel-1) * parseInt(intervalDay);
+            dateLastInstallment =  moment(dateFirstInstallment,"DD-MM-YYYY").add(parseInt(days), 'days');
+        }   
+        dateLastInstallmentConvert = moment(dateLastInstallment).format('DD/MM/YYYY');    ;
+        $('#dateLastInstallmentTwo').val(dateLastInstallmentConvert);
+    }else{
+        $('#totalFinalPriceTwo').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
+    } 
 };
 
-function calculateValueParcelWithInputThree(input,parcel,intervalDay){
+function calculateValueParcelWithInputThree(parcel,intervalDay){
+    inputValue = $('#inputPriceThree').val();
+    dateFirstInstallment = $('#dateFirstInstallmentThree').val();
+    
+    if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && inputValue != ''){
+        percentage = $('#discountPercentageThree').val();
+        totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
+        $('#totalFinalPriceThree').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
+        
+        totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(".", ","));
+       
+        valueParcel = parseFloat(totalPriceLessInput) / parseFloat(parcel);
+        $('#sharePriceThree').val(parseFloat(valueParcel).toFixed(2).replace(".", ","));
+
+        dateLastInstallment = "";
+        if (intervalDay == 30 || intervalDay == 31) {
+            dateLastInstallment =  moment(dateFirstInstallment,"DD-MM-YYYY").add(parseInt(parcel-1), 'months');
+        }else{
+            days = parseInt(parcel-1) * parseInt(intervalDay);
+            dateLastInstallment =  moment(dateFirstInstallment,"DD-MM-YYYY").add(parseInt(days), 'days');
+        }   
+        dateLastInstallmentConvert = moment(dateLastInstallment).format('DD/MM/YYYY');    ;
+        $('#dateLastInstallmentThree').val(dateLastInstallmentConvert);
+    }else{
+        $('#totalFinalPriceThree').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
+    } 
 };
 
