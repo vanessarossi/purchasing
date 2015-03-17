@@ -71,7 +71,7 @@ public class QuotationController {
         budget = budgetService.saveBudget(budget);
         Quotation quotation = budget.getQuotation();
         result.include("quotation",quotation);
-        result.redirectTo(this).formQuotation();
+        result.redirectTo(this).formBudget();
     }
 
     @Get("/formulario/adicionar/{quotation.id}")

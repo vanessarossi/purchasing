@@ -46,7 +46,8 @@ public class PurchaseOrder {
     @OneToOne(mappedBy = "purchaseOrder")
     private DeliveryInformation deliveryInformation;
 
-    @OneToOne(mappedBy = "purchaseOrder")
+    @OneToOne
+    @JoinColumn(name = "payment_information_id", referencedColumnName = "id")
     private PaymentInformation paymentInformation;
 
     @OneToOne(mappedBy = "purchaseOrder")

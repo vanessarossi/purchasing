@@ -2,19 +2,7 @@ package com.purchasing.entity;
 
 import com.purchasing.enumerator.MeanPaymentEnum;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -31,8 +19,8 @@ public class PaymentInformation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "contratct")
-    private Boolean contratct;
+    @Column(name = "hasContract")
+    private Boolean hasContract;
 
     @Enumerated(EnumType.ORDINAL)
     @NotNull
@@ -84,12 +72,6 @@ public class PaymentInformation {
     @JoinColumn(name = "form_payment_id", referencedColumnName = "id" ,nullable = false)
     private FormPayment formPayment;
 
-    @OneToOne
-    private PurchaseOrder purchaseOrder;
-
-    @OneToOne
-    private AdditionalPurchaseOrder additionalPurchaseOrder;
-
     public Long getId() {
         return id;
     }
@@ -98,12 +80,12 @@ public class PaymentInformation {
         this.id = id;
     }
 
-    public Boolean getContratct() {
-        return contratct;
+    public Boolean getHasContract() {
+        return hasContract;
     }
 
-    public void setContratct(Boolean contratct) {
-        this.contratct = contratct;
+    public void setHasContract(Boolean hasContract) {
+        this.hasContract = hasContract;
     }
 
     public MeanPaymentEnum getMeanPayment() {
@@ -200,21 +182,5 @@ public class PaymentInformation {
 
     public void setFormPayment(FormPayment formPayment) {
         this.formPayment = formPayment;
-    }
-
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
-    }
-
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
-    }
-
-    public AdditionalPurchaseOrder getAdditionalPurchaseOrder() {
-        return additionalPurchaseOrder;
-    }
-
-    public void setAdditionalPurchaseOrder(AdditionalPurchaseOrder additionalPurchaseOrder) {
-        this.additionalPurchaseOrder = additionalPurchaseOrder;
     }
 }

@@ -32,7 +32,7 @@ public class BudgetServiceImpl implements BudgetService {
             budgetQuotationDAO.save(newBudgetQuotation);
 
             QuotationRequest quotationRequest = new QuotationRequest();
-            quotationRequest = quotationRequestDAO.findById(QuotationRequest.class,quotationRequest.getId());
+            quotationRequest = quotationRequestDAO.findById(QuotationRequest.class,newBudgetQuotation.getQuotationRequest().getId());
 
             updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
         }
@@ -40,7 +40,10 @@ public class BudgetServiceImpl implements BudgetService {
         for (PaymentInformationBudget paymentInformationBudget : budget.getPaymentInformationBudgets()){
 
             PaymentInformation paymentInformation = new PaymentInformation();
-                paymentInformation.setContratct(paymentInformationBudget.getPaymentInformation().getContratct());
+                if (paymentInformationBudget.getPaymentInformation().getHasContract() != null) {
+                    paymentInformation.setHasContract(paymentInformationBudget.getPaymentInformation().getHasContract());
+                    paymentInformation.setContract(paymentInformationBudget.getPaymentInformation().getContract());
+                }
                 paymentInformation.setMeanPayment(paymentInformationBudget.getPaymentInformation().getMeanPayment());
                 paymentInformation.setDateFirstInstallment(paymentInformationBudget.getPaymentInformation().getDateFirstInstallment());
                 paymentInformation.setDateLastInstallment(paymentInformationBudget.getPaymentInformation().getDateLastInstallment());
@@ -51,7 +54,6 @@ public class BudgetServiceImpl implements BudgetService {
                 paymentInformation.setTotalPrice(paymentInformationBudget.getPaymentInformation().getTotalPrice());
                 paymentInformation.setDiscountPercentage(paymentInformationBudget.getPaymentInformation().getDiscountPercentage());
                 paymentInformation.setTotalFinalPrice(paymentInformationBudget.getPaymentInformation().getTotalFinalPrice());
-                paymentInformation.setContract(paymentInformationBudget.getPaymentInformation().getContract());
                 paymentInformation.setFormPayment(paymentInformationBudget.getPaymentInformation().getFormPayment());
 
              PaymentInformation paymentInformationSaved = paymentInformationDAO.save(paymentInformation);

@@ -25,6 +25,7 @@ public class PaymentInformationBudget {
     private Budget budget;
 
     @OneToOne
+    @JoinColumn(name = "payment_information_id", referencedColumnName = "id")
     private PaymentInformation paymentInformation;
 
     public Long getId() {

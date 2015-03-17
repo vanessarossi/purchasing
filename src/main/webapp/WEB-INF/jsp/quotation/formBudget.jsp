@@ -181,12 +181,12 @@
                                             <br>
                                             <div class="radio-inline">
                                                 <label class="control-label">
-                                                    <input type="radio" value="true" name="budget.paymentInformationBudgets[0].paymentInformation.contract" id="contract" <c:if test="${budget.contract[0] eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
+                                                    <input type="radio" value="true" name="budget.paymentInformationBudgets[0].paymentInformation.hasContract" id="contract" <c:if test="${budget.contract[0] eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
                                                 </label>
                                             </div>
                                             <div class="radio-inline">
                                                 <label class="control-label">
-                                                    <input type="radio" value="false" name="budget.paymentInformationBudgets[0].paymentInformation.contract" id="contract" <c:if test="${budget.contract[0] eq false}"> checked </c:if>> <fmt:message key="label.no"/>
+                                                    <input type="radio" value="false" name="budget.paymentInformationBudgets[0].paymentInformation.hasContract" id="contract" <c:if test="${budget.contract[0] eq false}"> checked </c:if>> <fmt:message key="label.no"/>
                                                 </label>
                                             </div>
                                             <br>
@@ -298,12 +298,12 @@
                                             <br>
                                             <div class="radio-inline">
                                                 <label class="control-label">
-                                                    <input type="radio" value="true" name="budget.paymentInformationBudgets[1].paymentInformation.contract" id="contractTwo" <c:if test="${budget.contract[1] eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
+                                                    <input type="radio" value="true" name="budget.paymentInformationBudgets[1].paymentInformation.hasContract" id="contractTwo" <c:if test="${budget.hasContract[1] eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
                                                 </label>
                                             </div>
                                             <div class="radio-inline">
                                                 <label class="control-label">
-                                                    <input type="radio" value="false" name="budget.paymentInformationBudgets[1].paymentInformation.contract" id="contractTwo" <c:if test="${budget.contract[1] eq false}"> checked </c:if>> <fmt:message key="label.no"/>
+                                                    <input type="radio" value="false" name="budget.paymentInformationBudgets[1].paymentInformation.hasContract" id="contractTwo" <c:if test="${budget.hasContract[1] eq false}"> checked </c:if>> <fmt:message key="label.no"/>
                                                 </label>
                                             </div>
                                             <br>
@@ -331,7 +331,7 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="totalPriceTwo"><fmt:message key="label.totalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalPriceTwo" name="budget.pmentInformationBudgets[1].paymentInformation.totalPrice" readonly>
+                                            <input  type="text" class="form-control" id="totalPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.totalPrice" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
@@ -415,12 +415,12 @@
                                             <br>
                                             <div class="radio-inline">
                                                 <label class="control-label">
-                                                    <input type="radio" value="true" name="budget.paymentInformationBudgets[2].paymentInformation.contract" id="contractThree" <c:if test="${budget.contract[0] eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
+                                                    <input type="radio" value="true" name="budget.paymentInformationBudgets[2].paymentInformation.hasContract" id="contractThree" <c:if test="${budget.hasContract[0] eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
                                                 </label>
                                             </div>
                                             <div class="radio-inline">
                                                 <label class="control-label">
-                                                    <input type="radio" value="false" name="budget.paymentInformationBudgets[2].paymentInformation.contract" id="contractThree" <c:if test="${budget.contract[0] eq false}"> checked </c:if>> <fmt:message key="label.no"/>
+                                                    <input type="radio" value="false" name="budget.paymentInformationBudgets[2].paymentInformation.hasContract" id="contractThree" <c:if test="${budget.hasContract[0] eq false}"> checked </c:if>> <fmt:message key="label.no"/>
                                                 </label>
                                             </div>
                                             <br>
