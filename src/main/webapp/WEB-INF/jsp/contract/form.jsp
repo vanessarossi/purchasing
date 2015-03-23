@@ -34,16 +34,14 @@
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="initialDate"><fmt:message key="label.initialDate"></fmt:message></label><span class="required"> *</span>
-                        <fmt:formatDate pattern="dd/MM/yyyy" value="${contract.initialDate}" var="initialDate"/>
-                        <input type="text" class="form-control date" name="contract.initialDate" id="initialDate" value="${initialDate}">
+                        <input type="text" class="form-control date" name="contract.initialDate" id="initialDate" value="<fmt:formatDate value="${contract.initialDate}" pattern="dd/MM/YYYY"/>">
                         <span class="required">${errors.from('contract.initialDate')}</span>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="finalDate"><fmt:message key="label.finalDate"></fmt:message></label><span class="required"> *</span>
-                        <fmt:formatDate pattern="dd/MM/yyyy" value="${contract.finalDate}" var="finalDate"/>
-                        <input type="text" class="form-control date" name="contract.finalDate" id="finalDate" value="${finalDate}">
+                        <input type="text" class="form-control date" name="contract.finalDate" id="finalDate" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${contract.finalDate}"/>">
                         <span class="required">${errors.from('contract.finalDate')}</span>
                     </div>
                 </div>
@@ -83,11 +81,9 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${renewalContracts}" var="renewal">
-                        <fmt:formatDate pattern="dd/MM/yyyy" value="${renewal.initialDate}" var="renewalInitialDate"/>
-                        <fmt:formatDate pattern="dd/MM/yyyy" value="${renewal.finalDate}" var="renewalFinalDate"/>
                         <tr>
-                            <td>${renewalInitialDate}</td>
-                            <td>${renewalFinalDate}</td>
+                            <td><fmt:formatDate pattern="dd/MM/yyyy" value="${renewal.initialDate}"/></td>
+                            <td><fmt:formatDate pattern="dd/MM/yyyy" value="${renewal.finalDate}"/></td>
                             <td><a href="/purchasing/contrato/renovacao/download/${renewal.id}"  target="_blank"><span class="fa fa-print btn btn-default btn-xs"></span></a></td>
                             <td><a onclick=confirmDetele(${renewal.id})><span class="fa fa-trash-o btn btn-default btn-xs"></span></a></td>
                         </tr>
@@ -142,17 +138,15 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="form-group">
-                        <label class="control-label" for="initialDate"><fmt:message key="label.initialDate"></fmt:message></label><span class="required"> *</span>
-                        <fmt:formatDate pattern="dd/MM/yyyy" value="${renewalContract.initialDate}" var="initialDate"/>
-                        <input type="text" class="form-control date" name="renewalContract.initialDate" id="initialDate" value="${initialDate}">
+                        <label class="control-label" for="initialDateRenewal"><fmt:message key="label.initialDate"></fmt:message></label><span class="required"> *</span>
+                        <input type="text" class="form-control date" name="renewalContract.initialDate" id="initialDateRenewal" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${renewalContract.initialDate}" />">
                         <span class="required">${errors.from('renewalContract.initialDate')}</span>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="form-group">
-                        <label class="control-label" for="finalDate"><fmt:message key="label.finalDate"></fmt:message></label><span class="required"> *</span>
-                        <fmt:formatDate pattern="dd/MM/yyyy" value="${renewalContract.finalDate}" var="finalDate"/>
-                        <input type="text" class="form-control date" name="renewalContract.finalDate" id="finalDate" value="${finalDate}">
+                        <label class="control-label" for="finalDateRenewal"><fmt:message key="label.finalDate"></fmt:message></label><span class="required"> *</span>
+                        <input type="text" class="form-control date" name="renewalContract.finalDate" id="finalDateRenewal" value= <fmt:formatDate pattern="dd/MM/yyyy" value="${renewalContract.finalDate}"/>">
                         <span class="required">${errors.from('renewalContract.finalDate')}</span>
                     </div>
                 </div>

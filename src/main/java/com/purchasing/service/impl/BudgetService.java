@@ -10,7 +10,7 @@ import com.purchasing.entity.Solicitation;
 public interface BudgetService {
 
     public Budget saveBudget(Budget budget);
-    public Budget searchBudget(Budget budget);
+    public Budget findById(Budget budget);
 
     /** Payment Information **/
     public PaymentInformation findPaymentInformationById(PaymentInformation paymentInformation);

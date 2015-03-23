@@ -68,7 +68,7 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Budget searchBudget(Budget budget) {
+    public Budget findById(Budget budget) {
         return budgetDAO.findById(Budget.class,budget.getId());
     }
 

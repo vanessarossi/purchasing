@@ -71,7 +71,7 @@ public class QuotationController {
         budget = budgetService.saveBudget(budget);
         Quotation quotation = budget.getQuotation();
         result.include("quotation",quotation);
-        result.redirectTo(this).formBudget();
+        result.redirectTo(this).formQuotation();
     }
 
     @Get("/formulario/adicionar/{quotation.id}")
@@ -130,6 +130,23 @@ public class QuotationController {
         quotation = quotationService.searchById(quotation);
         result.include("quotation",quotation);
         result.redirectTo(this).formQuotation();
+    }
+
+    @Get("/editar/orcamento/{budget.id}")
+    public void editBudget(Budget budget) {
+        budget = budgetService.findById(budget);
+        if (budget.getQuotation().getType().equals(TypeEnum.Material)) {
+            List<QuotationRequestProductView> quotationRequests = quotationService.groupByProduct(budget.getQuotation());
+            result.include("quotationRequests", quotationRequests);
+        } else if (budget.getQuotation().getType().equals(TypeEnum.Service)) {
+            List<QuotationRequestServiceView> quotationRequests = new QuotationRequestServiceView().generateList(quotationService.searchQuotationRequestServiceByQuotation(budget.getQuotation()));
+            result.include("quotationRequests", quotationRequests);
+        }
+        result.include("formsPayment", formPaymentService.findAll());
+        result.include("meansPayment", MeanPaymentEnum.values());
+        result.include("quotation",budget.getQuotation());
+        result.include("budget", budget);
+        result.redirectTo(this).formBudget();
     }
 
     @Get("/pesquisar/{quotation.id}")

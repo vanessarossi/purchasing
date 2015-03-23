@@ -104,6 +104,48 @@ function calculateTotalPriceMaterial(i){
     });     
 };
 
+function calculateTotalPriceMaterialTwo(i){
+    quantity = $('#quantity'+i).val();
+    unityPrice = $('#unityPrice'+i).val();
+
+        while (quantity.indexOf(',') != -1)
+            quantity = quantity.replace(',', '.');
+        while (unityPrice.indexOf(',') != -1)
+            unityPrice = unityPrice.replace(',', '.');
+
+        totalPriceMaterial = parseFloat(quantity) * parseFloat(unityPrice);
+        $('#totalPriceMaterial'+i).val(totalPriceMaterial.toFixed(2).replace(".", ","));
+        $('#totalPriceMaterial'+i).priceFormat({
+                prefix: 'R$ ',
+                centsSeparator: ',',
+                thousandsSeparator: ''
+        }); 
+        if (parseInt(i) === parseInt(numberRequestMaterial)) {
+            totalFinalPriceMaterial = 0;
+            for (var j = 0; j <= parseInt(numberRequestMaterial); j++) {
+                auxQuantity = $('#quantity'+j).val();
+                auxUnityPrice = $('#unityPrice'+j).val();
+                    while (auxQuantity.indexOf(',') != -1)
+                        auxQuantity = auxQuantity.replace(',', '.');
+                    while (auxUnityPrice.indexOf(',') != -1)
+                       auxUnityPrice = auxUnityPrice.replace(',', '.');
+
+                        auxTotalPriceMaterial = parseFloat(auxQuantity) * parseFloat(auxUnityPrice);
+                        totalFinalPriceMaterial = parseFloat(totalFinalPriceMaterial) + parseFloat(auxTotalPriceMaterial) ;
+                        totalPrice = totalFinalPriceMaterial;
+            };
+            $('#totalFinalPriceMaterial').val(totalFinalPriceMaterial.toFixed(2).replace(".", ","));
+            $('#totalFinalPriceMaterial').priceFormat({
+                prefix: 'R$ ',
+                centsSeparator: ',',
+                thousandsSeparator: ''
+            });
+            $('#totalPrice').val(totalPrice.toFixed(2).replace(".", ","));
+            $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
+            $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
+        }
+};
+
 $('#formPayment').change(function(){
     formPaymentId = $('#formPayment').val();
     $.ajax({
@@ -276,7 +318,6 @@ function calculateFirstFormPaymentThree(intervalDay){
         $('#totalFinalPriceThree').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     }
 };
-
 
 /** Calculo de valor final com parcela e sem entrada  **/
 function calculateSecondFormPayment(parcel,intervalDay){

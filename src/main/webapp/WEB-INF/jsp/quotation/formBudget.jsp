@@ -103,7 +103,7 @@
                                 <td>${quotationRequest.product.unit.description}</td>
                                 <td>
                                     <input type="hidden"  name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
-                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice"  id="unityPrice${i.index}" onclick="calculateTotalPriceMaterial(${i.index})">
+                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice"  id="unityPrice${i.index}" onclick="calculateTotalPriceMaterial(${i.index})" onblur="calculateTotalPriceMaterialTwo(${i.index})">
                                 </td>
                                 <td><input type="text" id="totalPriceMaterial${i.index}" readonly></td>
                             </tr>
@@ -170,7 +170,7 @@
                                             <label  class="control-label" for="meanPayment"><fmt:message key="label.meanPayment"/></label>
                                             <select class="form-control" id="meanPayment" name="budget.paymentInformationBudgets[0].paymentInformation.meanPayment">
                                                     <c:forEach items="${meansPayment}" var="meanPayment">
-                                                        <option value="${meanPayment}" >${meanPayment.description}</option>
+                                                        <option value="${meanPayment}" <c:if test="${meanPayment eq budget.paymentInformationBudgets[0].meanPayment}" >selected</c:if> >${meanPayment.description}</option>
                                                     </c:forEach>
                                             </select>
                                         </div>
@@ -181,12 +181,12 @@
                                             <br>
                                             <div class="radio-inline">
                                                 <label class="control-label">
-                                                    <input type="radio" value="true" name="budget.paymentInformationBudgets[0].paymentInformation.hasContract" id="contract" <c:if test="${budget.contract[0] eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
+                                                    <input type="radio" value="true" name="budget.paymentInformationBudgets[0].paymentInformation.hasContract" id="contract" <c:if test="${budget.hasContract[0] eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
                                                 </label>
                                             </div>
                                             <div class="radio-inline">
                                                 <label class="control-label">
-                                                    <input type="radio" value="false" name="budget.paymentInformationBudgets[0].paymentInformation.hasContract" id="contract" <c:if test="${budget.contract[0] eq false}"> checked </c:if>> <fmt:message key="label.no"/>
+                                                    <input type="radio" value="false" name="budget.paymentInformationBudgets[0].paymentInformation.hasContract" id="contract" <c:if test="${budget.paymentInformationBudgets[0].hasContract eq false}"> checked </c:if>> <fmt:message key="label.no"/>
                                                 </label>
                                             </div>
                                             <br>
@@ -195,7 +195,7 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="number_contract"><fmt:message key="label.number_contract"/></label>
-                                            <input type="text" class="form-control" id="number_contract" name="budget.paymentInformationBudgets[0].paymentInformation.contract.id" value="${budget.contract[0].id}"/>
+                                            <input type="text" class="form-control" id="number_contract" name="budget.paymentInformationBudgets[0].paymentInformation.contract.id" value="${budget.paymentInformationBudgets[0].contract.id}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-3">
@@ -287,7 +287,7 @@
                                             <label  class="control-label" for="meanPaymentTwo"><fmt:message key="label.meanPayment"/></label>
                                             <select class="form-control" id="meanPaymentTwo" name="budget.paymentInformationBudgets[1].paymentInformation.meanPayment">
                                                 <c:forEach items="${meansPayment}" var="meanPayment">
-                                                    <option value="${meanPayment}" >${meanPayment.description}</option>
+                                                    <option value="${meanPayment}" <c:if test="${meanPayment eq budget.paymentInformationBudgets[1].meanPayment}">selected</c:if> >${meanPayment.description}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>

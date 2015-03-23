@@ -1,9 +1,7 @@
 package com.purchasing.service.impl;
 
-import com.purchasing.entity.Product;
-import com.purchasing.entity.Quotation;
-import com.purchasing.entity.QuotationRequest;
-import com.purchasing.entity.SolicitationRequest;
+import com.purchasing.entity.*;
+import com.purchasing.support.budget.BudgetQuotationProductView;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 
 import java.util.List;
@@ -35,4 +33,5 @@ public interface QuotationService {
     public List<QuotationRequest> searchQuotationRequestServiceByQuotation(Quotation quotation);
 
     public List<QuotationRequestProductView> groupByProduct(Quotation quotation);
+    public List<BudgetQuotationProductView> groupByBudgetProduct(Budget budget);
 }

@@ -26,7 +26,7 @@ $("#text").keydown(function (event) {
 	                  	var unit = result[i]["unit"]["description"];
 	                  	var category = result[i]["category"]["description"];
 
-	                  	var product = description+" "+model+" "+mark;
+	                  	var product = description.replace('"','')+" "+model.replace('"','')+" "+mark.replace('"','');
 
 		                var row = '<tr onclick="chooseProduct('+code+','+"'"+product+"'"+','+"'"+unit+"'"+')">';
 		                row += "<td>"+code+"</td>";

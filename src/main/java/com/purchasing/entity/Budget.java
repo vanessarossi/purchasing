@@ -1,5 +1,7 @@
 package com.purchasing.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -52,9 +54,11 @@ public class Budget {
     private Supplier supplier;
 
     @OneToMany(mappedBy = "budget")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<BudgetQuotation> budgetQuotations;
 
     @OneToMany(mappedBy = "budget")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<PaymentInformationBudget> paymentInformationBudgets;
 
     public Long getId() {

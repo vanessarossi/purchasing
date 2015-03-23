@@ -2,6 +2,8 @@ package com.purchasing.entity;
 
 import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.enumerator.TypeEnum;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
@@ -65,9 +67,11 @@ public class Quotation {
     private User user;
 
     @OneToMany(mappedBy = "quotation")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Budget> budgets;
 
     @OneToMany(mappedBy = "quotation")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<QuotationRequest> quotationRequests;
 
     public Long getId() {

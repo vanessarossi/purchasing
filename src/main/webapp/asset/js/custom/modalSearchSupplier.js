@@ -40,7 +40,7 @@ $("#text").keydown(function (event) {
     }
 });
 
-$('#searchProduct').on('hide.bs.modal', function (e) {
+$('#searchSupplier').on('hide.bs.modal', function (e) {
     $('#tableSearchSupplier > tbody > tr').remove();
     $('#text').val('');
 });
