@@ -53,8 +53,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user){
         User newUser = user;
-         newUser.setId(1l);
-
         if (user.getId() != null && user.getPassword() == null){
             User userEdit = searchById(user);
             newUser.setPassword(userEdit.getPassword());
