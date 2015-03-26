@@ -81,11 +81,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 col-sm-3">
-                                    <a class="btn btn-warning"
-                                       href="<c:url value="/cotacao/editar/orcamento/${budget.id}"></c:url>"><fmt:message
-                                            key="button.edit"/> </a>
-                                </div>
+                                <a class="btn btn-warning" href="<c:url value="/cotacao/editar/orcamento/${budget.id}"></c:url>"><fmt:message key="button.edit"/></a>
+                                <a class="btn btn-primary" onclick="viewDetailBudget(${budget.id})"  ><fmt:message key="button.view.product"/></a>
                             </div>
                         </div>
                     </div>
@@ -94,6 +91,25 @@
         </div>
     </div>
 </html:template>
+<div class="modal fade" id="priceBudget" tabindex="-1" role="dialog" aria-labelledby="modalPriceBudget" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><fmt:message key="title.price.budget"/></h4>
+            </div>
+            <div class="modal-body">
+                <c:if test="${quotation.type == 'Material'}">
+                   Material
+                </c:if>
+                <c:if test="${quotation.type == 'Service'}">
+                    Serviço
+                </c:if>
+                <br><br><br>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <html:jsAssets/>
 <script src="${pageContext.request.contextPath}/asset/js/custom/form-quotation-visualize.js"></script>

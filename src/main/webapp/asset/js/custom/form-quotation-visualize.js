@@ -14,3 +14,7 @@ function toggleChevron(e) {
 }
 $('#accordion').on('hidden.bs.collapse', toggleChevron);
 $('#accordion').on('shown.bs.collapse', toggleChevron);
+
+function viewDetailBudget(id){
+	$('#priceBudget').modal('show');
+};

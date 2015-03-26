@@ -57,7 +57,7 @@
                 <div class="col-md-1 col-sm-1">
                     <div class="form-group">
                         <label class="control-label"  for="code"><fmt:message key="label.code"/></label>
-                        <input type="text" class="form-control" id="code" name="budget.supplier.id" >
+                        <input type="text" class="form-control" id="code" name="budget.supplier.id" required >
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
@@ -72,16 +72,17 @@
                 <div class="col-md-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="date"><fmt:message key="label.date"/></label>
-                        <input type="text" class="form-control date" id="date" name="budget.date">
+                        <input type="text" class="form-control date" id="date" name="budget.date" required>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="number_budget"  ><fmt:message key="label.number_budget"/></label>
-                        <input type="text" class="form-control" id="number_budget" name="budget.numberBudget">
+                        <input type="text" class="form-control" id="number_budget" name="budget.numberBudget" required>
                     </div>
                 </div>
             </div>
+
             <c:if test="${quotation.type == 'Material'}">
                 <table id="budgetMaterialTable" class="table table-striped table-hover table-condensed">
                     <thead>
@@ -109,7 +110,7 @@
                             </tr>
                         </c:forEach>
                         <tfoot>
-                        <tr>
+                            <tr>
                             <th style="width: 50%"></th>
                             <th style="width: 10%"><input type="hidden" id="numberRequestMaterial" value="${fn:length(quotationRequests)}" ></th>
                             <th style="width: 10%"></th>
@@ -125,8 +126,8 @@
                     <thead>
                     <tr>
                         <th style="width: 80%" ><fmt:message key="table.description" /></th>
-                        <th style="width: 10%" ><fmt:message key="table.##" /></th>
-                        <th style="width: 10%" ><fmt:message key="table.##" /></th>
+                        <th style="width: 10%" ><fmt:message key="table.unitary.price" /></th>
+                        <th style="width: 10%" ><fmt:message key="table.total.price" /></th>
                     </thead>
                     <tbody>
                         <c:forEach items="${quotationRequests}" var="quotationRequest" varStatus="i">
@@ -134,15 +135,15 @@
                                 <td>${quotationRequest.description}</td>
                                 <td>
                                     <input type="hidden"  name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
-                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice">
+                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice" id="unityPrice${i.index}" onclick="calculateTotalPriceService(${i.index})" onblur="calculateTotalPriceServiceTwo(${i.index})">
                                 </td>
-                                <td><input type="text" id="totalPrice${i.index}" readonly></td>
+                                <td><input type="text" id="totalPriceService${i.index}" readonly></td>
                             </tr>
                     <tfoot>
                     <tr>
-                        <th style="width: 80%" ></th>
-                        <th style="width: 10%"><input type="text" class="totalUnitPriceMaterial" readonly></th>
-                        <th style="width: 10%"><input type="text" class="finalPriceMaterial"readonly></th>
+                        <th style="width: 80%"><input type="hidden" id="numberRequestService" value="${fn:length(quotationRequests)}"></th>
+                        <th style="width: 10%"></th>
+                        <th style="width: 10%"><input type="text" id="totalFinalPriceService" readonly></th>
                     </tr>
                     </tfoot>
                         </c:forEach>

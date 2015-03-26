@@ -36,10 +36,8 @@ public class BudgetServiceImpl implements BudgetService {
 
             updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
         }
-
         for (PaymentInformationBudget paymentInformationBudget : budget.getPaymentInformationBudgets()){
-
-            PaymentInformation paymentInformation = new PaymentInformation();
+                PaymentInformation paymentInformation = new PaymentInformation();
                 if (paymentInformationBudget.getPaymentInformation().getHasContract() != null) {
                     paymentInformation.setHasContract(paymentInformationBudget.getPaymentInformation().getHasContract());
                     paymentInformation.setContract(paymentInformationBudget.getPaymentInformation().getContract());
@@ -54,16 +52,18 @@ public class BudgetServiceImpl implements BudgetService {
                 paymentInformation.setTotalPrice(paymentInformationBudget.getPaymentInformation().getTotalPrice());
                 paymentInformation.setDiscountPercentage(paymentInformationBudget.getPaymentInformation().getDiscountPercentage());
                 paymentInformation.setTotalFinalPrice(paymentInformationBudget.getPaymentInformation().getTotalFinalPrice());
-                paymentInformation.setFormPayment(paymentInformationBudget.getPaymentInformation().getFormPayment());
 
-             PaymentInformation paymentInformationSaved = paymentInformationDAO.save(paymentInformation);
+                if(paymentInformation.getFormPayment() != null && paymentInformation.getFormPayment().getId()!= null) {
+                    paymentInformation.setFormPayment(paymentInformationBudget.getPaymentInformation().getFormPayment());
+                }
+                PaymentInformation paymentInformationSaved = paymentInformationDAO.save(paymentInformation);
 
-            PaymentInformationBudget newPaymentInformationBudget = new PaymentInformationBudget();
+                PaymentInformationBudget newPaymentInformationBudget = new PaymentInformationBudget();
                 newPaymentInformationBudget.setBudget(budgetSaved);
                 newPaymentInformationBudget.setPaymentInformation(paymentInformationSaved);
-            paymentInformationBudgetDAO.save(newPaymentInformationBudget);
+                paymentInformationBudgetDAO.save(newPaymentInformationBudget);
+            }
 
-        }
         return budgetSaved;
     }
 

@@ -59,7 +59,6 @@ public class PaymentInformation {
     @Column(name = "discount_percentage")
     private Integer discountPercentage;
 
-    @NotNull
     @Digits(integer = 10, fraction = 2)
     @Column(name = "total_final_price")
     private BigDecimal totalFinalPrice;
@@ -69,7 +68,7 @@ public class PaymentInformation {
     private Contract contract;
 
     @ManyToOne
-    @JoinColumn(name = "form_payment_id", referencedColumnName = "id" ,nullable = false)
+    @JoinColumn(name = "form_payment_id", referencedColumnName = "id" )
     private FormPayment formPayment;
 
     public Long getId() {

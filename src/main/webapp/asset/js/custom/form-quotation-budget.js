@@ -7,7 +7,7 @@ $(document).ready(function(){
     var totalFinalPriceMaterial=0; // soma dos totais (quantidade * valor unit)
 
     var numberRequestMaterial = $('#numberRequestMaterial').val()-1;
-    
+    var numberRequestService = $('#numberRequestService').val()-1;
     /**  variaveis para calculos de pagamento **/
     var totalPrice = 0;   // total mostrado nas informações de pagamento 
     var percentage = 0; // percentual de desconto
@@ -144,6 +144,82 @@ function calculateTotalPriceMaterialTwo(i){
             $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
             $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
         }
+};
+
+function calculateTotalPriceService(i){
+    $('#unityPrice'+i).keypress(function(e) { 
+        unityPrice = $('#unityPrice'+i).val();
+        if (unityPrice != null && unityPrice.length >= 3) {
+            while (unityPrice.indexOf(',') != -1)
+                unityPrice = unityPrice.replace(',', '.');
+            totalPriceService = parseFloat(unityPrice);
+            $('#totalPriceService'+i).val(totalPriceService.toFixed(2).replace(".", ","));
+            $('#totalPriceService'+i).priceFormat({
+                    prefix: 'R$ ',
+                    centsSeparator: ',',
+                    thousandsSeparator: ''
+            }); 
+            console.log(i);
+            console.log(numberRequestService);
+            if (parseInt(i) === parseInt(numberRequestService)) {
+                totalFinalPriceService = 0;
+                for (var j = 0; j <= parseInt(numberRequestService); j++) {
+                    auxUnityPrice = $('#unityPrice'+j).val();
+                        while (auxUnityPrice.indexOf(',') != -1)
+                            auxUnityPrice = auxUnityPrice.replace(',', '.');
+
+                        auxTotalPriceService = parseFloat(auxUnityPrice);
+                        totalFinalPriceService = parseFloat(totalFinalPriceService) + parseFloat(auxTotalPriceService) ;
+                        totalPrice = totalFinalPriceService;
+                };
+                $('#totalFinalPriceService').val(totalFinalPriceService.toFixed(2).replace(".", ","));
+                $('#totalFinalPriceService').priceFormat({
+                    prefix: 'R$ ',
+                    centsSeparator: ',',
+                    thousandsSeparator: ''
+                });
+                $('#totalPrice').val(totalPrice.toFixed(2).replace(".", ","));
+                $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
+                $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
+                }
+            }  
+    });     
+};
+
+function calculateTotalPriceServiceTwo(i){
+    unityPrice = $('#unityPrice'+i).val();
+    if (unityPrice != null && unityPrice.length >= 3) {
+        while (unityPrice.indexOf(',') != -1)
+            unityPrice = unityPrice.replace(',', '.');
+            totalPriceService = parseFloat(unityPrice);
+            $('#totalPriceService'+i).val(totalPriceService.toFixed(2).replace(".", ","));
+            $('#totalPriceService'+i).priceFormat({
+                    prefix: 'R$ ',
+                    centsSeparator: ',',
+                    thousandsSeparator: ''
+            }); 
+        if (parseInt(i) === parseInt(numberRequestService)) {
+            totalFinalPriceService = 0;
+            for (var j = 0; j <= parseInt(numberRequestService); j++) {
+            auxUnityPrice = $('#unityPrice'+j).val();
+            while (auxUnityPrice.indexOf(',') != -1)
+                auxUnityPrice = auxUnityPrice.replace(',', '.');
+
+                auxTotalPriceService = parseFloat(auxUnityPrice);
+                totalFinalPriceService = parseFloat(totalFinalPriceService) + parseFloat(auxTotalPriceService) ;
+                totalPrice = totalFinalPriceService;
+            };
+            $('#totalFinalPriceService').val(totalFinalPriceService.toFixed(2).replace(".", ","));
+            $('#totalFinalPriceService').priceFormat({
+                prefix: 'R$ ',
+                centsSeparator: ',',
+                thousandsSeparator: ''
+            });
+            $('#totalPrice').val(totalPrice.toFixed(2).replace(".", ","));
+            $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
+            $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
+        }
+    } 
 };
 
 $('#formPayment').change(function(){
