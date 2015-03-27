@@ -103,6 +103,7 @@
                                 </td>
                                 <td>${quotationRequest.product.unit.description}</td>
                                 <td>
+                                    <input type="hidden" name="budget.budgetQuotations[${i.index}].id" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>">
                                     <input type="hidden"  name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
                                     <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice"  id="unityPrice${i.index}" onclick="calculateTotalPriceMaterial(${i.index})" onblur="calculateTotalPriceMaterialTwo(${i.index})" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>" >
                                 </td>
@@ -163,6 +164,7 @@
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                                     <fmt:message key="title.list.information.payment.one" />
                                     <input type="hidden" name="budget.paymentInformationBudgets[0].id" value="${budget.paymentInformationBudgets[0].id}"/>
+                                    <input type="hidden" name="budget.paymentInformationBudgets[0].paymentInformation.id" value="${budget.paymentInformationBudgets[0].paymentInformation.id}"/>
                                 </a><i class="indicator fa fa-angle-double-up"></i>
                             </h4>
                         </div>
@@ -281,6 +283,7 @@
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                                     <fmt:message key="title.list.information.payment.two" />
                                     <input type="hidden" name="budget.paymentInformationBudgets[1].id" value="${budget.paymentInformationBudgets[1].id}"  />
+                                    <input type="hidden" name="budget.paymentInformationBudgets[1].paymentInformation.id" value="${budget.paymentInformationBudgets[1].paymentInformation.id}"/>
                                 </a><i class="indicator fa fa-angle-double-up"></i>
                             </h4>
                         </div>
