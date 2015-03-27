@@ -52,10 +52,8 @@ public class BudgetServiceImpl implements BudgetService {
                 paymentInformation.setTotalPrice(paymentInformationBudget.getPaymentInformation().getTotalPrice());
                 paymentInformation.setDiscountPercentage(paymentInformationBudget.getPaymentInformation().getDiscountPercentage());
                 paymentInformation.setTotalFinalPrice(paymentInformationBudget.getPaymentInformation().getTotalFinalPrice());
+                paymentInformation.setFormPayment(paymentInformationBudget.getPaymentInformation().getFormPayment());
 
-                if(paymentInformation.getFormPayment() != null && paymentInformation.getFormPayment().getId()!= null) {
-                    paymentInformation.setFormPayment(paymentInformationBudget.getPaymentInformation().getFormPayment());
-                }
                 PaymentInformation paymentInformationSaved = paymentInformationDAO.save(paymentInformation);
 
                 PaymentInformationBudget newPaymentInformationBudget = new PaymentInformationBudget();

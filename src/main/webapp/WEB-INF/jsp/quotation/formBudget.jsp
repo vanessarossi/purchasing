@@ -160,10 +160,10 @@
                             <h4 class="panel-title">
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                                     <fmt:message key="title.list.information.payment.one" />
-                                </a><i class="indicator fa fa-angle-double-down"></i>
+                                </a><i class="indicator fa fa-angle-double-up"></i>
                             </h4>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in">
+                        <div id="collapseOne" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-2 col-sm-2">
@@ -202,8 +202,8 @@
                                     <div class="col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label  class="control-label" for="formPayment"><fmt:message key="label.formPayment"/></label>
-                                            <select class="form-control" id="formPayment" name="budget.paymentInformationBudgets[0].paymentInformation.formPayment.id">
-                                                <option><fmt:message key="label.select" /> </option>
+                                            <select class="form-control" id="formPayment" name="budget.paymentInformationBudgets[0].paymentInformation.formPayment.id" required>
+                                                <option value="" ><fmt:message key="label.select" /> </option>
                                                 <c:forEach items="${formsPayment}" var="formPayment">
                                                     <option value="${formPayment.id}" <c:if test="${formPayment.id eq budget.paymentInformationBudgets[0].paymentInformation.formPayment.id}"> selected </c:if> >${formPayment.description}</option>
                                                 </c:forEach>
@@ -318,9 +318,9 @@
                                     </div>
                                     <div class="col-md-3 col-sm-3">
                                         <div class="form-group">
-                                            <label  class="control-label" for="formPaymentTwo"><fmt:message key="label.formPayment"/></label>
-                                            <select class="form-control" id="formPaymentTwo" name="budget.paymentInformationBudgets[1].paymentInformation.formPayment.id">
-                                                <option><fmt:message key="label.select" /> </option>
+                                            <label class="control-label" for="formPaymentTwo"><fmt:message key="label.formPayment"/></label>
+                                            <select class="form-control" id="formPaymentTwo" name="budget.paymentInformationBudgets[1].paymentInformation.formPayment.id" required>
+                                                <option value="" ><fmt:message key="label.select" /> </option>
                                                 <c:forEach items="${formsPayment}" var="formPayment">
                                                     <option value="${formPayment.id}" <c:if
                                                             test="${formPayment.id eq budget.paymentInformationBudgets[1].paymentInformation.formPayment.id}"> selected </c:if> >${formPayment.description}</option>
@@ -384,125 +384,6 @@
                                         <div class="form-group">
                                             <label  class="control-label" for="expirationDateTwo"><fmt:message key="label.expiration_date"/></label>
                                             <input type="text" class="form-control date" id="expirationDateTwo" name="budget.paymentInformationBudgets[1].paymentInformation.expirationDate"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                    <fmt:message key="title.list.information.payment.three" />
-                                </a><i class="indicator fa fa fa-angle-double-up"></i>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="meanPaymentThree"><fmt:message key="label.meanPayment"/></label>
-                                            <select class="form-control" id="meanPaymentThree" name="budget.paymentInformationBudgets[2].paymentInformation.meanPayment">
-                                                <c:forEach items="${meansPayment}" var="meanPayment">
-                                                    <option value="${meanPayment}"
-                                                            <c:if test="${meanPayment eq budget.paymentInformationBudgets[2].paymentInformation.meanPayment}">selected</c:if> >${meanPayment.description}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-3">
-                                        <div class="form-group">
-                                            <label class="control-label" for="contractThree"><fmt:message key="label.contract"/></label>
-                                            <br>
-                                            <div class="radio-inline">
-                                                <label class="control-label">
-                                                    <input type="radio" value="true" name="budget.paymentInformationBudgets[2].paymentInformation.hasContract" id="contractThree" <c:if test="${budget.paymentInformationBudgets[2].paymentInformation.hasContract eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
-                                                </label>
-                                            </div>
-                                            <div class="radio-inline">
-                                                <label class="control-label">
-                                                    <input type="radio" value="false" name="budget.paymentInformationBudgets[2].paymentInformation.hasContract" id="contractThree" <c:if test="${budget.paymentInformationBudgets[2].paymentInformation.hasContract eq false}"> checked </c:if>> <fmt:message key="label.no"/>
-                                                </label>
-                                            </div>
-                                            <br>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="number_contractThree"><fmt:message key="label.number_contract"/></label>
-                                            <input type="text" class="form-control" id="number_contractThree" name="budget.paymentInformationBudgets[2].paymentInformation.contract.id" value="${budget.paymentInformationBudgets[2].paymentInformation.contract.id}"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="formPaymentThree"><fmt:message key="label.formPayment"/></label>
-                                            <select class="form-control" id="formPaymentThree" name="budget.paymentInformationBudgets[2].paymentInformation.formPayment.id">
-                                                <option><fmt:message key="label.select" /> </option>
-                                                <c:forEach items="${formsPayment}" var="formPayment">
-                                                    <option value="${formPayment.id}" <c:if
-                                                            test="${formPayment.id eq budget.paymentInformationBudgets[2].paymentInformation.formPayment.id}"> selected </c:if>>${formPayment.description}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="totalPriceThree"><fmt:message key="label.totalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalPriceThree" name="budget.paymentInformationBudgets[2].paymentInformation.totalPrice" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="discountPercentageThree"><fmt:message key="label.discountPercentage"/></label>
-                                            <input  type="text" class="form-control" id="discountPercentageThree" name="budget.paymentInformationBudgets[2].paymentInformation.discountPercentage">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="totalFinalPriceThree"><fmt:message key="label.totalFinalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalFinalPriceThree" name="budget.paymentInformationBudgets[2].paymentInformation.totalFinalPrice" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="inputPriceThree"><fmt:message key="label.inputPrice"/></label>
-                                            <input type="text" class="form-control" id="inputPriceThree" name="budget.paymentInformationBudgets[2].paymentInformation.inputPrice"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="sharePriceThree"><fmt:message key="label.sharePrice"/></label>
-                                            <input type="text" class="form-control" id="sharePriceThree" name="budget.paymentInformationBudgets[2].paymentInformation.sharePrice" readonly/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="dateInputThree"><fmt:message key="label.dateInput"/></label>
-                                            <input  type="text" class="form-control date" id="dateInputThree" name="budget.paymentInformationBudgets[2].paymentInformation.dateInput">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="dateFirstInstallmentThree"><fmt:message key="label.dateFirstInstallment"/></label>
-                                            <input  type="text" class="form-control date" id="dateFirstInstallmentThree" name="budget.paymentInformationBudgets[2].paymentInformation.dateFirstInstallment">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="dateLastInstallmentThree"><fmt:message key="label.dateLastInstallment"/></label>
-                                            <input  type="text" class="form-control date" id="dateLastInstallmentThree" name="budget.paymentInformationBudgets[2].paymentInformation.dateLastInstallment">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label  class="control-label" for="expirationDateThree"><fmt:message key="label.expiration_date"/></label>
-                                            <input type="text" class="form-control date" id="expirationDateThree" name="budget.paymentInformationBudgets[2].paymentInformation.expirationDate"/>
                                         </div>
                                     </div>
                                 </div>
