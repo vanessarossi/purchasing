@@ -1,9 +1,6 @@
 package com.purchasing.support.quotation;
 
-import com.purchasing.entity.CostCenter;
-import com.purchasing.entity.QuotationRequest;
-import com.purchasing.entity.Solicitation;
-import com.purchasing.entity.TypeService;
+import com.purchasing.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,7 @@ import java.util.List;
 public class QuotationRequestServiceView {
 
     private Long id;
+    private Service service;
     private Solicitation solicitation;
     private TypeService typeService;
     private CostCenter costCenter;
@@ -25,6 +23,14 @@ public class QuotationRequestServiceView {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 
     public Solicitation getSolicitation() {
@@ -68,6 +74,7 @@ public class QuotationRequestServiceView {
                 quotationRequestServiceView.setSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
                 quotationRequestServiceView.setCostCenter(quotationRequest.getSolicitationRequest().getSolicitation().getCostCenter());
                 quotationRequestServiceView.setTypeService(quotationRequest.getSolicitationRequest().getService().getTypeService());
+                quotationRequestServiceView.setService(quotationRequest.getSolicitationRequest().getService());
 
                 Integer length = 0;
                 if (quotationRequest.getSolicitationRequest().getService().getDescription().length() >= 70){

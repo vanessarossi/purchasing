@@ -11,9 +11,19 @@ import java.util.List;
 
 public class BudgetQuotationProductView implements Comparator<BudgetQuotationProductView> {
 
+    private Long id;
     private Product product;
     private Float quantity;
-    private BigDecimal unitaryPrice;
+    private BigDecimal unityPrice;
+    private BigDecimal totalPrice;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Product getProduct() {
         return product;
@@ -31,21 +41,31 @@ public class BudgetQuotationProductView implements Comparator<BudgetQuotationPro
         this.quantity = quantity;
     }
 
-    public BigDecimal getUnitaryPrice() {
-        return unitaryPrice;
+    public BigDecimal getUnityPrice() {
+        return unityPrice;
     }
 
-    public void setUnitaryPrice(BigDecimal unitaryPrice) {
-        this.unitaryPrice = unitaryPrice;
+    public void setUnityPrice(BigDecimal unityPrice) {
+        this.unityPrice = unityPrice;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public List<BudgetQuotationProductView> generateList(List<BudgetQuotation> budgetQuotations) {
         List<BudgetQuotationProductView> budgetsQuotationProductV = new ArrayList<>();
         for (BudgetQuotation budgetQuotation : budgetQuotations){
             BudgetQuotationProductView budgetQuotationProduct = new BudgetQuotationProductView();
+            budgetQuotationProduct.setId(budgetQuotation.getId());
             budgetQuotationProduct.setProduct(budgetQuotation.getQuotationRequest().getSolicitationRequest().getProduct());
             budgetQuotationProduct.setQuantity(budgetQuotation.getQuotationRequest().getSolicitationRequest().getQuantity());
-            budgetQuotationProduct.setUnitaryPrice(budgetQuotation.getUnityPrice());
+            budgetQuotationProduct.setUnityPrice(budgetQuotation.getUnityPrice());
+            budgetsQuotationProductV.add(budgetQuotationProduct);
         }
         return  budgetsQuotationProductV;
     }

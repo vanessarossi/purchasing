@@ -4,7 +4,6 @@ import com.purchasing.dao.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.service.impl.QuotationService;
-import com.purchasing.support.budget.BudgetQuotationProductView;
 import com.purchasing.support.date.Conversor;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 
@@ -196,12 +195,6 @@ public class QuotationServiceImpl implements QuotationService {
 
         return quotationRequestProductViews;
     }
-
-    @Override
-    public List<BudgetQuotationProductView> groupByBudgetProduct(Budget budget) {
-        return null;
-    }
-
 
     public User getUserLogged(){
         User user = (User) httpSession.getAttribute("userLogged");

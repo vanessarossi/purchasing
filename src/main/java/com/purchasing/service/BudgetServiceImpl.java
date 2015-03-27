@@ -4,8 +4,11 @@ import com.purchasing.dao.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.service.impl.BudgetService;
+import com.purchasing.support.budget.BudgetQuotationProductView;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * @author vanessa
@@ -71,6 +74,48 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
+    public List<BudgetQuotationProductView> groupProductBudget(Budget budget) {
+
+        budget = budgetDAO.findById(Budget.class, budget.getId());
+        List<BudgetQuotation> budgetQuotations = budget.getBudgetQuotations();
+
+        List<BudgetQuotationProductView> budgetQuotationProductViewList = new ArrayList<>();
+        List<BudgetQuotationProductView> budgetQuotationProductViews = new ArrayList<>();
+
+        Collections.sort(budgetQuotationProductViews, new BudgetQuotationProductView());
+        Map<Long, BudgetQuotationProductView> map = new HashMap<>();
+
+        budgetQuotationProductViewList = new BudgetQuotationProductView().generateList(budgetQuotations);
+
+        for (BudgetQuotationProductView budgetQuotationProductView : budgetQuotationProductViewList) {
+            Long idProduct = budgetQuotationProductView.getProduct().getId();
+            if (!map.containsKey(idProduct)) {
+                budgetQuotationProductView.setTotalPrice(budgetQuotationProductView.getUnityPrice().multiply(new BigDecimal(budgetQuotationProductView.getQuantity())));
+                map.put(budgetQuotationProductView.getProduct().getId(), budgetQuotationProductView);
+            } else {
+                BudgetQuotationProductView budgetQuotationProductV = map.get(idProduct);
+                if (budgetQuotationProductView.getQuantity() == null) {
+                    budgetQuotationProductView.setQuantity(0f);
+                }if (budgetQuotationProductView.getTotalPrice() == null) {
+                    budgetQuotationProductView.setTotalPrice(new BigDecimal(0));
+                }
+
+                Float quantity = budgetQuotationProductView.getQuantity() + budgetQuotationProductV.getQuantity();
+                BigDecimal totalPrice = budgetQuotationProductView.getTotalPrice().add(budgetQuotationProductV.getUnityPrice().multiply(new BigDecimal(budgetQuotationProductV.getQuantity())));
+                budgetQuotationProductV.setQuantity(quantity);
+                budgetQuotationProductV.setTotalPrice(totalPrice);
+            }
+        }
+
+        for (Long key : map.keySet()) {
+            BudgetQuotationProductView budgetQuotationProductView = map.get(key);
+            budgetQuotationProductViews.add(budgetQuotationProductView);
+        }
+
+        return budgetQuotationProductViews;
+    }
+
+    @Override
     public PaymentInformation findPaymentInformationById(PaymentInformation paymentInformation) {
         return paymentInformationDAO.findById(PaymentInformation.class,paymentInformation.getId());
     }
@@ -79,4 +124,6 @@ public class BudgetServiceImpl implements BudgetService {
     public void updateStatusSolicitation(Solicitation solicitation) {
         solicitation.getSituation().setStatus(StatusEnum.QuotingProcess);
     }
+
+
 }

@@ -9,6 +9,8 @@ import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.BudgetService;
 import com.purchasing.service.impl.FormPaymentService;
 import com.purchasing.service.impl.QuotationService;
+import com.purchasing.support.budget.BudgetQuotationProductView;
+import com.purchasing.support.budget.BudgetQuotationServiceView;
 import com.purchasing.support.datatable.DataTableModel;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 import com.purchasing.support.quotation.QuotationRequestServiceView;
@@ -137,10 +139,14 @@ public class QuotationController {
         budget = budgetService.findById(budget);
         if (budget.getQuotation().getType().equals(TypeEnum.Material)) {
             List<QuotationRequestProductView> quotationRequests = quotationService.groupByProduct(budget.getQuotation());
+            List<BudgetQuotationProductView> budgetQuotations = budgetService.groupProductBudget(budget);
             result.include("quotationRequests", quotationRequests);
+            result.include("budgetQuotations", budgetQuotations);
         } else if (budget.getQuotation().getType().equals(TypeEnum.Service)) {
             List<QuotationRequestServiceView> quotationRequests = new QuotationRequestServiceView().generateList(quotationService.searchQuotationRequestServiceByQuotation(budget.getQuotation()));
+            List<BudgetQuotationServiceView> budgetQuotations = new BudgetQuotationServiceView().generateList(budget.getBudgetQuotations());
             result.include("quotationRequests", quotationRequests);
+            result.include("budgetQuotations", budgetQuotations);
         }
         result.include("formsPayment", formPaymentService.findAll());
         result.include("meansPayment", MeanPaymentEnum.values());
@@ -167,7 +173,6 @@ public class QuotationController {
         quotationService.removeQuotationRequest(quotationRequest);
         result.use(Results.json()).withoutRoot().from(true).serialize();
     }
-
 
     /** Formulários **/
     @Path("/")

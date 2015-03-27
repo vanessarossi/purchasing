@@ -104,9 +104,9 @@
                                 <td>${quotationRequest.product.unit.description}</td>
                                 <td>
                                     <input type="hidden"  name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
-                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice"  id="unityPrice${i.index}" onclick="calculateTotalPriceMaterial(${i.index})" onblur="calculateTotalPriceMaterialTwo(${i.index})">
+                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice"  id="unityPrice${i.index}" onclick="calculateTotalPriceMaterial(${i.index})" onblur="calculateTotalPriceMaterialTwo(${i.index})" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>" >
                                 </td>
-                                <td><input type="text" id="totalPriceMaterial${i.index}" readonly></td>
+                                <td><input type="text" id="totalPriceMaterial${i.index}" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].totalPrice,"." ,"," )}</c:if>" readonly></td>
                             </tr>
                         </c:forEach>
                         <tfoot>
@@ -115,7 +115,7 @@
                             <th style="width: 10%"><input type="hidden" id="numberRequestMaterial" value="${fn:length(quotationRequests)}" ></th>
                             <th style="width: 10%"></th>
                             <th style="width: 10%"></th>
-                            <th style="width: 10%"><input type="text" id="totalFinalPriceMaterial" value="${budget.paymentInformationBudgets[1].paymentInformation.totalPrice}"  readonly></th>
+                            <th style="width: 10%"><input type="text" id="totalFinalPriceMaterial" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}"  readonly></th>
                         </tr>
                         </tfoot>
                     </tbody>
@@ -135,16 +135,17 @@
                                 <td>${quotationRequest.description}</td>
                                 <td>
                                     <input type="hidden"  name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
-                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice" id="unityPrice${i.index}" onclick="calculateTotalPriceService(${i.index})" onblur="calculateTotalPriceServiceTwo(${i.index})">
+                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice" id="unityPrice${i.index}" onclick="calculateTotalPriceService(${i.index})" onblur="calculateTotalPriceServiceTwo(${i.index})" value="<c:if test="${budgetQuotations[i.index].service.id eq quotationRequest.service.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>">
                                 </td>
-                                <td><input type="text" id="totalPriceService${i.index}" readonly></td>
+                                <td><input type="text" id="totalPriceService${i.index}"
+                                           value="<c:if test="${budgetQuotations[i.index].service.id eq quotationRequest.service.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>" readonly></td>
                             </tr>
                         </c:forEach>
                     <tfoot>
                         <tr>
                             <th style="width: 80%"><input type="hidden" id="numberRequestService" value="${fn:length(quotationRequests)}"></th>
                             <th style="width: 10%"></th>
-                            <th style="width: 10%"><input type="text" id="totalFinalPriceService" value="${budget.paymentInformationBudgets[1].paymentInformation.totalPrice}" readonly></th>
+                            <th style="width: 10%"><input type="text" id="totalFinalPriceService" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}" readonly></th>
                         </tr>
                     </tfoot>
 
@@ -217,7 +218,7 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="totalPrice"><fmt:message key="label.totalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalPrice" name="budget.paymentInformationBudgets[0].paymentInformation.totalPrice" value="${budget.paymentInformationBudgets[0].paymentInformation.totalPrice}" readonly>
+                                            <input  type="text" class="form-control" id="totalPrice" name="budget.paymentInformationBudgets[0].paymentInformation.totalPrice" value="${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
@@ -229,19 +230,19 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="totalFinalPrice"><fmt:message key="label.totalFinalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalFinalPrice" name="budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice" value="${budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice}" readonly>
+                                            <input  type="text" class="form-control" id="totalFinalPrice" name="budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice" value="${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice,"." ,"," )}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="inputPrice"><fmt:message key="label.inputPrice"/></label>
-                                            <input type="text" class="form-control" id="inputPrice" name="budget.paymentInformationBudgets[0].paymentInformation.inputPrice" value="${budget.paymentInformationBudgets[0].paymentInformation.inputPrice}"/>
+                                            <input type="text" class="form-control" id="inputPrice" name="budget.paymentInformationBudgets[0].paymentInformation.inputPrice" value="${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.inputPrice,"." ,"," ) }"/>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="sharePrice"><fmt:message key="label.sharePrice"/></label>
-                                            <input type="text" class="form-control" id="sharePrice" name="budget.paymentInformationBudgets[0].paymentInformation.sharePrice" value="${budget.paymentInformationBudgets[0].paymentInformation.sharePrice}" readonly/>
+                                            <input type="text" class="form-control" id="sharePrice" name="budget.paymentInformationBudgets[0].paymentInformation.sharePrice" value="${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.sharePrice, ".","," )  }" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -336,7 +337,7 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="totalPriceTwo"><fmt:message key="label.totalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.totalPrice"  value="${budget.paymentInformationBudgets[1].paymentInformation.totalPrice}" readonly>
+                                            <input  type="text" class="form-control" id="totalPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.totalPrice"  value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".", ",")} " readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
@@ -348,19 +349,19 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="totalFinalPriceTwo"><fmt:message key="label.totalFinalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalFinalPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice" value="${budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice}"  readonly>
+                                            <input  type="text" class="form-control" id="totalFinalPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice,"." ,"," )}"  readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="inputPriceTwo"><fmt:message key="label.inputPrice"/></label>
-                                            <input type="text" class="form-control" id="inputPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.inputPrice" value="${budget.paymentInformationBudgets[1].paymentInformation.inputPrice}" />
+                                            <input type="text" class="form-control" id="inputPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.inputPrice" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.inputPrice,".","," )}" />
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="sharePriceTwo"><fmt:message key="label.sharePrice"/></label>
-                                            <input type="text" class="form-control" id="sharePriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.sharePrice" value="${budget.paymentInformationBudgets[1].paymentInformation.sharePrice}"  readonly/>
+                                            <input type="text" class="form-control" id="sharePriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.sharePrice" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.sharePrice,".",",")}"  readonly/>
                                         </div>
                                     </div>
                                 </div>
