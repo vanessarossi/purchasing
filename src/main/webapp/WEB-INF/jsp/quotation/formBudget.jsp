@@ -57,14 +57,14 @@
                 <div class="col-md-1 col-sm-1">
                     <div class="form-group">
                         <label class="control-label"  for="code"><fmt:message key="label.code"/></label>
-                        <input type="text" class="form-control" id="code" name="budget.supplier.id" required >
+                        <input type="text" class="form-control" id="code" name="budget.supplier.id" value="${budget.supplier.id}" required >
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="supplier"><fmt:message key="label.supplier"/></label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="supplier" readonly>
+                            <input type="text" class="form-control" id="supplier" value="${budget.supplier.person.name}" readonly>
                             <span class="input-group-btn"><button class="btn btn-default" type="button" data-toggle="modal" data-target="#searchSupplier"><span class="fa fa-search"></span></button></span>
                         </div>
                     </div>
@@ -72,13 +72,13 @@
                 <div class="col-md-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="date"><fmt:message key="label.date"/></label>
-                        <input type="text" class="form-control date" id="date" name="budget.date" required>
+                        <input type="text" class="form-control date" id="date" name="budget.date" value="<fmt:formatDate value="${budget.date}" pattern="dd/MM/YYYY" />" required>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="number_budget"  ><fmt:message key="label.number_budget"/></label>
-                        <input type="text" class="form-control" id="number_budget" name="budget.numberBudget" required>
+                        <input type="text" class="form-control" id="number_budget" name="budget.numberBudget" value="${budget.numberBudget}" required>
                     </div>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                             <th style="width: 10%"><input type="hidden" id="numberRequestMaterial" value="${fn:length(quotationRequests)}" ></th>
                             <th style="width: 10%"></th>
                             <th style="width: 10%"></th>
-                            <th style="width: 10%"><input type="text" id="totalFinalPriceMaterial"readonly></th>
+                            <th style="width: 10%"><input type="text" id="totalFinalPriceMaterial" value="${budget.paymentInformationBudgets[1].paymentInformation.totalPrice}"  readonly></th>
                         </tr>
                         </tfoot>
                     </tbody>
@@ -139,14 +139,15 @@
                                 </td>
                                 <td><input type="text" id="totalPriceService${i.index}" readonly></td>
                             </tr>
-                    <tfoot>
-                    <tr>
-                        <th style="width: 80%"><input type="hidden" id="numberRequestService" value="${fn:length(quotationRequests)}"></th>
-                        <th style="width: 10%"></th>
-                        <th style="width: 10%"><input type="text" id="totalFinalPriceService" readonly></th>
-                    </tr>
-                    </tfoot>
                         </c:forEach>
+                    <tfoot>
+                        <tr>
+                            <th style="width: 80%"><input type="hidden" id="numberRequestService" value="${fn:length(quotationRequests)}"></th>
+                            <th style="width: 10%"></th>
+                            <th style="width: 10%"><input type="text" id="totalFinalPriceService" value="${budget.paymentInformationBudgets[1].paymentInformation.totalPrice}" readonly></th>
+                        </tr>
+                    </tfoot>
+
                     </tbody>
                 </table>
             </c:if>
@@ -160,6 +161,7 @@
                             <h4 class="panel-title">
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                                     <fmt:message key="title.list.information.payment.one" />
+                                    <input type="hidden" name="budget.paymentInformationBudgets[0].id" value="${budget.paymentInformationBudgets[0].id}"/>
                                 </a><i class="indicator fa fa-angle-double-up"></i>
                             </h4>
                         </div>
@@ -215,31 +217,31 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="totalPrice"><fmt:message key="label.totalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalPrice" name="budget.paymentInformationBudgets[0].paymentInformation.totalPrice" readonly>
+                                            <input  type="text" class="form-control" id="totalPrice" name="budget.paymentInformationBudgets[0].paymentInformation.totalPrice" value="${budget.paymentInformationBudgets[0].paymentInformation.totalPrice}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="discountPercentage"><fmt:message key="label.discountPercentage"/></label>
-                                            <input  type="text" class="form-control" id="discountPercentage" name="budget.paymentInformationBudgets[0].paymentInformation.discountPercentage">
+                                            <input  type="text" class="form-control" id="discountPercentage" name="budget.paymentInformationBudgets[0].paymentInformation.discountPercentage" value="${budget.paymentInformationBudgets[0].paymentInformation.discountPercentage}">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="totalFinalPrice"><fmt:message key="label.totalFinalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalFinalPrice" name="budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice" readonly>
+                                            <input  type="text" class="form-control" id="totalFinalPrice" name="budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice" value="${budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="inputPrice"><fmt:message key="label.inputPrice"/></label>
-                                            <input type="text" class="form-control" id="inputPrice" name="budget.paymentInformationBudgets[0].paymentInformation.inputPrice"/>
+                                            <input type="text" class="form-control" id="inputPrice" name="budget.paymentInformationBudgets[0].paymentInformation.inputPrice" value="${budget.paymentInformationBudgets[0].paymentInformation.inputPrice}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="sharePrice"><fmt:message key="label.sharePrice"/></label>
-                                            <input type="text" class="form-control" id="sharePrice" name="budget.paymentInformationBudgets[0].paymentInformation.sharePrice" readonly/>
+                                            <input type="text" class="form-control" id="sharePrice" name="budget.paymentInformationBudgets[0].paymentInformation.sharePrice" value="${budget.paymentInformationBudgets[0].paymentInformation.sharePrice}" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -247,25 +249,25 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="dateInput"><fmt:message key="label.dateInput"/></label>
-                                            <input  type="text" class="form-control date" id="dateInput" name="budget.paymentInformationBudgets[0].paymentInformation.dateInput">
+                                            <input  type="text" class="form-control date" id="dateInput" name="budget.paymentInformationBudgets[0].paymentInformation.dateInput" value="<fmt:formatDate value="${budget.paymentInformationBudgets[0].paymentInformation.dateInput}" pattern="dd/MM/YYYY"/>" >
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="dateFirstInstallment"><fmt:message key="label.dateFirstInstallment"/></label>
-                                            <input  type="text" class="form-control date" id="dateFirstInstallment" name="budget.paymentInformationBudgets[0].paymentInformation.dateFirstInstallment">
+                                            <input  type="text" class="form-control date" id="dateFirstInstallment" name="budget.paymentInformationBudgets[0].paymentInformation.dateFirstInstallment" value="<fmt:formatDate value="${budget.paymentInformationBudgets[0].paymentInformation.dateFirstInstallment}" pattern="dd/MM/YYYY"/>" >
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="dateLastInstallment"><fmt:message key="label.dateLastInstallment"/></label>
-                                            <input  type="text" class="form-control date" id="dateLastInstallment" name="budget.paymentInformationBudgets[0].paymentInformation.dateLastInstallment">
+                                            <input  type="text" class="form-control date" id="dateLastInstallment" name="budget.paymentInformationBudgets[0].paymentInformation.dateLastInstallment" value="<fmt:formatDate value="${budget.paymentInformationBudgets[0].paymentInformation.dateLastInstallment}" pattern="dd/MM/YYYY"/>" >
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="expirationDate"><fmt:message key="label.expiration_date"/></label>
-                                            <input type="text" class="form-control date" id="expirationDate" name="budget.paymentInformationBudgets[0].paymentInformation.expirationDate"/>
+                                            <input type="text" class="form-control date" id="expirationDate" name="budget.paymentInformationBudgets[0].paymentInformation.expirationDate" value="<fmt:formatDate value="${budget.paymentInformationBudgets[0].paymentInformation.expirationDate}" pattern="dd/MM/YYYY"/>" />
                                         </div>
                                     </div>
                                 </div>
@@ -277,6 +279,7 @@
                             <h4 class="panel-title">
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                                     <fmt:message key="title.list.information.payment.two" />
+                                    <input type="hidden" name="budget.paymentInformationBudgets[1].id" value="${budget.paymentInformationBudgets[1].id}"  />
                                 </a><i class="indicator fa fa-angle-double-up"></i>
                             </h4>
                         </div>
@@ -333,31 +336,31 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="totalPriceTwo"><fmt:message key="label.totalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.totalPrice" readonly>
+                                            <input  type="text" class="form-control" id="totalPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.totalPrice"  value="${budget.paymentInformationBudgets[1].paymentInformation.totalPrice}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="discountPercentageTwo"><fmt:message key="label.discountPercentage"/></label>
-                                            <input  type="text" class="form-control" id="discountPercentageTwo" name="budget.paymentInformationBudgets[1].paymentInformation.discountPercentage">
+                                            <input  type="text" class="form-control" id="discountPercentageTwo" name="budget.paymentInformationBudgets[1].paymentInformation.discountPercentage" value="${budget.paymentInformationBudgets[1].paymentInformation.discountPercentage}" >
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="totalFinalPriceTwo"><fmt:message key="label.totalFinalPrice"/></label>
-                                            <input  type="text" class="form-control" id="totalFinalPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice" readonly>
+                                            <input  type="text" class="form-control" id="totalFinalPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice" value="${budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice}"  readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="inputPriceTwo"><fmt:message key="label.inputPrice"/></label>
-                                            <input type="text" class="form-control" id="inputPriceTwo" name="budget.pmentInformationBudgets[1].paymentInformation.inputPrice"/>
+                                            <input type="text" class="form-control" id="inputPriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.inputPrice" value="${budget.paymentInformationBudgets[1].paymentInformation.inputPrice}" />
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="sharePriceTwo"><fmt:message key="label.sharePrice"/></label>
-                                            <input type="text" class="form-control" id="sharePriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.sharePrice" readonly/>
+                                            <input type="text" class="form-control" id="sharePriceTwo" name="budget.paymentInformationBudgets[1].paymentInformation.sharePrice" value="${budget.paymentInformationBudgets[1].paymentInformation.sharePrice}"  readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -365,25 +368,25 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="dateInputTwo"><fmt:message key="label.dateInput"/></label>
-                                            <input  type="text" class="form-control date" id="dateInputTwo" name="budget.paymentInformationBudgets[1].paymentInformation.dateInput">
+                                            <input  type="text" class="form-control date" id="dateInputTwo" name="budget.paymentInformationBudgets[1].paymentInformation.dateInput" value="<fmt:formatDate value="${budget.paymentInformationBudgets[1].paymentInformation.dateInput}" pattern="dd/MM/YYYY"/>" >
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="dateFirstInstallmentTwo"><fmt:message key="label.dateFirstInstallment"/></label>
-                                            <input  type="text" class="form-control date" id="dateFirstInstallmentTwo" name="budget.paymentInformationBudgets[1].paymentInformation.dateFirstInstallment">
+                                            <input  type="text" class="form-control date" id="dateFirstInstallmentTwo" name="budget.paymentInformationBudgets[1].paymentInformation.dateFirstInstallment" value="<fmt:formatDate value="${budget.paymentInformationBudgets[1].paymentInformation.dateFirstInstallment}" pattern="dd/MM/YYYY" />" >
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="dateLastInstallmentTwo"><fmt:message key="label.dateLastInstallment"/></label>
-                                            <input  type="text" class="form-control date" id="dateLastInstallmentTwo" name="budget.paymentInformationBudgets[1].paymentInformation.dateLastInstallment">
+                                            <input  type="text" class="form-control date" id="dateLastInstallmentTwo" name="budget.paymentInformationBudgets[1].paymentInformation.dateLastInstallment" value="<fmt:formatDate value="${budget.paymentInformationBudgets[1].paymentInformation.dateLastInstallment}" pattern="dd/MM/YYYY" />">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="expirationDateTwo"><fmt:message key="label.expiration_date"/></label>
-                                            <input type="text" class="form-control date" id="expirationDateTwo" name="budget.paymentInformationBudgets[1].paymentInformation.expirationDate"/>
+                                            <input type="text" class="form-control date" id="expirationDateTwo" name="budget.paymentInformationBudgets[1].paymentInformation.expirationDate" value="<fmt:formatDate value="${budget.paymentInformationBudgets[1].paymentInformation.expirationDate}" pattern="dd/MM/YYYY" />"/>
                                         </div>
                                     </div>
                                 </div>
@@ -392,6 +395,7 @@
                     </div>
                 </div>
             </div>
+
             <c:if test="${quotation.status eq 'Open'}">
                 <div class="row">
                     <div class="col-sm-offset-11 col-md-offset-11">
