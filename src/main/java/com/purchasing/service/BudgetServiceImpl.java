@@ -3,6 +3,7 @@ package com.purchasing.service;
 import com.purchasing.dao.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.StatusEnum;
+import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.BudgetService;
 import com.purchasing.support.budget.BudgetQuotationProductView;
 
@@ -23,21 +24,39 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public Budget saveBudget(Budget budget) {
-
         Budget budgetSaved = budgetDAO.save(budget);
 
-        for (BudgetQuotation budgetQuotation : budget.getBudgetQuotations()){
-            BudgetQuotation newBudgetQuotation = new BudgetQuotation();
+        for (BudgetQuotation budgetQuotation : budget.getBudgetQuotations()) {
+            if (budgetSaved.getQuotation().getType().equals(TypeEnum.Material)){
+                QuotationRequest quotationRequestAux = quotationRequestDAO.findById(QuotationRequest.class,  budgetQuotation.getQuotationRequest().getId());
+                List<QuotationRequest> quotationRequests = quotationRequestDAO.findQuotationRequestProductByProduct(quotationRequestAux.getQuotation(), quotationRequestAux.getSolicitationRequest().getProduct());
+                for (QuotationRequest quotationRequest : quotationRequests){
+                    if (quotationRequest.getSolicitationRequest().getProduct().getId() == quotationRequestAux.getSolicitationRequest().getProduct().getId()){
+                        BudgetQuotation newBudgetQuotation = new BudgetQuotation();
+                        newBudgetQuotation.setBudget(budgetSaved);
+                        newBudgetQuotation.setQuotationRequest(quotationRequest);
+                        newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
+                        newBudgetQuotation.setChosenBudget(false);
+
+                        budgetQuotationDAO.save(newBudgetQuotation);
+                        updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
+                    }
+                }
+            }else {
+                BudgetQuotation newBudgetQuotation = new BudgetQuotation();
                 newBudgetQuotation.setBudget(budgetSaved);
                 newBudgetQuotation.setQuotationRequest(budgetQuotation.getQuotationRequest());
                 newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
                 newBudgetQuotation.setChosenBudget(false);
-            budgetQuotationDAO.save(newBudgetQuotation);
 
-            QuotationRequest quotationRequest = new QuotationRequest();
-            quotationRequest = quotationRequestDAO.findById(QuotationRequest.class,newBudgetQuotation.getQuotationRequest().getId());
+                budgetQuotationDAO.save(newBudgetQuotation);
 
-            updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
+                QuotationRequest quotationRequest = new QuotationRequest();
+                quotationRequest = quotationRequestDAO.findById(QuotationRequest.class, newBudgetQuotation.getQuotationRequest().getId());
+
+                updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
+            }
+
         }
         for (PaymentInformationBudget paymentInformationBudget : budget.getPaymentInformationBudgets()){
                 PaymentInformation paymentInformation = new PaymentInformation();
