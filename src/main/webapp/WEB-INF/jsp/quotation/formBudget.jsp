@@ -136,7 +136,7 @@
                             <tr>
                                 <td>${quotationRequest.description}</td>
                                 <td>
-                                    <input type="hidden" name="budget.budgetQuotations[${i.index}].quotationRequest.solicitationRequest.service.id" value="${quotationRequest.service.id}">
+                                    <input type="hidden" name="budget.budgetQuotations[${i.index}].id" value="${quotationRequest.service.id}">
                                     <input type="hidden" name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
                                     <input type="text"   name="budget.budgetQuotations[${i.index}].unityPrice" id="unityPrice${i.index}" onclick="calculateTotalPriceService(${i.index})" onblur="calculateTotalPriceServiceTwo(${i.index})" value="<c:if test="${budgetQuotations[i.index].service.id eq quotationRequest.service.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>">
                                 </td>

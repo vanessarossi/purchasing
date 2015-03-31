@@ -27,20 +27,36 @@ public class BudgetServiceImpl implements BudgetService {
         Budget budgetSaved = budgetDAO.save(budget);
         for (BudgetQuotation budgetQuotation : budget.getBudgetQuotations()) {
             if (budgetSaved.getQuotation().getType().equals(TypeEnum.Material)){
-                    QuotationRequest quotationsRequest = budgetQuotation.getQuotationRequest();
-                    List<QuotationRequest> quotationRequests = quotationRequestDAO.findQuotationRequestProductByProduct(quotationsRequest.getQuotation(), quotationsRequest.getSolicitationRequest().getProduct());
-                
-                        for (QuotationRequest quotationRequest : quotationRequests) {
-                            if (quotationRequest.getSolicitationRequest().getProduct().getId() == quotationsRequest.getSolicitationRequest().getProduct().getId()) {
-                                BudgetQuotation newBudgetQuotation = new BudgetQuotation();
-                                newBudgetQuotation.setBudget(budgetSaved);
-                                newBudgetQuotation.setQuotationRequest(quotationRequest);
-                                newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
-                                newBudgetQuotation.setChosenBudget(false);
-                                budgetQuotationDAO.save(newBudgetQuotation);
-                                updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
-                            }
+                QuotationRequest quotationsRequest = budgetQuotation.getQuotationRequest();
+                List<QuotationRequest> quotationRequests = quotationRequestDAO.findQuotationRequestProductByProduct(budget.getQuotation(), quotationsRequest.getSolicitationRequest().getProduct());
+                if(budget.getId() != null) {
+                    List<BudgetQuotation> budgetQuotations = budgetQuotationDAO.findByBudgetId(budget);
+                    for (BudgetQuotation budgetQuotat : budgetQuotations) {
+                        if (budgetQuotat.getQuotationRequest().getSolicitationRequest().getProduct().getId().equals(budgetQuotation.getQuotationRequest().getSolicitationRequest().getProduct().getId())) {
+                            BudgetQuotation newBudgetQuotation = new BudgetQuotation();
+                            newBudgetQuotation.setId(budgetQuotat.getId());
+                            newBudgetQuotation.setBudget(budgetSaved);
+                            newBudgetQuotation.setQuotationRequest(budgetQuotat.getQuotationRequest());
+                            newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
+                            newBudgetQuotation.setChosenBudget(false);
+                            budgetQuotationDAO.save(newBudgetQuotation);
+                            updateStatusSolicitation(budgetQuotat.getQuotationRequest().getSolicitationRequest().getSolicitation());
                         }
+                    }
+                }else {
+                    for (QuotationRequest quotationRequest : quotationRequests) {
+                        if (quotationRequest.getSolicitationRequest().getProduct().getId().equals(quotationsRequest.getSolicitationRequest().getProduct().getId())){
+                            BudgetQuotation newBudgetQuotation = new BudgetQuotation();
+                            newBudgetQuotation.setBudget(budgetSaved);
+                            newBudgetQuotation.setQuotationRequest(quotationRequest);
+                            newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
+                            newBudgetQuotation.setChosenBudget(false);
+
+                            budgetQuotationDAO.save(newBudgetQuotation);
+                            updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
+                        }
+                    }
+                }
             }else {
                 BudgetQuotation newBudgetQuotation = new BudgetQuotation();
                 newBudgetQuotation.setId(budgetQuotation.getId());
@@ -48,12 +64,9 @@ public class BudgetServiceImpl implements BudgetService {
                 newBudgetQuotation.setQuotationRequest(budgetQuotation.getQuotationRequest());
                 newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
                 newBudgetQuotation.setChosenBudget(false);
-
                 budgetQuotationDAO.save(newBudgetQuotation);
-
                 QuotationRequest quotationRequest = new QuotationRequest();
                 quotationRequest = quotationRequestDAO.findById(QuotationRequest.class, newBudgetQuotation.getQuotationRequest().getId());
-
                 updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
             }
         }
@@ -75,7 +88,6 @@ public class BudgetServiceImpl implements BudgetService {
             paymentInformation.setTotalFinalPrice(paymentInformationBudget.getPaymentInformation().getTotalFinalPrice());
             paymentInformation.setFormPayment(paymentInformationBudget.getPaymentInformation().getFormPayment());
             paymentInformation.setId(paymentInformationBudget.getPaymentInformation().getId());
-
             PaymentInformation paymentInformationSaved = paymentInformationDAO.save(paymentInformation);
 
             PaymentInformationBudget newPaymentInformationBudget = new PaymentInformationBudget();
@@ -94,16 +106,14 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public List<BudgetQuotationProductView> groupProductBudget(Budget budget) {
-
         budget = budgetDAO.findById(Budget.class, budget.getId());
         List<BudgetQuotation> budgetQuotations = budget.getBudgetQuotations();
-
         List<BudgetQuotationProductView> budgetQuotationProductViewList = new ArrayList<>();
         List<BudgetQuotationProductView> budgetQuotationProductViews = new ArrayList<>();
 
         Collections.sort(budgetQuotationProductViews, new BudgetQuotationProductView());
-        Map<Long, BudgetQuotationProductView> map = new HashMap<>();
 
+        Map<Long, BudgetQuotationProductView> map = new HashMap<>();
         budgetQuotationProductViewList = new BudgetQuotationProductView().generateList(budgetQuotations);
 
         for (BudgetQuotationProductView budgetQuotationProductView : budgetQuotationProductViewList) {
@@ -130,7 +140,6 @@ public class BudgetServiceImpl implements BudgetService {
             BudgetQuotationProductView budgetQuotationProductView = map.get(key);
             budgetQuotationProductViews.add(budgetQuotationProductView);
         }
-
         return budgetQuotationProductViews;
     }
 

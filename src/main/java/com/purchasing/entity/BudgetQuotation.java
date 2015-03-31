@@ -23,11 +23,11 @@ public class BudgetQuotation {
     private BigDecimal unityPrice;
 
     @ManyToOne
-    @JoinColumn(name = "budget_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "budget_id", referencedColumnName = "id")
     private Budget budget;
 
     @ManyToOne
-    @JoinColumn(name = "quotation_request_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "quotation_request_id", referencedColumnName = "id")
     private QuotationRequest quotationRequest;
 
     public Long getId() {
