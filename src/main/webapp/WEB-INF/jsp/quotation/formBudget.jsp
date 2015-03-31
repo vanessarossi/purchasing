@@ -103,8 +103,8 @@
                                 </td>
                                 <td>${quotationRequest.product.unit.description}</td>
                                 <td>
-                                    <input type="hidden" name="budget.budgetQuotations[${i.index}].id" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>">
-                                    <input type="hidden"  name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
+                                    <input type="hidden"  name="budget.budgetQuotations[${i.index}].quotationRequest.solicitationRequest.product.id" value="${quotationRequest.product.id}">
+                                    <input type="hidden" name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
                                     <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice"  id="unityPrice${i.index}" onclick="calculateTotalPriceMaterial(${i.index})" onblur="calculateTotalPriceMaterialTwo(${i.index})" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>" >
                                 </td>
                                 <td><input type="text" id="totalPriceMaterial${i.index}" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].totalPrice,"." ,"," )}</c:if>" readonly></td>
@@ -125,21 +125,22 @@
             <c:if test="${quotation.type == 'Service'}">
                 <table id="quotationServiceDetailTable" class="table table-striped table-hover table-condensed">
                     <thead>
-                    <tr>
-                        <th style="width: 80%" ><fmt:message key="table.description" /></th>
-                        <th style="width: 10%" ><fmt:message key="table.unitary.price" /></th>
-                        <th style="width: 10%" ><fmt:message key="table.total.price" /></th>
+                        <tr>
+                            <th style="width: 80%" ><fmt:message key="table.description" /></th>
+                            <th style="width: 10%" ><fmt:message key="table.unitary.price" /></th>
+                            <th style="width: 10%" ><fmt:message key="table.total.price" /></th>
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${quotationRequests}" var="quotationRequest" varStatus="i">
                             <tr>
                                 <td>${quotationRequest.description}</td>
                                 <td>
-                                    <input type="hidden"  name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
-                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice" id="unityPrice${i.index}" onclick="calculateTotalPriceService(${i.index})" onblur="calculateTotalPriceServiceTwo(${i.index})" value="<c:if test="${budgetQuotations[i.index].service.id eq quotationRequest.service.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>">
+                                    <input type="hidden" name="budget.budgetQuotations[${i.index}].quotationRequest.solicitationRequest.service.id" value="${quotationRequest.service.id}">
+                                    <input type="hidden" name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
+                                    <input type="text"   name="budget.budgetQuotations[${i.index}].unityPrice" id="unityPrice${i.index}" onclick="calculateTotalPriceService(${i.index})" onblur="calculateTotalPriceServiceTwo(${i.index})" value="<c:if test="${budgetQuotations[i.index].service.id eq quotationRequest.service.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>">
                                 </td>
-                                <td><input type="text" id="totalPriceService${i.index}"
-                                           value="<c:if test="${budgetQuotations[i.index].service.id eq quotationRequest.service.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>" readonly></td>
+                                <td><input type="text" id="totalPriceService${i.index}" value="<c:if test="${budgetQuotations[i.index].service.id eq quotationRequest.service.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>" readonly></td>
                             </tr>
                         </c:forEach>
                     <tfoot>
@@ -149,7 +150,6 @@
                             <th style="width: 10%"><input type="text" id="totalFinalPriceService" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}" readonly></th>
                         </tr>
                     </tfoot>
-
                     </tbody>
                 </table>
             </c:if>

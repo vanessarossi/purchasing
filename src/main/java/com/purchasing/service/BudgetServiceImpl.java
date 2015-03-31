@@ -25,25 +25,25 @@ public class BudgetServiceImpl implements BudgetService {
     @Override
     public Budget saveBudget(Budget budget) {
         Budget budgetSaved = budgetDAO.save(budget);
-
         for (BudgetQuotation budgetQuotation : budget.getBudgetQuotations()) {
             if (budgetSaved.getQuotation().getType().equals(TypeEnum.Material)){
-                QuotationRequest quotationRequestAux = quotationRequestDAO.findById(QuotationRequest.class,  budgetQuotation.getQuotationRequest().getId());
-                List<QuotationRequest> quotationRequests = quotationRequestDAO.findQuotationRequestProductByProduct(quotationRequestAux.getQuotation(), quotationRequestAux.getSolicitationRequest().getProduct());
-                for (QuotationRequest quotationRequest : quotationRequests){
-                    if (quotationRequest.getSolicitationRequest().getProduct().getId() == quotationRequestAux.getSolicitationRequest().getProduct().getId()){
-                        BudgetQuotation newBudgetQuotation = new BudgetQuotation();
-                        newBudgetQuotation.setBudget(budgetSaved);
-                        newBudgetQuotation.setQuotationRequest(quotationRequest);
-                        newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
-                        newBudgetQuotation.setChosenBudget(false);
-
-                        budgetQuotationDAO.save(newBudgetQuotation);
-                        updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
-                    }
-                }
+                    QuotationRequest quotationsRequest = budgetQuotation.getQuotationRequest();
+                    List<QuotationRequest> quotationRequests = quotationRequestDAO.findQuotationRequestProductByProduct(quotationsRequest.getQuotation(), quotationsRequest.getSolicitationRequest().getProduct());
+                
+                        for (QuotationRequest quotationRequest : quotationRequests) {
+                            if (quotationRequest.getSolicitationRequest().getProduct().getId() == quotationsRequest.getSolicitationRequest().getProduct().getId()) {
+                                BudgetQuotation newBudgetQuotation = new BudgetQuotation();
+                                newBudgetQuotation.setBudget(budgetSaved);
+                                newBudgetQuotation.setQuotationRequest(quotationRequest);
+                                newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
+                                newBudgetQuotation.setChosenBudget(false);
+                                budgetQuotationDAO.save(newBudgetQuotation);
+                                updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
+                            }
+                        }
             }else {
                 BudgetQuotation newBudgetQuotation = new BudgetQuotation();
+                newBudgetQuotation.setId(budgetQuotation.getId());
                 newBudgetQuotation.setBudget(budgetSaved);
                 newBudgetQuotation.setQuotationRequest(budgetQuotation.getQuotationRequest());
                 newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
@@ -56,34 +56,34 @@ public class BudgetServiceImpl implements BudgetService {
 
                 updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
             }
-
         }
         for (PaymentInformationBudget paymentInformationBudget : budget.getPaymentInformationBudgets()){
-                PaymentInformation paymentInformation = new PaymentInformation();
-                if (paymentInformationBudget.getPaymentInformation().getHasContract() != null) {
-                    paymentInformation.setHasContract(paymentInformationBudget.getPaymentInformation().getHasContract());
-                    paymentInformation.setContract(paymentInformationBudget.getPaymentInformation().getContract());
-                }
-                paymentInformation.setMeanPayment(paymentInformationBudget.getPaymentInformation().getMeanPayment());
-                paymentInformation.setDateFirstInstallment(paymentInformationBudget.getPaymentInformation().getDateFirstInstallment());
-                paymentInformation.setDateLastInstallment(paymentInformationBudget.getPaymentInformation().getDateLastInstallment());
-                paymentInformation.setDateInput(paymentInformationBudget.getPaymentInformation().getDateInput());
-                paymentInformation.setExpirationDate(paymentInformationBudget.getPaymentInformation().getExpirationDate());
-                paymentInformation.setInputPrice(paymentInformationBudget.getPaymentInformation().getInputPrice());
-                paymentInformation.setSharePrice(paymentInformationBudget.getPaymentInformation().getSharePrice());
-                paymentInformation.setTotalPrice(paymentInformationBudget.getPaymentInformation().getTotalPrice());
-                paymentInformation.setDiscountPercentage(paymentInformationBudget.getPaymentInformation().getDiscountPercentage());
-                paymentInformation.setTotalFinalPrice(paymentInformationBudget.getPaymentInformation().getTotalFinalPrice());
-                paymentInformation.setFormPayment(paymentInformationBudget.getPaymentInformation().getFormPayment());
+            PaymentInformation paymentInformation = new PaymentInformation();
+            if (paymentInformationBudget.getPaymentInformation().getHasContract() != null) {
+                paymentInformation.setHasContract(paymentInformationBudget.getPaymentInformation().getHasContract());
+                paymentInformation.setContract(paymentInformationBudget.getPaymentInformation().getContract());
+            }
+            paymentInformation.setMeanPayment(paymentInformationBudget.getPaymentInformation().getMeanPayment());
+            paymentInformation.setDateFirstInstallment(paymentInformationBudget.getPaymentInformation().getDateFirstInstallment());
+            paymentInformation.setDateLastInstallment(paymentInformationBudget.getPaymentInformation().getDateLastInstallment());
+            paymentInformation.setDateInput(paymentInformationBudget.getPaymentInformation().getDateInput());
+            paymentInformation.setExpirationDate(paymentInformationBudget.getPaymentInformation().getExpirationDate());
+            paymentInformation.setInputPrice(paymentInformationBudget.getPaymentInformation().getInputPrice());
+            paymentInformation.setSharePrice(paymentInformationBudget.getPaymentInformation().getSharePrice());
+            paymentInformation.setTotalPrice(paymentInformationBudget.getPaymentInformation().getTotalPrice());
+            paymentInformation.setDiscountPercentage(paymentInformationBudget.getPaymentInformation().getDiscountPercentage());
+            paymentInformation.setTotalFinalPrice(paymentInformationBudget.getPaymentInformation().getTotalFinalPrice());
+            paymentInformation.setFormPayment(paymentInformationBudget.getPaymentInformation().getFormPayment());
+            paymentInformation.setId(paymentInformationBudget.getPaymentInformation().getId());
 
-                PaymentInformation paymentInformationSaved = paymentInformationDAO.save(paymentInformation);
+            PaymentInformation paymentInformationSaved = paymentInformationDAO.save(paymentInformation);
 
-                PaymentInformationBudget newPaymentInformationBudget = new PaymentInformationBudget();
+            PaymentInformationBudget newPaymentInformationBudget = new PaymentInformationBudget();
+                newPaymentInformationBudget.setId(paymentInformationBudget.getId());
                 newPaymentInformationBudget.setBudget(budgetSaved);
                 newPaymentInformationBudget.setPaymentInformation(paymentInformationSaved);
-                paymentInformationBudgetDAO.save(newPaymentInformationBudget);
-            }
-
+            paymentInformationBudgetDAO.save(newPaymentInformationBudget);
+        }
         return budgetSaved;
     }
 
@@ -116,11 +116,11 @@ public class BudgetServiceImpl implements BudgetService {
                 if (budgetQuotationProductView.getQuantity() == null) {
                     budgetQuotationProductView.setQuantity(0f);
                 }if (budgetQuotationProductView.getTotalPrice() == null) {
-                    budgetQuotationProductView.setTotalPrice(new BigDecimal(0));
+                    budgetQuotationProductView.setTotalPrice(budgetQuotationProductV.getTotalPrice());
                 }
-
                 Float quantity = budgetQuotationProductView.getQuantity() + budgetQuotationProductV.getQuantity();
-                BigDecimal totalPrice = budgetQuotationProductView.getTotalPrice().add(budgetQuotationProductV.getUnityPrice().multiply(new BigDecimal(budgetQuotationProductV.getQuantity())));
+                BigDecimal totalPrice = budgetQuotationProductV.getTotalPrice().add(budgetQuotationProductView.getUnityPrice().multiply(new BigDecimal(budgetQuotationProductView.getQuantity())));
+
                 budgetQuotationProductV.setQuantity(quantity);
                 budgetQuotationProductV.setTotalPrice(totalPrice);
             }
@@ -143,6 +143,4 @@ public class BudgetServiceImpl implements BudgetService {
     public void updateStatusSolicitation(Solicitation solicitation) {
         solicitation.getSituation().setStatus(StatusEnum.QuotingProcess);
     }
-
-
 }
