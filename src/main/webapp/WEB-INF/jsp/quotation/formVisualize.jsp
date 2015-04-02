@@ -59,9 +59,9 @@
             <tr>
                 <th style="width: 35%"><fmt:message key="table.supplier"/></th>
                 <th style="width: 7%"><fmt:message key="table.date"/></th>
-                <th style="width: 10%"><fmt:message key="table.abbreviated.total.price"/> <fmt:message key="table.one"/> </th>
+                <th style="width: 10%"><fmt:message key="table.number"/> </th>
+                <th style="width: 10%"><fmt:message key="table.abbreviated.total.price"/></th>
                 <th style="width: 10%"><fmt:message key="table.abbreviated.total.final.price"/> <fmt:message key="table.one"/></th>
-                <th style="width: 10%"><fmt:message key="table.abbreviated.total.price"/> <fmt:message key="table.two"/></th>
                 <th style="width: 10%"><fmt:message key="table.abbreviated.total.final.price"/> <fmt:message key="table.two"/></th>
                 <th style="width: 3%"><fmt:message key="table.##"/></th>
                 <th style="width: 3%"><fmt:message key="table.##"/></th>
@@ -72,12 +72,12 @@
                     <tr>
                         <td>${budget.supplier.person.name}</td>
                         <td><fmt:formatDate value="${budget.date}" pattern="dd/MM/YYYY"/></td>
-                        <td>${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalPrice,".",",")}</td>
+                        <td>${budget.numberBudget}</td>
                         <td>${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice,".",",")}</td>
                         <td>${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}</td>
                         <td>${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice,".",",")}</td>
                         <td><a href="<c:url value="/cotacao/editar/orcamento/${budget.id}"></c:url>"><span class="btn btn-default btn-xs fa fa-edit"></span></a></td>
-                        <td><a onclick="viewDetailBudget(${budget.id})"><span class="btn btn-default btn-xs fa fa-eye"></span></a></td>
+                        <td><a onclick='viewDetailBudget(${budget.id},"${quotation.type}")'><span class="btn btn-default btn-xs fa fa-eye"></span></a></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -93,10 +93,32 @@
             </div>
             <div class="modal-body">
                 <c:if test="${quotation.type == 'Material'}">
-                   Material
+                    <table id="bugetQuotationMaterialTable" class="table table-striped table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th style="width: 50%"><fmt:message key="table.product"/></th>
+                            <th style="width: 5%"><fmt:message key="table.abbreviatedQuantity"/></th>
+                            <th style="width: 10%"><fmt:message key="table.unit"/></th>
+                            <th style="width: 10%"><fmt:message key="table.unitary.price"/></th>
+                            <th style="width: 8%"><fmt:message key="table.total.price"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </c:if>
                 <c:if test="${quotation.type == 'Service'}">
-                    Serviço
+                    <table id="bugetQuotationServiceTable" class="table table-striped table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th style="width: 80%"><fmt:message key="table.description"/></th>
+                            <th style="width: 10%"><fmt:message key="table.unitary.price"/></th>
+                            <th style="width: 10%"><fmt:message key="table.total.price"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </c:if>
                 <br><br><br>
             </div>

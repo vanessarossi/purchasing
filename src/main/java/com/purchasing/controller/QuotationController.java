@@ -260,4 +260,18 @@ public class QuotationController {
             result.use(Results.json()).withoutRoot().from(false).serialize();
         }
     }
+
+    @Get("/pesquisa/produto/orcamento/{budget.id}/json")
+    public void searchDetailBudgetQuotation(Budget budget){
+        budget = budgetService.findById(budget);
+        if (budget.getQuotation().getType().equals(TypeEnum.Material)) {
+            List<BudgetQuotationProductView> budgetQuotations = budgetService.groupProductBudget(budget);
+            result.use(Results.json()).withoutRoot().from(budgetQuotations).include("product").serialize();
+        }else if (budget.getQuotation().getType().equals(TypeEnum.Service)) {
+            List<BudgetQuotationServiceView> budgetQuotations = new BudgetQuotationServiceView().generateList(budget.getBudgetQuotations());
+            result.use(Results.json()).withoutRoot().from(budgetQuotations).include("service").serialize();
+        }else{
+            result.use(Results.json()).withoutRoot().from(false).serialize();
+        }
+    }
 }
