@@ -54,41 +54,34 @@
         </div>
     </div>
     <div class="row">
-        <div class="panel-group" id="accordion">
-            <c:forEach items="${quotation.budgets}" var="budget" >
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#${budget.id}">
-                                ${budget.supplier.person.name}
-                            </a><i class="indicator fa fa-angle-double-up"></i>
-                        </h4>
-                    </div>
-                    <div id="${budget.id}" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-2 col-sm-2">
-                                    <div class="form-group">
-                                        <label class="control-label" for="date"><fmt:message key="label.date"/></label>
-                                        <input type="text" class="form-control" id="date" readonly="true" value="<fmt:formatDate value="${budget.date}" pattern="d/MM/YYYY"  />"/>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-2">
-                                    <div class="form-group">
-                                        <label class="control-label" for="budgetNumber"><fmt:message key="label.number_budget"/></label>
-                                        <input type="text" class="form-control" id="budgetNumber" readonly="true" value="${budget.numberBudget}"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <a class="btn btn-warning" href="<c:url value="/cotacao/editar/orcamento/${budget.id}"></c:url>"><fmt:message key="button.edit"/></a>
-                                <a class="btn btn-primary" onclick="viewDetailBudget(${budget.id})"  ><fmt:message key="button.view.product"/></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
+        <table id="budgetTable" class="table table-striped table-hover table-condensed">
+            <thead>
+            <tr>
+                <th style="width: 35%"><fmt:message key="table.supplier"/></th>
+                <th style="width: 7%"><fmt:message key="table.date"/></th>
+                <th style="width: 10%"><fmt:message key="table.abbreviated.total.price"/> <fmt:message key="table.one"/> </th>
+                <th style="width: 10%"><fmt:message key="table.abbreviated.total.final.price"/> <fmt:message key="table.one"/></th>
+                <th style="width: 10%"><fmt:message key="table.abbreviated.total.price"/> <fmt:message key="table.two"/></th>
+                <th style="width: 10%"><fmt:message key="table.abbreviated.total.final.price"/> <fmt:message key="table.two"/></th>
+                <th style="width: 3%"><fmt:message key="table.##"/></th>
+                <th style="width: 3%"><fmt:message key="table.##"/></th>
+            </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${quotation.budgets}" var="budget">
+                    <tr>
+                        <td>${budget.supplier.person.name}</td>
+                        <td><fmt:formatDate value="${budget.date}" pattern="dd/MM/YYYY"/></td>
+                        <td>${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalPrice,".",",")}</td>
+                        <td>${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice,".",",")}</td>
+                        <td>${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}</td>
+                        <td>${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice,".",",")}</td>
+                        <td><a href="<c:url value="/cotacao/editar/orcamento/${budget.id}"></c:url>"><span class="btn btn-default btn-xs fa fa-edit"></span></a></td>
+                        <td><a onclick="viewDetailBudget(${budget.id})"><span class="btn btn-default btn-xs fa fa-eye"></span></a></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
     </div>
 </html:template>
 <div class="modal fade" id="priceBudget" tabindex="-1" role="dialog" aria-labelledby="modalPriceBudget" aria-hidden="true">
