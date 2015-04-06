@@ -25,11 +25,43 @@ function viewDetailBudget(id,type){
             },
             success: function (result) {
                 if (result != false && type === 'Material') {
-                    
+                    for (var i = 0; i < result.length; i++) {
+						var description = result[i]["product"]["description"];
+						var model = ((result[i]["product"]["model"] == null) ? '' : result[i]["product"]["model"]);
+                        var mark = ((result[i]["product"]["mark"] == null) ? '' : result[i]["product"]["mark"]);
+						
+						var product = description +" "+ model +" "+ mark;
+                        var quantity =   result[i]["quantity"];
+                        var unit = result[i]["product"]["unit"]["description"];
+                        var unityPrice = result[i]["unityPrice"];
+                        var totalPrice = result[i]["totalPrice"];
+
+                        var row = "<tr>";
+                        row += "<td>"+product+"</td>";
+                        row += "<td>"+quantity+"</td>";
+                        row += "<td>"+unit+"</td>";
+                        row += "<td>"+unityPrice.toFixed(2).replace(".", ",")+"</td>";
+                        row += "<td>"+totalPrice.toFixed(2).replace(".", ",")+"</td>";
+                        row += "</tr>";
+
+                        $('#bugetQuotationMaterialTable > tbody').append(row);
+					}
                     $('#priceBudget').modal('show'); 
                 }
                 if(result != false && type === 'Service'){
-                   
+                   for (var i = 0; i < result.length; i++) {
+                        var service = result[i]["service"]["description"];
+                        var unityPrice = result[i]["unityPrice"];
+                        var totalPrice = unityPrice;
+
+                        var row = "<tr>";
+                        row += "<td>"+service+"</td>";
+                        row += "<td>"+unityPrice.toFixed(2).replace(".", ",")+"</td>";
+                        row += "<td>"+totalPrice.toFixed(2).replace(".", ",")+"</td>";
+                        row += "</tr>";
+
+                        $('#bugetQuotationServiceTable > tbody').append(row);
+                    }
                    $('#priceBudget').modal('show');
                 }
             },
@@ -39,3 +71,8 @@ function viewDetailBudget(id,type){
         });
     }
 };
+
+$('#priceBudget').on('hide.bs.modal', function (e) {
+      $('#bugetQuotationMaterialTable > tbody > tr').remove();
+      $('#bugetQuotationServiceTable > tbody > tr').remove();
+});

@@ -11,6 +11,7 @@ import com.purchasing.service.impl.FormPaymentService;
 import com.purchasing.service.impl.QuotationService;
 import com.purchasing.support.budget.BudgetQuotationProductView;
 import com.purchasing.support.budget.BudgetQuotationServiceView;
+import com.purchasing.support.budget.BudgetView;
 import com.purchasing.support.datatable.DataTableModel;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 import com.purchasing.support.quotation.QuotationRequestServiceView;
@@ -116,14 +117,9 @@ public class QuotationController {
     @Get("/formulario/iniciar/ordem/{quotation.id}")
     public void initialPurchaseOrder(Quotation quotation) {
         quotation = quotationService.searchById(quotation);
-        if (quotation.getType().equals(TypeEnum.Material)){
-            List<QuotationRequestProductView> quotationRequests = quotationService.groupByProduct(quotation);
-            result.include("quotationRequests",quotationRequests);
-        }else if(quotation.getType().equals(TypeEnum.Service)){
-            List<QuotationRequestServiceView> quotationRequests = new QuotationRequestServiceView().generateList(quotationService.searchQuotationRequestServiceByQuotation(quotation));
-            result.include("quotationRequests",quotationRequests);
-        }
+        List<BudgetView> budgets = new BudgetView().generateList(quotation.getBudgets(), budgetService);
         result.include("quotation",quotation);
+        result.include("budgets",budgets);
         result.redirectTo(this).formInitialPurchaseOrder();
     }
 
@@ -266,7 +262,7 @@ public class QuotationController {
         budget = budgetService.findById(budget);
         if (budget.getQuotation().getType().equals(TypeEnum.Material)) {
             List<BudgetQuotationProductView> budgetQuotations = budgetService.groupProductBudget(budget);
-            result.use(Results.json()).withoutRoot().from(budgetQuotations).include("product").serialize();
+            result.use(Results.json()).withoutRoot().from(budgetQuotations).include("product").include("product.unit").serialize();
         }else if (budget.getQuotation().getType().equals(TypeEnum.Service)) {
             List<BudgetQuotationServiceView> budgetQuotations = new BudgetQuotationServiceView().generateList(budget.getBudgetQuotations());
             result.use(Results.json()).withoutRoot().from(budgetQuotations).include("service").serialize();
