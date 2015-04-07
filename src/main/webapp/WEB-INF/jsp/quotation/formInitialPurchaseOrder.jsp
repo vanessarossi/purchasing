@@ -88,27 +88,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${budget.budgetsQuotationProduct}" var="budgetsQuotationProduct">
+                                <c:forEach items="${budget.budgetsQuotationProduct}" var="budgetsQuotationProduct" varStatus="j">
                                     <tr>
                                         <td>${budgetsQuotationProduct.product.description} ${budgetsQuotationProduct.product.model} ${budgetsQuotationProduct.product.mark}</td>
                                         <td>${budgetsQuotationProduct.quantity}</td>
                                         <td>${budgetsQuotationProduct.product.unit.description}</td>
                                         <td>${fn:replace(budgetsQuotationProduct.unityPrice,"." ,"," )}</td>
-                                        <td>${fn:replace(budgetsQuotationProduct.totalPrice,"." , ",")}</td>
+                                        <td><input type="text" id="total${i.index}${j.index}" readonly value="${fn:replace(budgetsQuotationProduct.totalPrice,"." , ",")}"/></td>
                                         <td>
                                             <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.budget.id" value="${budget.budget.id}">
                                             <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.solicitationRequest.product.id" value="${budgetsQuotationProduct.product.id}" >
-                                            <input type="checkbox" id="request${i.index}${budgetsQuotationProduct.product.id}" onclick="checkedRequest(${i.index},${budgetsQuotationProduct.product.id})" value=""/>
+                                            <input type="checkbox" id="request${i.index}${budgetsQuotationProduct.product.id}" name="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationProduct.product.id})" value=""/>
                                         </td>
                                     </tr>
                                 </c:forEach>
+                                    <input type="hidden" id="totalItem" value="${fn:length(budget.budgetsQuotationProduct)}" />
                                 </tbody>
                             </table>
                             <div class="row">
                                 <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
                                     <div class="form-group">
                                         <label class="control-label"><fmt:message key="label.totalPrice"/></label>
-                                        <input type="text" class="form-control" readonly="true" value=""/>
+                                        <input type="text" class="form-control" readonly="true" id="totalPrice${i.index}" value=""/>
                                     </div>
                                 </div>
                             </div>
@@ -148,18 +149,19 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${budget.budgetsQuotationService}" var="budgetsQuotationService">
+                                <c:forEach items="${budget.budgetsQuotationService}" var="budgetsQuotationService" varStatus="j" >
                                     <tr>
                                         <td>${budgetsQuotationService.service.description}</td>
                                         <td>${fn:replace(budgetsQuotationService.unityPrice, ".",",")}</td>
-                                        <td>${fn:replace(budgetsQuotationService.unityPrice,"." ,"," )}</td>
+                                        <td><input type="text" readonly id="total${i.index}${j.index}" value="${fn:replace(budgetsQuotationService.unityPrice,"." ,"," )}"/></td>
                                         <td>
                                             <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.budget.id" value="${budget.budget.id}">
                                             <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.id" value="${budgetsQuotationService.id}">
-                                            <input type="checkbox"  id="request${i.index}${budgetsQuotationService.service.id}" onclick="checkedRequest(${i.index},${budgetsQuotationService.service.id})" value=""/>
+                                            <input type="checkbox"  id="request${i.index}${budgetsQuotationService.service.id}" name="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationService.service.id})" value=""/>
                                         </td>
                                     </tr>
                                 </c:forEach>
+                                <input type="hidden" id="totalItem" value="${fn:length(budget.budgetsQuotationService)}"/>
                                 </tbody>
                             </table>
                             <div class="row">
