@@ -52,8 +52,8 @@
             </div>
         </div>
         <form action='<c:url value=""></c:url>' method="post" id="initialPurchasingOrderForm">
-            <c:if test="${quotation.type == 'Material'}">
-                <c:forEach items="${budgets}" var="budget" varStatus="i">
+            <c:forEach items="${budgets}" var="budget" varStatus="i">
+                <c:if test="${quotation.type == 'Material'}">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row">
@@ -76,20 +76,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <table id="budget${i}" class="table table-striped table-hover table-condensed">
+                            <table id="budget${i.index}" class="table table-striped table-hover table-condensed">
                                 <thead>
-                                <tr>
-                                    <th style="width: 50%"><fmt:message key="table.product"/></th>
-                                    <th style="width: 10%"><fmt:message key="table.abbreviatedQuantity"/></th>
-                                    <th style="width: 10%"><fmt:message key="table.unit"/></th>
-                                    <th style="width: 10%"><fmt:message key="table.unitary.price"/></th>
-                                    <th style="width: 10%"><fmt:message key="table.total.price"/></th>
-                                    <th style="width: 1%"><fmt:message key="table.##"/></th>
-                                </tr>
+                                    <tr>
+                                        <th style="width: 50%"><fmt:message key="table.product"/></th>
+                                        <th style="width: 10%"><fmt:message key="table.abbreviatedQuantity"/></th>
+                                        <th style="width: 10%"><fmt:message key="table.unit"/></th>
+                                        <th style="width: 10%"><fmt:message key="table.unitary.price"/></th>
+                                        <th style="width: 10%"><fmt:message key="table.total.price"/></th>
+                                        <th style="width: 1%"><fmt:message key="table.##"/></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${budget.budgetsQuotationProduct}" var="budgetsQuotationProduct"
-                                           varStatus="i">
+                                <c:forEach items="${budget.budgetsQuotationProduct}" var="budgetsQuotationProduct">
                                     <tr>
                                         <td>${budgetsQuotationProduct.product.description} ${budgetsQuotationProduct.product.model} ${budgetsQuotationProduct.product.mark}</td>
                                         <td>${budgetsQuotationProduct.quantity}</td>
@@ -99,7 +98,7 @@
                                         <td>
                                             <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.budget.id" value="${budget.budget.id}">
                                             <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.solicitationRequest.product.id" value="${budgetsQuotationProduct.product.id}" >
-                                            <input type="checkbox" />
+                                            <input type="checkbox" id="request${i.index}${budgetsQuotationProduct.product.id}" onclick="checkedRequest(${i.index},${budgetsQuotationProduct.product.id})" value=""/>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -115,12 +114,10 @@
                             </div>
                         </div>
                     </div>
-                </c:forEach>
-            </c:if>
-            <c:if test="${quotation.type == 'Service'}">
-                <c:forEach items="${budgets}" var="budget" varStatus="i">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
+                </c:if>
+                <c:if test="${quotation.type == 'Service'}">
+                <div class="panel panel-default">
+                    <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="form-group">
@@ -141,7 +138,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <table id="budget${i}" class="table table-striped table-hover table-condensed">
+                            <table id="budget${i.index}" class="table table-striped table-hover table-condensed">
                                 <thead>
                                 <tr>
                                     <th style="width: 50%"><fmt:message key="table.description"/></th>
@@ -151,8 +148,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${budget.budgetsQuotationService}" var="budgetsQuotationService"
-                                           varStatus="i">
+                                <c:forEach items="${budget.budgetsQuotationService}" var="budgetsQuotationService">
                                     <tr>
                                         <td>${budgetsQuotationService.service.description}</td>
                                         <td>${fn:replace(budgetsQuotationService.unityPrice, ".",",")}</td>
@@ -160,7 +156,7 @@
                                         <td>
                                             <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.budget.id" value="${budget.budget.id}">
                                             <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.id" value="${budgetsQuotationService.id}">
-                                            <input type="checkbox"/>
+                                            <input type="checkbox"  id="request${i.index}${budgetsQuotationService.service.id}" onclick="checkedRequest(${i.index},${budgetsQuotationService.service.id})" value=""/>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -176,13 +172,13 @@
                             </div>
                         </div>
                     </div>
-                </c:forEach>
-            </c:if>
-            <input type="hidden" id="totalBudget" >
+                </c:if>
+            </c:forEach>
+            <input type="hidden" id="totalBudget" value="${fn:length(budgets)}">
         </form>
     </div>
 </html:template>
 </body>
 <html:jsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/form-quotation-puchaseOrder.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-quotation-purchase-order.js"></script>
 </html>
