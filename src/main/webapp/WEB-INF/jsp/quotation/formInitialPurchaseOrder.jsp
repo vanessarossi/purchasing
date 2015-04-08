@@ -114,6 +114,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="panel-footer">
+                            <form action='<c:url value=""></c:url>' method="post">
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
+                                        <input type="submit" class="btn btn-primary btn-sm" value="<fmt:message key="button.generatePurchaseOrder"/> "/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </c:if>
                 <c:if test="${quotation.type == 'Service'}">
@@ -172,11 +181,26 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
+                    <div class="panel-footer">
+                        <form action='<c:url value=""></c:url>' method="post">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
+                                    <input type="submit" class="btn btn-primary btn-sm" value="<fmt:message key="button.generatePurchaseOrder"/> "/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 </c:if>
+                </br>
             </c:forEach>
             <input type="hidden" id="totalBudget" value="${fn:length(budgets)}">
+            <div class="row">
+                <div class="col-md-offset-10 col-sm-offset-10">
+                    <input type="submit" class="btn btn-primary" value="<fmt:message key="button.generatePurchaseOrders"/> "/>
+                </div>
+            </div>
         </form>
     </div>
 </html:template>
