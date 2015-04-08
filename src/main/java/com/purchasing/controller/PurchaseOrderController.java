@@ -1,10 +1,9 @@
 package com.purchasing.controller;
 
-import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.*;
+import com.purchasing.entity.Budget;
 import com.purchasing.entity.PurchaseOrder;
+import com.purchasing.service.impl.PurchaseOrderService;
 
 import javax.inject.Inject;
 
@@ -16,14 +15,16 @@ import javax.inject.Inject;
 public class PurchaseOrderController {
 
     private Result result;
+    private PurchaseOrderService purchaseOrderService;
 
     @Deprecated
     public PurchaseOrderController() {
     }
 
     @Inject
-    public PurchaseOrderController(Result result) {
+    public PurchaseOrderController(Result result, PurchaseOrderService purchaseOrderService) {
         this.result = result;
+        this.purchaseOrderService = purchaseOrderService;
     }
 
     /** Forms **/
@@ -47,8 +48,13 @@ public class PurchaseOrderController {
     }
 
      /** Actions **/
+    @Get("/salvar/unico/{budget.id}")
+    public void singleSave(Budget budget) {
+        result.redirectTo(this).visualize();
+    }
+
     @Post("/salvar")
-    public void save(PurchaseOrder purchaseOrder) {
+    public void variousSave(PurchaseOrder purchaseOrder){
         result.redirectTo(this).visualize();
     }
 }

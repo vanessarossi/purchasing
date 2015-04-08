@@ -6,8 +6,8 @@
 </head>
 <body style="text-align: center">
 <html:template>
-    <div class="row cleafix">
-        <div class="small-12 medium-12  small-centered medium-centered columns">
+    <div class="row">
+        <div>
             <h2><fmt:message key="title.error.403"/></h2>
 
             <h2>
@@ -15,8 +15,8 @@
             </h2>
         </div>
     </div>
-    <div class="row cleafix">
-        <div class="small-12 medium-12  small-centered medium-centered columns">
+    <div class="row">
+        <div>
             <img src="${pageContext.request.contextPath}/asset/images/error/shielddenied.png" alt=""/>
         </div>
     </div>

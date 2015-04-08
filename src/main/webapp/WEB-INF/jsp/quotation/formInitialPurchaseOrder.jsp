@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <form action='<c:url value=""></c:url>' method="post" id="initialPurchasingOrderForm">
+        <form action='<c:url value="/ordemCompra/salvar"></c:url>' method="post" id="initialPurchasingOrderForm">
             <c:forEach items="${budgets}" var="budget" varStatus="i">
                 <c:if test="${quotation.type == 'Material'}">
                     <div class="panel panel-default">
@@ -96,9 +96,9 @@
                                         <td>${fn:replace(budgetsQuotationProduct.unityPrice,"." ,"," )}</td>
                                         <td><input type="text" id="total${i.index}${j.index}" readonly value="${fn:replace(budgetsQuotationProduct.totalPrice,"." , ",")}"/></td>
                                         <td>
-                                            <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.budget.id" value="${budget.budget.id}">
-                                            <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.solicitationRequest.product.id" value="${budgetsQuotationProduct.product.id}" >
-                                            <input type="checkbox" id="request${i.index}${budgetsQuotationProduct.product.id}" name="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationProduct.product.id})" value=""/>
+                                            <input type="hidden" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.budget.id" value="${budget.budget.id}">
+                                            <input type="hidden" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.quotationRequest.solicitationRequest.product.id" value="${budgetsQuotationProduct.product.id}" >
+                                            <input type="checkbox" id="request${i.index}${budgetsQuotationProduct.product.id}" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.chosenBudget" class="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationProduct.product.id})" value=""/>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -115,19 +115,17 @@
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <form action='<c:url value=""></c:url>' method="post">
-                                <div class="row">
-                                    <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
-                                        <input type="submit" class="btn btn-primary btn-sm" value="<fmt:message key="button.generatePurchaseOrder"/> "/>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
+                                    <a  href="<c:url value="/ordemCompra/salvar/unico/${budget.budget.id}"></c:url>" class="btn btn-primary btn-sm"  > <fmt:message key="button.generatePurchaseOrder"/> </a>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </c:if>
                 <c:if test="${quotation.type == 'Service'}">
-                <div class="panel panel-default">
-                    <div class="panel-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="form-group">
@@ -164,9 +162,9 @@
                                         <td>${fn:replace(budgetsQuotationService.unityPrice, ".",",")}</td>
                                         <td><input type="text" readonly id="total${i.index}${j.index}" value="${fn:replace(budgetsQuotationService.unityPrice,"." ,"," )}"/></td>
                                         <td>
-                                            <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.budget.id" value="${budget.budget.id}">
-                                            <input type="hidden" name="purchaseOrder.orderRequests.budgetQuotation.id" value="${budgetsQuotationService.id}">
-                                            <input type="checkbox"  id="request${i.index}${budgetsQuotationService.service.id}" name="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationService.service.id})" value=""/>
+                                            <input type="hidden" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.budget.id" value="${budget.budget.id}">
+                                            <input type="hidden" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.id" value="${budgetsQuotationService.id}">
+                                            <input type="checkbox"  id="request${i.index}${budgetsQuotationService.service.id}" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.chosenBudget"  class="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationService.service.id})" value=""/>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -181,19 +179,16 @@
                                     </div>
                                 </div>
                             </div>
-                    </div>
-                    <div class="panel-footer">
-                        <form action='<c:url value=""></c:url>' method="post">
+                        </div>
+                        <div class="panel-footer">
                             <div class="row">
                                 <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
-                                    <input type="submit" class="btn btn-primary btn-sm" value="<fmt:message key="button.generatePurchaseOrder"/> "/>
+                                    <a href="<c:url value="/ordemCompra/salvar/unico/${budget.budget.id}"></c:url>" class="btn btn-primary btn-sm"> <fmt:message key="button.generatePurchaseOrder"/> </a>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
                 </c:if>
-                </br>
             </c:forEach>
             <input type="hidden" id="totalBudget" value="${fn:length(budgets)}">
             <div class="row">
