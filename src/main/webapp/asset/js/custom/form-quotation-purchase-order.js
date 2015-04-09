@@ -57,7 +57,6 @@ function calculateTotalPriceChecked(totalIndexBudget,totalItemBudget){
 	}	
 }
 
-
 function validateSingleBudgetChoose(budgetIndex,totalIndexBudget,link){
 	var totalPrice = $('#totalPrice'+budgetIndex).val();
 	var result = false;
@@ -79,5 +78,13 @@ function validateSingleBudgetChoose(budgetIndex,totalIndexBudget,link){
 }
 
 function validateTotalBudgetChoose(totalIndexBudget){
-
+	quantity=0;
+	for (var i = 0 ; i <= (totalIndexBudget-1); i++) {
+		if ($('#totalPriceChoise'+i).val() != '0,00' && $('#totalPriceChoise'+i).val() != '') {
+			quantity += parseInt(1);
+		};
+	}
+	if (quantity > 1) {
+		$('#initialPurchasingOrderForm').submit();
+	};
 }

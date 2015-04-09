@@ -204,7 +204,7 @@
             <input type="hidden" id="totalBudget" value="${fn:length(budgets)}">
             <div class="row">
                 <div class="col-md-offset-10 col-sm-offset-10">
-                    <input type="submit" class="btn btn-primary" value="<fmt:message key="button.generatePurchaseOrders"/> "/>
+                    <a onclick="validateTotalBudgetChoose(${fn:length(budgets)})" class="btn btn-primary"><fmt:message key="button.generatePurchaseOrders"/></a>
                 </div>
             </div>
             <div class="row" id="divJustification">
