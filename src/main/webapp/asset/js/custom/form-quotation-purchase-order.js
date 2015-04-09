@@ -4,6 +4,7 @@ $(document).ready(function () {
         code = (e.keyCode ? e.keyCode : e.which);
         return (code == 13) ? false : true;
     });
+    $('#divJustification').hide();
 });
 
 function checkedRequest(budgetIndex,itemRequest) {
@@ -51,7 +52,32 @@ function calculateTotalPriceChecked(totalIndexBudget,totalItemBudget){
 				totalPrice = parseFloat(totalPrice) + parseFloat($('#total'+i+j).val());
 			}
 		}
-		$('#totalPrice'+i).val(totalPrice.toFixed(2).replace(".", ","));
+		$('#totalPriceChoise'+i).val(totalPrice.toFixed(2).replace(".", ","));
 		totalPrice = 0;
 	}	
+}
+
+
+function validateSingleBudgetChoose(budgetIndex,totalIndexBudget,link){
+	var totalPrice = $('#totalPrice'+budgetIndex).val();
+	var result = false;
+	for (var i = 0 ; i <= (totalIndexBudget-1); i++) {
+		otherTotalPrice = $('#totalPrice'+i).val();
+		if (budgetIndex != i && parseFloat(totalPrice) > parseFloat(otherTotalPrice)) {
+			$('#exclusive').attr("name","purchaseOrder.orderRequests["+budgetIndex+"].budgetQuotation.quotationRequest.budget.quotationRequest.quotation.exclusiveSupplier");
+			$('#justification').attr("name","purchaseOrder.orderRequests["+budgetIndex+"].budgetQuotation.quotationRequest.budget.quotationRequest.quotation.justification");
+			$('#divJustification').show();
+			result = true;	
+			break;
+		}else{
+			result = false;
+		}
+	}
+	if (result == false) {
+		window.location = link;
+	};
+}
+
+function validateTotalBudgetChoose(totalIndexBudget){
+
 }

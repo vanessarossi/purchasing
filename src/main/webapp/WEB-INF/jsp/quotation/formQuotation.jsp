@@ -25,6 +25,9 @@
                             <span class="required">${errors.from('quotation.type')}</span>
                         </div>
                     </div>
+                    <div>
+
+                    </div>
                     </br>
                     <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
                 </div>
