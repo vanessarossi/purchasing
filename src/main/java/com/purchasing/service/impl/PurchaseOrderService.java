@@ -18,4 +18,7 @@ public interface PurchaseOrderService {
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPagination(String sSearch);
 
+    public List<Object[]> findMissingPagination(String sSearch, int iDisplayStart, int iDisplayLength);
+    public Integer totalMissingPagination(String sSearch);
+
 }

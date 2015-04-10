@@ -35,4 +35,14 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     public Integer totalPagination(String sSearch) {
         return null;
     }
+
+    @Override
+    public List<Object[]> findMissingPagination(String sSearch, int iDisplayStart, int iDisplayLength) {
+        return null;
+    }
+
+    @Override
+    public Integer totalMissingPagination(String sSearch) {
+        return null;
+    }
 }
