@@ -46,7 +46,8 @@ public class Approval {
     private Boolean fourthApproval;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fourthApprovalDate;
+    @Column(name = "date_fourth approval")
+    private Date dateFourthApproval;
 
     @Length(min = 1, max = 20)
     @Column(name = "user_fourth_approval")
@@ -61,14 +62,6 @@ public class Approval {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Boolean isSecondApproval() {
-        return secondApproval;
-    }
-
-    public void setSecondApproval(Boolean secondApproval) {
-        this.secondApproval = secondApproval;
     }
 
     public Boolean isFirstApproval() {
@@ -93,6 +86,14 @@ public class Approval {
 
     public void setUserFirstApproval(Long userFirstApproval) {
         this.userFirstApproval = userFirstApproval;
+    }
+
+    public Boolean isSecondApproval() {
+        return secondApproval;
+    }
+
+    public void setSecondApproval(Boolean secondApproval) {
+        this.secondApproval = secondApproval;
     }
 
     public Date getDateSecondApproval() {
@@ -143,12 +144,12 @@ public class Approval {
         this.fourthApproval = fourthApproval;
     }
 
-    public Date getFourthApprovalDate() {
-        return fourthApprovalDate;
+    public Date getDateFourthApproval() {
+        return dateFourthApproval;
     }
 
-    public void setFourthApprovalDate(Date fourthApprovalDate) {
-        this.fourthApprovalDate = fourthApprovalDate;
+    public void setDateFourthApproval(Date dateFourthApproval) {
+        this.dateFourthApproval = dateFourthApproval;
     }
 
     public Long getUserFourthApproval() {
