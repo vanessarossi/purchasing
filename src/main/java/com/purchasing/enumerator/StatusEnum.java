@@ -8,28 +8,27 @@ import java.util.List;
  */
 public enum StatusEnum {
 
-    Open("Aberta",false,true,true,false),
+    Open("Aberta",false,true,false,false),
     WaitingApproval("Aguardando aprovação",true,false,true,false),
     Approved("Aprovada",true,false,true,false),
     Reject("Recusada",true,false,true,false),
     PreAnalysisReject("Pré analise recusada",true,false,false,false),
-    InAnalysis("Em analise",true,false,true,false),
+    InAnalysis("Em analise",true,false,false,false),
     QuotingProcess("Processo de cotação",true,false,false,false),
     AnalysisQuote("Cotação em analise",true,false,false,false),
-    QuoteApproved("Cotação aprovada",true,false,true,false),
-    QuoteReject("Cotação recusada",true,false,true,false),
-    PartiallyQuoteApproved("Cotação parcialmente aprovada",true,false,true,false),
+    QuoteApproved("Cotação aprovada",true,false,false,false),
+    QuoteReject("Cotação recusada",true,false,false,false),
+    PartiallyQuoteApproved("Cotação parcialmente aprovada",true,false,false,false),
     BuyingProcess("Em processo de compra",true,false,false,false),
-    PurchaseMade("Compra realizada",true,false,false,false),
+    PurchaseMade("Compra realizada",true,false,true,false),
     Reproved("Reprovado",false,false,false,true),
     Delivered("Entregue",false,false,false,true),
     PartiallyDelivered("Entregue parcialmente",false,false,false,true),
     Conferred("Conferida",true,false,true,false),
-    ConferredReproved("Conferencia reprovada",true,false,true,false),
     Finished("Finalizada",true,true,true,false),
-    PartiallyFinished("Finalizado parcialmente",true,false,true,false),
+    PartiallyFinished("Finalizada parcialmente",true,true,true,false),
     CancellationRequest("Pedido de cancelamento",true,false,false,false),
-    Canceled("Cancelada",true,false,false,false);
+    Canceled("Cancelada",true,true,true,false);
 
     private String description;
     private Boolean hasOnSolicitation;
@@ -85,7 +84,7 @@ public enum StatusEnum {
         this.hasOnProduct = hasOnProduct;
     }
 
-    /** Status para algumas pesquisas realizadas nas listagens  **/
+    /** Status agrupados devido a utilização  **/
     public static List<StatusEnum> getStatusSolicitation(){
         List<StatusEnum> statusEnumList = new ArrayList<>();
         for (StatusEnum statusEnum : StatusEnum.values()) {
@@ -116,4 +115,13 @@ public enum StatusEnum {
         return statusEnumList;
     }
 
+    /** Search for class DAO  **/
+
+    public static List<StatusEnum> getStatusForSearchPurchaseOrderBySupplier() {
+        List<StatusEnum> statusEnums = new ArrayList<>();
+        statusEnums.add(PurchaseMade);
+        statusEnums.add(Conferred);
+        statusEnums.add(PartiallyFinished);
+        return statusEnums;
+    }
 }

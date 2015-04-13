@@ -29,18 +29,24 @@ public class PurchaseOrder {
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status;
 
-    @ManyToOne
-    @JoinColumn(name = "approval_id", referencedColumnName = "id", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "approval_id", referencedColumnName = "id")
     private Approval approval;
 
-    @OneToOne(mappedBy = "purchaseOrder")
+    @OneToOne
+    @JoinColumn(name = "budget_id", referencedColumnName = "id")
+    private Budget budget;
+
+    @OneToOne
+    @JoinColumn(name = "delivery_information_id", referencedColumnName = "id" )
     private DeliveryInformation deliveryInformation;
 
     @OneToOne
     @JoinColumn(name = "payment_information_id", referencedColumnName = "id")
     private PaymentInformation paymentInformation;
 
-    @OneToOne(mappedBy = "purchaseOrder")
+    @OneToOne
+    @JoinColumn(name = "reception_id" , referencedColumnName = "id")
     private Reception reception;
 
     @OneToMany(mappedBy = "purchaseOrder")
@@ -49,83 +55,5 @@ public class PurchaseOrder {
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderRequest> orderRequests;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Boolean getAlreadyPurchased() {
-        return alreadyPurchased;
-    }
-
-    public void setAlreadyPurchased(Boolean alreadyPurchased) {
-        this.alreadyPurchased = alreadyPurchased;
-    }
-
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
-
-    public Approval getApproval() {
-        return approval;
-    }
-
-    public void setApproval(Approval approval) {
-        this.approval = approval;
-    }
-
-    public DeliveryInformation getDeliveryInformation() {
-        return deliveryInformation;
-    }
-
-    public void setDeliveryInformation(DeliveryInformation deliveryInformation) {
-        this.deliveryInformation = deliveryInformation;
-    }
-
-    public PaymentInformation getPaymentInformation() {
-        return paymentInformation;
-    }
-
-    public void setPaymentInformation(PaymentInformation paymentInformation) {
-        this.paymentInformation = paymentInformation;
-    }
-
-    public Reception getReception() {
-        return reception;
-    }
-
-    public void setReception(Reception reception) {
-        this.reception = reception;
-    }
-
-    public List<AdditionalPurchaseOrder> getAdditionalPurchaseOrders() {
-        return additionalPurchaseOrders;
-    }
-
-    public void setAdditionalPurchaseOrders(List<AdditionalPurchaseOrder> additionalPurchaseOrders) {
-        this.additionalPurchaseOrders = additionalPurchaseOrders;
-    }
-
-    public List<OrderRequest> getOrderRequests() {
-        return orderRequests;
-    }
-
-    public void setOrderRequests(List<OrderRequest> orderRequests) {
-        this.orderRequests = orderRequests;
-    }
 }

@@ -48,10 +48,6 @@ public class Quotation {
     @Temporal(TemporalType.TIMESTAMP)
     private Date finalDate;
 
-    @Length(min = 1, max = 1000)
-    @Column(name = "observation")
-    private String observation;
-
     @Column(name = "exclusive_supplier")
     private Boolean exclusiveSupplier;
 
