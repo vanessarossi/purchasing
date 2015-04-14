@@ -1,5 +1,6 @@
 package com.purchasing.service.impl;
 
+import com.purchasing.entity.Budget;
 import com.purchasing.entity.PurchaseOrder;
 import com.purchasing.entity.Supplier;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface PurchaseOrderService {
 
-    public PurchaseOrder singleSave(PurchaseOrder purchaseOrder);
+    public PurchaseOrder singleSave(Budget budget);
     public List<PurchaseOrder> variousSave(PurchaseOrder purchaseOrder);
 
     public List<PurchaseOrder> findBySupplierOrderDate(Supplier supplier);

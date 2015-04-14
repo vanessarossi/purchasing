@@ -3,7 +3,6 @@ package com.purchasing.entity;
 import com.purchasing.enumerator.StatusEnum;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "purchase_order", schema = "", catalog = "purchasing")
 public class PurchaseOrder {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,13 +24,12 @@ public class PurchaseOrder {
     @Column(name = "already_purchased")
     private Boolean alreadyPurchased;
 
-    @NotNull
     @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status;
 
     @OneToOne
-    @JoinColumn(name = "approval_id", referencedColumnName = "id")
+    @JoinColumn(name = "approval_id", referencedColumnName = "id", nullable = true)
     private Approval approval;
 
     @OneToOne
@@ -38,15 +37,15 @@ public class PurchaseOrder {
     private Budget budget;
 
     @OneToOne
-    @JoinColumn(name = "delivery_information_id", referencedColumnName = "id" )
+    @JoinColumn(name = "delivery_information_id", referencedColumnName = "id", nullable = true)
     private DeliveryInformation deliveryInformation;
 
     @OneToOne
-    @JoinColumn(name = "payment_information_id", referencedColumnName = "id")
+    @JoinColumn(name = "payment_information_id", referencedColumnName = "id", nullable = true)
     private PaymentInformation paymentInformation;
 
     @OneToOne
-    @JoinColumn(name = "reception_id" , referencedColumnName = "id")
+    @JoinColumn(name = "reception_id" , referencedColumnName = "id", nullable = true)
     private Reception reception;
 
     @OneToMany(mappedBy = "purchaseOrder")

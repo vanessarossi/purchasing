@@ -6,9 +6,7 @@ import com.purchasing.entity.Supplier;
 import com.purchasing.enumerator.StatusEnum;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.hibernate.sql.JoinType;
 
 import javax.inject.Inject;
@@ -42,6 +40,13 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         criteria.setFirstResult(iDisplayStart);
         criteria.setMaxResults(iDisplayLength);
+        Disjunction disjunction = Restrictions.disjunction();
+            criteria.createAlias("budget", "budget");
+            criteria.createAlias("budget.supplier", "supplier");
+            criteria.createAlias("supplier.person", "person");
+            disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.desc("id"));
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;
@@ -60,7 +65,14 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.setMaxResults(iDisplayLength);
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
+            criteria.addOrder(Order.desc("id"));
         Disjunction disjunction = Restrictions.disjunction();
+            criteria.createAlias("budget", "budget");
+            criteria.createAlias("budget.supplier", "supplier");
+            criteria.createAlias("supplier.person", "person");
+            disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.desc("id"));
             criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
@@ -69,9 +81,15 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     public Integer totalPaginationMissingAnalyst(String sSearch) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
-        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
+        Disjunction disjunction = Restrictions.disjunction();
+            criteria.createAlias("budget", "budget");
+            criteria.createAlias("budget.supplier", "supplier");
+            criteria.createAlias("supplier.person", "person");
+            disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.desc("id"));
             criteria.add(disjunction);
             criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());
@@ -82,12 +100,20 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
             criteria.setFirstResult(iDisplayStart);
             criteria.setMaxResults(iDisplayLength);
-        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateSecondApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", new BigDecimal(300.00)));
+
+            Disjunction disjunction = Restrictions.disjunction();
+            criteria.createAlias("budget", "budget");
+            criteria.createAlias("budget.supplier", "supplier");
+            criteria.createAlias("supplier.person", "person");
+            disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.desc("id"));
+
             criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
@@ -96,12 +122,20 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     public Integer totalPaginationMissingManager(String sSearch) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
-        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateSecondApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", new BigDecimal(300.00)));
+
+            Disjunction disjunction = Restrictions.disjunction();
+            criteria.createAlias("budget", "budget");
+            criteria.createAlias("budget.supplier", "supplier");
+            criteria.createAlias("supplier.person", "person");
+            disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.desc("id"));
+
             criteria.add(disjunction);
             criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());
@@ -112,12 +146,20 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         criteria.setFirstResult(iDisplayStart);
         criteria.setMaxResults(iDisplayLength);
-        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateThirdApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateSecondApproval"));
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", new BigDecimal(1500.00)));
+
+            Disjunction disjunction = Restrictions.disjunction();
+            criteria.createAlias("budget", "budget");
+            criteria.createAlias("budget.supplier", "supplier");
+            criteria.createAlias("supplier.person", "person");
+            disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.desc("id"));
+
         criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
@@ -126,12 +168,20 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     public Integer totalPaginationMissingDirector(String sSearch) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
-        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateThirdApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateSecondApproval"));
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", new BigDecimal(1500.00)));
+
+        Disjunction disjunction = Restrictions.disjunction();
+        criteria.createAlias("budget", "budget");
+        criteria.createAlias("budget.supplier", "supplier");
+        criteria.createAlias("supplier.person", "person");
+        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+        criteria.add(disjunction);
+        criteria.addOrder(Order.desc("id"));
+
         criteria.add(disjunction);
         criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());
@@ -142,12 +192,21 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         criteria.setFirstResult(iDisplayStart);
         criteria.setMaxResults(iDisplayLength);
-        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateFourthApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateThirdApproval"));
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", new BigDecimal(9999.99)));
+
+        Disjunction disjunction = Restrictions.disjunction();
+        criteria.createAlias("budget", "budget");
+        criteria.createAlias("budget.supplier", "supplier");
+        criteria.createAlias("supplier.person", "person");
+        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+        criteria.add(disjunction);
+        criteria.addOrder(Order.desc("id"));
+
+
         criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
@@ -156,12 +215,22 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     public Integer totalPaginationMissingDirectorship(String sSearch) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
-        Disjunction disjunction = Restrictions.disjunction();
+
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateFourthApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateThirdApproval"));
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", new BigDecimal(9999.99)));
+
+        Disjunction disjunction = Restrictions.disjunction();
+        criteria.createAlias("budget", "budget");
+        criteria.createAlias("budget.supplier", "supplier");
+        criteria.createAlias("supplier.person", "person");
+        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+        criteria.add(disjunction);
+        criteria.addOrder(Order.desc("id"));
+
+
         criteria.add(disjunction);
         criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());

@@ -19,5 +19,5 @@
 <html:notification/>
 <html:jsAssets/>
 <html:tableJsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/purchase-order.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-purchase-order.js"></script>
 </html>

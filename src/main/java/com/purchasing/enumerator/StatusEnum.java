@@ -26,7 +26,7 @@ public enum StatusEnum {
     PartiallyDelivered("Entregue parcialmente",false,false,false,true),
     Conferred("Conferida",true,false,true,false),
     Finished("Finalizada",true,true,true,false),
-    PartiallyFinished("Finalizada parcialmente",true,true,true,false),
+    PartiallyFinished("Finalizada parcialmente",true,false,true,false),
     CancellationRequest("Pedido de cancelamento",true,false,false,false),
     Canceled("Cancelada",true,true,true,false);
 
