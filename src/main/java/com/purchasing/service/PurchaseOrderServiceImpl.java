@@ -27,15 +27,23 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Inject private BudgetQuotationDAO budgetQuotationDAO;
     @Inject private SolicitationDAO solicitationDAO;
     @Inject private SituationDAO situationDAO;
+    @Inject private PaymentInformationDAO paymentInformationDAO;
 
     @Override
     public PurchaseOrder singleSave(Budget budget) {
         budget = budgetDAO.findById(Budget.class, budget.getId());
 
+        PaymentInformation paymentInformation = new PaymentInformation();
+          paymentInformation.setMeanPayment(budget.getPaymentInformationBudgets().get(0).getPaymentInformation().getMeanPayment());
+          paymentInformation.setFormPayment(budget.getPaymentInformationBudgets().get(0).getPaymentInformation().getFormPayment());
+          paymentInformation.setTotalPrice(budget.getPaymentInformationBudgets().get(0).getPaymentInformation().getTotalPrice());
+
+        paymentInformation = paymentInformationDAO.save(paymentInformation);
+
         PurchaseOrder purchaseOrder = new PurchaseOrder();
             purchaseOrder.setReception(null);
             purchaseOrder.setDeliveryInformation(null);
-            purchaseOrder.setPaymentInformation(null);
+            purchaseOrder.setPaymentInformation(paymentInformation);
             purchaseOrder.setApproval(null);
             purchaseOrder.setBudget(budget);
 
@@ -119,7 +127,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     public List<Object[]> findPaginationMissing(String sSearch, int iDisplayStart, int iDisplayLength) {
         String search = sSearch == null ? "" : sSearch;
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
-        switch (getUserLogged().getId().toString()){
+        switch (getUserLogged().getRole().getId().toString()){
             case "2":
                 purchaseOrders = purchaseOrderDAO.paginationMissingDirectorship(search, iDisplayStart, iDisplayLength);
                 break;
@@ -187,4 +195,5 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         User user = (User) httpSession.getAttribute("userLogged");
         return user;
     }
+
 }

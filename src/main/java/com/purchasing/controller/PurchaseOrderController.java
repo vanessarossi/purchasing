@@ -94,11 +94,11 @@ public class PurchaseOrderController {
 
     @Get("/paginar/pendencia")
     public void paginationMissing(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength) {
-        List<Object[]> purchaseOrderObjects = purchaseOrderService.findPagination(sSearch, iDisplayStart, iDisplayLength);
+        List<Object[]> purchaseOrderObjects = purchaseOrderService.findPaginationMissing(sSearch, iDisplayStart, iDisplayLength);
         DataTableModel dataTableModel = new DataTableModel();
         dataTableModel.setsEcho(sEcho);
-        dataTableModel.setiTotalRecords(purchaseOrderService.totalPagination(sSearch));
-        dataTableModel.setiTotalDisplayRecords(purchaseOrderService.totalPagination(sSearch));
+        dataTableModel.setiTotalRecords(purchaseOrderService.totalPaginationMissing(sSearch));
+        dataTableModel.setiTotalDisplayRecords(purchaseOrderService.totalPaginationMissing(sSearch));
         dataTableModel.setAaData(purchaseOrderObjects.toArray());
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }

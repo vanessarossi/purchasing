@@ -16,8 +16,7 @@
       <thead>
       <tr>
         <th style="width: 5%"><fmt:message key="table.code"/></th>
-        <th style="width: 50%"><fmt:message key="table.supplier"/></th>
-        <th style="width: 15%"><fmt:message key="table.status"/></th>
+        <th style="width: 80%"><fmt:message key="table.supplier"/></th>
         <th style="width: 2%"><fmt:message key="table.##"/></th>
         <th style="width: 2%"><fmt:message key="table.##"/></th>
       </tr>
