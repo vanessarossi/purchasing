@@ -51,6 +51,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
             orderRequestDAO.save(orderRequest);
 
+            budgetQuotation.setChosenBudget(true);
             budgetQuotationDAO.save(budgetQuotation);
 
             Situation situation = new Situation();

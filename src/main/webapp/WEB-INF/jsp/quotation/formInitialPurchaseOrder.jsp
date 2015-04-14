@@ -128,7 +128,9 @@
                         <div class="panel-footer">
                             <div class="row">
                                 <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
-                                    <a onclick="validateSingleBudgetChoose(${i.index},${fn:length(budgets)},'<c:url value="/ordemCompra/salvar/unico/${budget.budget.id}"></c:url>')" class="btn btn-primary btn-sm" > <fmt:message key="button.generatePurchaseOrder"/> </a>
+                                    <c:if test="${quotation.status eq 'Open'}">
+                                        <a onclick="validateSingleBudgetChoose(${i.index},${fn:length(budgets)},'<c:url value="/ordemCompra/salvar/unico/${budget.budget.id}"></c:url>')" class="btn btn-primary btn-sm" > <fmt:message key="button.generatePurchaseOrder"/> </a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -194,7 +196,9 @@
                         <div class="panel-footer">
                             <div class="row">
                                 <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
-                                    <a onclick="validateSingleBudgetChoose(${i.index},${fn:length(budgets)},'<c:url value="/ordemCompra/salvar/unico/${budget.budget.id}"></c:url>')" class="btn btn-primary btn-sm" id="send" > <fmt:message key="button.generatePurchaseOrder"/> </a>
+                                     <c:if test="${quotation.status eq 'Open'}">
+                                        <a onclick="validateSingleBudgetChoose(${i.index},${fn:length(budgets)},'<c:url value="/ordemCompra/salvar/unico/${budget.budget.id}"></c:url>')" class="btn btn-primary btn-sm" id="send" > <fmt:message key="button.generatePurchaseOrder"/> </a>
+                                     </c:if>
                                 </div>
                             </div>
                         </div>
@@ -204,7 +208,9 @@
             <input type="hidden" id="totalBudget" value="${fn:length(budgets)}">
             <div class="row">
                 <div class="col-md-offset-10 col-sm-offset-10">
-                    <a onclick="validateTotalBudgetChoose(${fn:length(budgets)})" class="btn btn-primary"><fmt:message key="button.generatePurchaseOrders"/></a>
+                    <c:if test="${quotation.status eq 'Open'}">
+                        <a onclick="validateTotalBudgetChoose(${fn:length(budgets)})" class="btn btn-primary"><fmt:message key="button.generatePurchaseOrders"/></a>
+                    </c:if>
                 </div>
             </div>
             <div class="row" id="divJustification">
