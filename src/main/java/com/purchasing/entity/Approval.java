@@ -16,8 +16,10 @@ public class Approval {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "first_approval")
     private Boolean firstApproval;
 
+    @Column(name = "date_first_approval")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateFirstApproval;
 
@@ -25,8 +27,10 @@ public class Approval {
     @Column(name = "user_first_approval")
     private Long userFirstApproval;
 
+    @Column(name = "second_approval")
     private Boolean secondApproval;
 
+    @Column(name = "date_second_approval")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateSecondApproval;
 
@@ -34,8 +38,10 @@ public class Approval {
     @Column(name = "user_second_approval")
     private Long userSecondApproval;
 
+    @Column(name = "third_approval")
     private Boolean thirdApproval;
 
+    @Column(name = "date_third_approval")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateThirdApproval;
 
@@ -43,16 +49,18 @@ public class Approval {
     @Column(name = "user_third_approval")
     private Long userThirdApproval;
 
+    @Column(name = "fourth_approval")
     private Boolean fourthApproval;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_fourth approval")
+    @Column(name = "date_fourth_approval")
     private Date dateFourthApproval;
 
     @Length(min = 1, max = 20)
     @Column(name = "user_fourth_approval")
     private Long userFourthApproval;
 
+    @Column(name = "justification_disapproval")
     private String justificationDisapproval;
 
 

@@ -56,6 +56,4 @@ public class Reception {
     @OneToMany(mappedBy = "reception")
     private List<RequestDelivered> requestDelivereds;
 
-    @OneToOne
-    private PurchaseOrder purchaseOrder;
 }

@@ -46,12 +46,12 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.purchaseOrder"/> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><fmt:message key="submenu.list"/></a></li>
-                <li><a href="#"><fmt:message key="submenu.missingList"/></a></li>
-                <li><a href="#"><fmt:message key="submenu.reception"/></a></li>
+                <li><a href="<c:url value="/ordemCompra/listagem" ></c:url>"><fmt:message key="submenu.list"/></a></li>
+                <li><a href="<c:url value="/ordemCompra/listagem/pendencia" ></c:url>"><fmt:message key="submenu.missingList"/></a></li>
+                <li><a href="<c:url value="/ordemCompra/formulario/recepcao" ></c:url>"><fmt:message key="submenu.reception"/></a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header"><fmt:message key="submenu.headerSearch"/></li>
-                <li><a href="#"><fmt:message key="submenu.searchBySupplier"/></a></li>
+                <li><a href="<c:url value="/ordemCompra/pesquisar" ></c:url>"><fmt:message key="submenu.searchBySupplier"/></a></li>
             </ul>
         </li>
         <li class="dropdown">

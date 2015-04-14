@@ -1,7 +1,6 @@
 package com.purchasing.dao;
 
 import com.purchasing.dao.base.DAOImpl;
-import com.purchasing.entity.Contract;
 import com.purchasing.entity.PurchaseOrder;
 import com.purchasing.entity.Supplier;
 import com.purchasing.enumerator.StatusEnum;
@@ -43,17 +42,13 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         criteria.setFirstResult(iDisplayStart);
         criteria.setMaxResults(iDisplayLength);
-        Disjunction disjunction = Restrictions.disjunction();
-        criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;
     }
     public Integer totalPagination(String sSearch) {
         Integer total = 0;
-        Criteria criteria = getSession().createCriteria(Contract.class);
-        Disjunction disjunction = Restrictions.disjunction();
-        criteria.add(disjunction);
+        Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());
         return total;
@@ -73,7 +68,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     }
     public Integer totalPaginationMissingAnalyst(String sSearch) {
         Integer total = 0;
-        Criteria criteria = getSession().createCriteria(Contract.class);
+        Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
@@ -100,7 +95,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     }
     public Integer totalPaginationMissingManager(String sSearch) {
         Integer total = 0;
-        Criteria criteria = getSession().createCriteria(Contract.class);
+        Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
@@ -130,7 +125,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     }
     public Integer totalPaginationMissingDirector(String sSearch) {
         Integer total = 0;
-        Criteria criteria = getSession().createCriteria(Contract.class);
+        Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
@@ -160,7 +155,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     }
     public Integer totalPaginationMissingDirectorship(String sSearch) {
         Integer total = 0;
-        Criteria criteria = getSession().createCriteria(Contract.class);
+        Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);

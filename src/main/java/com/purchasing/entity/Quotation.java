@@ -4,21 +4,8 @@ import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.enumerator.TypeEnum;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -100,14 +87,6 @@ public class Quotation {
 
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
-    }
-
-    public String getObservation() {
-        return observation;
-    }
-
-    public void setObservation(String observation) {
-        this.observation = observation;
     }
 
     public Boolean getExclusiveSupplier() {

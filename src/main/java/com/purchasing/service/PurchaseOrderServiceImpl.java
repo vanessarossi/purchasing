@@ -68,9 +68,23 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
-    public List<Object[]> paginationMissingAnalyst(String sSearch, int iDisplayStart, int iDisplayLength) {
+    public List<Object[]> findPaginationMissing(String sSearch, int iDisplayStart, int iDisplayLength) {
         String search = sSearch == null ? "" : sSearch;
-        List<PurchaseOrder> purchaseOrders = purchaseOrderDAO.paginationMissingAnalyst(search, iDisplayStart, iDisplayLength);
+        List<PurchaseOrder> purchaseOrders = new ArrayList<>();
+        switch (getUserLogged().getId().toString()){
+            case "2":
+                purchaseOrders = purchaseOrderDAO.paginationMissingDirectorship(search, iDisplayStart, iDisplayLength);
+                break;
+            case "3":
+                purchaseOrders = purchaseOrderDAO.paginationMissingDirector(search, iDisplayStart, iDisplayLength);
+                break;
+            case "4":
+                purchaseOrders = purchaseOrderDAO.paginationMissingManager(search,iDisplayStart,iDisplayLength);
+                break;
+            case  "5":
+                purchaseOrders = purchaseOrderDAO.paginationMissingAnalyst(search,iDisplayStart,iDisplayLength);
+                break;
+        }
         List<Object[]> purchaseOrderList = new ArrayList<>();
 
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
@@ -91,96 +105,25 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
-    public Integer totalPaginationMissingAnalyst(String sSearch) {
+    public Integer totalPaginationMissing(String sSearch) {
+        Integer total = 0;
         String search = sSearch == null ? "" : sSearch;
-        return purchaseOrderDAO.totalPaginationMissingAnalyst(search);
-    }
-
-    @Override
-    public List<Object[]> paginationMissingManager(String sSearch, int iDisplayStart, int iDisplayLength) {
-        String search = sSearch == null ? "" : sSearch;
-        List<PurchaseOrder> purchaseOrders = purchaseOrderDAO.paginationMissingManager(search, iDisplayStart, iDisplayLength);
-        List<Object[]> purchaseOrderList = new ArrayList<>();
-
-        for (PurchaseOrder purchaseOrder : purchaseOrders) {
-            String colCode = purchaseOrder.getId().toString();
-            String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
-            String colButtonEdit = "";
-            String colButtonView = "";
-
-            String[] row = {
-                    colCode,
-                    colSupplier,
-                    colButtonEdit,
-                    colButtonView,
-            };
-            purchaseOrderList.add(row);
+        switch (getUserLogged().getId().toString()) {
+            case "2":
+                total = purchaseOrderDAO.totalPaginationMissingDirectorship(search);
+                break;
+            case "3":
+                total = purchaseOrderDAO.totalPaginationMissingDirector(search);
+                break;
+            case "4":
+                total = purchaseOrderDAO.totalPaginationMissingManager(search);
+                break;
+            case "5":
+                total = purchaseOrderDAO.totalPaginationMissingAnalyst(search);
+                break;
         }
-        return purchaseOrderList;
-    }
 
-    @Override
-    public Integer totalPaginationMissingManager(String sSearch) {
-        String search = sSearch == null ? "" : sSearch;
-        return purchaseOrderDAO.totalPaginationMissingManager(search);
-    }
-
-    @Override
-    public List<Object[]> paginationMissingDirector(String sSearch, int iDisplayStart, int iDisplayLength) {
-        String search = sSearch == null ? "" : sSearch;
-        List<PurchaseOrder> purchaseOrders = purchaseOrderDAO.paginationMissingDirector(search, iDisplayStart, iDisplayLength);
-        List<Object[]> purchaseOrderList = new ArrayList<>();
-
-        for (PurchaseOrder purchaseOrder : purchaseOrders) {
-            String colCode = purchaseOrder.getId().toString();
-            String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
-            String colButtonEdit = "";
-            String colButtonView = "";
-
-            String[] row = {
-                    colCode,
-                    colSupplier,
-                    colButtonEdit,
-                    colButtonView,
-            };
-            purchaseOrderList.add(row);
-        }
-        return purchaseOrderList;
-    }
-
-    @Override
-    public Integer totalPaginationMissingDirector(String sSearch) {
-        String search = sSearch == null ? "" : sSearch;
-        return purchaseOrderDAO.totalPaginationMissingDirector(search);
-    }
-
-    @Override
-    public List<Object[]> paginationMissingDirectorship(String sSearch, int iDisplayStart, int iDisplayLength) {
-        String search = sSearch == null ? "" : sSearch;
-        List<PurchaseOrder> purchaseOrders = purchaseOrderDAO.paginationMissingDirectorship(search, iDisplayStart, iDisplayLength);
-        List<Object[]> purchaseOrderList = new ArrayList<>();
-
-        for (PurchaseOrder purchaseOrder : purchaseOrders) {
-            String colCode = purchaseOrder.getId().toString();
-            String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
-            String colButtonEdit = "";
-            String colButtonView = "";
-
-            String[] row = {
-                    colCode,
-                    colSupplier,
-                    colButtonEdit,
-                    colButtonView,
-            };
-            purchaseOrderList.add(row);
-        }
-        return purchaseOrderList;
-    }
-
-    @Override
-    public Integer totalPaginationMissingDirectorship(String sSearch) {
-        String search = sSearch == null ? "" : sSearch;
-        return purchaseOrderDAO.totalPaginationMissingDirectorship(search);
+        return total;
     }
 
     @Override
@@ -191,7 +134,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             }
         return purchaseOrder;
     }
-
 
     public User getUserLogged() {
         User user = (User) httpSession.getAttribute("userLogged");

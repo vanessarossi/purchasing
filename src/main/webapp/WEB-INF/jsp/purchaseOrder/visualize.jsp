@@ -1,16 +1,23 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Vanessa
-  Date: 4/8/15
-  Time: 11:12 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <title></title>
+  <title><fmt:message key="title.page.purchaseOrder"/> - <fmt:message key="title.purchasing"/></title>
+  <html:head/>
+  <html:tableAssets/>
 </head>
 <body>
+<html:template>
+  <div class="container-fluid">
+    <div class="page-header">
+      <h3><fmt:message key="title.purchasing.order"/></h3>
+    </div>
 
+
+  </div>
+</html:template>
 </body>
+<html:notification/>
+<html:jsAssets/>
+<html:tableJsAssets/>
+<script src="${pageContext.request.contextPath}/asset/js/custom/purchase-order.js"></script>
 </html>
