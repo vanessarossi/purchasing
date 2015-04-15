@@ -49,7 +49,8 @@ function calculateTotalPriceChecked(totalIndexBudget,totalItemBudget){
 	for (var i = 0; i <= (totalIndexBudget - 1); i++) {
 		for (var j = 0; j <= (totalItemBudget - 1); j++) {
 			if ($('.'+i+j).val() === 'true') {
-				totalPrice = parseFloat(totalPrice) + parseFloat($('#total'+i+j).val());
+				valueTotal = $('#total'+i+j).val().replace(',', '.');
+				totalPrice = parseFloat(totalPrice) + parseFloat(valueTotal);
 			}
 		}
 		$('#totalPriceChoise'+i).val(totalPrice.toFixed(2).replace(".", ","));

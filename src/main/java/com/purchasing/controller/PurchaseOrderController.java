@@ -65,13 +65,15 @@ public class PurchaseOrderController {
      /** Actions **/
     @Get("/salvar/unico/{budget.id}")
     public void singleSave(Budget budget) {
-         PurchaseOrder purchaseOrder =  purchaseOrderService.singleSave(budget);
+        PurchaseOrder purchaseOrder =  purchaseOrderService.singleSave(budget);
         result.include("purchaseOrder",purchaseOrder);
         result.redirectTo(this).visualize();
     }
 
     @Post("/salvar")
     public void variousSave(PurchaseOrder purchaseOrder){
+        List<PurchaseOrder> purchaseOrders = purchaseOrderService.variousSave(purchaseOrder);
+        result.include("purchaseOrders",purchaseOrders);
         result.redirectTo(this).visualize();
     }
 

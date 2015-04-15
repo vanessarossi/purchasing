@@ -107,7 +107,6 @@
                                 <tfoot>
                                     <tr>
                                         <th></th>
-
                                         <th>
                                             <label class="control-label"><fmt:message key="label.totalPrice"/></label>
                                         </th>
@@ -161,12 +160,12 @@
                             </div>
                             <table id="budget${i.index}" class="table table-striped table-hover table-condensed">
                                 <thead>
-                                <tr>
-                                    <th style="width: 50%"><fmt:message key="table.description"/></th>
-                                    <th style="width: 10%"><fmt:message key="table.unitary.price"/></th>
-                                    <th style="width: 10%"><fmt:message key="table.total.price"/></th>
-                                    <th style="width: 1%"><fmt:message key="table.##"/></th>
-                                </tr>
+                                    <tr>
+                                        <th style="width: 50%"><fmt:message key="table.description"/></th>
+                                        <th style="width: 10%"><fmt:message key="table.unitary.price"/></th>
+                                        <th style="width: 10%"><fmt:message key="table.total.price"/></th>
+                                        <th style="width: 1%"><fmt:message key="table.##"/></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${budget.budgetsQuotationService}" var="budgetsQuotationService" varStatus="j" >
@@ -183,15 +182,21 @@
                                 </c:forEach>
                                 <input type="hidden" id="totalItem" value="${fn:length(budget.budgetsQuotationService)}"/>
                                 </tbody>
-                            </table>
-                            <div class="row">
-                                <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
-                                    <div class="form-group">
+                                <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>
                                         <label class="control-label"><fmt:message key="label.totalPrice"/></label>
-                                        <input type="text" class="form-control" readonly="true" value=""/>
-                                    </div>
-                                </div>
-                            </div>
+                                        <input type="text" class="form-control" readonly="true" id="totalPrice${i.index}" value="${budget.budget.paymentInformationBudgets[0].paymentInformation.totalPrice}"/>
+                                    </th>
+                                    <th>
+                                        <label class="control-label"><fmt:message key="label.totalPriceChoise"/></label>
+                                        <input type="text" class="form-control" readonly="true" id="totalPriceChoise${i.index}" value=""/>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                </tfoot>
+                            </table>
                         </div>
                         <div class="panel-footer">
                             <div class="row">

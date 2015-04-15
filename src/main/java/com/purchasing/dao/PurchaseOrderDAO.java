@@ -59,7 +59,6 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         return total;
     }
 
-
     /** analista **/
     public List<PurchaseOrder> paginationMissingAnalyst(String sSearch, int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
@@ -83,9 +82,9 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     public Integer totalPaginationMissingAnalyst(String sSearch) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
-        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("budget", "budget");
             criteria.createAlias("budget.supplier", "supplier");
             criteria.createAlias("supplier.person", "person");
@@ -98,141 +97,129 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         return total;
     }
 
-    public List<PurchaseOrder> paginationMissingManager(String sSearch, BigDecimal minimumValue,  int iDisplayStart, int iDisplayLength) {
+    /**  gerente **/
+    public List<PurchaseOrder> paginationMissingManager(String sSearch, BigDecimal maximumValue,  int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
             criteria.setFirstResult(iDisplayStart);
             criteria.setMaxResults(iDisplayLength);
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
-            criteria.add(Restrictions.isNull("approval.dateSecondApproval"));
-            criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
-            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
-
-            Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("budget", "budget");
             criteria.createAlias("budget.supplier", "supplier");
             criteria.createAlias("supplier.person", "person");
+            criteria.add(Restrictions.isNull("approval.dateSecondApproval"));
+            criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
+            criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
-
             criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;
     }
-    public Integer totalPaginationMissingManager(String sSearch, BigDecimal minimumValue) {
+    public Integer totalPaginationMissingManager(String sSearch, BigDecimal maximumValue) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
-            criteria.add(Restrictions.isNull("approval.dateSecondApproval"));
-            criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
-            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
-
-            Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("budget", "budget");
             criteria.createAlias("budget.supplier", "supplier");
             criteria.createAlias("supplier.person", "person");
+            criteria.add(Restrictions.isNull("approval.dateSecondApproval"));
+            criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
+            criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
-
             criteria.add(disjunction);
             criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());
         return total;
     }
 
-    public List<PurchaseOrder> paginationMissingDirector(String sSearch,BigDecimal minimumValue , int iDisplayStart, int iDisplayLength) {
+    /** diretor  **/
+    public List<PurchaseOrder> paginationMissingDirector(String sSearch,BigDecimal maximumValue , int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
         criteria.setFirstResult(iDisplayStart);
         criteria.setMaxResults(iDisplayLength);
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
-            criteria.add(Restrictions.isNull("approval.dateThirdApproval"));
-            criteria.add(Restrictions.isNotNull("approval.dateSecondApproval"));
-            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
-
-            Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("budget", "budget");
             criteria.createAlias("budget.supplier", "supplier");
             criteria.createAlias("supplier.person", "person");
+            criteria.add(Restrictions.isNull("approval.dateThirdApproval"));
+            criteria.add(Restrictions.isNotNull("approval.dateSecondApproval"));
+            criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
-
         criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;
     }
-    public Integer totalPaginationMissingDirector(String sSearch, BigDecimal minimumValue) {
+    public Integer totalPaginationMissingDirector(String sSearch, BigDecimal maximumValue) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
+            criteria.createAlias("budget", "budget");
+            criteria.createAlias("budget.supplier", "supplier");
+            criteria.createAlias("supplier.person", "person");
             criteria.add(Restrictions.isNull("approval.dateThirdApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateSecondApproval"));
-            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
-
-        Disjunction disjunction = Restrictions.disjunction();
-        criteria.createAlias("budget", "budget");
-        criteria.createAlias("budget.supplier", "supplier");
-        criteria.createAlias("supplier.person", "person");
-        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
-        criteria.add(disjunction);
-        criteria.addOrder(Order.desc("id"));
-
+            criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
+            disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.desc("id"));
         criteria.add(disjunction);
         criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());
         return total;
     }
 
-    public List<PurchaseOrder> paginationMissingDirectorship(String sSearch, int iDisplayStart, int iDisplayLength) {
+    /** diretoria **/
+    public List<PurchaseOrder> paginationMissingDirectorship(String sSearch,BigDecimal maximumValue, int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
         criteria.setFirstResult(iDisplayStart);
         criteria.setMaxResults(iDisplayLength);
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
+            criteria.createAlias("budget", "budget");
+            criteria.createAlias("budget.supplier", "supplier");
+            criteria.createAlias("supplier.person", "person");
             criteria.add(Restrictions.isNull("approval.dateFourthApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateThirdApproval"));
-            criteria.add(Restrictions.ge("paymentInformation.totalPrice", new BigDecimal(9999.99)));
-
-        Disjunction disjunction = Restrictions.disjunction();
-        criteria.createAlias("budget", "budget");
-        criteria.createAlias("budget.supplier", "supplier");
-        criteria.createAlias("supplier.person", "person");
-        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
-        criteria.add(disjunction);
-        criteria.addOrder(Order.desc("id"));
-
-
+            criteria.add(Restrictions.ge("paymentInformation.totalPrice", maximumValue));
+            disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.desc("id"));
         criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;
     }
-    public Integer totalPaginationMissingDirectorship(String sSearch) {
+    public Integer totalPaginationMissingDirectorship(String sSearch, BigDecimal maximumValue) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
-
+        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
+            criteria.createAlias("budget", "budget");
+            criteria.createAlias("budget.supplier", "supplier");
+            criteria.createAlias("supplier.person", "person");
             criteria.add(Restrictions.isNull("approval.dateFourthApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateThirdApproval"));
-            criteria.add(Restrictions.ge("paymentInformation.totalPrice", new BigDecimal(9999.99)));
-
-        Disjunction disjunction = Restrictions.disjunction();
-        criteria.createAlias("budget", "budget");
-        criteria.createAlias("budget.supplier", "supplier");
-        criteria.createAlias("supplier.person", "person");
-        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
-        criteria.add(disjunction);
-        criteria.addOrder(Order.desc("id"));
-
-
+            criteria.add(Restrictions.ge("paymentInformation.totalPrice", maximumValue));
+            disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(disjunction);
+            criteria.addOrder(Order.desc("id"));
         criteria.add(disjunction);
         criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());

@@ -80,6 +80,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public List<PurchaseOrder> variousSave(PurchaseOrder purchaseOrder) {
+
+
+
+
         return null;
     }
 
@@ -129,13 +133,13 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         switch (getUserLogged().getRole().getId().toString()){
             case "2":
-                purchaseOrders = purchaseOrderDAO.paginationMissingDirectorship(search, iDisplayStart, iDisplayLength);
+                purchaseOrders = purchaseOrderDAO.paginationMissingDirectorship(search,getUserLogged().getRole().getMinimumValue(),iDisplayStart, iDisplayLength);
                 break;
             case "3":
-                purchaseOrders = purchaseOrderDAO.paginationMissingDirector(search, iDisplayStart, iDisplayLength);
+                purchaseOrders = purchaseOrderDAO.paginationMissingDirector(search,getUserLogged().getRole().getMaximumValue(),iDisplayStart, iDisplayLength);
                 break;
             case "4":
-                purchaseOrders = purchaseOrderDAO.paginationMissingManager(search,iDisplayStart,iDisplayLength);
+                purchaseOrders = purchaseOrderDAO.paginationMissingManager(search,getUserLogged().getRole().getMaximumValue(),iDisplayStart,iDisplayLength);
                 break;
             case  "5":
                 purchaseOrders = purchaseOrderDAO.paginationMissingAnalyst(search,iDisplayStart,iDisplayLength);
@@ -166,13 +170,13 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         String search = sSearch == null ? "" : sSearch;
         switch (getUserLogged().getId().toString()) {
             case "2":
-                total = purchaseOrderDAO.totalPaginationMissingDirectorship(search);
+                total = purchaseOrderDAO.totalPaginationMissingDirectorship(search,getUserLogged().getRole().getMinimumValue());
                 break;
             case "3":
-                total = purchaseOrderDAO.totalPaginationMissingDirector(search);
+                total = purchaseOrderDAO.totalPaginationMissingDirector(search, getUserLogged().getRole().getMinimumValue());
                 break;
             case "4":
-                total = purchaseOrderDAO.totalPaginationMissingManager(search);
+                total = purchaseOrderDAO.totalPaginationMissingManager(search, getUserLogged().getRole().getMinimumValue());
                 break;
             case "5":
                 total = purchaseOrderDAO.totalPaginationMissingAnalyst(search);
