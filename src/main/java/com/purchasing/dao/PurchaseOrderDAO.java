@@ -25,7 +25,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     }
 
     public List<PurchaseOrder> findBySupplierOrderDate(Supplier supplier){
-        Criteria criteria = getSession().createCriteria(Supplier.class);
+        Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
         criteria.createAlias("budget", "budget");
         disjunction.add(Restrictions.eq("budget.supplier", supplier));

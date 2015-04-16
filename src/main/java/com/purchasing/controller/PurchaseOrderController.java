@@ -78,7 +78,6 @@ public class PurchaseOrderController {
         result.redirectTo(this).list();
     }
 
-
     @Get("/visualizar/{purchaseOrder.id}")
     public void view(PurchaseOrder purchaseOrder){
         purchaseOrder = purchaseOrderService.findById(purchaseOrder);
@@ -86,9 +85,11 @@ public class PurchaseOrderController {
         result.redirectTo(this).visualize();
     }
 
+    @Post("/pesquisar/fornecedor")
     public void searchPurchaseOrderBySupplier(Supplier supplier){
         List<PurchaseOrder> purchaseOrders = purchaseOrderService.findBySupplierOrderDate(supplier);
         result.include("purchaseOrders",purchaseOrders);
+        result.redirectTo(this).formSearch();
     }
 
     /**  Listegem  **/
