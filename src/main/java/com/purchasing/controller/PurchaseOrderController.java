@@ -78,10 +78,12 @@ public class PurchaseOrderController {
         result.redirectTo(this).list();
     }
 
-    @Get("/visualizar/{purchaseOrder.id}")
-    public void view(PurchaseOrder purchaseOrder){
+    @Get("/visualizar/{purchaseOrder.id}/{origin}")
+    public void view(PurchaseOrder purchaseOrder, String origin){
         purchaseOrder = purchaseOrderService.findById(purchaseOrder);
+        String approve = (origin.equals("approve")) ? "true" : "false";
         result.include("purchaseOrder",new PurchaseOrderView().generate(purchaseOrder,purchaseOrderService));
+        result.include("approve",approve);
         result.redirectTo(this).visualize();
     }
 

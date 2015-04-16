@@ -116,6 +116,17 @@
         </c:forEach>
       </div>
     </div>
+
+    <c:if test="${approve == 'true'}">
+      <div class="row">
+        <div class="col-sm-offset-11 col-md-offset-11">
+          <div class="form-group">
+            <a href='<c:url value="/ordemCompra/aprovar/${purchaseOrder.purchaseOrder.id}"></c:url>' class="btn btn-success"><fmt:message key="button.approve"/></a>
+          </div>
+        </div>
+      </div>
+    </c:if>
+
   </div>
 </html:template>
 </body>

@@ -121,7 +121,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
             String colStatus = purchaseOrder.getStatus().getDescription();
             String colButtonEdit = "";
-            String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
+            String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/normal><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
 
             String[] row = {
                     colCode,
@@ -164,7 +164,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
             String colCode = purchaseOrder.getId().toString();
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
-            String colButtonView = "";
+            String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/approve><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
 
             String[] row = {
                     colCode,
