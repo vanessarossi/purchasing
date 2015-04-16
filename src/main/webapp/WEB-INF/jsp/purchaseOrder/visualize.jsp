@@ -36,7 +36,6 @@
           <c:if test="${purchaseOrder.purchaseOrder.budget.quotation.type == 'Material'}">
             <table id="orderRequestProductTable" class="table table-striped table-hover table-condensed">
               <thead>
-
                 <tr>
                     <th style="width: 50%"><fmt:message key="table.product"/></th>
                     <th style="width: 10%"><fmt:message key="table.abbreviatedQuantity"/></th>
@@ -78,6 +77,14 @@
               </tbody>
             </table>
           </c:if>
+        <div class="row">
+          <div class="col-sm-2 col-md-2 col-md-offset-10 col-sm-offset-10">
+            <div class="form-group">
+              <label class="control-label"><fmt:message key="label.total.price"/></label>
+              <input type="text" class="form-control" readonly value="${fn:replace(purchaseOrder.purchaseOrder.paymentInformation.totalPrice,"." ,"," )}"/>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="panel panel-default">
@@ -85,15 +92,33 @@
         <h3 class="panel-title"><fmt:message key="title.budgets"/></h3>
       </div>
       <div class="panel-body">
-        <div class="row">
-
-        </div>
+        <c:forEach items="${purchaseOrder.purchaseOrder.budget.quotation.budgets}" var="budget">
+          <div class="row">
+            <div class="col-sm-5 col-md-5">
+              <div class="form-group">
+                  <label class="control-label"><fmt:message key="label.supplier" /></label>
+                  <input type="text" class="form-control" readonly value="${budget.supplier.person.name}" />
+              </div>
+            </div>
+            <div class="col-sm-2 col-md-2">
+              <div class="form-group">
+                <label class="control-label"><fmt:message key="label.date"/></label>
+                <input type="text" class="form-control" readonly value="<fmt:formatDate value="${budget.date}" pattern="dd/MM/YYYY"/>"/>
+              </div>
+            </div>
+            <div class="col-sm-2 col-md-2">
+              <div class="form-group">
+                <label class="control-label"><fmt:message key="label.total.price"/></label>
+                <input type="text" class="form-control" readonly value="${budget.paymentInformationBudgets[0].paymentInformation.totalPrice}"/>
+              </div>
+            </div>
+          </div>
+        </c:forEach>
       </div>
     </div>
   </div>
 </html:template>
 </body>
-<html:notification/>
 <html:jsAssets/>
 <html:tableJsAssets/>
 <c:if test="${purchaseOrder.purchaseOrder.budget.quotation.type == 'Material'}">
@@ -102,5 +127,4 @@
 <c:if test="${purchaseOrder.purchaseOrder.budget.quotation.type == 'Service'}">
   <script src="${pageContext.request.contextPath}/asset/js/custom/view-purchase-order-service.js"></script>
 </c:if>
-
 </html>
