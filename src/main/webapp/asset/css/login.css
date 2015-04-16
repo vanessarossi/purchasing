@@ -479,3 +479,9 @@
 .btn-group.open .btn-success.dropdown-toggle {
     background-color: #499249;
 }
+
+.message-error {
+    color: #FF0000;
+    font-size: 12px;
+    font-weight: bold;
+}

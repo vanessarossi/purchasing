@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="form-group ">
-                <span class="messageNullLogin redText"></span>
+                <span class="messageNullLogin message-error"></span>
             </div>
             <div class="form-actions">
                 <a onclick="submitLogin()" class="submit btn btn-success pull-right">
@@ -35,7 +35,7 @@
             <br>
             <c:if test="${! empty errorSign}">
                 <div class="form-group">
-                    <span class="redText"><fmt:message key="${errorSign}"/></span>
+                    <span class="message-error"><fmt:message key="${errorSign}"/></span>
                 </div>
             </c:if>
         </form>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="form-group ">
-                    <span class="messageNullNewPassword redText"></span>
+                    <span class="messageNullNewPassword message-error"></span>
                 </div>
                 <a onclick="submitNewPassword()" class="submit btn btn-default btn-block">
                     <fmt:message key="button.newPassword"/>
