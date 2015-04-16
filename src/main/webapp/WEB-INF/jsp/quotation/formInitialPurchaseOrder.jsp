@@ -96,9 +96,9 @@
                                         <td>${fn:replace(budgetsQuotationProduct.unityPrice,"." ,"," )}</td>
                                         <td><input type="text" id="total${i.index}${j.index}" readonly value="${fn:replace(budgetsQuotationProduct.totalPrice,"." , ",")}"/></td>
                                         <td>
-                                            <input type="hidden" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.budget.id" value="${budget.budget.id}">
-                                            <input type="hidden" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.quotationRequest.solicitationRequest.product.id" value="${budgetsQuotationProduct.product.id}" >
-                                            <input type="checkbox" id="request${i.index}${budgetsQuotationProduct.product.id}" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.chosenBudget" class="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationProduct.product.id})" value=""/>
+                                            <input type="hidden" name="purchaseOrders[${i.index}].orderRequests[${j.index}].budgetQuotation.budget.id" value="${budget.budget.id}">
+                                            <input type="hidden" name="purchaseOrders[${i.index}].orderRequests[${j.index}].budgetQuotation.quotationRequest.solicitationRequest.product.id" value="${budgetsQuotationProduct.product.id}" >
+                                            <input type="checkbox" id="request${i.index}${budgetsQuotationProduct.product.id}" name="purchaseOrders[${i.index}].orderRequests[${j.index}].budgetQuotation.chosenBudget" class="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationProduct.product.id})" value=""/>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -117,7 +117,7 @@
                                             <label class="control-label"><fmt:message key="label.totalPriceChoise"/></label>
                                         </th>
                                         <th>
-                                            <input type="text" class="form-control" readonly="true" id="totalPriceChoise${i.index}" value=""/>
+                                            <input type="text" class="form-control" readonly="true" id="totalPriceChoise${i.index}" name="purchaseOrders[${i.index}].paymentInformation.totalPrice" value=""/>
                                         </th>
                                         <th></th>
                                     </tr>
@@ -174,9 +174,9 @@
                                         <td>${fn:replace(budgetsQuotationService.unityPrice, ".",",")}</td>
                                         <td><input type="text" readonly id="total${i.index}${j.index}" value="${fn:replace(budgetsQuotationService.unityPrice,"." ,"," )}"/></td>
                                         <td>
-                                            <input type="hidden" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.budget.id" value="${budget.budget.id}">
-                                            <input type="hidden" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.id" value="${budgetsQuotationService.id}">
-                                            <input type="checkbox"  id="request${i.index}${budgetsQuotationService.service.id}" name="purchaseOrder.orderRequests[${i.index}].budgetQuotation.chosenBudget"  class="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationService.service.id})" value=""/>
+                                            <input type="hidden" name="purchaseOrders[${i.index}].orderRequests[${j.index}].budgetQuotation.budget.id" value="${budget.budget.id}">
+                                            <input type="hidden" name="purchaseOrders[${i.index}].orderRequests[${j.index}].budgetQuotation.id" value="${budgetsQuotationService.id}">
+                                            <input type="checkbox"  id="request${i.index}${budgetsQuotationService.service.id}" name="purchaseOrders[${i.index}].orderRequests[${j.index}].budgetQuotation.chosenBudget"  class="${i.index}${j.index}"  onclick="checkedRequest(${i.index},${budgetsQuotationService.service.id})" value=""/>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -191,7 +191,7 @@
                                     </th>
                                     <th>
                                         <label class="control-label"><fmt:message key="label.totalPriceChoise"/></label>
-                                        <input type="text" class="form-control" readonly="true" id="totalPriceChoise${i.index}" value=""/>
+                                        <input type="text" class="form-control" readonly="true" id="totalPriceChoise${i.index}" name="purchaseOrders[${i.index}].paymentInformation.totalPrice" value=""/>
                                     </th>
                                     <th></th>
                                 </tr>

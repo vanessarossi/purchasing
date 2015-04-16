@@ -18,7 +18,7 @@ public class PurchaseOrder {
     private Long id;
 
     @Column(name = "date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @Column(name = "already_purchased")

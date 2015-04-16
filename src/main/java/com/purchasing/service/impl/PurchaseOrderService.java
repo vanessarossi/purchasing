@@ -3,6 +3,7 @@ package com.purchasing.service.impl;
 import com.purchasing.entity.Budget;
 import com.purchasing.entity.PurchaseOrder;
 import com.purchasing.entity.Supplier;
+import com.purchasing.support.purchaseOrder.OrderRequestProductView;
 
 import java.util.List;
 
@@ -12,8 +13,9 @@ import java.util.List;
 public interface PurchaseOrderService {
 
     public PurchaseOrder singleSave(Budget budget);
-    public List<PurchaseOrder> variousSave(PurchaseOrder purchaseOrder);
+    public List<PurchaseOrder> variousSave(List<PurchaseOrder> purchaseOrders);
 
+    public PurchaseOrder findById(PurchaseOrder purchaseOrder);
     public List<PurchaseOrder> findBySupplierOrderDate(Supplier supplier);
 
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength);
@@ -23,5 +25,7 @@ public interface PurchaseOrderService {
     public Integer totalPaginationMissing(String sSearch);
 
     public PurchaseOrder findByConference(Long id);
+
+    public List<OrderRequestProductView> groupByProduct(PurchaseOrder purchaseOrder);
 
 }

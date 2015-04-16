@@ -7,6 +7,7 @@ import com.purchasing.entity.PurchaseOrder;
 import com.purchasing.entity.Supplier;
 import com.purchasing.service.impl.PurchaseOrderService;
 import com.purchasing.support.datatable.DataTableModel;
+import com.purchasing.support.purchaseOrder.PurchaseOrderView;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -67,13 +68,21 @@ public class PurchaseOrderController {
     public void singleSave(Budget budget) {
         PurchaseOrder purchaseOrder =  purchaseOrderService.singleSave(budget);
         result.include("purchaseOrder",purchaseOrder);
-        result.redirectTo(this).visualize();
+        result.redirectTo(this).list();
     }
 
     @Post("/salvar")
-    public void variousSave(PurchaseOrder purchaseOrder){
-        List<PurchaseOrder> purchaseOrders = purchaseOrderService.variousSave(purchaseOrder);
+    public void variousSave(List<PurchaseOrder> purchaseOrders){
+        List<PurchaseOrder> purchaseSaved = purchaseOrderService.variousSave(purchaseOrders);
         result.include("purchaseOrders",purchaseOrders);
+        result.redirectTo(this).list();
+    }
+
+
+    @Get("/visualizar/{purchaseOrder.id}")
+    public void view(PurchaseOrder purchaseOrder){
+        purchaseOrder = purchaseOrderService.findById(purchaseOrder);
+        result.include("purchaseOrder",new PurchaseOrderView().generate(purchaseOrder,purchaseOrderService));
         result.redirectTo(this).visualize();
     }
 

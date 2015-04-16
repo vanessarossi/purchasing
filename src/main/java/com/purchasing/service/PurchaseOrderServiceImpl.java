@@ -2,15 +2,16 @@ package com.purchasing.service;
 
 import com.purchasing.dao.*;
 import com.purchasing.entity.*;
+import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.service.impl.PurchaseOrderService;
+import com.purchasing.support.purchaseOrder.OrderRequestProductView;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author vanessa
@@ -28,6 +29,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Inject private SolicitationDAO solicitationDAO;
     @Inject private SituationDAO situationDAO;
     @Inject private PaymentInformationDAO paymentInformationDAO;
+    @Inject private FormPaymentDAO formPaymentDAO;
 
     @Override
     public PurchaseOrder singleSave(Budget budget) {
@@ -47,7 +49,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             purchaseOrder.setApproval(null);
             purchaseOrder.setBudget(budget);
 
-            purchaseOrder.setDate(new Date());
+            purchaseOrder.setDate(new Timestamp(new Date().getTime()));
             purchaseOrder.setStatus(StatusEnum.Open);
 
         purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
@@ -79,12 +81,24 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
-    public List<PurchaseOrder> variousSave(PurchaseOrder purchaseOrder) {
+    public List<PurchaseOrder> variousSave(List<PurchaseOrder> purchaseOrders) {
+        List<PurchaseOrder> purchaseOrdersSaved = new ArrayList<>();
+        if (purchaseOrders.get(0).getOrderRequests().get(0).getBudgetQuotation().getId() != null){  /** ordem de compra serviço  **/
+            purchaseOrdersSaved = saveOrdersService(purchaseOrders);
+        }else{  /** ordem de compra produto  **/
 
+            purchaseOrdersSaved = saveOrdersMaterial(purchaseOrders);
+        }
+        return purchaseOrdersSaved;
+    }
 
-
-
-        return null;
+    @Override
+    public PurchaseOrder findById(PurchaseOrder purchaseOrder) {
+        PurchaseOrder purchaseOrderFound = new PurchaseOrder();
+        if (purchaseOrder.getId() != null){
+            purchaseOrderFound = purchaseOrderDAO.findById(PurchaseOrder.class, purchaseOrder.getId());
+        }
+        return purchaseOrderFound;
     }
 
     @Override
@@ -107,7 +121,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
             String colStatus = purchaseOrder.getStatus().getDescription();
             String colButtonEdit = "";
-            String colButtonView = "";
+            String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
 
             String[] row = {
                     colCode,
@@ -133,16 +147,16 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         switch (getUserLogged().getRole().getId().toString()){
             case "2":
-                purchaseOrders = purchaseOrderDAO.paginationMissingDirectorship(search,getUserLogged().getRole().getMinimumValue(),iDisplayStart, iDisplayLength);
+                purchaseOrders = purchaseOrderDAO.paginationMissingDirectorship(search, getUserLogged().getRole().getMinimumValue(), iDisplayStart, iDisplayLength);
                 break;
             case "3":
-                purchaseOrders = purchaseOrderDAO.paginationMissingDirector(search,getUserLogged().getRole().getMaximumValue(),iDisplayStart, iDisplayLength);
+                purchaseOrders = purchaseOrderDAO.paginationMissingDirector(search, getUserLogged().getRole().getMaximumValue(), iDisplayStart, iDisplayLength);
                 break;
             case "4":
-                purchaseOrders = purchaseOrderDAO.paginationMissingManager(search,getUserLogged().getRole().getMaximumValue(),iDisplayStart,iDisplayLength);
+                purchaseOrders = purchaseOrderDAO.paginationMissingManager(search, getUserLogged().getRole().getMaximumValue(), iDisplayStart, iDisplayLength);
                 break;
             case  "5":
-                purchaseOrders = purchaseOrderDAO.paginationMissingAnalyst(search,iDisplayStart,iDisplayLength);
+                purchaseOrders = purchaseOrderDAO.paginationMissingAnalyst(search, iDisplayStart, iDisplayLength);
                 break;
         }
         List<Object[]> purchaseOrderList = new ArrayList<>();
@@ -150,13 +164,11 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
             String colCode = purchaseOrder.getId().toString();
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
-            String colButtonEdit = "";
             String colButtonView = "";
 
             String[] row = {
                     colCode,
                     colSupplier,
-                    colButtonEdit,
                     colButtonView,
             };
             purchaseOrderList.add(row);
@@ -170,7 +182,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         String search = sSearch == null ? "" : sSearch;
         switch (getUserLogged().getId().toString()) {
             case "2":
-                total = purchaseOrderDAO.totalPaginationMissingDirectorship(search,getUserLogged().getRole().getMinimumValue());
+                total = purchaseOrderDAO.totalPaginationMissingDirectorship(search, getUserLogged().getRole().getMinimumValue());
                 break;
             case "3":
                 total = purchaseOrderDAO.totalPaginationMissingDirector(search, getUserLogged().getRole().getMinimumValue());
@@ -195,9 +207,157 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         return purchaseOrder;
     }
 
+    @Override
+    public List<OrderRequestProductView> groupByProduct(PurchaseOrder purchaseOrder) {
+        purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class,purchaseOrder.getId());
+
+        List<OrderRequest> orderRequests = purchaseOrder.getOrderRequests();
+        List<OrderRequestProductView> orderRequestProductViewList = new ArrayList<>();
+        List<OrderRequestProductView> orderRequestProductViews = new ArrayList<>();
+
+        Collections.sort(orderRequestProductViews,new OrderRequestProductView());
+        Map<Long,OrderRequestProductView> map = new HashMap<>();
+        orderRequestProductViewList = new OrderRequestProductView().generateList(orderRequests);
+
+        for (OrderRequestProductView orderRequestProductView : orderRequestProductViewList){
+            Long idProduct = orderRequestProductView.getProduct().getId();
+            if (!map.containsKey(idProduct)){
+                orderRequestProductView.setTotalPrice(orderRequestProductView.getTotalPrice());
+                map.put(orderRequestProductView.getProduct().getId(),orderRequestProductView);
+            }else{
+                OrderRequestProductView orderRequestProductV = map.get(idProduct);
+                if (orderRequestProductView.getQuantity() == null){
+                    orderRequestProductView.setQuantity(0f);
+                }
+                if (orderRequestProductView.getTotalPrice() == null){
+                    orderRequestProductView.setTotalPrice(orderRequestProductV.getTotalPrice());
+                }
+                Float quantity = orderRequestProductView.getQuantity() + orderRequestProductV.getQuantity();
+                BigDecimal totalPrice = orderRequestProductV.getTotalPrice().add(orderRequestProductView.getTotalPrice());
+                orderRequestProductV.setQuantity(quantity);
+                orderRequestProductV.setTotalPrice(totalPrice);
+            }
+        }
+        for (Long key : map.keySet()){
+            OrderRequestProductView orderRequestProductView = map.get(key);
+            orderRequestProductViews.add(orderRequestProductView);
+        }
+        return orderRequestProductViews;
+    }
+
+    /** utilizados para ajudar   **/
     public User getUserLogged() {
         User user = (User) httpSession.getAttribute("userLogged");
         return user;
+    }
+
+    public List<PurchaseOrder> saveOrdersService(List<PurchaseOrder> purchaseOrders){
+        List<PurchaseOrder> purchaseOrdersSaved = new ArrayList<>();
+        for (PurchaseOrder purchaseOrder : purchaseOrders) {
+            List<OrderRequest> orderRequests = purchaseOrder.getOrderRequests();
+
+            PaymentInformation paymentInformation = new PaymentInformation();
+            paymentInformation.setMeanPayment(MeanPaymentEnum.Money);
+            paymentInformation.setFormPayment(formPaymentDAO.findById(FormPayment.class, 1l));
+            paymentInformation.setTotalPrice(purchaseOrder.getPaymentInformation().getTotalPrice());
+
+            paymentInformation = paymentInformationDAO.save(paymentInformation);
+
+            purchaseOrder.setReception(null);
+            purchaseOrder.setDeliveryInformation(null);
+            purchaseOrder.setPaymentInformation(paymentInformation);
+            purchaseOrder.setApproval(null);
+            purchaseOrder.setBudget(purchaseOrder.getOrderRequests().get(0).getBudgetQuotation().getBudget());
+
+            purchaseOrder.setDate(new Timestamp(new Date().getTime()));
+            purchaseOrder.setStatus(StatusEnum.Open);
+
+            purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
+            Quotation quotation = new Quotation();
+            for (OrderRequest orderRequest : orderRequests) {
+                if (orderRequest.getBudgetQuotation().getChosenBudget() != null && orderRequest.getBudgetQuotation().getChosenBudget() == true) {
+                    BudgetQuotation budgetQuotationFound = budgetQuotationDAO.findById(BudgetQuotation.class, orderRequest.getBudgetQuotation().getId());
+
+                    OrderRequest newOrderRequest = new OrderRequest();
+                    newOrderRequest.setBudgetQuotation(budgetQuotationFound);
+                    newOrderRequest.setPurchaseOrder(purchaseOrder);
+
+                    orderRequestDAO.save(newOrderRequest);
+
+                    budgetQuotationFound.setChosenBudget(true);
+                    budgetQuotationDAO.save(budgetQuotationFound);
+
+                    Situation situation = budgetQuotationFound.getQuotationRequest().getSolicitationRequest().getSolicitation().getSituation();
+                    situation.setStatus(StatusEnum.AnalysisQuote);
+                    situationDAO.save(situation);
+
+                    quotation = budgetQuotationFound.getQuotationRequest().getQuotation();
+                }
+
+            }
+
+            quotation.setUser(getUserLogged());
+            quotation.setFinalDate(new Timestamp(new Date().getTime()));
+            quotation.setStatus(StatusEnum.Finished);
+            quotationDAO.save(quotation);
+
+            purchaseOrdersSaved.add(purchaseOrder);
+        }
+        return  purchaseOrdersSaved;
+    }
+
+    public List<PurchaseOrder> saveOrdersMaterial(List<PurchaseOrder> purchaseOrders) {
+        List<PurchaseOrder> purchaseOrdersSaved = new ArrayList<>();
+        for (PurchaseOrder purchaseOrder : purchaseOrders) {
+            List<OrderRequest> orderRequests = purchaseOrder.getOrderRequests();
+
+            PaymentInformation paymentInformation = new PaymentInformation();
+            paymentInformation.setMeanPayment(MeanPaymentEnum.Money);
+            paymentInformation.setFormPayment(formPaymentDAO.findById(FormPayment.class, 1l));
+            paymentInformation.setTotalPrice(purchaseOrder.getPaymentInformation().getTotalPrice());
+
+            paymentInformation = paymentInformationDAO.save(paymentInformation);
+
+            purchaseOrder.setReception(null);
+            purchaseOrder.setDeliveryInformation(null);
+            purchaseOrder.setPaymentInformation(paymentInformation);
+            purchaseOrder.setApproval(null);
+            purchaseOrder.setBudget(purchaseOrder.getOrderRequests().get(0).getBudgetQuotation().getBudget());
+
+            purchaseOrder.setDate(new Timestamp(new Date().getTime()));
+            purchaseOrder.setStatus(StatusEnum.Open);
+
+            purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
+            Quotation quotation = new Quotation();
+            for (OrderRequest orderRequest : orderRequests) {
+                if (orderRequest.getBudgetQuotation().getChosenBudget()!= null && orderRequest.getBudgetQuotation().getChosenBudget() == true) {
+                    List<BudgetQuotation> budgetQuotations = budgetQuotationDAO.findByBudgetAndProduct(orderRequest.getBudgetQuotation().getBudget(), orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getProduct());
+                    for (BudgetQuotation budgetQuotation : budgetQuotations) {
+                        OrderRequest newOrderRequest = new OrderRequest();
+                        newOrderRequest.setBudgetQuotation(budgetQuotation);
+                        newOrderRequest.setPurchaseOrder(purchaseOrder);
+
+                        orderRequestDAO.save(newOrderRequest);
+
+                        budgetQuotation.setChosenBudget(true);
+                        budgetQuotationDAO.save(budgetQuotation);
+
+                        Situation situation = budgetQuotation.getQuotationRequest().getSolicitationRequest().getSolicitation().getSituation();
+                        situation.setStatus(StatusEnum.AnalysisQuote);
+                        situationDAO.save(situation);
+                    }
+                    quotation = budgetQuotations.get(0).getQuotationRequest().getQuotation();
+                }
+
+            }
+            quotation.setUser(getUserLogged());
+            quotation.setFinalDate(new Timestamp(new Date().getTime()));
+            quotation.setStatus(StatusEnum.Finished);
+            quotationDAO.save(quotation);
+
+            purchaseOrdersSaved.add(purchaseOrder);
+        }
+        return  purchaseOrdersSaved;
     }
 
 }

@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class BudgetView {
 
-
     private Budget budget;
     private List<BudgetQuotationServiceView> budgetsQuotationService;
     private List<BudgetQuotationProductView> budgetsQuotationProduct;
