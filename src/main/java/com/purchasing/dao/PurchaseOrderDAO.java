@@ -62,19 +62,17 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     /** analista **/
     public List<PurchaseOrder> paginationMissingAnalyst(String sSearch, int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
             criteria.setFirstResult(iDisplayStart);
             criteria.setMaxResults(iDisplayLength);
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
-            criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
-            criteria.addOrder(Order.desc("id"));
-        Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("budget", "budget");
             criteria.createAlias("budget.supplier", "supplier");
             criteria.createAlias("supplier.person", "person");
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
-            criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;
@@ -84,10 +82,10 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
-            criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
             criteria.createAlias("budget", "budget");
             criteria.createAlias("budget.supplier", "supplier");
             criteria.createAlias("supplier.person", "person");
+            criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));

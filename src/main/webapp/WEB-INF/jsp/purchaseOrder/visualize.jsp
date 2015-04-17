@@ -109,24 +109,41 @@
             <div class="col-sm-2 col-md-2">
               <div class="form-group">
                 <label class="control-label"><fmt:message key="label.total.price"/></label>
-                <input type="text" class="form-control" readonly value="${budget.paymentInformationBudgets[0].paymentInformation.totalPrice}"/>
+                <input type="text" class="form-control" readonly value="${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}"/>
               </div>
             </div>
           </div>
         </c:forEach>
       </div>
     </div>
-
-    <c:if test="${approve == 'true'}">
+    <form action='<c:url value="/ordemCompra/reprovar"></c:url>' method="post" id="reprovePurchaseOrderForm">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="form-group">
+            <label class="control-label"><fmt:message key="title.justification.disapproval"/></label>
+            <textarea rows="4" cols="100" class="form-control" id="justification" name="justification" required ></textarea>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm-offset-11 col-md-offset-11">
           <div class="form-group">
+            <input type="hidden" name="purchaseOrder.id" value="${purchaseOrder.purchaseOrder.id}"  />
+            <button type="submit" class="btn btn-primary"><fmt:message key="button.save"/></button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <c:if test="${approve == 'true'}">
+      <div class="row">
+        <div class="col-sm-offset-9 col-md-offset-9">
+          <div class="form-group">
             <a href='<c:url value="/ordemCompra/aprovar/${purchaseOrder.purchaseOrder.id}"></c:url>' class="btn btn-success"><fmt:message key="button.approve"/></a>
+            <a onclick="reprove()" class="btn btn-warning"><fmt:message key="button.reprove"/></a>
           </div>
         </div>
       </div>
     </c:if>
-
   </div>
 </html:template>
 </body>

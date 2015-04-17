@@ -94,6 +94,18 @@ public class PurchaseOrderController {
         result.redirectTo(this).formSearch();
     }
 
+    @Get("/aprovar/{purchaseOrder.id}")
+    public void approvePurchaseOrder(PurchaseOrder purchaseOrder){
+        purchaseOrderService.approve(purchaseOrder);
+        result.redirectTo(this).missingList();
+    }
+
+    @Post("/reprovar")
+    public void reprovePurchaseOrder(PurchaseOrder purchaseOrder,String justification){
+        purchaseOrderService.reprove(purchaseOrder,justification);
+        result.redirectTo(this).missingList();
+    }
+
     /**  Listegem  **/
     @Get("/paginar")
     public void pagination(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength) {

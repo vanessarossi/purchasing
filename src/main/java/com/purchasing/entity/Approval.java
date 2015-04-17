@@ -1,7 +1,5 @@
 package com.purchasing.entity;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -23,9 +21,8 @@ public class Approval {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateFirstApproval;
 
-    @Length(min = 1, max = 20)
     @Column(name = "user_first_approval")
-    private Long userFirstApproval;
+    private String userFirstApproval;
 
     @Column(name = "second_approval")
     private Boolean secondApproval;
@@ -34,9 +31,8 @@ public class Approval {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateSecondApproval;
 
-    @Length(min = 1, max = 20)
     @Column(name = "user_second_approval")
-    private Long userSecondApproval;
+    private String userSecondApproval;
 
     @Column(name = "third_approval")
     private Boolean thirdApproval;
@@ -45,9 +41,8 @@ public class Approval {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateThirdApproval;
 
-    @Length(min = 1, max = 20)
     @Column(name = "user_third_approval")
-    private Long userThirdApproval;
+    private String userThirdApproval;
 
     @Column(name = "fourth_approval")
     private Boolean fourthApproval;
@@ -56,9 +51,8 @@ public class Approval {
     @Column(name = "date_fourth_approval")
     private Date dateFourthApproval;
 
-    @Length(min = 1, max = 20)
     @Column(name = "user_fourth_approval")
-    private Long userFourthApproval;
+    private String userFourthApproval;
 
     @Column(name = "justification_disapproval")
     private String justificationDisapproval;
@@ -88,11 +82,11 @@ public class Approval {
         this.dateFirstApproval = dateFirstApproval;
     }
 
-    public Long getUserFirstApproval() {
+    public String getUserFirstApproval() {
         return userFirstApproval;
     }
 
-    public void setUserFirstApproval(Long userFirstApproval) {
+    public void setUserFirstApproval(String userFirstApproval) {
         this.userFirstApproval = userFirstApproval;
     }
 
@@ -112,11 +106,11 @@ public class Approval {
         this.dateSecondApproval = dateSecondApproval;
     }
 
-    public Long getUserSecondApproval() {
+    public String getUserSecondApproval() {
         return userSecondApproval;
     }
 
-    public void setUserSecondApproval(Long userSecondApproval) {
+    public void setUserSecondApproval(String userSecondApproval) {
         this.userSecondApproval = userSecondApproval;
     }
 
@@ -136,11 +130,11 @@ public class Approval {
         this.dateThirdApproval = dateThirdApproval;
     }
 
-    public Long getUserThirdApproval() {
+    public String getUserThirdApproval() {
         return userThirdApproval;
     }
 
-    public void setUserThirdApproval(Long userThirdApproval) {
+    public void setUserThirdApproval(String userThirdApproval) {
         this.userThirdApproval = userThirdApproval;
     }
 
@@ -160,11 +154,11 @@ public class Approval {
         this.dateFourthApproval = dateFourthApproval;
     }
 
-    public Long getUserFourthApproval() {
+    public String getUserFourthApproval() {
         return userFourthApproval;
     }
 
-    public void setUserFourthApproval(Long userFourthApproval) {
+    public void setUserFourthApproval(String userFourthApproval) {
         this.userFourthApproval = userFourthApproval;
     }
 

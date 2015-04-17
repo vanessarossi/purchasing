@@ -28,4 +28,7 @@ public interface PurchaseOrderService {
 
     public List<OrderRequestProductView> groupByProduct(PurchaseOrder purchaseOrder);
 
+    public void approve(PurchaseOrder purchaseOrder);
+    public void reprove(PurchaseOrder purchaseOrder, String justification);
+
 }
