@@ -183,18 +183,18 @@
                                 <input type="hidden" id="totalItem" value="${fn:length(budget.budgetsQuotationService)}"/>
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th>
-                                        <label class="control-label"><fmt:message key="label.totalPrice"/></label>
-                                        <input type="text" class="form-control" readonly="true" id="totalPrice${i.index}" value="${budget.budget.paymentInformationBudgets[0].paymentInformation.totalPrice}"/>
-                                    </th>
-                                    <th>
-                                        <label class="control-label"><fmt:message key="label.totalPriceChoise"/></label>
-                                        <input type="text" class="form-control" readonly="true" id="totalPriceChoise${i.index}" name="purchaseOrders[${i.index}].paymentInformation.totalPrice" value=""/>
-                                    </th>
-                                    <th></th>
-                                </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            <label class="control-label"><fmt:message key="label.totalPrice"/></label>
+                                            <input type="text" class="form-control" readonly="true" id="totalPrice${i.index}" value="${budget.budget.paymentInformationBudgets[0].paymentInformation.totalPrice}"/>
+                                        </th>
+                                        <th>
+                                            <label class="control-label"><fmt:message key="label.totalPriceChoise"/></label>
+                                            <input type="text" class="form-control" readonly="true" id="totalPriceChoise${i.index}" name="purchaseOrders[${i.index}].paymentInformation.totalPrice" value=""/>
+                                        </th>
+                                        <th></th>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>
@@ -218,34 +218,52 @@
                     </c:if>
                 </div>
             </div>
-            <div class="row" id="divJustification">
-                <div class="col-md-2 col-sm-2">
-                    <div class="form-group">
-                        <label class="control-label" for="exclusive"><fmt:message key="label.exclusive"/></label>
-                        <br>
-                        <div class="radio-inline">
-                            <label class="control-label">
-                                <input type="radio" value="true" name="quo.urgency" id="exclusive"
-                                <c:if test="${quotation.exclusiveSupplier eq true}"> checked </c:if> > <fmt:message key="label.yes"/>
-                            </label>
-                        </div>
-                        <div class="radio-inline">
-                            <label class="control-label">
-                                <input type="radio" value="false" name="solicitation.urgency" id="exclusive"
-                                <c:if test="${quotation.exclusiveSupplier  eq false}"> checked </c:if> > <fmt:message key="label.no"/>
-                            </label>
-                        </div>
-                        <br>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label" for="justification"><fmt:message key="label.justification"/></label>
-                        <textarea rows="4" cols="100" class="form-control" id="justification"></textarea>
-                    </div>
-                </div>
-            </div>
         </form>
+        <div class="panel-body">
+            <form action='<c:url value="/ordemCompra/salvar/justificado"></c:url>' method="post"
+                  id="initialPurchasingOrderJustificationForm">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <div class="form-group">
+                            <label class="control-label" for="exclusive"><fmt:message key="label.exclusive"/></label>
+                            <br>
+
+                            <div class="radio-inline">
+                                <label class="control-label">
+                                    <input type="radio" value="true" name="quo.urgency" id="exclusive"
+                                    <c:if test="${quotation.exclusiveSupplier eq true}"> checked </c:if> > <fmt:message
+                                        key="label.yes"/>
+                                </label>
+                            </div>
+                            <div class="radio-inline">
+                                <label class="control-label">
+                                    <input type="radio" value="false" name="solicitation.urgency" id="exclusive"
+                                    <c:if test="${quotation.exclusiveSupplier  eq false}"> checked </c:if> >
+                                    <fmt:message
+                                            key="label.no"/>
+                                </label>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label" for="justification"><fmt:message
+                                    key="label.justification"/></label>
+                            <textarea rows="4" cols="100" class="form-control" id="justification" required></textarea>
+                        </div>
+                    </div>
+                    <input type="hidden" name="budget.id" id="budgetChoised" value=""/>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-10 col-sm-offset-10">
+                        <c:if test="${quotation.status eq 'Open'}">
+                            <input type="submit" value="<fmt:message key="button.save"/>" class="btn btn-success"/>
+                        </c:if>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </html:template>
 </body>

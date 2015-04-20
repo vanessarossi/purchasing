@@ -4,6 +4,7 @@ $(document).ready(function () {
         code = (e.keyCode ? e.keyCode : e.which);
         return (code == 13) ? false : true;
     });
+    $('#initialPurchasingOrderJustificationForm').hide();
     $('#divJustification').hide();
 });
 
@@ -63,10 +64,12 @@ function validateSingleBudgetChoose(budgetIndex,totalIndexBudget,link){
 	var result = false;
 	for (var i = 0 ; i <= (totalIndexBudget-1); i++) {
 		otherTotalPrice = $('#totalPrice'+i).val();
-		if (budgetIndex != i && parseFloat(totalPrice) > parseFloat(otherTotalPrice)) {
-			$('#exclusive').attr("name","purchaseOrder.orderRequests["+budgetIndex+"].budgetQuotation.quotationRequest.budget.quotationRequest.quotation.exclusiveSupplier");
-			$('#justification').attr("name","purchaseOrder.orderRequests["+budgetIndex+"].budgetQuotation.quotationRequest.budget.quotationRequest.quotation.justification");
-			$('#divJustification').show();
+		if (totalIndexBudget == 1 || (budgetIndex != i && parseFloat(totalPrice) > parseFloat(otherTotalPrice))) {
+			var valueChoised = $('input[name="purchaseOrders['+budgetIndex+'].orderRequests[0].budgetQuotation.budget.id"]').val();
+			$('#exclusive').attr("name","exclusive");
+			$('#justification').attr("name","justification");
+			$('#budgetChoised').val(valueChoised);
+			$('#initialPurchasingOrderJustificationForm').show();
 			result = true;	
 			break;
 		}else{

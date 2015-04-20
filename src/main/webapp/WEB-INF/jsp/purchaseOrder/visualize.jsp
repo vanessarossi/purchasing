@@ -116,6 +116,22 @@
         </c:forEach>
       </div>
     </div>
+
+    <c:if test="${purchaseOrder.purchaseOrder.approval != null && purchaseOrder.purchaseOrder.approval.justificationDisapproval != null}">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="form-group">
+            <label class="control-label"><fmt:message key="title.justification.disapproval"/></label>
+            <textarea rows="4" cols="100" class="form-control">${purchaseOrder.purchaseOrder.approval.justificationDisapproval}</textarea>
+          </div>
+        </div>
+      </div>
+    </c:if>
+
+    <c:if test="${purchaseOrder.purchaseOrder.budget.quotation.justification != null}">
+      
+    </c:if>
+
     <form action='<c:url value="/ordemCompra/reprovar"></c:url>' method="post" id="reprovePurchaseOrderForm">
       <div class="row">
         <div class="col-sm-12 col-md-12">

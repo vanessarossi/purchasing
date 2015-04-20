@@ -101,10 +101,10 @@
                             <thead>
                             <tr>
                                 <th style="width: 3%"><fmt:message key="table.solicitation" /></th>
-                                <th style="width: 15%"><fmt:message key="table.costCenter" /></th>
+                                <th style="width: 17%"><fmt:message key="table.costCenter" /></th>
                                 <th style="width: 50%" ><fmt:message key="table.product" /></th>
                                 <th style="width: 10%" ><fmt:message key="table.quantity" /></th>
-                                <th style="width: 10%" ><fmt:message key="table.unit" /></th>
+                                <th style="width: 8%" ><fmt:message key="table.unit" /></th>
                                 <th style="width: 2%" ><fmt:message key="table.##" /></th>
                             </tr>
                             </thead>

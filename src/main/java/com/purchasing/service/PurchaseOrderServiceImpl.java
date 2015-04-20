@@ -94,6 +94,57 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public PurchaseOrder singleSaveWithJustification(Budget budget, String justification, Boolean exclusive) {
+        budget = budgetDAO.findById(Budget.class, budget.getId());
+
+        PaymentInformation paymentInformation = new PaymentInformation();
+        paymentInformation.setMeanPayment(budget.getPaymentInformationBudgets().get(0).getPaymentInformation().getMeanPayment());
+        paymentInformation.setFormPayment(budget.getPaymentInformationBudgets().get(0).getPaymentInformation().getFormPayment());
+        paymentInformation.setTotalPrice(budget.getPaymentInformationBudgets().get(0).getPaymentInformation().getTotalPrice());
+
+        paymentInformation = paymentInformationDAO.save(paymentInformation);
+
+        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        purchaseOrder.setReception(null);
+        purchaseOrder.setDeliveryInformation(null);
+        purchaseOrder.setPaymentInformation(paymentInformation);
+        purchaseOrder.setApproval(null);
+        purchaseOrder.setBudget(budget);
+
+        purchaseOrder.setDate(new Timestamp(new Date().getTime()));
+        purchaseOrder.setStatus(StatusEnum.Open);
+
+        purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
+
+        for (BudgetQuotation budgetQuotation : budget.getBudgetQuotations()) {
+            OrderRequest orderRequest = new OrderRequest();
+            orderRequest.setPurchaseOrder(purchaseOrder);
+            orderRequest.setBudgetQuotation(budgetQuotation);
+
+            orderRequestDAO.save(orderRequest);
+
+            budgetQuotation.setChosenBudget(true);
+            budgetQuotationDAO.save(budgetQuotation);
+
+            Situation situation = new Situation();
+            situation = budgetQuotation.getQuotationRequest().getSolicitationRequest().getSolicitation().getSituation();
+            situation.setStatus(StatusEnum.AnalysisQuote);
+            situationDAO.save(situation);
+        }
+
+        Quotation quotation = new Quotation();
+        quotation = budget.getQuotation();
+        quotation.setUser(getUserLogged());
+        quotation.setJustification(justification);
+        quotation.setExclusiveSupplier(exclusive);
+        quotation.setFinalDate(new Timestamp(new Date().getTime()));
+        quotation.setStatus(StatusEnum.Finished);
+        quotationDAO.save(quotation);
+
+        return purchaseOrder;
+    }
+
+    @Override
     public PurchaseOrder findById(PurchaseOrder purchaseOrder) {
         PurchaseOrder purchaseOrderFound = new PurchaseOrder();
         if (purchaseOrder.getId() != null){
@@ -261,66 +312,78 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 approval.setFourthApproval(true);
                 approval.setDateFourthApproval(new Timestamp(new Date().getTime()));
                 approval.setUserFourthApproval(getUserLogged().getName());
-                approvalDAO.save(approval);
+                approval = approvalDAO.save(approval);
+
+                for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
+                    SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
+                    solicitationRequest.setStatus(StatusEnum.Approved);
+                    solicitationRequestDAO.save(solicitationRequest);
+                    alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
+                }
+                purchaseOrder.setApproval(approval);
+
                 if (compareMinimum == 1 || compareMinimum == 0) {
                     purchaseOrder.setStatus(StatusEnum.Approved);
-                    purchaseOrderDAO.save(purchaseOrder);
-                    for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
-                        SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
-                        solicitationRequest.setStatus(StatusEnum.Approved);
-                        solicitationRequestDAO.save(solicitationRequest);
-                        alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
-                    }
                 }
+                purchaseOrderDAO.save(purchaseOrder);
                 break;
             case 3: /** Diretor  **/
                 approval.setThirdApproval(true);
                 approval.setDateThirdApproval(new Timestamp(new Date().getTime()));
                 approval.setUserThirdApproval(getUserLogged().getName());
-                approvalDAO.save(approval);
-                if (compareMinimum == -1 || compareMinimum == 0 && compareMaximum == 1 || compareMaximum == 0) {
-                    purchaseOrder.setStatus(StatusEnum.Approved);
-                    purchaseOrderDAO.save(purchaseOrder);
-                    for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
-                        SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
-                        solicitationRequest.setStatus(StatusEnum.Approved);
-                        solicitationRequestDAO.save(solicitationRequest);
-                        alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
-                    }
+                approval = approvalDAO.save(approval);
+
+                for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
+                    SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
+                    solicitationRequest.setStatus(StatusEnum.Approved);
+                    solicitationRequestDAO.save(solicitationRequest);
+                    alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
                 }
+
+                purchaseOrder.setApproval(approval);
+                if (compareMinimum == 1 || compareMinimum == 0 && compareMaximum == -1 || compareMaximum == 0) {
+                    purchaseOrder.setStatus(StatusEnum.Approved);
+                }
+
+                purchaseOrderDAO.save(purchaseOrder);
                 break;
             case 4: /** Gerente **/
                 approval.setSecondApproval(true);
                 approval.setDateSecondApproval(new Timestamp(new Date().getTime()));
                 approval.setUserSecondApproval(getUserLogged().getName());
-                approvalDAO.save(approval);
-                if (compareMinimum == -1 || compareMinimum == 0 && compareMaximum == 1 || compareMaximum == 0) {
-                    purchaseOrder.setStatus(StatusEnum.Approved);
-                    purchaseOrderDAO.save(purchaseOrder);
-                    for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
-                        SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
-                        solicitationRequest.setStatus(StatusEnum.Approved);
-                        solicitationRequestDAO.save(solicitationRequest);
-                        alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
-                    }
+                approval = approvalDAO.save(approval);
+
+                for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
+                    SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
+                    solicitationRequest.setStatus(StatusEnum.Approved);
+                    solicitationRequestDAO.save(solicitationRequest);
+                    alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
                 }
+                purchaseOrder.setApproval(approval);
+
+                if (compareMinimum == 1 || compareMinimum == 0 && compareMaximum == -1 || compareMaximum == 0) {
+                    purchaseOrder.setStatus(StatusEnum.Approved);
+                }
+                purchaseOrderDAO.save(purchaseOrder);
                 break;
             case 5: /** Analista **/
                     approval.setFirstApproval(true);
                     approval.setDateFirstApproval(new Timestamp(new Date().getTime()));
                     approval.setUserFirstApproval(getUserLogged().getName());
                     approval = approvalDAO.save(approval);
-                if (compareMinimum == -1 || compareMinimum == 0 && compareMaximum == 1 || compareMaximum == 0) {
-                    purchaseOrder.setApproval(approval);
-                    purchaseOrder.setStatus(StatusEnum.Approved);
-                    purchaseOrderDAO.save(purchaseOrder);
-                    for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
-                        SolicitationRequest solicitationRequest =  orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
-                        solicitationRequest.setStatus(StatusEnum.Approved);
-                        solicitationRequestDAO.save(solicitationRequest);
-                        alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
-                    }
+
+                for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
+                    SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
+                    solicitationRequest.setStatus(StatusEnum.Approved);
+                    solicitationRequestDAO.save(solicitationRequest);
+                    alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
                 }
+                purchaseOrder.setApproval(approval);
+
+                if (compareMinimum == 1 || compareMinimum == 0 && compareMaximum == -1 || compareMaximum == 0) {
+                    purchaseOrder.setStatus(StatusEnum.Approved);
+                }
+                purchaseOrderDAO.save(purchaseOrder);
                 break;
         }
     }
@@ -539,3 +602,4 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         }
     }
 }
+

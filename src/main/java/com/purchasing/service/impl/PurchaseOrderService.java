@@ -14,6 +14,7 @@ public interface PurchaseOrderService {
 
     public PurchaseOrder singleSave(Budget budget);
     public List<PurchaseOrder> variousSave(List<PurchaseOrder> purchaseOrders);
+    public PurchaseOrder singleSaveWithJustification(Budget budget, String justification, Boolean exclusive);
 
     public PurchaseOrder findById(PurchaseOrder purchaseOrder);
     public List<PurchaseOrder> findBySupplierOrderDate(Supplier supplier);

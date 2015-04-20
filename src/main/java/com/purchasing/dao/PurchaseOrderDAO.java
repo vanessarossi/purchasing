@@ -110,7 +110,6 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
             criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
-            criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
             criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
@@ -123,14 +122,13 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
-            criteria.createAlias("budget", "budget");
-            criteria.createAlias("budget.supplier", "supplier");
-            criteria.createAlias("supplier.person", "person");
+            criteria.createAlias("budget", "budget", JoinType.LEFT_OUTER_JOIN);
+            criteria.createAlias("budget.supplier", "supplier", JoinType.LEFT_OUTER_JOIN);
+            criteria.createAlias("supplier.person", "person", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateSecondApproval"));
-            criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
+            criteria.add(Restrictions.eq("approval.firstApproval", true));
             criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
-            criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
             criteria.add(disjunction);
             criteria.setProjection(Projections.rowCount());

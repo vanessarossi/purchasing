@@ -66,15 +66,19 @@ public class PurchaseOrderController {
      /** Actions **/
     @Get("/salvar/unico/{budget.id}")
     public void singleSave(Budget budget) {
-        PurchaseOrder purchaseOrder =  purchaseOrderService.singleSave(budget);
-        result.include("purchaseOrder",purchaseOrder);
+        purchaseOrderService.singleSave(budget);
         result.redirectTo(this).list();
     }
 
     @Post("/salvar")
     public void variousSave(List<PurchaseOrder> purchaseOrders){
-        List<PurchaseOrder> purchaseSaved = purchaseOrderService.variousSave(purchaseOrders);
-        result.include("purchaseOrders",purchaseOrders);
+        purchaseOrderService.variousSave(purchaseOrders);
+        result.redirectTo(this).list();
+    }
+
+    @Post("/salvar/justificado")
+    public void saveWithJustification(Budget budget, String justification, Boolean exclusive) {
+        purchaseOrderService.singleSaveWithJustification(budget,justification,exclusive);
         result.redirectTo(this).list();
     }
 
@@ -83,7 +87,7 @@ public class PurchaseOrderController {
         purchaseOrder = purchaseOrderService.findById(purchaseOrder);
         String approve = (origin.equals("approve")) ? "true" : "false";
         result.include("purchaseOrder",new PurchaseOrderView().generate(purchaseOrder,purchaseOrderService));
-        result.include("approve",approve);
+        result.include("approve", approve);
         result.redirectTo(this).visualize();
     }
 
