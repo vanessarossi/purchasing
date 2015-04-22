@@ -31,4 +31,43 @@ public class DeliveryInformation {
     @Column(name = "receptor_name")
     private String receptorName;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getReceptorName() {
+        return receptorName;
+    }
+
+    public void setReceptorName(String receptorName) {
+        this.receptorName = receptorName;
+    }
 }

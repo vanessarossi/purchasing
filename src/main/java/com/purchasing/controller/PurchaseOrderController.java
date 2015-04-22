@@ -5,6 +5,8 @@ import br.com.caelum.vraptor.view.Results;
 import com.purchasing.entity.Budget;
 import com.purchasing.entity.PurchaseOrder;
 import com.purchasing.entity.Supplier;
+import com.purchasing.enumerator.MeanPaymentEnum;
+import com.purchasing.service.impl.FormPaymentService;
 import com.purchasing.service.impl.PurchaseOrderService;
 import com.purchasing.support.datatable.DataTableModel;
 import com.purchasing.support.purchaseOrder.PurchaseOrderView;
@@ -21,15 +23,17 @@ public class PurchaseOrderController {
 
     private Result result;
     private PurchaseOrderService purchaseOrderService;
+    private FormPaymentService formPaymentService;
 
     @Deprecated
     public PurchaseOrderController() {
     }
 
     @Inject
-    public PurchaseOrderController(Result result, PurchaseOrderService purchaseOrderService) {
+    public PurchaseOrderController(Result result, PurchaseOrderService purchaseOrderService, FormPaymentService formPaymentService) {
         this.result = result;
         this.purchaseOrderService = purchaseOrderService;
+        this.formPaymentService = formPaymentService;
     }
 
     /** Forms **/
@@ -114,7 +118,14 @@ public class PurchaseOrderController {
     public void addInformation(PurchaseOrder purchaseOrder){
         purchaseOrder = purchaseOrderService.findById(purchaseOrder);
         result.include("purchaseOrder", new PurchaseOrderView().generate(purchaseOrder, purchaseOrderService));
+        result.include("formsPayment", formPaymentService.findAll());
+        result.include("meansPayment", MeanPaymentEnum.values());
         result.redirectTo(this).form();
+    }
+
+    @Post("/adicionar/informacao")
+    public void addInformations(PurchaseOrder purchaseOrder){
+        result.forwardTo(this).list();
     }
 
     /**  Listegem  **/

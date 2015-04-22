@@ -66,7 +66,7 @@ public class Approval {
         this.id = id;
     }
 
-    public Boolean isFirstApproval() {
+    public Boolean getFirstApproval() {
         return firstApproval;
     }
 
@@ -90,7 +90,7 @@ public class Approval {
         this.userFirstApproval = userFirstApproval;
     }
 
-    public Boolean isSecondApproval() {
+    public Boolean getSecondApproval() {
         return secondApproval;
     }
 
@@ -114,7 +114,7 @@ public class Approval {
         this.userSecondApproval = userSecondApproval;
     }
 
-    public Boolean isThirdApproval() {
+    public Boolean getThirdApproval() {
         return thirdApproval;
     }
 
@@ -138,7 +138,7 @@ public class Approval {
         this.userThirdApproval = userThirdApproval;
     }
 
-    public Boolean isFourthApproval() {
+    public Boolean getFourthApproval() {
         return fourthApproval;
     }
 

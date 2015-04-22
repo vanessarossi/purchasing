@@ -145,6 +145,11 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public void saveDeliveryAndPayment(PurchaseOrder purchaseOrder) {
+        
+    }
+
+    @Override
     public PurchaseOrder findById(PurchaseOrder purchaseOrder) {
         PurchaseOrder purchaseOrderFound = new PurchaseOrder();
         if (purchaseOrder.getId() != null){
