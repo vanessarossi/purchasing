@@ -50,7 +50,7 @@
             <td>${purchaseOrder.id}</td>
             <td>${purchaseOrder.budget.supplier.person.name}</td>
             <td>${purchaseOrder.status.description}</td>
-            <td><a href=/purchasing/ordemCompra/visualizar/${purchaseOrder.id}><span class="fa fa-eye btn btn-default btn-xs"></span></a>  </td>
+            <td><a href="/purchasing/ordemCompra/visualizar/${purchaseOrder.id}/normal"><span class="fa fa-eye btn btn-default btn-xs"></span></a>  </td>
           </tr>
         </c:forEach>
       </tbody>

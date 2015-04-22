@@ -96,19 +96,19 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     }
 
     /**  gerente **/
-    public List<PurchaseOrder> paginationMissingManager(String sSearch, BigDecimal maximumValue,  int iDisplayStart, int iDisplayLength) {
+    public List<PurchaseOrder> paginationMissingManager(String sSearch, BigDecimal minimumValue,  int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
             criteria.setFirstResult(iDisplayStart);
             criteria.setMaxResults(iDisplayLength);
             criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
             criteria.createAlias("paymentInformation", "paymentInformation", JoinType.LEFT_OUTER_JOIN);
-            criteria.createAlias("budget", "budget");
-            criteria.createAlias("budget.supplier", "supplier");
-            criteria.createAlias("supplier.person", "person");
+            criteria.createAlias("budget", "budget", JoinType.LEFT_OUTER_JOIN);
+            criteria.createAlias("budget.supplier", "supplier", JoinType.LEFT_OUTER_JOIN);
+            criteria.createAlias("supplier.person", "person", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateSecondApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
-            criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
+            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.addOrder(Order.desc("id"));
             criteria.add(disjunction);
@@ -116,7 +116,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;
     }
-    public Integer totalPaginationMissingManager(String sSearch, BigDecimal maximumValue) {
+    public Integer totalPaginationMissingManager(String sSearch, BigDecimal minimumValue) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
@@ -127,7 +127,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.createAlias("supplier.person", "person", JoinType.LEFT_OUTER_JOIN);
             criteria.add(Restrictions.isNull("approval.dateSecondApproval"));
             criteria.add(Restrictions.eq("approval.firstApproval", true));
-            criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
+            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.addOrder(Order.desc("id"));
             criteria.add(disjunction);
@@ -137,7 +137,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     }
 
     /** diretor  **/
-    public List<PurchaseOrder> paginationMissingDirector(String sSearch,BigDecimal maximumValue , int iDisplayStart, int iDisplayLength) {
+    public List<PurchaseOrder> paginationMissingDirector(String sSearch,BigDecimal minimumValue , int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
         criteria.setFirstResult(iDisplayStart);
@@ -149,7 +149,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.createAlias("supplier.person", "person");
             criteria.add(Restrictions.isNull("approval.dateThirdApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateSecondApproval"));
-            criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
+            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
@@ -158,7 +158,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;
     }
-    public Integer totalPaginationMissingDirector(String sSearch, BigDecimal maximumValue) {
+    public Integer totalPaginationMissingDirector(String sSearch, BigDecimal minimumValue) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
@@ -169,7 +169,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.createAlias("supplier.person", "person");
             criteria.add(Restrictions.isNull("approval.dateThirdApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateSecondApproval"));
-            criteria.add(Restrictions.le("paymentInformation.totalPrice", maximumValue));
+            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
@@ -180,7 +180,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     }
 
     /** diretoria **/
-    public List<PurchaseOrder> paginationMissingDirectorship(String sSearch,BigDecimal maximumValue, int iDisplayStart, int iDisplayLength) {
+    public List<PurchaseOrder> paginationMissingDirectorship(String sSearch,BigDecimal minimumValue, int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
         criteria.setFirstResult(iDisplayStart);
@@ -192,7 +192,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.createAlias("supplier.person", "person");
             criteria.add(Restrictions.isNull("approval.dateFourthApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateThirdApproval"));
-            criteria.add(Restrictions.ge("paymentInformation.totalPrice", maximumValue));
+            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
@@ -201,7 +201,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;
     }
-    public Integer totalPaginationMissingDirectorship(String sSearch, BigDecimal maximumValue) {
+    public Integer totalPaginationMissingDirectorship(String sSearch, BigDecimal minimumValue) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
@@ -212,7 +212,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.createAlias("supplier.person", "person");
             criteria.add(Restrictions.isNull("approval.dateFourthApproval"));
             criteria.add(Restrictions.isNotNull("approval.dateThirdApproval"));
-            criteria.add(Restrictions.ge("paymentInformation.totalPrice", maximumValue));
+            criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));

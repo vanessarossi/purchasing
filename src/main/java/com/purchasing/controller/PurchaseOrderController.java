@@ -78,7 +78,7 @@ public class PurchaseOrderController {
 
     @Post("/salvar/justificado")
     public void saveWithJustification(Budget budget, String justification, Boolean exclusive) {
-        purchaseOrderService.singleSaveWithJustification(budget,justification,exclusive);
+        purchaseOrderService.singleSaveWithJustification(budget, justification, exclusive);
         result.redirectTo(this).list();
     }
 
@@ -106,8 +106,15 @@ public class PurchaseOrderController {
 
     @Post("/reprovar")
     public void reprovePurchaseOrder(PurchaseOrder purchaseOrder,String justification){
-        purchaseOrderService.reprove(purchaseOrder,justification);
+        purchaseOrderService.reprove(purchaseOrder, justification);
         result.redirectTo(this).missingList();
+    }
+
+    @Get("/adicionar/informacao/{purchaseOrder.id}")
+    public void addInformation(PurchaseOrder purchaseOrder){
+        purchaseOrder = purchaseOrderService.findById(purchaseOrder);
+        result.include("purchaseOrder", new PurchaseOrderView().generate(purchaseOrder, purchaseOrderService));
+        result.redirectTo(this).form();
     }
 
     /**  Listegem  **/

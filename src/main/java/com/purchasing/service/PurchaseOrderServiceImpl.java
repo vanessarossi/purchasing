@@ -172,7 +172,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             String colCode = purchaseOrder.getId().toString();
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
             String colStatus = purchaseOrder.getStatus().getDescription();
-            String colButtonEdit = "";
+            String colButtonEdit = "<a href=/purchasing/ordemCompra/adicionar/informacao/" + purchaseOrder.getId() +"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
             String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/normal><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
 
             String[] row = {
@@ -202,10 +202,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 purchaseOrders = purchaseOrderDAO.paginationMissingDirectorship(search, getUserLogged().getRole().getMinimumValue(), iDisplayStart, iDisplayLength);
                 break;
             case 3:
-                purchaseOrders = purchaseOrderDAO.paginationMissingDirector(search, getUserLogged().getRole().getMaximumValue(), iDisplayStart, iDisplayLength);
+                purchaseOrders = purchaseOrderDAO.paginationMissingDirector(search, getUserLogged().getRole().getMinimumValue(), iDisplayStart, iDisplayLength);
                 break;
             case 4:
-                purchaseOrders = purchaseOrderDAO.paginationMissingManager(search, getUserLogged().getRole().getMaximumValue(), iDisplayStart, iDisplayLength);
+                purchaseOrders = purchaseOrderDAO.paginationMissingManager(search, getUserLogged().getRole().getMinimumValue(), iDisplayStart, iDisplayLength);
                 break;
             case 5:
                 purchaseOrders = purchaseOrderDAO.paginationMissingAnalyst(search, iDisplayStart, iDisplayLength);
@@ -305,8 +305,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             approval = purchaseOrder.getApproval();
         }
 
-        Integer compareMinimum = getUserLogged().getRole().getMinimumValue().compareTo(purchaseOrder.getPaymentInformation().getTotalPrice());
-        Integer compareMaximum = getUserLogged().getRole().getMaximumValue().compareTo(purchaseOrder.getPaymentInformation().getTotalPrice());
+        Integer compareMinimum = purchaseOrder.getPaymentInformation().getTotalPrice().compareTo(getUserLogged().getRole().getMinimumValue());
+        Integer compareMaximum = purchaseOrder.getPaymentInformation().getTotalPrice().compareTo(getUserLogged().getRole().getMaximumValue());
             switch (getUserLogged().getRole().getId().intValue()) {
             case 2: /** Conselho **/
                 approval.setFourthApproval(true);

@@ -118,39 +118,97 @@
     </div>
 
     <c:if test="${purchaseOrder.purchaseOrder.approval != null && purchaseOrder.purchaseOrder.approval.justificationDisapproval != null}">
-      <div class="row">
-        <div class="col-sm-12 col-md-12">
-          <div class="form-group">
-            <label class="control-label"><fmt:message key="title.justification.disapproval"/></label>
-            <textarea rows="4" cols="100" class="form-control">${purchaseOrder.purchaseOrder.approval.justificationDisapproval}</textarea>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><fmt:message key="title.justification.disapproval"/></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <div class="form-group">
+                <label class="control-label"><fmt:message key="title.justification.disapproval"/></label>
+                <textarea rows="4" cols="100" class="form-control">${purchaseOrder.purchaseOrder.approval.justificationDisapproval}</textarea>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </c:if>
 
     <c:if test="${purchaseOrder.purchaseOrder.budget.quotation.justification != null}">
-      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><fmt:message key="title.justification.supplier"/></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-2 col-sm-2">
+              <div class="form-group">
+                <label class="control-label"><fmt:message key="label.exclusive"/></label>
+                <input type="text" class="form-control" readonly value="<c:if test="${purchaseOrder.purchaseOrder.budget.quotation.exclusiveSupplier eq true}"> <fmt:message key="label.yes" /> </c:if>"/>
+              </div>
+            </div>
+            <div class="col-md-10 col-sm-10">
+              <div class="form-group">
+                <label class="control-label" for="justification"><fmt:message key="label.justification"/></label>
+                <textarea rows="4" cols="100" class="form-control" readonly>${purchaseOrder.purchaseOrder.budget.quotation.justification}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </c:if>
+
+    <c:if test="${purchaseOrder.purchaseOrder.approval.justificationDisapproval != null}">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><fmt:message key="title.justification.disapproval"/></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label class="control-label" for="justification"><fmt:message key="label.justification"/></label>
+                <textarea rows="4" cols="100" class="form-control"
+                          readonly>${purchaseOrder.purchaseOrder.approval.justificationDisapproval}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </c:if>
 
     <form action='<c:url value="/ordemCompra/reprovar"></c:url>' method="post" id="reprovePurchaseOrderForm">
-      <div class="row">
-        <div class="col-sm-12 col-md-12">
-          <div class="form-group">
-            <label class="control-label"><fmt:message key="title.justification.disapproval"/></label>
-            <textarea rows="4" cols="100" class="form-control" id="justification" name="justification" required ></textarea>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><fmt:message key="title.justification.reprove"/></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <div class="form-group">
+                <label class="control-label"><fmt:message key="title.justification.disapproval"/></label>
+                <textarea rows="4" cols="100" class="form-control" id="justification" name="justification"
+                          required></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-offset-11 col-md-offset-11">
+              <div class="form-group">
+                <input type="hidden" name="purchaseOrder.id" value="${purchaseOrder.purchaseOrder.id}"/>
+                <button type="submit" class="btn btn-primary"><fmt:message key="button.save"/></button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-offset-11 col-md-offset-11">
-          <div class="form-group">
-            <input type="hidden" name="purchaseOrder.id" value="${purchaseOrder.purchaseOrder.id}"  />
-            <button type="submit" class="btn btn-primary"><fmt:message key="button.save"/></button>
-          </div>
-        </div>
-      </div>
+
     </form>
-    <c:if test="${approve == 'true'}">
+
+    <c:if test="${approve eq 'true' && purchaseOrder.purchaseOrder.status eq 'Open'}">
       <div class="row">
         <div class="col-sm-offset-9 col-md-offset-9">
           <div class="form-group">
@@ -160,6 +218,7 @@
         </div>
       </div>
     </c:if>
+
   </div>
 </html:template>
 </body>
