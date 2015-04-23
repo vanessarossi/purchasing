@@ -296,6 +296,25 @@
                   <input type="text" class="form-control date" id="expirationDate" name="purchaseOrder.paymentInformation.expirationDate" value="<fmt:formatDate value="${purchaseOrder.purchaseOrder.paymentInformation.expirationDate}" pattern="dd/MM/YYYY"/>"/>
                 </div>
               </div>
+              <div class="col-md-2 col-sm-3">
+                <div class="form-group">
+                  <label class="control-label" for="contract"><fmt:message key="label.alreadyPurchased"/></label>
+                  <br>
+                  <div class="radio-inline">
+                    <label class="control-label">
+                      <input type="radio" value="true" name="purchaseOrder.alreadyPurchased" id="alreadyPurchased"
+                      <c:if test="${purchaseOrder.purchaseOrder.alreadyPurchased eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
+                    </label>
+                  </div>
+                  <div class="radio-inline">
+                    <label class="control-label">
+                      <input type="radio" value="false" name="purchaseOrder.alreadyPurchased" id="alreadyPurchased"
+                      <c:if test="${purchaseOrder.purchaseOrder.alreadyPurchased eq false}"> checked </c:if>> <fmt:message key="label.no"/>
+                    </label>
+                  </div>
+                  <br>
+                </div>
+              </div>
             </div>
         </div>
       </div>
@@ -360,7 +379,7 @@
               <input type="hidden" name="purchaseOrder.deliveryInformation.id" value="${purchaseOrder.purchaseOrder.deliveryInformation.id}">
               <input type="hidden" name="purchaseOrder.paymentInformation.id" value="${purchaseOrder.purchaseOrder.paymentInformation.id}">
               <input type="hidden" name="purchaseOrder.id" value="${purchaseOrder.purchaseOrder.id}">
-              <input type="submit" value="<fmt:message key="button.save"/>" />
+              <input type="submit" class="btn btn-success" value="<fmt:message key="button.save"/>" />
             </div>
           </div>
         </div>

@@ -71,7 +71,7 @@ public class PurchaseOrder {
         this.date = date;
     }
 
-    public Boolean isAlreadyPurchased() {
+    public Boolean getAlreadyPurchased() {
         return alreadyPurchased;
     }
 

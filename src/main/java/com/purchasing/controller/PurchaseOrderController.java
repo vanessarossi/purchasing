@@ -125,6 +125,7 @@ public class PurchaseOrderController {
 
     @Post("/adicionar/informacao")
     public void addInformations(PurchaseOrder purchaseOrder){
+        purchaseOrderService.saveDeliveryAndPayment(purchaseOrder);
         result.forwardTo(this).list();
     }
 

@@ -31,6 +31,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Inject private PaymentInformationDAO paymentInformationDAO;
     @Inject private FormPaymentDAO formPaymentDAO;
     @Inject private SolicitationRequestDAO solicitationRequestDAO;
+    @Inject private DeliveryInformationDAO deliveryInformationDAO;
 
     @Override
     public PurchaseOrder singleSave(Budget budget) {
@@ -87,7 +88,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         if (purchaseOrders.get(0).getOrderRequests().get(0).getBudgetQuotation().getId() != null){  /** ordem de compra serviço  **/
             purchaseOrdersSaved = saveOrdersService(purchaseOrders);
         }else{  /** ordem de compra produto  **/
-
             purchaseOrdersSaved = saveOrdersMaterial(purchaseOrders);
         }
         return purchaseOrdersSaved;
@@ -146,7 +146,42 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public void saveDeliveryAndPayment(PurchaseOrder purchaseOrder) {
-        
+        DeliveryInformation deliveryInformation = deliveryInformationDAO.save(purchaseOrder.getDeliveryInformation());
+
+        PaymentInformation paymentInformation = new PaymentInformation();
+        if (purchaseOrder.getPaymentInformation().getHasContract() != null) {
+            paymentInformation.setHasContract(purchaseOrder.getPaymentInformation().getHasContract());
+            paymentInformation.setContract(purchaseOrder.getPaymentInformation().getContract());
+        }
+        paymentInformation.setMeanPayment(purchaseOrder.getPaymentInformation().getMeanPayment());
+        paymentInformation.setDateFirstInstallment(purchaseOrder.getPaymentInformation().getDateFirstInstallment());
+        paymentInformation.setDateLastInstallment(purchaseOrder.getPaymentInformation().getDateLastInstallment());
+        paymentInformation.setDateInput(purchaseOrder.getPaymentInformation().getDateInput());
+        paymentInformation.setExpirationDate(purchaseOrder.getPaymentInformation().getExpirationDate());
+        paymentInformation.setInputPrice(purchaseOrder.getPaymentInformation().getInputPrice());
+        paymentInformation.setSharePrice(purchaseOrder.getPaymentInformation().getSharePrice());
+        paymentInformation.setTotalPrice(purchaseOrder.getPaymentInformation().getTotalPrice());
+        paymentInformation.setDiscountPercentage(purchaseOrder.getPaymentInformation().getDiscountPercentage());
+        paymentInformation.setTotalFinalPrice(purchaseOrder.getPaymentInformation().getTotalFinalPrice());
+        paymentInformation.setFormPayment(purchaseOrder.getPaymentInformation().getFormPayment());
+        paymentInformation.setId(purchaseOrder.getPaymentInformation().getId());
+        paymentInformation = paymentInformationDAO.save(paymentInformation);
+
+        Boolean alreadyPurchased = purchaseOrder.getAlreadyPurchased();
+
+        purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, purchaseOrder.getId());
+
+        purchaseOrder.setDeliveryInformation(deliveryInformation);
+        purchaseOrder.setPaymentInformation(paymentInformation);
+        purchaseOrder.setAlreadyPurchased(alreadyPurchased);
+
+        if (purchaseOrder.getStatus().equals(StatusEnum.Approved)){
+            purchaseOrder.setStatus(StatusEnum.BuyingProcess);
+            for (OrderRequest orderRequest: purchaseOrder.getOrderRequests()){
+                alterStausSolicitationBuyingProcess(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
+            }
+        }
+        purchaseOrderDAO.save(purchaseOrder);
     }
 
     @Override
@@ -605,6 +640,16 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             situation.setStatus(StatusEnum.QuoteReject);
             situationDAO.save(situation);
         }
+    }
+
+    public void alterStausSolicitationBuyingProcess(Solicitation solicitation){
+        Situation situation = solicitation.getSituation();
+        situation.setStatus(StatusEnum.BuyingProcess);
+        situationDAO.save(situation);
+    }
+
+    public void alterStausSolicitationPurchaseMade(Solicitation solicitation) {
+
     }
 }
 
