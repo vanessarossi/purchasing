@@ -1,5 +1,7 @@
 package com.purchasing.printer.base;
 
+import com.purchasing.service.impl.PurchaseOrderService;
+
 import java.io.File;
 
 /**
@@ -8,4 +10,6 @@ import java.io.File;
 public interface Printer {
 
     public File generate(Long code);
+    public File generateOrder(Long code, PurchaseOrderService purchaseOrderService);
+
 }

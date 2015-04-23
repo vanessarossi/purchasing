@@ -5,6 +5,7 @@ import com.purchasing.entity.PurchaseOrder;
 import com.purchasing.entity.Supplier;
 import com.purchasing.support.purchaseOrder.OrderRequestProductView;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -32,5 +33,7 @@ public interface PurchaseOrderService {
 
     public void approve(PurchaseOrder purchaseOrder);
     public void reprove(PurchaseOrder purchaseOrder, String justification);
+
+    public File printerOrder(PurchaseOrder purchaseOrder);
 
 }

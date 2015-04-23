@@ -1,6 +1,7 @@
 package com.purchasing.printer.impl;
 
 import com.purchasing.printer.base.Printer;
+import com.purchasing.service.impl.PurchaseOrderService;
 
 import java.io.File;
 
@@ -14,4 +15,10 @@ public class PrinterImpl extends BasePrinterImpl implements Printer {
     public File generate(Long code) {
         return null;
     }
+
+    @Override
+    public File generateOrder(Long code, PurchaseOrderService purchaseOrderService) {
+        return null;
+    }
+
 }

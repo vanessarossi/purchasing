@@ -354,6 +354,12 @@
             </div>
             <div class="col-md-4 col-sm-4">
               <div class="form-group">
+                <label class="control-label" for="place"><fmt:message key="label.place"/></label>
+                <input type="text" class="form-control" id="place" name="purchaseOrder.deliveryInformation.place" value="${purchaseOrder.purchaseOrder.deliveryInformation.place}"/>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+              <div class="form-group">
                 <label class="control-label" for="helpPlace"><fmt:message key="label.place"/></label>
                 <select class="form-control" id="helpPlace">
                     <option value="0"><fmt:message key="label.select"/></option>

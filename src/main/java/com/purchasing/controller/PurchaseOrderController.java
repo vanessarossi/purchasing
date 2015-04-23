@@ -12,6 +12,7 @@ import com.purchasing.support.datatable.DataTableModel;
 import com.purchasing.support.purchaseOrder.PurchaseOrderView;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class PurchaseOrderController {
     private Result result;
     private PurchaseOrderService purchaseOrderService;
     private FormPaymentService formPaymentService;
+
 
     @Deprecated
     public PurchaseOrderController() {
@@ -127,6 +129,11 @@ public class PurchaseOrderController {
     public void addInformations(PurchaseOrder purchaseOrder){
         purchaseOrderService.saveDeliveryAndPayment(purchaseOrder);
         result.forwardTo(this).list();
+    }
+
+    @Get("/imprimir/pedido/{purchaseOrder.id}")
+    public File printerOrder(PurchaseOrder purchaseOrder){
+        return purchaseOrderService.printerOrder(purchaseOrder);
     }
 
     /**  Listegem  **/

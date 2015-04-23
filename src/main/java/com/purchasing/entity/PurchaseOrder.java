@@ -21,6 +21,10 @@ public class PurchaseOrder {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
+    @Column(name = "date_generate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateGenerate;
+
     @Column(name = "already_purchased")
     private Boolean alreadyPurchased;
 
@@ -69,6 +73,14 @@ public class PurchaseOrder {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Date getDateGenerate() {
+        return dateGenerate;
+    }
+
+    public void setDateGenerate(Date dateGenerate) {
+        this.dateGenerate = dateGenerate;
     }
 
     public Boolean getAlreadyPurchased() {

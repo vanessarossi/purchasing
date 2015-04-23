@@ -40,60 +40,70 @@ $('#helpPlace').change(function(){
 });
 
 function fillAdministrativeOffice () {
+    $('#place').val("Sede Administrativa");
 	$('#street').val("Rua Francisquinho Dias");
 	$('#neighborhood').val("Centro");
 	$('#number').val("583");
 	$('#receptorName').val();
 }
 function fillDiagnosticCenter () {
+    $('#place').val("Centro de Diagnóstico");
 	$('#street').val("Rua Silvia Jardim");
 	$('#neighborhood').val("Centro");
 	$('#number').val("260/268");
 	$('#receptorName').val("");
 }
 function fillDrugstore () {
+    $('#place').val("Farmácia");
 	$('#street').val("Rua Campos Salles");
 	$('#neighborhood').val("Centro");
 	$('#number').val("491");
 	$('#receptorName').val("");
 }
 function fillOptica () {
+    $('#place').val("Optica");
 	$('#street').val("Rua Campos Salles");
 	$('#neighborhood').val("Centro");
 	$('#number').val("491");
 	$('#receptorName').val("");
 }
 function fillReferenceCenter () {
+    $('#place').val("Centro de Referencia");
 	$('#street').val("Rua Coronel Alípio Dias");
 	$('#neighborhood').val("Centro");
 	$('#number').val("885");
 	$('#receptorName').val("");
 }
 function fillHospital () {
+    $('#place').val("Hospital");
 	$('#street').val("Rua Alexandre Carlos de Melo");
 	$('#neighborhood').val("Jardim Aeroporto");
 	$('#number').val("118");
 	$('#receptorName').val("");
 }
 function fillDepartmentOfOccupationalHealth() {
+    $('#place').val("Departamento de Saúde Ocupacional");
 	$('#street').val("Rua Carlos Botelho");
 	$('#neighborhood').val("Centro");
 	$('#number').val("593");
 	$('#receptorName').val("");
 }
 function fillPreventiveMedicine () {
+    $('#place').val("Medicina Preventiva");
 	$('#street').val("Rua Rui Barbosa");
 	$('#neighborhood').val("Centro");
 	$('#number').val("109");
 	$('#receptorName').val("");
 }
 function fillSpecialtyCenter () {
+    $('#place').val("Centro de Especialidades");
 	$('#street').val("Rua Leôncio D’Ávilla Riberiro");
 	$('#neighborhood').val("Vila Brasil");
 	$('#number').val("11");
 	$('#receptorName').val("");
 }
 function clear () {
+    $('#place').val("");
 	$('#street').val("");
 	$('#neighborhood').val("");
 	$('#number').val("");

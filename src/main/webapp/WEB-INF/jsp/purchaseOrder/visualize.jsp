@@ -218,7 +218,7 @@
         </div>
       </div>
     </c:if>
-
+    <a href="<c:url value="/ordemCompra/imprimir/pedido/${purchaseOrder.purchaseOrder.id}"></c:url>"target='_blank'><span class="fa fa-print btn btn-default"></span></a>
   </div>
 </html:template>
 </body>

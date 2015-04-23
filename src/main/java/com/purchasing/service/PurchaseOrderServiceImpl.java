@@ -4,11 +4,13 @@ import com.purchasing.dao.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.StatusEnum;
+import com.purchasing.printer.OrderPrinter;
 import com.purchasing.service.impl.PurchaseOrderService;
 import com.purchasing.support.purchaseOrder.OrderRequestProductView;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.*;
@@ -32,6 +34,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Inject private FormPaymentDAO formPaymentDAO;
     @Inject private SolicitationRequestDAO solicitationRequestDAO;
     @Inject private DeliveryInformationDAO deliveryInformationDAO;
+    @Inject private OrderPrinter orderPrinter;
 
     @Override
     public PurchaseOrder singleSave(Budget budget) {
@@ -504,6 +507,21 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         }
     }
 
+    @Override
+    public File printerOrder(PurchaseOrder purchaseOrder) {
+        purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class,purchaseOrder.getId());
+        if (purchaseOrder.getStatus() == StatusEnum.BuyingProcess){
+            purchaseOrder.setDateGenerate(new Timestamp(new Date().getTime()));
+            purchaseOrder.setStatus(StatusEnum.PurchaseMade);
+            purchaseOrderDAO.save(purchaseOrder);
+            for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
+                alterStausSolicitationPurchaseMade(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
+            }
+        }
+
+        return orderPrinter.generateOrder(purchaseOrder.getId(), this);
+    }
+
     /** utilizados para ajudar   **/
     public User getUserLogged() {
         User user = (User) httpSession.getAttribute("userLogged");
@@ -649,7 +667,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     public void alterStausSolicitationPurchaseMade(Solicitation solicitation) {
-
+        Situation situation = solicitation.getSituation();
+        situation.setStatus(StatusEnum.PurchaseMade);
+        situationDAO.save(situation);
     }
 }
 

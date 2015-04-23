@@ -15,6 +15,10 @@ public class DeliveryInformation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Length(min = 1, max = 100)
+    @Column(name = "place")
+    private String place;
+
    @Length(min = 1, max = 150)
    @Column(name = "street")
     private String street;
@@ -37,6 +41,14 @@ public class DeliveryInformation {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     public String getStreet() {
