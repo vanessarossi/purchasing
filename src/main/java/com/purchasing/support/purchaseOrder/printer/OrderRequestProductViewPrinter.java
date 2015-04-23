@@ -78,7 +78,7 @@ public class OrderRequestProductViewPrinter implements Comparator<OrderRequestPr
 
             OrderRequestProductViewPrinter orderRequestProductViewPrinter = new OrderRequestProductViewPrinter();
             String description = orderRequestProductView.getProduct().getDescription();
-            String model = orderRequestProductView.getProduct().getModel();
+            String model = orderRequestProductView.getProduct().getModel() == null ? "" : orderRequestProductView.getProduct().getModel();
             String mark = orderRequestProductView.getProduct().getMark();
             String unity = orderRequestProductView.getProduct().getUnit().getDescription();
 

@@ -2,12 +2,14 @@ package com.purchasing.printer;
 
 import com.purchasing.dao.PurchaseOrderDAO;
 import com.purchasing.entity.PurchaseOrder;
+import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.enumerator.TypePersonEnum;
 import com.purchasing.printer.base.BasePrinter;
 import com.purchasing.printer.impl.PrinterImpl;
 import com.purchasing.service.impl.PurchaseOrderService;
 import com.purchasing.support.date.Conversor;
 import com.purchasing.support.purchaseOrder.printer.OrderRequestProductViewPrinter;
+import com.purchasing.support.purchaseOrder.printer.OrderRequestServiceViewPrinter;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -19,6 +21,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,10 +36,23 @@ public class OrderPrinter extends PrinterImpl implements BasePrinter {
 
     @Override
     public File generateOrder(Long code,PurchaseOrderService purchaseOrderService) {
-        String url = "/jasper/purchase_request_product.jrxml";
+        String url = "";
+        List<OrderRequestProductViewPrinter> solicitationViewList = new ArrayList<>();
+        List<OrderRequestServiceViewPrinter> orderRequestServiceViewList = new ArrayList<>();
+        JRBeanCollectionDataSource jrBeanCollectionDataSource = null;
+
         PurchaseOrder purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, code);
-        List<OrderRequestProductViewPrinter> solicitationViewList = new OrderRequestProductViewPrinter().generateList(purchaseOrderService.groupByProduct(purchaseOrder));
-        JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(solicitationViewList);
+
+        if (purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material)){
+            url = "/jasper/purchase_request_product.jrxml";
+            solicitationViewList = new OrderRequestProductViewPrinter().generateList(purchaseOrderService.groupByProduct(purchaseOrder));
+            jrBeanCollectionDataSource = new JRBeanCollectionDataSource(solicitationViewList);
+        }else{
+            url = "/jasper/purchase_request_service.jrxml";
+            orderRequestServiceViewList = new OrderRequestServiceViewPrinter().generateList(purchaseOrder.getOrderRequests());
+            jrBeanCollectionDataSource = new JRBeanCollectionDataSource(orderRequestServiceViewList);
+        }
+
         InputStream inputStream = this.getClass().getResourceAsStream(url);
         JasperPrint jasperPrint = null;
         try {

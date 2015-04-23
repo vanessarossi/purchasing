@@ -34,13 +34,11 @@ public class OrderRequestServiceView implements Comparator<OrderRequestServiceVi
 
     public List<OrderRequestServiceView> generateList(List<OrderRequest> orderRequests) {
         List<OrderRequestServiceView> orderRequestServiceV = new ArrayList<>();
-        Integer indexNumber = 1;
         for (OrderRequest orderRequest : orderRequests) {
             OrderRequestServiceView orderRequestServiceView = new OrderRequestServiceView();
                 orderRequestServiceView.setService(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getService());
                 orderRequestServiceView.setUnityPrice(orderRequest.getBudgetQuotation().getUnityPrice());
                 orderRequestServiceV.add(orderRequestServiceView);
-            indexNumber =+1;
         }
         return orderRequestServiceV;
     }
