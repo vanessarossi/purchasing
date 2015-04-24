@@ -50,11 +50,18 @@
           </tr>
           </thead>
           <tbody>
-
+            <c:if test="${purchaseOrder.orderRequests}" var="orderRequest">
+                <tr>
+                  <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.solicitation.costCenter}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+            </c:if>
           </tbody>
         </table>
       </c:if>
-
       <c:if test="${purchaseOrder.budget.quotation.type eq 'Service'}">
         <table class="table" id="tableService">
           <thead>
@@ -65,11 +72,9 @@
           </tr>
           </thead>
           <tbody>
-
           </tbody>
         </table>
       </c:if>
-
     </form>
   </div>
 </html:template>

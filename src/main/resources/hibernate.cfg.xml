@@ -61,7 +61,6 @@
         <mapping class="com.purchasing.entity.State"/>
         <mapping class="com.purchasing.entity.Contact"/>
         <mapping class="com.purchasing.entity.Category"/>
-        <mapping class="com.purchasing.entity.AdditionalPurchaseOrder"/>
         <mapping class="com.purchasing.entity.Approval"/>
         <mapping class="com.purchasing.entity.Quotation"/>
         <mapping class="com.purchasing.entity.QuotationRequest"/>

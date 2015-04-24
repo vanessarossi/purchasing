@@ -31,9 +31,6 @@ public class Reception {
     @Column(name = "bar_code_tax_document")
     private Integer barCodeTaxDocument;
 
-    @Column(name = "conferred_import")
-    private Boolean conferredImport;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_conferred")
     private Date dateConferred;
@@ -42,16 +39,14 @@ public class Reception {
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status;
 
-    @Length(min = 1, max = 100)
-    @Column(name = "user_conferred")
-    private String userConferred;
-
-    @OneToOne(mappedBy = "reception")
-    private AdditionalPurchaseOrder additionalPurchaseOrder;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "purchase_order_id", referencedColumnName = "id", nullable = false)
+    private PurchaseOrder purchaseOrder;
 
     @OneToMany(mappedBy = "reception")
     private List<RequestDelivered> requestDelivereds;

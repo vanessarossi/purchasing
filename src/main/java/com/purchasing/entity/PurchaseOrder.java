@@ -48,15 +48,11 @@ public class PurchaseOrder {
     @JoinColumn(name = "payment_information_id", referencedColumnName = "id", nullable = true)
     private PaymentInformation paymentInformation;
 
-    @OneToOne
-    @JoinColumn(name = "reception_id" , referencedColumnName = "id", nullable = true)
-    private Reception reception;
-
-    @OneToMany(mappedBy = "purchaseOrder")
-    private List<AdditionalPurchaseOrder> additionalPurchaseOrders;
-
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderRequest> orderRequests;
+
+    @OneToMany(mappedBy = "purchaseOrder")
+    private List<Reception> receptions;
 
 
     public Long getId() {
@@ -129,22 +125,6 @@ public class PurchaseOrder {
 
     public void setPaymentInformation(PaymentInformation paymentInformation) {
         this.paymentInformation = paymentInformation;
-    }
-
-    public Reception getReception() {
-        return reception;
-    }
-
-    public void setReception(Reception reception) {
-        this.reception = reception;
-    }
-
-    public List<AdditionalPurchaseOrder> getAdditionalPurchaseOrders() {
-        return additionalPurchaseOrders;
-    }
-
-    public void setAdditionalPurchaseOrders(List<AdditionalPurchaseOrder> additionalPurchaseOrders) {
-        this.additionalPurchaseOrders = additionalPurchaseOrders;
     }
 
     public List<OrderRequest> getOrderRequests() {

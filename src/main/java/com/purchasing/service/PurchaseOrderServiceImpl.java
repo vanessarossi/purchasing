@@ -48,7 +48,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         paymentInformation = paymentInformationDAO.save(paymentInformation);
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
-            purchaseOrder.setReception(null);
             purchaseOrder.setDeliveryInformation(null);
             purchaseOrder.setPaymentInformation(paymentInformation);
             purchaseOrder.setApproval(null);
@@ -108,7 +107,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         paymentInformation = paymentInformationDAO.save(paymentInformation);
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
-        purchaseOrder.setReception(null);
         purchaseOrder.setDeliveryInformation(null);
         purchaseOrder.setPaymentInformation(paymentInformation);
         purchaseOrder.setApproval(null);
@@ -540,7 +538,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
             paymentInformation = paymentInformationDAO.save(paymentInformation);
 
-            purchaseOrder.setReception(null);
             purchaseOrder.setDeliveryInformation(null);
             purchaseOrder.setPaymentInformation(paymentInformation);
             purchaseOrder.setApproval(null);
@@ -595,7 +592,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
             paymentInformation = paymentInformationDAO.save(paymentInformation);
 
-            purchaseOrder.setReception(null);
             purchaseOrder.setDeliveryInformation(null);
             purchaseOrder.setPaymentInformation(paymentInformation);
             purchaseOrder.setApproval(null);
