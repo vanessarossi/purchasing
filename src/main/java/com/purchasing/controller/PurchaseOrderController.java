@@ -26,7 +26,6 @@ public class PurchaseOrderController {
     private PurchaseOrderService purchaseOrderService;
     private FormPaymentService formPaymentService;
 
-
     @Deprecated
     public PurchaseOrderController() {
     }
@@ -135,6 +134,14 @@ public class PurchaseOrderController {
     public File printerOrder(PurchaseOrder purchaseOrder){
         return purchaseOrderService.printerOrder(purchaseOrder);
     }
+
+    @Post("/pesquisar/conferencia")
+    public void searchConference(PurchaseOrder purchaseOrder){
+        purchaseOrder = purchaseOrderService.findByConference(purchaseOrder.getId());
+        result.include("purchaseOrder",purchaseOrder);
+        result.redirectTo(this).formReception();
+    }
+
 
     /**  Listegem  **/
     @Get("/paginar")

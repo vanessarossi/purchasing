@@ -205,7 +205,6 @@
           </div>
         </div>
       </div>
-
     </form>
 
     <c:if test="${approve eq 'true' && purchaseOrder.purchaseOrder.status eq 'Open'}">
@@ -218,7 +217,17 @@
         </div>
       </div>
     </c:if>
-    <a href="<c:url value="/ordemCompra/imprimir/pedido/${purchaseOrder.purchaseOrder.id}"></c:url>"target='_blank'><span class="fa fa-print btn btn-default"></span></a>
+
+    <c:if test="${purchaseOrder.purchaseOrder.alreadyPurchased eq 'true' || purchaseOrder.purchaseOrder.paymentInformation.hasContract eq 'true' || purchaseOrder.purchaseOrder.status eq 'BuyingProcess' || purchaseOrder.purchaseOrder.status eq 'PurchaseMade'}">
+      <div class="row">
+        <div class="col-sm-offset-11 col-md-offset-11">
+          <div class="form-group">
+            <a href="<c:url value="/ordemCompra/imprimir/pedido/${purchaseOrder.purchaseOrder.id}"></c:url>" target='_blank'><span class="fa fa-print btn btn-default"></span></a>
+          </div>
+        </div>
+      </div>
+    </c:if>
+
   </div>
 </html:template>
 </body>
