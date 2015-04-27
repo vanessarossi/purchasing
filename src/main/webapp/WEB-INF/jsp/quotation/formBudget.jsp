@@ -87,11 +87,11 @@
                 <table id="budgetMaterialTable" class="table table-striped table-hover table-condensed">
                     <thead>
                     <tr>
-                        <th style="width: 50%"><fmt:message key="table.product" /></th>
-                        <th style="width: 10%" ><fmt:message key="table.quantity" /></th>
-                        <th style="width: 10%" ><fmt:message key="table.unit" /></th>
-                        <th style="width: 8%" ><fmt:message key="table.unitary.price" /></th>
-                        <th style="width: 8%" ><fmt:message key="table.total.price" /></th>
+                        <th style="width: 60%"><fmt:message key="table.product" /></th>
+                        <th style="width: 5%" ><fmt:message key="table.quantity" /></th>
+                        <th style="width: 8%" ><fmt:message key="table.unit" /></th>
+                        <th style="width: 5%" ><fmt:message key="table.unitary.price" /></th>
+                        <th style="width: 5%" ><fmt:message key="table.total.price" /></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -112,11 +112,11 @@
                         </c:forEach>
                         <tfoot>
                             <tr>
-                            <th style="width: 50%"></th>
-                            <th style="width: 10%"><input type="hidden" id="numberRequestMaterial" value="${fn:length(quotationRequests)}" ></th>
-                            <th style="width: 10%"></th>
-                            <th style="width: 10%"></th>
-                            <th style="width: 10%"><input type="text" id="totalFinalPriceMaterial" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}"  readonly></th>
+                            <th style="width: 60%"></th>
+                            <th style="width: 5%"><input type="hidden" id="numberRequestMaterial" value="${fn:length(quotationRequests)}" ></th>
+                            <th style="width: 8%"></th>
+                            <th style="width: 5%"></th>
+                            <th style="width: 5%"><input type="text" id="totalFinalPriceMaterial" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}"  readonly></th>
                         </tr>
                         </tfoot>
                     </tbody>

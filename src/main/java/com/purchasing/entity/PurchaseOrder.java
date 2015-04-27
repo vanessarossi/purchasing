@@ -1,6 +1,8 @@
 package com.purchasing.entity;
 
 import com.purchasing.enumerator.StatusEnum;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -49,6 +51,7 @@ public class PurchaseOrder {
     private PaymentInformation paymentInformation;
 
     @OneToMany(mappedBy = "purchaseOrder")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<OrderRequest> orderRequests;
 
     @OneToMany(mappedBy = "purchaseOrder")

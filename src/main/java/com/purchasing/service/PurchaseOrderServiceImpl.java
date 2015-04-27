@@ -382,7 +382,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 }
 
                 purchaseOrder.setApproval(approval);
-                if (compareMinimum == 1 || compareMinimum == 0 && compareMaximum == -1 || compareMaximum == 0) {
+                if ((compareMinimum == 1 || compareMinimum == 0) && (compareMaximum == -1 || compareMaximum == 0)) {
                     purchaseOrder.setStatus(StatusEnum.Approved);
                 }
 
@@ -402,7 +402,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 }
                 purchaseOrder.setApproval(approval);
 
-                if (compareMinimum == 1 || compareMinimum == 0 && compareMaximum == -1 || compareMaximum == 0) {
+                if ((compareMinimum == 1 || compareMinimum == 0) && (compareMaximum == -1 || compareMaximum == 0)) {
                     purchaseOrder.setStatus(StatusEnum.Approved);
                 }
                 purchaseOrderDAO.save(purchaseOrder);
@@ -421,7 +421,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 }
                 purchaseOrder.setApproval(approval);
 
-                if (compareMinimum == 1 || compareMinimum == 0 && compareMaximum == -1 || compareMaximum == 0) {
+                if ((compareMinimum == 1 || compareMinimum == 0 )&& (compareMaximum == -1 || compareMaximum == 0)) {
                     purchaseOrder.setStatus(StatusEnum.Approved);
                 }
                 purchaseOrderDAO.save(purchaseOrder);
