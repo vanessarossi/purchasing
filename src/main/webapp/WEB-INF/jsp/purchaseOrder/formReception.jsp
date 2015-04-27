@@ -37,52 +37,73 @@
       </div>
     </form>
     <br>
-    <form action='<c:url value="/ordemCompra/"></c:url>' method="post" id="confirmReceptionForm">
+    <form action='' method="post" id="confirmReceptionForm">
+      <div class="row">
+        <div class="col-md-3 col-sm-3 ">
+          <label class="control-label"><fmt:message key="label.tax.document"/></label>
+          <input type="text" class="form-control" name="reception.taxDocument" required/>
+        </div>
+        <div class="col-md-5 col-sm-5 ">
+          <label class="control-label"><fmt:message key="label.bar.codetax.document"/></label>
+          <input type="text" class="form-control" name="reception.barCodeTaxDocument"/>
+        </div>
+      </div>
+
+      <br>
       <c:if test="${purchaseOrder.budget.quotation.type eq 'Material'}">
         <div class="panel panel-default">
           <div class="panel-body">
             <table class="table" id="tableProduct">
-          <thead>
-          <tr>
-            <th style="width:20%"><fmt:message key="table.costCenter"/></th>
-            <th style="width:50%"><fmt:message key="table.product"/></th>
-            <th style="width:5%"><fmt:message key="table.abbreviatedQuantity"/></th>
-            <th style="width:6%"><fmt:message key="table.unit"/></th>
-            <th style="width:5%"><fmt:message key="table.unitary.price"/></th>
-            <th style="width:5%"><fmt:message key="table.total.price"/></th>
-          </tr>
-          </thead>
-          <tbody>
-            <c:forEach items="${purchaseOrder.orderRequests}" var="orderRequest">
-                <tr>
-                  <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.solicitation.costCenter.description}</td>
-                  <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.description} ${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.model} ${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.mark}</td>
-                  <td><input type="text" size="8" /></td>
-                  <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.unit.description}</td>
-                  <td><input type="text" type="text" size="10" readonly value="${fn:replace(orderRequest.budgetQuotation.unityPrice,".",",")}"/></td>
-                  <td><input type="text" size="10" /></td>
-                </tr>
-            </c:forEach>
-          </tbody>
-        </table>
+              <thead>
+              <tr>
+                <th style="width:20%"><fmt:message key="table.costCenter"/></th>
+                <th style="width:50%"><fmt:message key="table.product"/></th>
+                <th style="width:5%"><fmt:message key="table.abbreviatedQuantity"/></th>
+                <th style="width:6%"><fmt:message key="table.unit"/></th>
+                <th style="width:5%"><fmt:message key="table.unitary.price"/></th>
+                <th style="width:5%"><fmt:message key="table.total.price"/></th>
+              </tr>
+              </thead>
+                <tbody>
+                  <c:forEach items="${purchaseOrder.orderRequests}" var="orderRequest" varStatus="i">
+                      <tr>
+                        <input type="hidden" name="reception.requestDelivereds[${i.index}].orderRequest.id" id="orderRequestId${i.index}" value="${orderRequest.id}" />
+                        <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.solicitation.costCenter.description}</td>
+                        <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.description} ${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.model} ${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.mark}</td>
+                        <td><input type="text" size="8" name="reception.requestDelivereds[${i.index}].quantity" id="quantity${i.index}"  onblur="calculateTotalPriceMaterial(${i.index},${fn:length(purchaseOrder.orderRequests)} - 1)" /></td>
+                        <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.unit.description}</td>
+                        <td><input type="text" id="unityPrice${i.index}" size="10" readonly value="${fn:replace(orderRequest.budgetQuotation.unityPrice,".",",")}"/></td>
+                        <td><input type="text" id="totalPriceMaterial${i.index}" size="10" readonly /></td>
+                      </tr>
+                  </c:forEach>
+                </tbody>
+              <tfoot>
+                <th style="width:20%"></th>
+                <th style="width:50%"></th>
+                <th style="width:5%"></th>
+                <th style="width:6%"></th>
+                <th style="width:5%"></th>
+                <th style="width:5%"><input type="text" id="totalFinalPriceMaterial" size="10" value="" readonly /></th>
+              </tfoot>
+            </table>
           </div>
        </div>
       </c:if>
       <c:if test="${purchaseOrder.budget.quotation.type eq 'Service'}">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <table class="table" id="tableService">
-          <thead>
-          <tr>
-            <th style="width:15%"><fmt:message key="table.costCenter"/></th>
-            <th style="width:70%"><fmt:message key="table.service"/></th>
-            <th style="width:1%"></th>
-          </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table" id="tableService">
+            <thead>
+            <tr>
+              <th style="width:15%"><fmt:message key="table.costCenter"/></th>
+              <th style="width:70%"><fmt:message key="table.service"/></th>
+              <th style="width:1%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          </div>
       </div>
       </c:if>
       <c:if test="${purchaseOrder.id != null}">
@@ -188,8 +209,8 @@
         <div class="row">
           <div class="col-sm-offset-10 col-md-offset-10">
             <div class="form-group">
-              <input type="submit" class="btn btn-primary" value="<fmt:message key="button.confered"/>" >
-              <input type="submit" class="btn btn-success" value="<fmt:message key="button.finalize"/>" >
+              <input type="button" class="btn btn-primary" id="confered" value="<fmt:message key="button.confered"/>" >
+              <input type="button" class="btn btn-success" id="finalize" value="<fmt:message key="button.finalize"/>" >
             </div>
           </div>
         </div>
@@ -198,7 +219,10 @@
   </div>
 </html:template>
 </body>
+<html:notification/>
 <html:jsAssets/>
 <html:tableJsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/purchase-order.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/jquery.mask.min.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/price_format.2.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-purchase-order-reception.js"></script>
 </html>

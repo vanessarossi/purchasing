@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@tag pageEncoding="UTF-8" %>
 <div class="modal fade" id="modalError">
     <div class="modal-dialog modal-sm">
@@ -15,8 +16,6 @@
     </div>
 </div>
 
-
-
 <div class="modal fade" id="modalConfirm">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -32,8 +31,6 @@
     </div>
 </div>
 
-
-
 <div class="modal fade" id="modalSuccess">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -43,3 +40,26 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalErrorReception">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="lead text-center">Atenção!</p>
+                <h6 class="text-center">A quantidade de item entegue é superior a quantidade do pedido.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalErrorQuantityLess">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="lead text-center">Atenção!</p>
+                <h6 class="text-center">A quantidade de item entegue é inferior a quantidade do pedido.</h6>
+            </div>
+        </div>
+    </div>
+</div>
+

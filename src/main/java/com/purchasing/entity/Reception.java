@@ -31,9 +31,6 @@ public class Reception {
     @Column(name = "bar_code_tax_document")
     private Integer barCodeTaxDocument;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_conferred")
-    private Date dateConferred;
 
     @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
@@ -85,14 +82,6 @@ public class Reception {
 
     public void setBarCodeTaxDocument(Integer barCodeTaxDocument) {
         this.barCodeTaxDocument = barCodeTaxDocument;
-    }
-
-    public Date getDateConferred() {
-        return dateConferred;
-    }
-
-    public void setDateConferred(Date dateConferred) {
-        this.dateConferred = dateConferred;
     }
 
     public StatusEnum getStatus() {

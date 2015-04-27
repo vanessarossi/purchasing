@@ -35,6 +35,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Inject private SolicitationRequestDAO solicitationRequestDAO;
     @Inject private DeliveryInformationDAO deliveryInformationDAO;
     @Inject private OrderPrinter orderPrinter;
+    @Inject private RequestDeliveredDAO requestDeliveredDAO;
 
     @Override
     public PurchaseOrder singleSave(Budget budget) {
@@ -520,6 +521,41 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         return orderPrinter.generateOrder(purchaseOrder.getId(), this);
     }
 
+    @Override
+    public Float getQuantityByOrderRequest(OrderRequest orderRequest) {
+        orderRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId());
+        return orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity();
+    }
+
+    @Override
+    public Float getQuantityDeliveredByOrderRequest(OrderRequest orderRequest) {
+        return requestDeliveredDAO.totalDeliveredByOrderRequest(orderRequest);
+    }
+
+    @Override
+    public void saveReception(Reception reception,StatusEnum statusEnum) {
+        List<RequestDelivered> requestDelivereds = reception.getRequestDelivereds();
+
+        reception.setDate(new Timestamp(new Date().getTime()));
+        reception.setUser(getUserLogged());
+        reception.setStatus(statusEnum);
+        reception.setPaymentInformation(null);
+
+        reception = receptionDAO.save(reception);
+
+        for (RequestDelivered requestDelivered : requestDelivereds){
+            requestDelivered.setReception(reception);
+            requestDeliveredDAO.save(requestDelivered);
+        }
+
+        if (statusEnum == StatusEnum.Conferred){
+            for (RequestDelivered requestDelivered : requestDelivereds){
+                alterStatusSolicitationConfered(requestDelivered.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
+            }
+        }
+
+    }
+
     /** utilizados para ajudar   **/
     public User getUserLogged() {
         User user = (User) httpSession.getAttribute("userLogged");
@@ -667,5 +703,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         situation.setStatus(StatusEnum.PurchaseMade);
         situationDAO.save(situation);
     }
+
+    public  void alterStatusSolicitationConfered(Solicitation solicitation){
+        Situation situation = solicitation.getSituation();
+        situation.setStatus(StatusEnum.Conferred);
+        situationDAO.save(situation);
+    }
+
 }
 

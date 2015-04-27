@@ -2,10 +2,9 @@ package com.purchasing.controller;
 
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
-import com.purchasing.entity.Budget;
-import com.purchasing.entity.PurchaseOrder;
-import com.purchasing.entity.Supplier;
+import com.purchasing.entity.*;
 import com.purchasing.enumerator.MeanPaymentEnum;
+import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.service.impl.FormPaymentService;
 import com.purchasing.service.impl.PurchaseOrderService;
 import com.purchasing.support.datatable.DataTableModel;
@@ -68,6 +67,12 @@ public class PurchaseOrderController {
         result.include("controller", this.getClass()).toString();
     }
 
+    @Path("/pesquisa/recepcao")
+    public void listReception(){
+        result.include("controller", this.getClass()).toString();
+    }
+
+
      /** Actions **/
     @Get("/salvar/unico/{budget.id}")
     public void singleSave(Budget budget) {
@@ -99,7 +104,7 @@ public class PurchaseOrderController {
     @Post("/pesquisar/fornecedor")
     public void searchPurchaseOrderBySupplier(Supplier supplier){
         List<PurchaseOrder> purchaseOrders = purchaseOrderService.findBySupplierOrderDate(supplier);
-        result.include("purchaseOrders",purchaseOrders);
+        result.include("purchaseOrders", purchaseOrders);
         result.redirectTo(this).formSearch();
     }
 
@@ -142,6 +147,18 @@ public class PurchaseOrderController {
         result.redirectTo(this).formReception();
     }
 
+    @Post("/recepcao/conferir")
+    public void conferedReception(Reception reception){
+        purchaseOrderService.saveReception(reception, StatusEnum.Conferred);
+        result.redirectTo("/home");
+    }
+
+    @Post("/recepcao/finalizar")
+    public void finalizeReception(Reception reception){
+        purchaseOrderService.saveReception(reception, StatusEnum.Finished);
+        result.redirectTo("/home");
+    }
+
 
     /**  Listegem  **/
     @Get("/paginar")
@@ -166,4 +183,12 @@ public class PurchaseOrderController {
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }
 
+    /** validate **/
+    @Get("/quantidade/receber/{orderRequest.id}/json")
+    public void totalOrderRequestById (OrderRequest orderRequest){
+      Float quantity =  purchaseOrderService.getQuantityByOrderRequest(orderRequest);
+      Float quantityDelivered = purchaseOrderService.getQuantityDeliveredByOrderRequest(orderRequest);
+      Float receivable = quantity - quantityDelivered;
+        result.use(Results.json()).withoutRoot().from(receivable).serialize();
+    }
 }

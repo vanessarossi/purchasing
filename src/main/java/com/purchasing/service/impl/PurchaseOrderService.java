@@ -1,8 +1,7 @@
 package com.purchasing.service.impl;
 
-import com.purchasing.entity.Budget;
-import com.purchasing.entity.PurchaseOrder;
-import com.purchasing.entity.Supplier;
+import com.purchasing.entity.*;
+import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.support.purchaseOrder.OrderRequestProductView;
 
 import java.io.File;
@@ -35,5 +34,11 @@ public interface PurchaseOrderService {
     public void reprove(PurchaseOrder purchaseOrder, String justification);
 
     public File printerOrder(PurchaseOrder purchaseOrder);
+
+    public Float getQuantityByOrderRequest(OrderRequest orderRequest);
+    public Float getQuantityDeliveredByOrderRequest(OrderRequest orderRequest);
+
+
+    public void saveReception(Reception reception,StatusEnum statusEnum);
 
 }

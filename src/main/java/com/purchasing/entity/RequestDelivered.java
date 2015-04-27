@@ -33,4 +33,35 @@ public class RequestDelivered {
     @JoinColumn(name = "reception_id", referencedColumnName = "id", nullable = false)
     private Reception reception;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public OrderRequest getOrderRequest() {
+        return orderRequest;
+    }
+
+    public void setOrderRequest(OrderRequest orderRequest) {
+        this.orderRequest = orderRequest;
+    }
+
+    public Reception getReception() {
+        return reception;
+    }
+
+    public void setReception(Reception reception) {
+        this.reception = reception;
+    }
 }
