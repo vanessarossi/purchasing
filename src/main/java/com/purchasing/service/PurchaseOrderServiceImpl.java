@@ -536,24 +536,24 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     public void saveReception(Reception reception,StatusEnum statusEnum) {
         List<RequestDelivered> requestDelivereds = reception.getRequestDelivereds();
 
-        reception.setDate(new Timestamp(new Date().getTime()));
-        reception.setUser(getUserLogged());
-        reception.setStatus(statusEnum);
-        reception.setPaymentInformation(null);
-
-        reception = receptionDAO.save(reception);
-
-        for (RequestDelivered requestDelivered : requestDelivereds){
-            requestDelivered.setReception(reception);
-            requestDeliveredDAO.save(requestDelivered);
-        }
-
+        PurchaseOrder purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, reception.getPurchaseOrder().getId());
         if (statusEnum == StatusEnum.Conferred){
+
+
+
+            reception.setDate(new Timestamp(new Date().getTime()));
+            reception.setUser(getUserLogged());
+            reception.setStatus(statusEnum);
+            reception.setPaymentInformation(null);
+            reception = receptionDAO.save(null);
+
             for (RequestDelivered requestDelivered : requestDelivereds){
+                requestDelivered.setReception(reception);
+                requestDeliveredDAO.save(requestDelivered);
                 alterStatusSolicitationConfered(requestDelivered.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
             }
-        }
 
+        }
     }
 
     /** utilizados para ajudar   **/
@@ -710,5 +710,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         situationDAO.save(situation);
     }
 
+    public void alterStatusFinishedOrPartiallyFinished(Solicitation solicitation){}
 }
 

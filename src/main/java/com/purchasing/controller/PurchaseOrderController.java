@@ -150,13 +150,13 @@ public class PurchaseOrderController {
     @Post("/recepcao/conferir")
     public void conferedReception(Reception reception){
         purchaseOrderService.saveReception(reception, StatusEnum.Conferred);
-        result.redirectTo("/home");
+        result.forwardTo(this).formReception();
     }
 
     @Post("/recepcao/finalizar")
     public void finalizeReception(Reception reception){
         purchaseOrderService.saveReception(reception, StatusEnum.Finished);
-        result.redirectTo("/home");
+        result.forwardTo(this).listReception();
     }
 
 

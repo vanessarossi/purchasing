@@ -48,7 +48,6 @@
           <input type="text" class="form-control" name="reception.barCodeTaxDocument"/>
         </div>
       </div>
-
       <br>
       <c:if test="${purchaseOrder.budget.quotation.type eq 'Material'}">
         <div class="panel panel-default">
