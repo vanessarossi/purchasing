@@ -72,8 +72,8 @@ public class PurchaseOrderController {
         result.include("controller", this.getClass()).toString();
     }
 
-    @Path("/pesquisa/recepcao")
-    public void listReception(){
+    @Path("/formulario/confirma/conferencia")
+    public void formConfirmConference() {
         result.include("controller", this.getClass()).toString();
     }
 
@@ -161,7 +161,19 @@ public class PurchaseOrderController {
     @Post("/recepcao/finalizar")
     public void finalizeReception(Reception reception){
         purchaseOrderService.saveReception(reception, StatusEnum.Finished);
-        result.forwardTo(this).listReception();
+        PurchaseOrder purchaseOrder = purchaseOrderService.findById(reception.getPurchaseOrder());
+        result.include("purchaseOrder", purchaseOrder);
+        result.forwardTo(this).visualize();
+    }
+
+    @Get("/confirmacao/conferencia/{purchaseOrder.id}")
+    public void confirmConference(PurchaseOrder purchaseOrder){
+
+        purchaseOrder = purchaseOrderService.findById(purchaseOrder);
+        result.include("purchaseOrder",purchaseOrder);
+        result.include("formsPayment", formPaymentService.findAll());
+        result.include("meansPayment", MeanPaymentEnum.values());
+        result.redirectTo(this).formConfirmConference();
     }
 
 

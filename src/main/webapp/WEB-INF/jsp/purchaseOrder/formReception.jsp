@@ -95,17 +95,19 @@
             <table class="table" id="tableService">
             <thead>
             <tr>
-              <th style="width:15%"><fmt:message key="table.costCenter"/></th>
+              <th style="width:20%"><fmt:message key="table.costCenter"/></th>
               <th style="width:70%"><fmt:message key="table.service"/></th>
+              <th style="width:5%"><fmt:message key="table.unitary.price"/></th>
               <th style="width:1%"></th>
             </tr>
             </thead>
               <c:forEach items="${purchaseOrder.orderRequests}" var="orderRequest" varStatus="i">
                 <tr>
-                  <input type="hidden" name="reception.requestDelivereds[${i.index}].orderRequest.id" id="orderRequestId${i.index}" value="${orderRequest.id}" />
+
                   <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.solicitation.costCenter.description}</td>
                   <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.service.description}</td>
-                  <td><input type="checkbox"/></td>
+                  <td>${fn:replace(orderRequest.budgetQuotation.unityPrice,".",",")}</td>
+                  <td><input type="checkbox"name="reception.requestDelivereds[${i.index}].orderRequest.id" id="orderRequestId${i.index}" value="${orderRequest.id}"/></td>
                 </tr>
               </c:forEach>
           </table>
@@ -212,14 +214,16 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-offset-10 col-md-offset-10">
-            <div class="form-group">
-              <input type="button" class="btn btn-primary" id="confered" value="<fmt:message key="button.confered"/>" >
-              <input type="button" class="btn btn-success" id="finalize" value="<fmt:message key="button.finalize"/>" >
+        <c:if test="${purchaseOrder.status != 'Finished'}">
+          <div class="row">
+            <div class="col-sm-offset-10 col-md-offset-10">
+              <div class="form-group">
+                <input type="button" class="btn btn-primary" id="confered" value="<fmt:message key="button.confered"/>" >
+                <input type="button" class="btn btn-success" id="finalize" value="<fmt:message key="button.finalize"/>" >
+              </div>
             </div>
           </div>
-        </div>
+        </c:if>
       </c:if>
     </form>
   </div>

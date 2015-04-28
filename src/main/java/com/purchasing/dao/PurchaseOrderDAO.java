@@ -228,7 +228,8 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Disjunction disjunction = Restrictions.disjunction();
         criteria.setFirstResult(iDisplayStart);
         criteria.setMaxResults(iDisplayLength);
-        criteria.add(Restrictions.eq("status", StatusEnum.Conferred));
+        criteria.createAlias("receptions","receptions",JoinType.LEFT_OUTER_JOIN);
+        criteria.add(Restrictions.eq("receptions.status", StatusEnum.Conferred));
         criteria.addOrder(Order.desc("id"));
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
@@ -238,13 +239,8 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
         Disjunction disjunction = Restrictions.disjunction();
-        criteria.createAlias("approval", "approval", JoinType.LEFT_OUTER_JOIN);
-        criteria.createAlias("budget", "budget");
-        criteria.createAlias("budget.supplier", "supplier");
-        criteria.createAlias("supplier.person", "person");
-        criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
-        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
-        criteria.add(disjunction);
+        criteria.createAlias("receptions","receptions",JoinType.LEFT_OUTER_JOIN);
+        criteria.add(Restrictions.eq("receptions.status", StatusEnum.Conferred));
         criteria.addOrder(Order.desc("id"));
         criteria.add(disjunction);
         criteria.setProjection(Projections.rowCount());

@@ -4,6 +4,7 @@ import com.purchasing.dao.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.StatusEnum;
+import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.printer.OrderPrinter;
 import com.purchasing.service.impl.PurchaseOrderService;
 import com.purchasing.support.purchaseOrder.OrderRequestProductView;
@@ -303,12 +304,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
             String colCode = purchaseOrder.getId().toString();
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
-            String colButtonEdit = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/approve><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
+            String colButtonConfirmConference = "<a href=/purchasing/ordemCompra/confirmacao/conferencia/" + purchaseOrder.getId() +"><span class=\"fa fa-check-square btn btn-default btn-xs\"></span></a>";
 
             String[] row = {
                     colCode,
                     colSupplier,
-                    colButtonEdit,
+                    colButtonConfirmConference,
             };
             purchaseOrderList.add(row);
         }
@@ -555,7 +556,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Override
     public Float getQuantityByOrderRequest(OrderRequest orderRequest) {
         orderRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId());
-        return orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity();
+        Float total = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity() == null ? 0f : orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity();
+        return total;
     }
 
     @Override
@@ -565,7 +567,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public void saveReception(Reception reception,StatusEnum statusEnum) {
-
         List<RequestDelivered> requestDelivereds = reception.getRequestDelivereds();
         PurchaseOrder purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, reception.getPurchaseOrder().getId());
         StatusEnum statusPurchase = null;
@@ -578,7 +579,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             reception = receptionDAO.save(reception);
 
             for (RequestDelivered requestDelivered : requestDelivereds){
-                if (requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f){
+                if ((purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material) && requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f)||(purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Service))){
                     requestDelivered.setReception(reception);
                     RequestDelivered requestDeliveredSaved  = requestDeliveredDAO.save(requestDelivered);
                     alterStatusSolicitationConfered(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
@@ -594,7 +595,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             reception = receptionDAO.save(reception);
 
             for (RequestDelivered requestDelivered : requestDelivereds) {
-                if (requestDelivered.getQuantity() != null &&  requestDelivered.getQuantity() > 0f) {
+                if ((purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material) && requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f)||(purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Service))) {
                     requestDelivered.setReception(reception);
                     RequestDelivered requestDeliveredSaved = requestDeliveredDAO.save(requestDelivered);
                     alterStatusProduct(requestDelivered.getOrderRequest());
@@ -781,7 +782,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         Float total = getQuantityByOrderRequest(orderRequest);
         Float totalDelivered = getQuantityDeliveredByOrderRequest(orderRequest);
         Integer difference = total.compareTo(totalDelivered);
-        SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
+        SolicitationRequest solicitationRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId()).getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
         if (difference == 0){
             solicitationRequest.setStatus(StatusEnum.Delivered);
         }
