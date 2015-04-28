@@ -326,19 +326,25 @@
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-md-4 col-sm-4">
-              <div class="form-group">
-                <label class="control-label" for="street"><fmt:message key="label.street"/></label>
-                <input type="text" class="form-control" id="street" name="purchaseOrder.deliveryInformation.street" value="${purchaseOrder.purchaseOrder.deliveryInformation.street}"/>
+              <div class="col-md-2 col-sm-2">
+                  <div class="form-group">
+                      <label class="control-label" for="deliveryTime"><fmt:message key="label.delivery.time"/></label>
+                      <input type="text" class="form-control" id="deliveryTime" name="purchaseOrder.deliveryInformation.deliveryTime" value="${purchaseOrder.purchaseOrder.deliveryInformation.deliveryTime}"/>
+                  </div>
               </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
+              <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                      <label class="control-label" for="street"><fmt:message key="label.street"/></label>
+                      <input type="text" class="form-control" id="street" name="purchaseOrder.deliveryInformation.street" value="${purchaseOrder.purchaseOrder.deliveryInformation.street}"/>
+                  </div>
+              </div>
+              <div class="col-md-4 col-sm-4">
               <div class="form-group">
                 <label class="control-label" for="neighborhood"><fmt:message key="label.neighborhood"/></label>
                 <input type="text" class="form-control" id="neighborhood" name="purchaseOrder.deliveryInformation.neighborhood" value="${purchaseOrder.purchaseOrder.deliveryInformation.neighborhood}" />
               </div>
             </div>
-            <div class="col-md-2 col-sm-2">
+              <div class="col-md-2 col-sm-2">
               <div class="form-group">
                 <label class="control-label" for="number"><fmt:message key="label.number"/></label>
                 <input type="text" class="form-control" id="number" name="purchaseOrder.deliveryInformation.number" value="${purchaseOrder.purchaseOrder.deliveryInformation.number}"/>

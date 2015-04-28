@@ -293,6 +293,37 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public List<Object[]> findPaginationMissingConfered(String sSearch, int iDisplayStart, int iDisplayLength) {
+        String search = sSearch == null ? "" : sSearch;
+        List<PurchaseOrder> purchaseOrders = new ArrayList<>();
+        purchaseOrders = purchaseOrderDAO.paginationMissingConfered(search,iDisplayStart,iDisplayLength);
+
+        List<Object[]> purchaseOrderList = new ArrayList<>();
+
+        for (PurchaseOrder purchaseOrder : purchaseOrders) {
+            String colCode = purchaseOrder.getId().toString();
+            String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
+            String colButtonEdit = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/approve><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
+
+            String[] row = {
+                    colCode,
+                    colSupplier,
+                    colButtonEdit,
+            };
+            purchaseOrderList.add(row);
+        }
+        return purchaseOrderList;
+    }
+
+    @Override
+    public Integer totalPaginationMissingConfered(String sSearch) {
+        Integer total = 0;
+        String search = sSearch == null ? "" : sSearch;
+        total = purchaseOrderDAO.totalPaginationMissingConfered(search);
+        return total;
+    }
+
+    @Override
     public PurchaseOrder findByConference(Long id) {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
             if (id != null){
@@ -534,25 +565,44 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public void saveReception(Reception reception,StatusEnum statusEnum) {
+
         List<RequestDelivered> requestDelivereds = reception.getRequestDelivereds();
-
         PurchaseOrder purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, reception.getPurchaseOrder().getId());
+        StatusEnum statusPurchase = null;
+
         if (statusEnum == StatusEnum.Conferred){
-
-
-
             reception.setDate(new Timestamp(new Date().getTime()));
             reception.setUser(getUserLogged());
             reception.setStatus(statusEnum);
             reception.setPaymentInformation(null);
-            reception = receptionDAO.save(null);
+            reception = receptionDAO.save(reception);
 
             for (RequestDelivered requestDelivered : requestDelivereds){
-                requestDelivered.setReception(reception);
-                requestDeliveredDAO.save(requestDelivered);
-                alterStatusSolicitationConfered(requestDelivered.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
+                if (requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f){
+                    requestDelivered.setReception(reception);
+                    RequestDelivered requestDeliveredSaved  = requestDeliveredDAO.save(requestDelivered);
+                    alterStatusSolicitationConfered(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
+                }
             }
+            purchaseOrder.setStatus(StatusEnum.Conferred);
+            purchaseOrderDAO.save(purchaseOrder);
+        }else{
+            reception.setDate(new Timestamp(new Date().getTime()));
+            reception.setUser(getUserLogged());
+            reception.setStatus(statusEnum);
+            reception.setPaymentInformation(purchaseOrder.getPaymentInformation());
+            reception = receptionDAO.save(reception);
 
+            for (RequestDelivered requestDelivered : requestDelivereds) {
+                if (requestDelivered.getQuantity() != null &&  requestDelivered.getQuantity() > 0f) {
+                    requestDelivered.setReception(reception);
+                    RequestDelivered requestDeliveredSaved = requestDeliveredDAO.save(requestDelivered);
+                    alterStatusProduct(requestDelivered.getOrderRequest());
+                    statusPurchase = alterStatusFinishedOrPartiallyFinished(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
+                }
+            }
+            purchaseOrder.setStatus(statusPurchase);
+            purchaseOrderDAO.save(purchaseOrder);
         }
     }
 
@@ -710,6 +760,35 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         situationDAO.save(situation);
     }
 
-    public void alterStatusFinishedOrPartiallyFinished(Solicitation solicitation){}
+    public StatusEnum alterStatusFinishedOrPartiallyFinished(Solicitation solicitation){
+        Situation situation = solicitation.getSituation();
+
+        Integer totalDelivered = solicitationRequestDAO.totalSolicitationRequestDeliveredBySolicitation(solicitation);
+        Integer total = solicitationRequestDAO.totalSolicitationRequestBySolicitation(solicitation);
+        StatusEnum statusEnum = StatusEnum.Finished;
+        if (total == totalDelivered){
+            situation.setStatus(StatusEnum.Finished);
+        }else{
+            situation.setStatus(StatusEnum.PartiallyFinished);
+            statusEnum = StatusEnum.PartiallyFinished;
+        }
+        situationDAO.save(situation);
+
+        return  statusEnum;
+    }
+
+    public void alterStatusProduct(OrderRequest orderRequest){
+        Float total = getQuantityByOrderRequest(orderRequest);
+        Float totalDelivered = getQuantityDeliveredByOrderRequest(orderRequest);
+        Integer difference = total.compareTo(totalDelivered);
+        SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
+        if (difference == 0){
+            solicitationRequest.setStatus(StatusEnum.Delivered);
+        }
+        if (difference == -1) {
+            solicitationRequest.setStatus(StatusEnum.PartiallyDelivered);
+        }
+        solicitationRequestDAO.save(solicitationRequest);
+    }
 }
 

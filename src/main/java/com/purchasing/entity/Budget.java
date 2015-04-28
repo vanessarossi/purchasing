@@ -42,9 +42,6 @@ public class Budget {
     @Column(name = "number_budget")
     private String numberBudget;
 
-    @Column(name = "delivery_time")
-    private Integer deliveryTime;
-
     @ManyToOne
     @JoinColumn(name = "quotation_id", referencedColumnName = "id", nullable = false)
     private Quotation quotation;
@@ -91,14 +88,6 @@ public class Budget {
 
     public void setNumberBudget(String numberBudget) {
         this.numberBudget = numberBudget;
-    }
-
-    public Integer getDeliveryTime() {
-        return deliveryTime;
-    }
-
-    public void setDeliveryTime(Integer deliveryTime) {
-        this.deliveryTime = deliveryTime;
     }
 
     public Quotation getQuotation() {

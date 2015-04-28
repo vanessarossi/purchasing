@@ -34,7 +34,7 @@ public class SolicitationPrinter extends PrinterImpl implements BasePrinter {
 
     @Override
     public File generate(Long code) {
-        String url = "/jasper/solicitacao.jrxml";
+        String url = "/jasper/solicitation.jrxml";
         Solicitation solicitation = solicitationDAO.findById(Solicitation.class,code);
 
         List<SolicitationView> solicitationViewList = new SolicitationView().getList(solicitation.getSolicitationRequests());

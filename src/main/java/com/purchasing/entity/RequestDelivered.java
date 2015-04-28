@@ -23,7 +23,7 @@ public class RequestDelivered {
 
     @Digits(integer = 10, fraction = 2)
     @Column(name = "quantity")
-    private String quantity;
+    private Float quantity;
 
     @ManyToOne
     @JoinColumn(name = "order_request_id", referencedColumnName = "id", nullable = false)
@@ -41,11 +41,11 @@ public class RequestDelivered {
         this.id = id;
     }
 
-    public String getQuantity() {
+    public Float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
 

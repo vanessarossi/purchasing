@@ -128,7 +128,6 @@ public enum StatusEnum {
     public static List<StatusEnum> getStatusSearchPurchaseOrderForConference(){
         List<StatusEnum> statusEnums = new ArrayList<>();
         statusEnums.add(PurchaseMade);
-        statusEnums.add(Conferred);
         statusEnums.add(PartiallyFinished);
         return statusEnums;
     }

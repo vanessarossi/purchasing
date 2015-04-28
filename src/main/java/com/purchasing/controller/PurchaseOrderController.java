@@ -47,6 +47,11 @@ public class PurchaseOrderController {
         result.include("controller", this.getClass()).toString();
     }
 
+    @Path("/listagem/conferida")
+    public void missingConferedList(){
+        result.include("controller", this.getClass()).toString();
+    }
+
     @Path("/formulario/recepcao")
     public void formReception(){
         result.include("controller", this.getClass()).toString();
@@ -179,6 +184,17 @@ public class PurchaseOrderController {
         dataTableModel.setsEcho(sEcho);
         dataTableModel.setiTotalRecords(purchaseOrderService.totalPaginationMissing(sSearch));
         dataTableModel.setiTotalDisplayRecords(purchaseOrderService.totalPaginationMissing(sSearch));
+        dataTableModel.setAaData(purchaseOrderObjects.toArray());
+        result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
+    }
+
+    @Get("/paginar/pendencia/conferida")
+    public void paginationMissingConfered(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength) {
+        List<Object[]> purchaseOrderObjects = purchaseOrderService.findPaginationMissingConfered(sSearch, iDisplayStart, iDisplayLength);
+        DataTableModel dataTableModel = new DataTableModel();
+        dataTableModel.setsEcho(sEcho);
+        dataTableModel.setiTotalRecords(purchaseOrderService.totalPaginationMissingConfered(sSearch));
+        dataTableModel.setiTotalDisplayRecords(purchaseOrderService.totalPaginationMissingConfered(sSearch));
         dataTableModel.setAaData(purchaseOrderObjects.toArray());
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }

@@ -182,4 +182,25 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
         total =  Integer.parseInt(criteria.uniqueResult().toString());
         return total;
     }
+
+    public Integer totalSolicitationRequestDeliveredBySolicitation(Solicitation solicitation){
+        Integer total = 0;
+        Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
+        criteria.add(Restrictions.eq("solicitation", solicitation));
+        criteria.add(Restrictions.eq("status",StatusEnum.Delivered));
+        criteria.setProjection(Projections.rowCount());
+        total =  Integer.parseInt(criteria.uniqueResult().toString());
+        return total;
+    }
+
+    public Integer totalSolicitationRequestPartiallyDeliveredBySolicitation(Solicitation solicitation){
+        Integer total = 0;
+        Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
+        criteria.add(Restrictions.eq("solicitation", solicitation));
+        criteria.add(Restrictions.eq("status",StatusEnum.PartiallyDelivered));
+        criteria.setProjection(Projections.rowCount());
+        total =  Integer.parseInt(criteria.uniqueResult().toString());
+        return total;
+    }
+
 }

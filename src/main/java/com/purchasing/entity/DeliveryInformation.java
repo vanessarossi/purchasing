@@ -31,9 +31,13 @@ public class DeliveryInformation {
     @Column(name = "number")
     private String number;
 
+    @Column(name = "delivery_time")
+    private Integer deliveryTime;
+
     @Length(min = 1, max = 150)
     @Column(name = "receptor_name")
     private String receptorName;
+
 
     public Long getId() {
         return id;
@@ -73,6 +77,14 @@ public class DeliveryInformation {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Integer getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Integer deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
     public String getReceptorName() {

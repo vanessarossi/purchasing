@@ -50,6 +50,9 @@
                 <li><a href="<c:url value="/ordemCompra/listagem/pendencia" ></c:url>"><fmt:message key="submenu.missingList"/></a></li>
                 <li><a href="<c:url value="/ordemCompra/formulario/recepcao" ></c:url>"><fmt:message key="submenu.reception"/></a></li>
                 <li class="divider"></li>
+                <li class="dropdown-header"><fmt:message key="submenu.headerPendenceFinalize"/></li>
+                <li><a href="<c:url value="/ordemCompra/listagem/conferida" ></c:url>"><fmt:message key="submenu.searchConfered"/></a></li>
+                <li class="divider"></li>
                 <li class="dropdown-header"><fmt:message key="submenu.headerSearch"/></li>
                 <li><a href="<c:url value="/ordemCompra/pesquisar" ></c:url>"><fmt:message key="submenu.searchBySupplier"/></a></li>
             </ul>

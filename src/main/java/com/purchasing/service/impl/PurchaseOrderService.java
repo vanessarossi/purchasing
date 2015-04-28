@@ -26,6 +26,9 @@ public interface PurchaseOrderService {
     public List<Object[]> findPaginationMissing(String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPaginationMissing(String sSearch);
 
+    public List<Object[]> findPaginationMissingConfered(String sSearch, int iDisplayStart, int iDisplayLength);
+    public Integer totalPaginationMissingConfered(String sSearch);
+
     public PurchaseOrder findByConference(Long id);
 
     public List<OrderRequestProductView> groupByProduct(PurchaseOrder purchaseOrder);

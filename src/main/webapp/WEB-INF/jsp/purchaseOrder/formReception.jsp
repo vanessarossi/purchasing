@@ -47,6 +47,7 @@
           <label class="control-label"><fmt:message key="label.bar.codetax.document"/></label>
           <input type="text" class="form-control" name="reception.barCodeTaxDocument"/>
         </div>
+        <input type="hidden" name="reception.purchaseOrder.id" value="${purchaseOrder.id}" >
       </div>
       <br>
       <c:if test="${purchaseOrder.budget.quotation.type eq 'Material'}">
@@ -99,8 +100,14 @@
               <th style="width:1%"></th>
             </tr>
             </thead>
-            <tbody>
-            </tbody>
+              <c:forEach items="${purchaseOrder.orderRequests}" var="orderRequest" varStatus="i">
+                <tr>
+                  <input type="hidden" name="reception.requestDelivereds[${i.index}].orderRequest.id" id="orderRequestId${i.index}" value="${orderRequest.id}" />
+                  <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.solicitation.costCenter.description}</td>
+                  <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.service.description}</td>
+                  <td><input type="checkbox"/></td>
+                </tr>
+              </c:forEach>
           </table>
           </div>
       </div>

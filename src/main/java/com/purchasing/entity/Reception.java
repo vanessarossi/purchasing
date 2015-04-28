@@ -45,7 +45,7 @@ public class Reception {
     private PurchaseOrder purchaseOrder;
 
     @OneToOne
-    @JoinColumn(name = "payment_information_id", referencedColumnName = "id" , nullable = false)
+    @JoinColumn(name = "payment_information_id", referencedColumnName = "id" , nullable = true)
     private PaymentInformation paymentInformation;
 
     @OneToMany(mappedBy = "reception")
