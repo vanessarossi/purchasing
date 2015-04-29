@@ -168,7 +168,6 @@ public class PurchaseOrderController {
 
     @Get("/confirmacao/conferencia/{purchaseOrder.id}")
     public void confirmConference(PurchaseOrder purchaseOrder){
-
         purchaseOrder = purchaseOrderService.findById(purchaseOrder);
         result.include("purchaseOrder",purchaseOrder);
         result.include("formsPayment", formPaymentService.findAll());
@@ -176,6 +175,15 @@ public class PurchaseOrderController {
         result.redirectTo(this).formConfirmConference();
     }
 
+    @Get("/finalizar/conferencia")
+    public void saveConference(Reception reception){
+
+    }
+
+    @Get("/imprimir/ordem/{reception.id}")
+    public File printerPurchaseOrder(Reception reception){
+        return purchaseOrderService.printerPurchaseOrder(reception);
+    }
 
     /**  Listegem  **/
     @Get("/paginar")

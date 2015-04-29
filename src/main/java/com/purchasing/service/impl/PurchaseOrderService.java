@@ -3,6 +3,7 @@ package com.purchasing.service.impl;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.support.purchaseOrder.OrderRequestProductView;
+import com.purchasing.support.purchaseOrder.printer.PurchaseOrderViewPrinter;
 
 import java.io.File;
 import java.util.List;
@@ -33,15 +34,20 @@ public interface PurchaseOrderService {
 
     public List<OrderRequestProductView> groupByProduct(PurchaseOrder purchaseOrder);
 
+    public List<PurchaseOrderViewPrinter> groupByCostCenter(List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters);
+
     public void approve(PurchaseOrder purchaseOrder);
     public void reprove(PurchaseOrder purchaseOrder, String justification);
 
     public File printerOrder(PurchaseOrder purchaseOrder);
+    public File printerPurchaseOrder(Reception reception);
 
     public Float getQuantityByOrderRequest(OrderRequest orderRequest);
     public Float getQuantityDeliveredByOrderRequest(OrderRequest orderRequest);
 
 
     public void saveReception(Reception reception,StatusEnum statusEnum);
+
+    public void saveConference(Reception reception);
 
 }

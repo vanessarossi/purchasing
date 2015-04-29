@@ -6,8 +6,10 @@ import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.printer.OrderPrinter;
+import com.purchasing.printer.PurchaseOrderPrinter;
 import com.purchasing.service.impl.PurchaseOrderService;
 import com.purchasing.support.purchaseOrder.OrderRequestProductView;
+import com.purchasing.support.purchaseOrder.printer.PurchaseOrderViewPrinter;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -36,6 +38,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Inject private SolicitationRequestDAO solicitationRequestDAO;
     @Inject private DeliveryInformationDAO deliveryInformationDAO;
     @Inject private OrderPrinter orderPrinter;
+    @Inject private PurchaseOrderPrinter purchaseOrderPrinter;
     @Inject private RequestDeliveredDAO requestDeliveredDAO;
 
     @Override
@@ -372,6 +375,32 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public List<PurchaseOrderViewPrinter> groupByCostCenter(List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters) {
+        List<PurchaseOrderViewPrinter> purchaseOrderViewPrinterArrayList = new ArrayList<>();
+        List<PurchaseOrderViewPrinter> purchaseOrderViewPrinterList= new ArrayList<>();
+
+        Collections.sort(purchaseOrderViewPrinterList,new PurchaseOrderViewPrinter());
+        Map<String,PurchaseOrderViewPrinter> map = new HashMap<>();
+
+        purchaseOrderViewPrinterArrayList = purchaseOrderViewPrinters;
+        for (PurchaseOrderViewPrinter purchaseOrderViewPrinter : purchaseOrderViewPrinterArrayList){
+            String idCostCenter = purchaseOrderViewPrinter.getCode_cost_center();
+            if (!map.containsKey(idCostCenter)){
+                map.put(purchaseOrderViewPrinter.getCode_cost_center(),purchaseOrderViewPrinter);
+            }else{
+                PurchaseOrderViewPrinter purchaseOrderV = map.get(idCostCenter);
+                BigDecimal totalPrice = new BigDecimal(purchaseOrderV.getTotal_price()).add(new BigDecimal(purchaseOrderViewPrinter.getTotal_price()));
+                purchaseOrderV.setTotal_price(totalPrice.toString().replace(".",","));
+            }
+        }
+        for (String key : map.keySet()){
+            PurchaseOrderViewPrinter purchaseOrderViewPrinter = map.get(key);
+            purchaseOrderViewPrinterList.add(purchaseOrderViewPrinter);
+        }
+        return purchaseOrderViewPrinterList;
+    }
+
+    @Override
     public void approve(PurchaseOrder purchaseOrder) {
         purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class,purchaseOrder.getId());
         Approval approval = new Approval();
@@ -554,6 +583,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public File printerPurchaseOrder(Reception reception) {
+        reception = receptionDAO.findById(Reception.class,reception.getId());
+        return purchaseOrderPrinter.generatePurchaseOrder(reception.getPurchaseOrder(),reception,this);
+    }
+
+    @Override
     public Float getQuantityByOrderRequest(OrderRequest orderRequest) {
         orderRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId());
         Float total = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity() == null ? 0f : orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity();
@@ -606,6 +641,33 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             purchaseOrderDAO.save(purchaseOrder);
         }
     }
+
+    @Override
+    public void saveConference(Reception reception) {
+
+        PaymentInformation paymentInformation = reception.getPaymentInformation();
+        paymentInformation = paymentInformationDAO.save(paymentInformation);
+
+        reception = receptionDAO.findById(Reception.class,reception.getId());
+        reception.setStatus(StatusEnum.Finished);
+        reception.setPaymentInformation(paymentInformation);
+
+        receptionDAO.save(reception);
+
+        PurchaseOrder purchaseOrder = reception.getPurchaseOrder();
+
+        StatusEnum statusPurchase = null;
+        for (RequestDelivered requestDelivered : reception.getRequestDelivereds()) {
+            requestDelivered.setReception(reception);
+            RequestDelivered requestDeliveredSaved = requestDeliveredDAO.save(requestDelivered);
+            alterStatusProduct(requestDelivered.getOrderRequest());
+            statusPurchase = alterStatusFinishedOrPartiallyFinished(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
+        }
+
+        purchaseOrder.setStatus(statusPurchase);
+        purchaseOrderDAO.save(purchaseOrder);
+    }
+
 
     /** utilizados para ajudar   **/
     public User getUserLogged() {

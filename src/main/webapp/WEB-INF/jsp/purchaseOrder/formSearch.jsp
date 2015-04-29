@@ -35,7 +35,7 @@
         </div>
       </div>
     </form>
-    <table class="table table-striped table-hover table-condensed">
+    <table class="table table-striped table-hover table-condensed" id="searchPurchaseOrderTable">
       <thead>
         <tr>
           <th style="width: 5%"><fmt:message key="table.code"/></th>

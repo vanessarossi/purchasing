@@ -1,5 +1,7 @@
 package com.purchasing.printer.impl;
 
+import com.purchasing.entity.PurchaseOrder;
+import com.purchasing.entity.Reception;
 import com.purchasing.printer.base.Printer;
 import com.purchasing.service.impl.PurchaseOrderService;
 
@@ -21,4 +23,8 @@ public class PrinterImpl extends BasePrinterImpl implements Printer {
         return null;
     }
 
+    @Override
+    public File generatePurchaseOrder(PurchaseOrder purchaseOrder, Reception reception, PurchaseOrderService purchaseOrderService) {
+        return null;
+    }
 }

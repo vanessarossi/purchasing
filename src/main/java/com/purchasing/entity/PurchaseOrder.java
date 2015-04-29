@@ -55,6 +55,7 @@ public class PurchaseOrder {
     private List<OrderRequest> orderRequests;
 
     @OneToMany(mappedBy = "purchaseOrder")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Reception> receptions;
 
 
@@ -136,5 +137,13 @@ public class PurchaseOrder {
 
     public void setOrderRequests(List<OrderRequest> orderRequests) {
         this.orderRequests = orderRequests;
+    }
+
+    public List<Reception> getReceptions() {
+        return receptions;
+    }
+
+    public void setReceptions(List<Reception> receptions) {
+        this.receptions = receptions;
     }
 }

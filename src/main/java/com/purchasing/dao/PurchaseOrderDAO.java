@@ -29,7 +29,6 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Disjunction disjunction = Restrictions.disjunction();
         criteria.createAlias("budget", "budget");
         disjunction.add(Restrictions.eq("budget.supplier", supplier));
-        disjunction.add(Restrictions.in("status", StatusEnum.getStatusForSearchPurchaseOrderBySupplier()));
         criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
