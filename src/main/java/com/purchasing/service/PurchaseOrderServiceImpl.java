@@ -299,15 +299,15 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Override
     public List<Object[]> findPaginationMissingConfered(String sSearch, int iDisplayStart, int iDisplayLength) {
         String search = sSearch == null ? "" : sSearch;
-        List<PurchaseOrder> purchaseOrders = new ArrayList<>();
-        purchaseOrders = purchaseOrderDAO.paginationMissingConfered(search,iDisplayStart,iDisplayLength);
+        List<Reception> receptions = new ArrayList<>();
+        receptions = receptionDAO.paginationMissingConfered(search,iDisplayStart,iDisplayLength);
 
         List<Object[]> purchaseOrderList = new ArrayList<>();
 
-        for (PurchaseOrder purchaseOrder : purchaseOrders) {
-            String colCode = purchaseOrder.getId().toString();
-            String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
-            String colButtonConfirmConference = "<a href=/purchasing/ordemCompra/confirmacao/conferencia/" + purchaseOrder.getId() +"><span class=\"fa fa-check-square btn btn-default btn-xs\"></span></a>";
+        for (Reception reception : receptions) {
+            String colCode = reception.getPurchaseOrder().getId().toString();
+            String colSupplier = reception.getPurchaseOrder().getBudget().getSupplier().getPerson().getName();
+            String colButtonConfirmConference = "<a href=/purchasing/ordemCompra/confirmacao/conferencia/" + reception.getId() +"><span class=\"fa fa-check-square btn btn-default btn-xs\"></span></a>";
 
             String[] row = {
                     colCode,
@@ -323,7 +323,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     public Integer totalPaginationMissingConfered(String sSearch) {
         Integer total = 0;
         String search = sSearch == null ? "" : sSearch;
-        total = purchaseOrderDAO.totalPaginationMissingConfered(search);
+        total = receptionDAO.totalPaginationMissingConfered(search);
         return total;
     }
 
@@ -389,7 +389,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 map.put(purchaseOrderViewPrinter.getCode_cost_center(),purchaseOrderViewPrinter);
             }else{
                 PurchaseOrderViewPrinter purchaseOrderV = map.get(idCostCenter);
-                BigDecimal totalPrice = new BigDecimal(purchaseOrderV.getTotal_price()).add(new BigDecimal(purchaseOrderViewPrinter.getTotal_price()));
+                BigDecimal totalPrice = new BigDecimal(purchaseOrderV.getTotal_price().replace(",",".")).add(new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",",".")));
                 purchaseOrderV.setTotal_price(totalPrice.toString().replace(".",","));
             }
         }
@@ -591,7 +591,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Override
     public Float getQuantityByOrderRequest(OrderRequest orderRequest) {
         orderRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId());
-        Float total = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity() == null ? 0f : orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity();
+        Float total = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity() == null ? 1f : orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity();
         return total;
     }
 
@@ -644,8 +644,24 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public void saveConference(Reception reception) {
+        PaymentInformation paymentInformation = new PaymentInformation();
+        if (reception.getPaymentInformation().getHasContract() != null) {
+            paymentInformation.setHasContract(reception.getPaymentInformation().getHasContract());
+            paymentInformation.setContract(reception.getPaymentInformation().getContract());
+        }
+        paymentInformation.setMeanPayment(reception.getPaymentInformation().getMeanPayment());
+        paymentInformation.setDateFirstInstallment(reception.getPaymentInformation().getDateFirstInstallment());
+        paymentInformation.setDateLastInstallment(reception.getPaymentInformation().getDateLastInstallment());
+        paymentInformation.setDateInput(reception.getPaymentInformation().getDateInput());
+        paymentInformation.setExpirationDate(reception.getPaymentInformation().getExpirationDate());
+        paymentInformation.setInputPrice(reception.getPaymentInformation().getInputPrice());
+        paymentInformation.setSharePrice(reception.getPaymentInformation().getSharePrice());
+        paymentInformation.setTotalPrice(reception.getPaymentInformation().getTotalPrice());
+        paymentInformation.setDiscountPercentage(reception.getPaymentInformation().getDiscountPercentage());
+        paymentInformation.setTotalFinalPrice(reception.getPaymentInformation().getTotalFinalPrice());
+        paymentInformation.setFormPayment(reception.getPaymentInformation().getFormPayment());
+        paymentInformation.setId(reception.getPaymentInformation().getId());
 
-        PaymentInformation paymentInformation = reception.getPaymentInformation();
         paymentInformation = paymentInformationDAO.save(paymentInformation);
 
         reception = receptionDAO.findById(Reception.class,reception.getId());
@@ -666,6 +682,24 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
         purchaseOrder.setStatus(statusPurchase);
         purchaseOrderDAO.save(purchaseOrder);
+    }
+
+    @Override
+    public Reception findReceptionById(Reception reception) {
+        return receptionDAO.findById(Reception.class,reception.getId());
+    }
+
+    @Override
+    public BigDecimal sumTotal(List<RequestDelivered> requestDelivereds) {
+        BigDecimal total = new BigDecimal("0");
+
+        for (RequestDelivered requestDelivered : requestDelivereds){
+            BigDecimal quantity = requestDelivered.getQuantity() == null ? new BigDecimal("1") : new BigDecimal(requestDelivered.getQuantity());
+            BigDecimal unitPrice = requestDelivered.getOrderRequest().getBudgetQuotation().getUnityPrice();
+            BigDecimal totalRequest = quantity.multiply(unitPrice);
+            total = total.add(totalRequest);
+        }
+        return total;
     }
 
 

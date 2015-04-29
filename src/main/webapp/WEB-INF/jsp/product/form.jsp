@@ -31,7 +31,7 @@
             <div class="row" >
                 <div class="col-sm-4 col-md-4">
                     <div class="form-group">
-                        <label class="control-label"><fmt:message key="label.mark"></fmt:message></label><span class="required"> *</span>
+                        <label class="control-label"><fmt:message key="label.mark"></fmt:message></label>
                         <input type="text" class="form-control" id="mark" name="product.mark" value="${product.mark}"/>
                         <span class="required">${errors.from('product.mark')}</span>
                     </div>

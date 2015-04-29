@@ -95,7 +95,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         String expiration_date = reception.getPaymentInformation().getExpirationDate() == null ? "" : Conversor.converterDateInString(reception.getPaymentInformation().getExpirationDate());
         String share_price = reception.getPaymentInformation().getSharePrice() == null ? "" : reception.getPaymentInformation().getSharePrice().toString();
         String total_price = reception.getPaymentInformation().getTotalPrice().toString();
-        String discount_percentage = reception.getPaymentInformation().getDiscountPercentage().toString();
+        String discount_percentage = reception.getPaymentInformation().getTotalPrice().min(reception.getPaymentInformation().getTotalFinalPrice()).toString();
         String total_final_price = reception.getPaymentInformation().getTotalFinalPrice().toString();
 
         String form_payment = reception.getPaymentInformation().getFormPayment().getDescription();
@@ -179,7 +179,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         map.put("expiration_date",expiration_date);
         map.put("share_price",share_price.replace(".", ","));
         map.put("total_price",total_price.replace(".", ","));
-        map.put("discount_percentage",discount_percentage);
+        map.put("discount_percentage",discount_percentage.replace(".",","));
         map.put("total_final_price",total_final_price.replace(".", ","));
         map.put("date_purchase_request",date_purchase_request);
         map.put("form_payment",form_payment);

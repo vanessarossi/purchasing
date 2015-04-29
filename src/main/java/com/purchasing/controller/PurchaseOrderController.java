@@ -166,18 +166,21 @@ public class PurchaseOrderController {
         result.forwardTo(this).visualize();
     }
 
-    @Get("/confirmacao/conferencia/{purchaseOrder.id}")
-    public void confirmConference(PurchaseOrder purchaseOrder){
-        purchaseOrder = purchaseOrderService.findById(purchaseOrder);
-        result.include("purchaseOrder",purchaseOrder);
+    @Get("/confirmacao/conferencia/{reception.id}")
+    public void confirmConference(Reception reception){
+        reception = purchaseOrderService.findReceptionById(reception);
+        /** gambiarra **/
+        result.include("totalPrice",purchaseOrderService.sumTotal(reception.getRequestDelivereds()));
+        result.include("reception",reception);
         result.include("formsPayment", formPaymentService.findAll());
         result.include("meansPayment", MeanPaymentEnum.values());
         result.redirectTo(this).formConfirmConference();
     }
 
-    @Get("/finalizar/conferencia")
+    @Post("/finalizar/conferencia")
     public void saveConference(Reception reception){
-
+        purchaseOrderService.saveConference(reception);
+        result.forwardTo(this).list();
     }
 
     @Get("/imprimir/ordem/{reception.id}")

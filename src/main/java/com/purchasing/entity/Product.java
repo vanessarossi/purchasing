@@ -27,7 +27,6 @@ public class Product {
     @Column(name = "model")
     private String model;
 
-    @NotBlank
     @Length(min = 1, max = 100)
     @Column(name = "mark")
     private String mark;

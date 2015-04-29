@@ -6,6 +6,7 @@ import com.purchasing.support.purchaseOrder.OrderRequestProductView;
 import com.purchasing.support.purchaseOrder.printer.PurchaseOrderViewPrinter;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -50,4 +51,7 @@ public interface PurchaseOrderService {
 
     public void saveConference(Reception reception);
 
+    public Reception findReceptionById(Reception reception);
+
+    public BigDecimal sumTotal(List<RequestDelivered>requestDelivereds);
 }

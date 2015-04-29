@@ -1,6 +1,8 @@
 package com.purchasing.entity;
 
 import com.purchasing.enumerator.StatusEnum;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -49,6 +51,7 @@ public class Reception {
     private PaymentInformation paymentInformation;
 
     @OneToMany(mappedBy = "reception")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<RequestDelivered> requestDelivereds;
 
 

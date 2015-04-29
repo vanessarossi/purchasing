@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="60"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="158"/>
+	<property name="ireport.y" value="411"/>
 	<parameter name="corporate_name" class="java.lang.String"/>
 	<parameter name="document_supplier" class="java.lang.String"/>
 	<parameter name="number_request" class="java.lang.String"/>
@@ -401,7 +401,7 @@
 				<reportElement x="0" y="13" width="555" height="1" uuid="af8ccbd0-a5e2-42f3-a4bf-7d34df0eff32"/>
 			</line>
 			<textField>
-				<reportElement x="67" y="166" width="245" height="20" uuid="42f848d1-4d59-45b1-a979-271c6c0fac3a"/>
+				<reportElement x="58" y="166" width="279" height="20" uuid="42f848d1-4d59-45b1-a979-271c6c0fac3a"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -415,14 +415,14 @@
 				<textFieldExpression><![CDATA[$P{total_price_one}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="67" y="185" width="245" height="20" uuid="f1f23cf5-8b92-4887-afca-62299c62cfb4"/>
+				<reportElement x="58" y="185" width="279" height="20" uuid="f1f23cf5-8b92-4887-afca-62299c62cfb4"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{supplier_two}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="65" y="206" width="245" height="20" uuid="a1efd864-4975-4058-baa4-a04021a43ce9"/>
+				<reportElement x="57" y="206" width="280" height="20" uuid="a1efd864-4975-4058-baa4-a04021a43ce9"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -443,7 +443,7 @@
 				<textFieldExpression><![CDATA[$P{total_price_three}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="166" width="67" height="20" uuid="d76eaa32-f1ba-482a-8a8d-163ee7cdb315"/>
+				<reportElement x="0" y="166" width="54" height="20" uuid="d76eaa32-f1ba-482a-8a8d-163ee7cdb315"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -471,14 +471,14 @@
 				<text><![CDATA[Valor Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="186" width="67" height="20" uuid="8602ef69-ceb7-4091-87bf-c00051eb00b1"/>
+				<reportElement x="0" y="186" width="55" height="20" uuid="8602ef69-ceb7-4091-87bf-c00051eb00b1"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fornecedor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="205" width="67" height="20" uuid="dc4072a4-f8d1-4061-80f0-45592f078d11"/>
+				<reportElement x="0" y="205" width="55" height="20" uuid="dc4072a4-f8d1-4061-80f0-45592f078d11"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
