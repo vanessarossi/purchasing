@@ -23,6 +23,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -95,7 +97,11 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         String expiration_date = reception.getPaymentInformation().getExpirationDate() == null ? "" : Conversor.converterDateInString(reception.getPaymentInformation().getExpirationDate());
         String share_price = reception.getPaymentInformation().getSharePrice() == null ? "" : reception.getPaymentInformation().getSharePrice().toString();
         String total_price = reception.getPaymentInformation().getTotalPrice().toString();
-        String discount_percentage = reception.getPaymentInformation().getTotalPrice().min(reception.getPaymentInformation().getTotalFinalPrice()).toString();
+         DecimalFormat decimalFormat = new DecimalFormat();
+                                        decimalFormat.setMaximumFractionDigits(2);
+                                        decimalFormat.setMinimumFractionDigits(2);
+                                        decimalFormat.setGroupingUsed(false);
+        String discount_percentage = decimalFormat.format((reception.getPaymentInformation().getTotalPrice().multiply(new BigDecimal(reception.getPaymentInformation().getDiscountPercentage()))).divide(new BigDecimal(100)));
         String total_final_price = reception.getPaymentInformation().getTotalFinalPrice().toString();
 
         String form_payment = reception.getPaymentInformation().getFormPayment().getDescription();

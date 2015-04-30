@@ -389,8 +389,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 map.put(purchaseOrderViewPrinter.getCode_cost_center(),purchaseOrderViewPrinter);
             }else{
                 PurchaseOrderViewPrinter purchaseOrderV = map.get(idCostCenter);
-                BigDecimal totalPrice = new BigDecimal(purchaseOrderV.getTotal_price().replace(",",".")).add(new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",",".")));
-                purchaseOrderV.setTotal_price(totalPrice.toString().replace(".",","));
+                BigDecimal totalPrice = new BigDecimal(purchaseOrderV.getTotal_price().replace(",",".")).add(new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",", ".")));
+                purchaseOrderV.setTotal_price(totalPrice.toString().replace(".", ","));
             }
         }
         for (String key : map.keySet()){
@@ -585,7 +585,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Override
     public File printerPurchaseOrder(Reception reception) {
         reception = receptionDAO.findById(Reception.class,reception.getId());
-        return purchaseOrderPrinter.generatePurchaseOrder(reception.getPurchaseOrder(),reception,this);
+        return purchaseOrderPrinter.generatePurchaseOrder(reception.getPurchaseOrder(), reception, this);
     }
 
     @Override
@@ -604,7 +604,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     public void saveReception(Reception reception,StatusEnum statusEnum) {
         List<RequestDelivered> requestDelivereds = reception.getRequestDelivereds();
         PurchaseOrder purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, reception.getPurchaseOrder().getId());
-        StatusEnum statusPurchase = null;
 
         if (statusEnum == StatusEnum.Conferred){
             reception.setDate(new Timestamp(new Date().getTime()));
@@ -634,10 +633,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     requestDelivered.setReception(reception);
                     RequestDelivered requestDeliveredSaved = requestDeliveredDAO.save(requestDelivered);
                     alterStatusProduct(requestDelivered.getOrderRequest());
-                    statusPurchase = alterStatusFinishedOrPartiallyFinished(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
+                    alterStatusFinishedOrPartiallyFinished(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
                 }
             }
-            purchaseOrder.setStatus(statusPurchase);
+           alterStatusPurchaseOrder(purchaseOrder);
             purchaseOrderDAO.save(purchaseOrder);
         }
     }
@@ -672,15 +671,14 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
         PurchaseOrder purchaseOrder = reception.getPurchaseOrder();
 
-        StatusEnum statusPurchase = null;
         for (RequestDelivered requestDelivered : reception.getRequestDelivereds()) {
             requestDelivered.setReception(reception);
             RequestDelivered requestDeliveredSaved = requestDeliveredDAO.save(requestDelivered);
             alterStatusProduct(requestDelivered.getOrderRequest());
-            statusPurchase = alterStatusFinishedOrPartiallyFinished(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
+            alterStatusFinishedOrPartiallyFinished(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
         }
 
-        purchaseOrder.setStatus(statusPurchase);
+        alterStatusPurchaseOrder(purchaseOrder);
         purchaseOrderDAO.save(purchaseOrder);
     }
 
@@ -857,21 +855,34 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         situationDAO.save(situation);
     }
 
-    public StatusEnum alterStatusFinishedOrPartiallyFinished(Solicitation solicitation){
+    public void alterStatusPurchaseOrder(PurchaseOrder purchaseOrder){
+        List<OrderRequest> orderRequests = purchaseOrder.getOrderRequests();
+        Float receivable = 0f;
+        StatusEnum statusEnum = StatusEnum.Finished;
+        for (OrderRequest orderRequest : orderRequests){
+            Float quantity = getQuantityByOrderRequest(orderRequest);
+            Float quantityDelivered = getQuantityDeliveredByOrderRequest(orderRequest);
+            receivable = quantity - quantityDelivered;
+            if (receivable > 0 ){
+                statusEnum = statusEnum.PartiallyFinished;
+            }
+        }
+        purchaseOrder.setStatus(statusEnum);
+    }
+
+    public void alterStatusFinishedOrPartiallyFinished(Solicitation solicitation){
         Situation situation = solicitation.getSituation();
 
         Integer totalDelivered = solicitationRequestDAO.totalSolicitationRequestDeliveredBySolicitation(solicitation);
         Integer total = solicitationRequestDAO.totalSolicitationRequestBySolicitation(solicitation);
-        StatusEnum statusEnum = StatusEnum.Finished;
+
         if (total == totalDelivered){
             situation.setStatus(StatusEnum.Finished);
         }else{
             situation.setStatus(StatusEnum.PartiallyFinished);
-            statusEnum = StatusEnum.PartiallyFinished;
         }
         situationDAO.save(situation);
 
-        return  statusEnum;
     }
 
     public void alterStatusProduct(OrderRequest orderRequest){
