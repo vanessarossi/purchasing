@@ -54,9 +54,6 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<SolicitationRequest> solicitationRequests;
 
-    @OneToOne(mappedBy = "product")
-    private Stock stock;
-
 
     public Long getId() {
         return id;
@@ -136,13 +133,5 @@ public class Product {
 
     public void setSolicitationRequests(List<SolicitationRequest> solicitationRequests) {
         this.solicitationRequests = solicitationRequests;
-    }
-
-    public Stock getStock() {
-        return stock;
-    }
-
-    public void setStock(Stock stock) {
-        this.stock = stock;
     }
 }
