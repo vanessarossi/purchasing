@@ -227,7 +227,7 @@
         </div>
       </div>
     </c:if>
-
+      
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"><fmt:message key="title.receptions"/></h3>

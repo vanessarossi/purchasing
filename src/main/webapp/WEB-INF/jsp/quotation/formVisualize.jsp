@@ -73,8 +73,8 @@
                         <td>${budget.supplier.person.name}</td>
                         <td><fmt:formatDate value="${budget.date}" pattern="dd/MM/YYYY"/></td>
                         <td>${budget.numberBudget}</td>
+                        <td>${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalPrice,".",",")}</td>
                         <td>${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice,".",",")}</td>
-                        <td>${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}</td>
                         <td>${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalFinalPrice,".",",")}</td>
                         <td><a href="<c:url value="/cotacao/editar/orcamento/${budget.id}"></c:url>"><span class="btn btn-default btn-xs fa fa-edit"></span></a></td>
                         <td><a onclick='viewDetailBudget(${budget.id},"${quotation.type}")'><span class="btn btn-default btn-xs fa fa-eye"></span></a></td>

@@ -212,7 +212,7 @@
             </c:forEach>
             <input type="hidden" id="totalBudget" value="${fn:length(budgets)}">
             <div class="row">
-                <div class="col-md-offset-10 col-sm-offset-10">
+                <div class="col-md-offset-9 col-sm-offset-9">
                     <c:if test="${quotation.status eq 'Open'}">
                         <a onclick="validateTotalBudgetChoose(${fn:length(budgets)})" class="btn btn-primary"><fmt:message key="button.generatePurchaseOrders"/></a>
                     </c:if>
