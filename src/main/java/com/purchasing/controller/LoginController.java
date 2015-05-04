@@ -42,6 +42,11 @@ public class LoginController {
         result.include("controller", this.getClass().toString());
     }
 
+    @Path("/formulario/perfil")
+    public void formPerfil() {
+        result.include("controller", this.getClass().toString());
+    }
+
     @Public
     @Path("/autenticar")
     public void authenticate(User user){
@@ -49,7 +54,11 @@ public class LoginController {
         if (userFound != null && userFound.getId() != null){
             httpSession.setAttribute("userLogged",userFound);
             userSession.setUser(userFound);
-            result.redirectTo("/home");
+            if (userFound.getLastAccess().equals(null)){
+                result.redirectTo("/formPerfil");
+            }else{
+                result.redirectTo("/home");
+            }
         }else{
             result.include("errorSign","message.errorSign");
             result.redirectTo(this).login();

@@ -101,7 +101,7 @@ public class PurchaseOrderController {
     public void view(PurchaseOrder purchaseOrder, String origin){
         purchaseOrder = purchaseOrderService.findById(purchaseOrder);
         String approve = (origin.equals("approve")) ? "true" : "false";
-        result.include("purchaseOrder",new PurchaseOrderView().generate(purchaseOrder,purchaseOrderService));
+        result.include("purchaseOrder",purchaseOrder);
         result.include("approve", approve);
         result.redirectTo(this).visualize();
     }
