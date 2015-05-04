@@ -41,7 +41,7 @@
       <div class="row">
         <div class="col-md-3 col-sm-3 ">
           <label class="control-label"><fmt:message key="label.tax.document"/></label>
-          <input type="text" class="form-control" name="reception.taxDocument" required/>
+          <input type="text" class="form-control" name="reception.taxDocument" id="taxDocument" required/>
         </div>
         <div class="col-md-5 col-sm-5 ">
           <label class="control-label"><fmt:message key="label.bar.codetax.document"/></label>

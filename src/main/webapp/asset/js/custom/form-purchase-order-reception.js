@@ -2,13 +2,19 @@ $(document).ready(function() {
 });
 
 $('#confered').click(function(){
-	$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/conferir');
-	$('#confirmReceptionForm').submit();
+	var tax_document = $("#taxDocument").val();
+	if(taxDocument != null && taxDocument != ''){
+		$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/conferir');
+		$('#confirmReceptionForm').submit();
+	}
 });
 
 $('#finalize').click(function(){
-	$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/finalizar');
-	$('#confirmReceptionForm').submit();
+	var tax_document = $("#taxDocument").val();
+	if(taxDocument != null && taxDocument != ''){
+		$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/finalizar');
+		$('#confirmReceptionForm').submit();
+	}	
 });
 
 function calculateTotalPriceMaterial(i,numberRequestMaterial){

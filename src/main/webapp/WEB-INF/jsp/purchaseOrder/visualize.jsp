@@ -206,7 +206,37 @@
         </div>
       </div>
     </form>
-
+    <c:if test="${purchaseOrder.purchaseOrder.receptions != null}">
+      <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><fmt:message key="title.receptions"/></h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped table-hover table-condensed">
+          <thead>
+          <tr>
+            <th style="width: 50%"><fmt:message key="table.user"/></th>
+            <th style="width: 20%"><fmt:message key="table.tax.document"/></th>
+            <th style="width: 10%"><fmt:message key="table.date"/></th>
+            <th style="width: 2%"><fmt:message key="table.##"/></th>
+          </tr>
+          </thead>
+          <tbody>
+          <c:forEach items="${purchaseOrder.purchaseOrder.receptions}" var="reception" >
+            <c:if test="${reception.status == 'Finished'}">
+              <tr>
+                <td>${reception.user.name}</td>
+                <td>${reception.taxDocument}</td>
+                <td><fmt:formatDate value="${reception.date}" pattern="dd/MM/YYYY HH:mm"/></td>
+                <td><a href="<c:url value="/ordemCompra/imprimir/ordem/${reception.id}"></c:url>" target='_blank'><span class="fa fa-print btn btn-default"></span></a></td>
+              </tr>
+            </c:if>
+          </c:forEach>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </c:if>
     <c:if test="${approve == 'true' && purchaseOrder.purchaseOrder.status == 'Open'}">
       <div class="row">
         <div class="col-sm-offset-9 col-md-offset-9">
@@ -227,34 +257,6 @@
         </div>
       </div>
     </c:if>
-      
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><fmt:message key="title.receptions"/></h3>
-      </div>
-      <div class="panel-body">
-            <table class="table table-striped table-hover table-condensed">
-              <thead>
-                <tr>
-                  <th style="width: 50%"><fmt:message key="table.user"/></th>
-                  <th style="width: 10%"><fmt:message key="table.date"/></th>
-                  <th style="width: 10%"><fmt:message key="table.##"/></th>
-                </tr>
-              </thead>
-              <tbody>
-              <c:forEach items="${purchaseOrder.purchaseOrder.receptions}" var="reception" >
-                <c:if test="${reception.status == 'Finished'}">
-                  <tr>
-                    <td>${reception.user.name}</td>
-                    <td><fmt:formatDate value="${reception.date}" pattern="dd/MM/YYYY HH:mm"/></td>
-                    <td><a href="<c:url value="/ordemCompra/imprimir/ordem/${reception.id}"></c:url>" target='_blank'><span class="fa fa-print btn btn-default"></span></a></td>
-                  </tr>
-                </c:if>
-              </c:forEach>
-            </tbody>
-            </table>
-      </div>
-    </div>
 
   </div>
 </html:template>
