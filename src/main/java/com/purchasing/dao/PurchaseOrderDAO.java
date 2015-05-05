@@ -58,6 +58,36 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         return total;
     }
 
+    public List<PurchaseOrder> paginationWithFilter(String sSearch, StatusEnum status ,int iDisplayStart, int iDisplayLength) {
+        Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        criteria.setFirstResult(iDisplayStart);
+        criteria.setMaxResults(iDisplayLength);
+        Disjunction disjunction = Restrictions.disjunction();
+        criteria.createAlias("budget", "budget");
+        criteria.createAlias("budget.supplier", "supplier");
+        criteria.createAlias("supplier.person", "person");
+        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+        criteria.add(disjunction);
+        criteria.add(Restrictions.eq("status",status));
+        criteria.addOrder(Order.desc("id"));
+        List<PurchaseOrder> purchaseOrders = new ArrayList<>();
+        purchaseOrders.addAll(criteria.list());
+        return purchaseOrders;
+    }
+    public Integer totalPaginationWithFilter(String sSearch,StatusEnum status) {
+        Integer total = 0;
+        Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
+        criteria.createAlias("budget", "budget");
+        criteria.createAlias("budget.supplier", "supplier");
+        criteria.createAlias("supplier.person", "person");
+        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.eq("status",status));
+        criteria.setProjection(Projections.rowCount());
+        total = Integer.parseInt(criteria.uniqueResult().toString());
+        return total;
+    }
+
     /** analista **/
     public List<PurchaseOrder> paginationMissingAnalyst(String sSearch, int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);

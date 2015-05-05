@@ -11,6 +11,19 @@
         <div class="page-header">
             <h3><fmt:message key="title.solicitations" /></h3>
         </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <div class="form-group">
+                    <label  class="control-label" for="status"><fmt:message key="label.status"/></label></span>
+                    <select id="status" class="form-control">
+                        <option value=""><fmt:message key="label.select"/></option>
+                        <c:forEach items="${status}" var="status">
+                            <option value="${status}">${status.description}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+        </div>
         <c:if test="${! empty messageErrorEdit}">
             <div class="row">
                 <div class="col-md-12 col-sm-12 text-center">

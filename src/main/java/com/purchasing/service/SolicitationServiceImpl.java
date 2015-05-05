@@ -305,6 +305,91 @@ public class SolicitationServiceImpl implements SolicitationService {
     }
 
     @Override
+    public List<Object[]> findPaginationWithFilter(String sSearch, StatusEnum status, int iDisplayStart, int iDisplayLength) {
+        String search = sSearch == null ? "" : sSearch;
+        List<Solicitation> solicitations = solicitationDAO.paginationWithFilter(search, status ,iDisplayStart,iDisplayLength);
+        List<Object[]> solicitationsList = new ArrayList<>();
+
+        for (Solicitation solicitation : solicitations){
+            String colCode = solicitation.getId().toString() ;
+            String colInitialDate = Conversor.converterDateTimeInString(solicitation.getInitialDate());
+            String colCostCenter = solicitation.getCostCenter().getDescription();
+            String colName = solicitation.getUser().getName();
+            String colStatus = solicitation.getSituation().getStatus().getDescription();
+            String buttonView = "<a href=/purchasing/solicitacao/visualizar/"+solicitation.getId()+"/geral><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
+            String buttonPrinter= "<a href=/purchasing/solicitacao/imprimir/"+solicitation.getId()+"  target='_blank'><span class=\"fa fa-print btn btn-default btn-xs\"></span></a>";
+            String buttonCancel = "<a  onclick=reproveSolicitation("+solicitation.getId()+")><span class=\"fa fa-times btn btn-default btn-xs\"></span></a>";
+            String [] row = {
+                    colCode,
+                    colInitialDate,
+                    colCostCenter,
+                    colName,
+                    colStatus,
+                    buttonView,
+                    buttonPrinter,
+                    buttonCancel
+            };
+            solicitationsList.add(row);
+        }
+        return solicitationsList;
+    }
+
+    @Override
+    public Integer totalPaginationWithFilter(String sSearch, StatusEnum status) {
+        String search = sSearch == null ? "" : sSearch;
+        return solicitationDAO.totalPaginationWithFilter(search,status);
+    }
+
+    @Override
+    public List<Object[]> findIndividualPaginationWithFilter(String sSearch, StatusEnum status, int iDisplayStart, int iDisplayLength) {
+        String search = sSearch == null ? "" : sSearch;
+        List<Solicitation> solicitations = new ArrayList<>();
+        if (getUserLogged().getRole().getId() <= 7){
+            solicitations = solicitationDAO.paginationIndividualCoordinatorWithFilter(search,status ,iDisplayStart, iDisplayLength, getUserLogged().getCostCenters());
+        }else{
+            solicitations = solicitationDAO.paginationIndividualWithFilter(search, status,iDisplayStart, iDisplayLength, getUserLogged());
+        }
+
+        List<Object[]> solicitationsList = new ArrayList<>();
+        for (Solicitation solicitation : solicitations){
+            String colCode = solicitation.getId().toString() ;
+            String colInitialDate = Conversor.converterDateTimeInString(solicitation.getInitialDate());
+            String colCostCenter = solicitation.getCostCenter().getDescription();
+            String colName = solicitation.getUser().getName();
+            String colStatus = solicitation.getSituation().getStatus().getDescription();
+            String buttonView = "<a href=/purchasing/solicitacao/visualizar/"+solicitation.getId()+"/individual><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
+            String buttonEdit = "<a href=/purchasing/solicitacao/editar/"+solicitation.getId()+"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
+            String buttonCope = "<a href=/purchasing/solicitacao/copiar/"+solicitation.getId()+"><span class=\"fa fa-files-o btn btn-default btn-xs\"></span></a>";
+            String buttonCancel = "<a href='#' onclick=cancelSolicitation("+solicitation.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
+            String [] row = {
+                    colCode,
+                    colInitialDate,
+                    colCostCenter,
+                    colName,
+                    colStatus,
+                    buttonView,
+                    buttonEdit,
+                    buttonCope,
+                    buttonCancel
+            };
+            solicitationsList.add(row);
+        }
+        return solicitationsList;
+    }
+
+    @Override
+    public Integer totalIndividualPaginationWithFilter(String sSearch, StatusEnum status) {
+        String search = sSearch == null ? "" : sSearch;
+        Integer quantity = 0;
+        if (getUserLogged().getRole().getId() <= 7){
+            quantity = solicitationDAO.totalIndividualPaginationCoordinatorWithFilter(search,status, getUserLogged().getCostCenters());
+        }else{
+            quantity = solicitationDAO.totalIndividualPaginationWithFilter(search,status ,getUserLogged());
+        }
+        return quantity;
+    }
+
+    @Override
     public void approval(Solicitation solicitation) {
         solicitation = solicitationDAO.findById(Solicitation.class,solicitation.getId());
         solicitation.getSituation().setDateApproval(new Timestamp(new Date().getTime()));

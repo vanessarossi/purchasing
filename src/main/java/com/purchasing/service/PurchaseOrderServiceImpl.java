@@ -240,6 +240,37 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public List<Object[]> findPaginationWithFilter(String sSearch, StatusEnum status, int iDisplayStart, int iDisplayLength) {
+        String search = sSearch == null ? "" : sSearch;
+        List<PurchaseOrder> purchaseOrders = purchaseOrderDAO.paginationWithFilter(search,status,iDisplayStart,iDisplayLength);
+        List<Object[]> purchaseOrderList = new ArrayList<>();
+
+        for (PurchaseOrder purchaseOrder : purchaseOrders) {
+            String colCode = purchaseOrder.getId().toString();
+            String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
+            String colStatus = purchaseOrder.getStatus().getDescription();
+            String colButtonEdit = "<a href=/purchasing/ordemCompra/adicionar/informacao/" + purchaseOrder.getId() +"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
+            String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/normal><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
+
+            String[] row = {
+                    colCode,
+                    colSupplier,
+                    colStatus,
+                    colButtonEdit,
+                    colButtonView,
+            };
+            purchaseOrderList.add(row);
+        }
+        return purchaseOrderList;
+    }
+
+    @Override
+    public Integer totalPaginationWithFilter(String sSearch, StatusEnum status) {
+        String search = sSearch == null ? "" : sSearch;
+        return purchaseOrderDAO.totalPaginationWithFilter(search,status);
+    }
+
+    @Override
     public List<Object[]> findPaginationMissing(String sSearch, int iDisplayStart, int iDisplayLength) {
         String search = sSearch == null ? "" : sSearch;
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();

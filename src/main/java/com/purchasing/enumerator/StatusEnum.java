@@ -8,8 +8,8 @@ import java.util.List;
  */
 public enum StatusEnum {
 
-    Open("Aberta",false,true,false,false),
-    WaitingApproval("Aguardando aprovação",true,false,true,false),
+    Open("Aberta",false,true,true,false),
+    WaitingApproval("Aguardando aprovação",true,false,false,false),
     Approved("Aprovada",true,false,true,false),
     Reject("Recusada",true,false,true,false),
     PreAnalysisReject("Pré analise recusada",true,false,false,false),

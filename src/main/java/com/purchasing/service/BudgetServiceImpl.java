@@ -137,7 +137,7 @@ public class BudgetServiceImpl implements BudgetService {
                 }
                 Float quantity = budgetQuotationProductView.getQuantity() + budgetQuotationProductV.getQuantity();
                 BigDecimal totalPrice = budgetQuotationProductV.getTotalPrice().add(budgetQuotationProductView.getUnityPrice().multiply(new BigDecimal(budgetQuotationProductView.getQuantity())));
-                
+
                 budgetQuotationProductV.setQuantity(quantity);
                 budgetQuotationProductV.setTotalPrice(new BigDecimal(decimalFormat.format(totalPrice)));
             }

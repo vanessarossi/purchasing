@@ -5,11 +5,7 @@ $(document).ready(function() {
         return (code == 13) ? false : true;
     });
 
-    fillTable();
-});
-
-function fillTable(){
-    var oTable =  $('#solicitationTable').dataTable({
+   oTable =  $('#solicitationTable').dataTable({
         "oLanguage": {
             "sUrl": getContextPathDataTable()
         },
@@ -28,7 +24,60 @@ function fillTable(){
         "bServerSide": true,
         "sAjaxSource": getContextPath()+'solicitacao/paginar',
     });
-};
+});
+
+$('#status').change(function () {
+  status = $('#status').val();
+   if(status != ''){
+     filtrar();
+    }else{
+		if(oTable != null)oTable.fnDestroy();
+		$('#solicitationTable').dataTable({
+		   "oLanguage": {
+		    "sUrl": getContextPathDataTable()
+		 },
+		   "bAutoWidth":true,
+		   "bLengthChange": false,
+		   "bPaginate": true,
+		   "bFilter": true,
+		   "bSort": false,
+		   "bInfo": true,
+		   "processing": true,
+		   "bJQueryUI": false,
+		   "sPaginationType": "full_numbers",
+		   "iDisplayLength":  10,
+		   "aLengthMenu": [[5, 10, 100], [5,10, 100]],
+		    "bProcessing": false,
+		    "bServerSide": true,
+		    "sAjaxSource": getContextPath()+'solicitacao/paginar',
+		});
+	}
+});
+
+function filtrar () {
+      if(oTable != null)oTable.fnDestroy();
+     status = $('#status').val();
+	 
+	$('#solicitationTable').dataTable({
+	   "oLanguage": {
+	    "sUrl": getContextPathDataTable()
+	 },
+	   "bAutoWidth":true,
+	   "bLengthChange": false,
+	   "bPaginate": true,
+	   "bFilter": true,
+	   "bSort": false,
+	   "bInfo": true,
+	   "processing": true,
+	   "bJQueryUI": false,
+	   "sPaginationType": "full_numbers",
+	   "iDisplayLength":  10,
+	   "aLengthMenu": [[5, 10, 100], [5,10, 100]],
+	    "bProcessing": false,
+	    "bServerSide": true,
+	    "sAjaxSource": getContextPath()+'solicitacao/paginar/filtro/'+status,
+	});
+}
 
 function reproveSolicitation(solicitation) {
     $('#solicitationId').val(solicitation);

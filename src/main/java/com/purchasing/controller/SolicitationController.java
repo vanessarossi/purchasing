@@ -12,6 +12,7 @@ import com.purchasing.annotation.*;
 import com.purchasing.entity.Product;
 import com.purchasing.entity.Solicitation;
 import com.purchasing.entity.SolicitationRequest;
+import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.SolicitationService;
 import com.purchasing.service.impl.TypeServiceService;
@@ -93,7 +94,7 @@ public class SolicitationController {
                    }
                }
             }
-            result.include("solicitation",solicitationFound);
+            result.include("solicitation", solicitationFound);
             result.redirectTo(this).form();
     }
 
@@ -132,8 +133,9 @@ public class SolicitationController {
     @Admin
     @Path("/listar")
     public void list() {
-           result.include("controller", this.getClass().toString());
-       }
+        result.include("status", StatusEnum.getStatusSolicitation());
+        result.include("controller", this.getClass().toString());
+    }
 
     @Solicitor
     @SolicitorReceptionist
@@ -146,8 +148,9 @@ public class SolicitationController {
     @Admin
     @Path("/listar/individual")
     public void individualList(){
-           result.include("controller", this.getClass().toString());
-       }
+        result.include("status", StatusEnum.getStatusSolicitation());
+        result.include("controller", this.getClass().toString());
+    }
 
     @Purchaser
     @Coordinato
@@ -181,7 +184,6 @@ public class SolicitationController {
             result.include("controller", this.getClass().toString());
         }
 
-
     @Purchaser
     @Analyst
     @Admin
@@ -190,16 +192,37 @@ public class SolicitationController {
         result.include("controller", this.getClass().toString());
     }
 
-
     /** Paginação **/
+    @Get("/paginar/filtro/{status}")
+    public void paginationWithFilter(String sSearch,StatusEnum status,String sEcho, int iDisplayStart, int iDisplayLength){
+        List<Object[]> solicitationObjects = solicitationService.findPaginationWithFilter(sSearch, status,iDisplayStart,iDisplayLength);
+        DataTableModel dataTableModel = new DataTableModel();
+            dataTableModel.setsEcho(sEcho);
+            dataTableModel.setiTotalRecords(solicitationService.totalPaginationWithFilter(sSearch,status));
+            dataTableModel.setiTotalDisplayRecords(solicitationService.totalPaginationWithFilter(sSearch,status));
+            dataTableModel.setAaData(solicitationObjects.toArray());
+        result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
+    }
+
+    @Get("/paginar/individual/filtro/{status}")
+    public void individualPaginationWithFilter(String sSearch,StatusEnum status ,String sEcho, int iDisplayStart, int iDisplayLength){
+        List<Object[]> solicitationObjects = solicitationService.findIndividualPaginationWithFilter(sSearch, status,iDisplayStart, iDisplayLength);
+        DataTableModel dataTableModel = new DataTableModel();
+            dataTableModel.setsEcho(sEcho);
+            dataTableModel.setiTotalRecords(solicitationService.totalIndividualPaginationWithFilter(sSearch,status));
+            dataTableModel.setiTotalDisplayRecords(solicitationService.totalIndividualPaginationWithFilter(sSearch,status));
+            dataTableModel.setAaData(solicitationObjects.toArray());
+        result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
+    }
+
     @Get("/paginar")
     public void pagination(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength){
         List<Object[]> solicitationObjects = solicitationService.findPagination(sSearch,iDisplayStart,iDisplayLength);
         DataTableModel dataTableModel = new DataTableModel();
-            dataTableModel.setsEcho(sEcho);
-            dataTableModel.setiTotalRecords(solicitationService.totalPagination(sSearch));
-            dataTableModel.setiTotalDisplayRecords(solicitationService.totalPagination(sSearch));
-            dataTableModel.setAaData(solicitationObjects.toArray());
+        dataTableModel.setsEcho(sEcho);
+        dataTableModel.setiTotalRecords(solicitationService.totalPagination(sSearch));
+        dataTableModel.setiTotalDisplayRecords(solicitationService.totalPagination(sSearch));
+        dataTableModel.setAaData(solicitationObjects.toArray());
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }
 
@@ -207,10 +230,10 @@ public class SolicitationController {
     public void individualPagination(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength){
         List<Object[]> solicitationObjects = solicitationService.findIndividualPagination(sSearch, iDisplayStart, iDisplayLength);
         DataTableModel dataTableModel = new DataTableModel();
-            dataTableModel.setsEcho(sEcho);
-            dataTableModel.setiTotalRecords(solicitationService.totalIndividualPagination(sSearch));
-            dataTableModel.setiTotalDisplayRecords(solicitationService.totalIndividualPagination(sSearch));
-            dataTableModel.setAaData(solicitationObjects.toArray());
+        dataTableModel.setsEcho(sEcho);
+        dataTableModel.setiTotalRecords(solicitationService.totalIndividualPagination(sSearch));
+        dataTableModel.setiTotalDisplayRecords(solicitationService.totalIndividualPagination(sSearch));
+        dataTableModel.setAaData(solicitationObjects.toArray());
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }
 

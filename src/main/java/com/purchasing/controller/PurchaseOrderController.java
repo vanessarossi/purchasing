@@ -47,6 +47,7 @@ public class PurchaseOrderController {
     @Admin
     @Path("/listagem")
     public void list(){
+        result.include("status", StatusEnum.getStatusPurchaseOrder());
         result.include("controller", this.getClass()).toString();
     }
 
@@ -189,7 +190,7 @@ public class PurchaseOrderController {
         purchaseOrderService.saveReception(reception, StatusEnum.Finished);
         PurchaseOrder purchaseOrder = purchaseOrderService.findById(reception.getPurchaseOrder());
         result.include("purchaseOrder", purchaseOrder);
-        result.forwardTo(this).visualize();
+        result.forwardTo(this).formSearch();
     }
 
     @Get("/confirmacao/conferencia/{reception.id}")
@@ -222,6 +223,17 @@ public class PurchaseOrderController {
         dataTableModel.setsEcho(sEcho);
         dataTableModel.setiTotalRecords(purchaseOrderService.totalPagination(sSearch));
         dataTableModel.setiTotalDisplayRecords(purchaseOrderService.totalPagination(sSearch));
+        dataTableModel.setAaData(purchaseOrderObjects.toArray());
+        result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
+    }
+
+    @Get("/paginar/filtro/{status}")
+    public void paginationWithFilter(String sSearch, StatusEnum status ,String sEcho, int iDisplayStart, int iDisplayLength) {
+        List<Object[]> purchaseOrderObjects = purchaseOrderService.findPaginationWithFilter(sSearch, status,iDisplayStart, iDisplayLength);
+        DataTableModel dataTableModel = new DataTableModel();
+        dataTableModel.setsEcho(sEcho);
+        dataTableModel.setiTotalRecords(purchaseOrderService.totalPaginationWithFilter(sSearch,status));
+        dataTableModel.setiTotalDisplayRecords(purchaseOrderService.totalPaginationWithFilter(sSearch,status));
         dataTableModel.setAaData(purchaseOrderObjects.toArray());
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }

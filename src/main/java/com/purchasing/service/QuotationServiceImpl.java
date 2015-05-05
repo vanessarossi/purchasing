@@ -69,6 +69,40 @@ public class QuotationServiceImpl implements QuotationService {
     }
 
     @Override
+    public List<Object[]> findPaginationWithFilter(String sSearch, StatusEnum status, int iDisplayStart, int iDisplayLength) {
+        String search = sSearch == null ? "" : sSearch;
+        List<Quotation> quotations = quotationDAO.paginationWithFilter(search,status,iDisplayStart,iDisplayLength);
+        List<Object[]> quotationList = new ArrayList<>();
+
+        for (Quotation quotation : quotations){
+            String colNumber = quotation.getId().toString();
+            String colType = quotation.getType().getDescription();
+            String colUser = quotation.getUser().getName();
+            String colStatus = quotation.getStatus().getDescription();
+            String colInitialDate = Conversor.converterDateTimeInString(quotation.getInitialDate());
+            String colFinalDate = Conversor.converterDateTimeInString(quotation.getFinalDate());
+            String buttonView = "<a href=/purchasing/cotacao/editar/"+quotation.getId()+"><span class=\"fa fa-pencil-square-o btn btn-default btn-xs\"></span></a>";
+            String [] row = {
+                    colNumber,
+                    colType,
+                    colUser,
+                    colStatus,
+                    colInitialDate,
+                    colFinalDate,
+                    buttonView
+            };
+            quotationList.add(row);
+        }
+        return quotationList;
+    }
+
+    @Override
+    public Integer totalPaginationWithFilter(String sSearch, StatusEnum status) {
+        String search = sSearch == null ? "" : sSearch;
+        return quotationDAO.totalPaginationWithFilter(search,status);
+    }
+
+    @Override
     public Quotation searchById(Quotation quotation) {
         if (quotation.getId() != null){
             quotation  = quotationDAO.findById(Quotation.class,quotation.getId());

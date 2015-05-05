@@ -25,6 +25,9 @@ public interface PurchaseOrderService {
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPagination(String sSearch);
 
+    public List<Object[]> findPaginationWithFilter(String sSearch,StatusEnum status,int iDisplayStart, int iDisplayLength);
+    public Integer totalPaginationWithFilter(String sSearch,StatusEnum status);
+
     public List<Object[]> findPaginationMissing(String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPaginationMissing(String sSearch);
 

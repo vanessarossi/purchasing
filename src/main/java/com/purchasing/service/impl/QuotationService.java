@@ -4,6 +4,7 @@ import com.purchasing.entity.Product;
 import com.purchasing.entity.Quotation;
 import com.purchasing.entity.QuotationRequest;
 import com.purchasing.entity.SolicitationRequest;
+import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 
 import java.util.List;
@@ -17,6 +18,9 @@ public interface QuotationService {
 
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPagination(String sSearch);
+
+    public List<Object[]> findPaginationWithFilter(String sSearch,StatusEnum status,int iDisplayStart, int iDisplayLength);
+    public Integer totalPaginationWithFilter(String sSearch,StatusEnum status);
 
     public Quotation searchById(Quotation quotation);
 

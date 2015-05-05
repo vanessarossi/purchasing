@@ -32,6 +32,12 @@ public interface SolicitationService {
     public List<Object[]> findPaginationSolicitationRequests(Solicitation solicitation,String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPaginationSolicitationRequests(Solicitation solicitation,String sSearch);
 
+    public List<Object[]> findPaginationWithFilter(String sSearch,StatusEnum status , int iDisplayStart, int iDisplayLength);
+    public Integer totalPaginationWithFilter(String sSearch,StatusEnum status);
+
+    public List<Object[]> findIndividualPaginationWithFilter(String sSearch,StatusEnum status, int iDisplayStart, int iDisplayLength);
+    public Integer totalIndividualPaginationWithFilter(String sSearch,StatusEnum status);
+
     /** Status  **/
     public void approval(Solicitation solicitation);
     public void reject(Solicitation solicitation);

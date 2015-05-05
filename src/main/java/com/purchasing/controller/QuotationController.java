@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.view.Results;
 import com.purchasing.annotation.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.MeanPaymentEnum;
+import com.purchasing.enumerator.StatusEnum;
 import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.BudgetService;
 import com.purchasing.service.impl.FormPaymentService;
@@ -64,7 +65,7 @@ public class QuotationController {
 
     @Post("/salvar/pedido/servico")
     public void saveRequestService(Quotation quotation, SolicitationRequest solicitationRequest) {
-        quotationService.addQuotationRequestService(quotation,solicitationRequest);
+        quotationService.addQuotationRequestService(quotation, solicitationRequest);
         Quotation quotationSaved = quotationService.searchById(quotation);
         result.include("quotation",quotationSaved);
         result.redirectTo(this).formQuotation();
@@ -161,7 +162,7 @@ public class QuotationController {
 
     @Get("/deletar/pedido/material/total/{quotation.id}/{product.id}/json")
     public void removeQuotationRequestProductByProduct(Quotation quotation,Product product) {
-        quotationService.removeQuotationRequestByProduct(quotation,product);
+        quotationService.removeQuotationRequestByProduct(quotation, product);
         result.use(Results.json()).withoutRoot().from(true).serialize();
     }
 
@@ -178,6 +179,7 @@ public class QuotationController {
     @Admin
     @Path("/")
     public void list() {
+        result.include("status", StatusEnum.getStatusQuotation());
         result.include("controller", this.getClass().toString());
     }
 
@@ -223,6 +225,16 @@ public class QuotationController {
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }
 
+    @Get("/paginar/filtro/{status}")
+    public void paginationWithFilter(String sSearch,StatusEnum status ,String sEcho, int iDisplayStart, int iDisplayLength){
+        List<Object[]> quotationObjects = quotationService.findPaginationWithFilter(sSearch,status,iDisplayStart,iDisplayLength);
+        DataTableModel dataTableModel = new DataTableModel();
+        dataTableModel.setsEcho(sEcho);
+        dataTableModel.setiTotalRecords(quotationService.totalPaginationWithFilter(sSearch,status));
+        dataTableModel.setiTotalDisplayRecords(quotationService.totalPaginationWithFilter(sSearch,status));
+        dataTableModel.setAaData(quotationObjects.toArray());
+        result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
+    }
 
     /** Listagem total de produtos e serviços **/
     @Get("/listagem/total/material/{quotation.id}/json")
