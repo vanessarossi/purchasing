@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.annotation.Admin;
 import com.purchasing.entity.User;
 import com.purchasing.service.impl.UserService;
 import com.purchasing.support.datatable.DataTableModel;
@@ -36,11 +37,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @Admin
     @Path("")
     public void list() {
         result.include("controller", this.getClass().toString());
     }
 
+    @Admin
     @Path("/formulario")
      public void form() {
          result.include("companies",userService.findAllCompany());

@@ -384,7 +384,7 @@
           </div>
         </div>
       </div>
-      <c:if test="${purchaseOrder.purchaseOrder.approval != null && purchaseOrder.purchaseOrder.approval.firstApproval == 'true'}">
+      <c:if test="${(purchaseOrder.purchaseOrder.approval != null && purchaseOrder.purchaseOrder.approval.firstApproval == 'true') && (purchaseOrder.purchaseOrder.status != 'Reject' && purchaseOrder.purchaseOrder.status != 'Conferred' && purchaseOrder.purchaseOrder.status != 'Finished' && purchaseOrder.purchaseOrder.status != 'PartiallyFinished' && purchaseOrder.purchaseOrder.status != 'Canceled') }">
         <div class="row">
           <div class="col-sm-offset-10 col-md-offset-10">
             <div class="form-group">

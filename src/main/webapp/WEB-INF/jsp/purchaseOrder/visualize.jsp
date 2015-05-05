@@ -11,7 +11,6 @@
     <div class="page-header">
       <h3><fmt:message key="title.purchasing.order"/></h3>
     </div>
-
     <div class="row">
       <div class="col-sm-2 col-md-2">
         <div class="form-group">
@@ -32,7 +31,6 @@
         </div>
       </div>
     </div>
-
     <div class="panel panel-default">
       <div class="panel-body">
           <c:if test="${purchaseOrder.budget.quotation.type == 'Material'}">
@@ -93,7 +91,6 @@
         </div>
       </div>
     </div>
-
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"><fmt:message key="title.budgets"/></h3>

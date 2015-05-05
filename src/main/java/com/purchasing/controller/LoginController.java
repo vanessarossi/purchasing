@@ -1,9 +1,6 @@
 package com.purchasing.controller;
 
-import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
 import com.purchasing.annotation.Public;
 import com.purchasing.entity.User;
@@ -12,6 +9,8 @@ import com.purchasing.support.user.UserSession;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author vanessa
@@ -48,14 +47,17 @@ public class LoginController {
     }
 
     @Public
-    @Path("/autenticar")
+    @Post("/autenticar")
     public void authenticate(User user){
         User userFound = userService.authenticate(user);
         if (userFound != null && userFound.getId() != null){
             httpSession.setAttribute("userLogged",userFound);
             userSession.setUser(userFound);
-            if (userFound.getLastAccess().equals(null)){
-                result.redirectTo("/formPerfil");
+            if (userFound.getLastAccess() == null){
+                userFound.setLastAccess(new Timestamp(new Date().getTime()));
+                userService.save(userFound);
+                result.include("user",userFound);
+                result.redirectTo(this).formPerfil();
             }else{
                 result.redirectTo("/home");
             }
@@ -63,6 +65,21 @@ public class LoginController {
             result.include("errorSign","message.errorSign");
             result.redirectTo(this).login();
         }
+    }
+
+    @Post("/confirma/nova/senha")
+    public void confirmNewPassword(User user){
+        User userFound = userService.searchById(user);
+        userFound.setPassword(user.getPassword());
+        userService.saveNewPassword(userFound);
+        result.redirectTo("/home");
+    }
+
+    @Get("/meu/perfil/{user.id}")
+    public void myPerfil(User user){
+        user = userService.searchById(user);
+        result.include("user",user);
+        result.redirectTo(this).formPerfil();
     }
 
     @Public

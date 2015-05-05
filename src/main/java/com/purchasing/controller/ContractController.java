@@ -9,6 +9,10 @@ import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.annotation.Admin;
+import com.purchasing.annotation.Analyst;
+import com.purchasing.annotation.Manager;
+import com.purchasing.annotation.Purchaser;
 import com.purchasing.entity.Contract;
 import com.purchasing.entity.RenewalContract;
 import com.purchasing.service.impl.ContractService;
@@ -41,11 +45,19 @@ public class ContractController {
         this.contractService = contractService;
     }
 
-    @Path({ "", "/" })
+    @Purchaser
+    @Analyst
+    @Manager
+    @Admin
+    @Path("")
     public void list() {
         result.include("controller", this.getClass().toString());
     }
 
+    @Purchaser
+    @Analyst
+    @Manager
+    @Admin
     @Path("/formulario")
     public void form() {
         result.include("controller", this.getClass().toString());

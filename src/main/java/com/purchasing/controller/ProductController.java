@@ -8,6 +8,9 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.annotation.Admin;
+import com.purchasing.annotation.Analyst;
+import com.purchasing.annotation.Purchaser;
 import com.purchasing.entity.Product;
 import com.purchasing.service.impl.CategoryService;
 import com.purchasing.service.impl.ProductService;
@@ -42,11 +45,17 @@ public class ProductController {
          this.categoryService = categoryService;
      }
 
+    @Purchaser
+    @Analyst
+    @Admin
     @Path("")
     public void list() {
          result.include("controller", this.getClass().toString());
      }
 
+    @Purchaser
+    @Analyst
+    @Admin
     @Path("/formulario")
     public void form() {
         result.include("units",unitService.findAllOrderDescription());

@@ -55,10 +55,6 @@ public class PermissionInteceptor {
             status = false;
         }else if(methodPermissionDirector != null && isDirector(getUser()) == true){
             status = true;
-        } if (methodPermissionAdmin != null && isAdmin(getUser()) != true){
-            status = false;
-        }else if(methodPermissionAdmin != null && isAdmin(getUser()) == true){
-            status = true;
         }if (methodPermissionManager != null && isManager(getUser())!= true && status == null){
             status = false;
         }else if(methodPermissionManager != null && isManager(getUser()) == true){
@@ -67,7 +63,7 @@ public class PermissionInteceptor {
             status = false;
         }else if(methodPermissionAnalyst != null && isAnalyst(getUser()) == true){
             status = true;
-        } if (methodPermissionCoordinato != null && isCoordinato(getUser()) != true){
+        } if (methodPermissionCoordinato != null && isCoordinato(getUser()) != true && status == null){
             status = false;
         }else if(methodPermissionCoordinato != null && isCoordinato(getUser()) == true){
             status = true;
@@ -79,15 +75,12 @@ public class PermissionInteceptor {
             status = false;
         }else if(methodPermissionSolicitorReceptionist != null && isSolicitorReceptionist(getUser()) == true){
             status = true;
-        } if (methodPermissionAdmin != null && isAdmin(getUser()) != true){
-            status = false;
-        }else if(methodPermissionAdmin != null && isAdmin(getUser()) == true){
-            status = true;
-        }if (methodPermissionSolicitor != null && isSolicitor(getUser())!= true && status == null){
+        } if (methodPermissionSolicitor != null && isSolicitor(getUser())!= true && status == null){
             status = false;
         }else if(methodPermissionSolicitor != null && isSolicitor(getUser()) == true){
             status = true;
         }
+
         if (status != null && status == false){
             result.use(http()).sendError(403);
         }else{
@@ -101,39 +94,39 @@ public class PermissionInteceptor {
     }
 
     public boolean isAdmin(User user){
-        return user.getRole().getId().equals(1) ? true : false;
+        return user.getRole().getId() == 1 ? true : false;
     }
 
     public boolean isCouncil(User user){
-        return user.getRole().getId().equals(2) ? true : false;
+        return user.getRole().getId() == 2 ? true : false;
     }
 
     public boolean isDirector(User user){
-        return user.getRole().getId().equals(3) ? true : false;
+        return user.getRole().getId() == 3 ? true : false;
     }
 
     public boolean isManager(User user){
-        return user.getRole().getId().equals(4) ? true : false;
+        return user.getRole().getId() ==  4 ? true : false;
     }
 
     public boolean isAnalyst(User user){
-        return user.getRole().getId().equals(5) ? true : false;
+        return user.getRole().getId() == 5 ? true : false;
     }
 
     public boolean isCoordinato(User user){
-        return user.getRole().getId().equals(6) ? true : false;
+        return user.getRole().getId() == 6 ? true : false;
     }
 
     public boolean isPurchaser(User user){
-        return user.getRole().getId().equals(7) ? true : false;
+        return user.getRole().getId() == 7 ? true : false;
     }
 
     public boolean isSolicitorReceptionist(User user){
-        return user.getRole().getId().equals(8) ? true : false;
+        return user.getRole().getId() == 8 ? true : false;
     }
 
     public boolean isSolicitor(User user){
-        return user.getRole().getId().equals(9) ? true : false;
+        return user.getRole().getId() == 9 ? true : false;
     }
 
     public User getUser(){

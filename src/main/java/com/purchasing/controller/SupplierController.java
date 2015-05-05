@@ -1,13 +1,13 @@
 package com.purchasing.controller;
 
-import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.annotation.Admin;
+import com.purchasing.annotation.Analyst;
+import com.purchasing.annotation.Manager;
+import com.purchasing.annotation.Purchaser;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.TypePersonEnum;
 import com.purchasing.service.impl.CategoryService;
@@ -41,12 +41,19 @@ public class SupplierController {
         this.validator = validator;
     }
 
-
+    @Purchaser
+    @Analyst
+    @Manager
+    @Admin
     @Path("")
     public void list() {
         result.include("controller", this.getClass().toString());
     }
 
+    @Purchaser
+    @Analyst
+    @Manager
+    @Admin
     @Path("/formulario")
     public void form() {
         TypePersonEnum[] typesPerson  = TypePersonEnum.values();

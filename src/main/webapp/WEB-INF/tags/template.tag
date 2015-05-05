@@ -70,7 +70,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${userLogged.username} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<c:url value="/login/formulario/perfil" ></c:url>"><span class="fa fa-user"></span> <fmt:message key="submenu.profile"/></a></li>
+                <li><a href="<c:url value="/login/meu/perfil/${userLogged.id}" ></c:url>"><span class="fa fa-user"></span> <fmt:message key="submenu.profile"/></a></li>
                 <li class="divider"></li>
                 <li><a href="<c:url value="/login/logoff" ></c:url>"><span class="fa fa-sign-out"></span> <fmt:message key="submenu.singOut"/></a></li>
               </ul>

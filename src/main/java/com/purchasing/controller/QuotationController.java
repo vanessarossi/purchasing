@@ -3,6 +3,7 @@ package com.purchasing.controller;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.annotation.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.TypeEnum;
@@ -171,11 +172,19 @@ public class QuotationController {
     }
 
     /** Formulários **/
+
+    @Purchaser
+    @Analyst
+    @Admin
     @Path("/")
     public void list() {
         result.include("controller", this.getClass().toString());
     }
 
+
+    @Purchaser
+    @Analyst
+    @Admin
     @Path("/formulario")
     public void formQuotation() {
         result.include("types", TypeEnum.findTypeQuotation());

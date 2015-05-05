@@ -7,6 +7,9 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.annotation.Admin;
+import com.purchasing.annotation.Analyst;
+import com.purchasing.annotation.Purchaser;
 import com.purchasing.entity.Unit;
 import com.purchasing.service.impl.UnitService;
 import com.purchasing.support.datatable.DataTableModel;
@@ -35,6 +38,9 @@ public class UnitController {
         this.validator = validator;
     }
 
+    @Purchaser
+    @Analyst
+    @Admin
     @Path("")
     public void index() {
         result.include("controller", this.getClass().toString());

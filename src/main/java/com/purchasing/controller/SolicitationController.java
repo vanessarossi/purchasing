@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.annotation.*;
 import com.purchasing.entity.Product;
 import com.purchasing.entity.Solicitation;
 import com.purchasing.entity.SolicitationRequest;
@@ -125,21 +126,48 @@ public class SolicitationController {
 
 
     /** Formulários **/
+    @Purchaser
+    @Analyst
+    @Manager
+    @Admin
     @Path("/listar")
     public void list() {
            result.include("controller", this.getClass().toString());
        }
 
+    @Solicitor
+    @SolicitorReceptionist
+    @Purchaser
+    @Coordinato
+    @Analyst
+    @Manager
+    @Director
+    @Council
+    @Admin
     @Path("/listar/individual")
     public void individualList(){
            result.include("controller", this.getClass().toString());
        }
 
+    @Purchaser
+    @Coordinato
+    @Analyst
+    @Manager
+    @Admin
     @Path("/listar/pendente")
     public void missingList() {
            result.include("controller", this.getClass().toString());
        }
 
+    @Solicitor
+    @SolicitorReceptionist
+    @Purchaser
+    @Coordinato
+    @Analyst
+    @Manager
+    @Director
+    @Council
+    @Admin
     @Path("/formulario")
     public void form() {
             result.include("typesService",typeServiceService.findAll());
@@ -153,6 +181,10 @@ public class SolicitationController {
             result.include("controller", this.getClass().toString());
         }
 
+
+    @Purchaser
+    @Analyst
+    @Admin
     @Path("/formulario/finalizacao")
     public void finalizationForm(){
         result.include("controller", this.getClass().toString());

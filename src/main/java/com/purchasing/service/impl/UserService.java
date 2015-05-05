@@ -13,6 +13,7 @@ public interface UserService {
 
     public User authenticate(User user);
     public User save(User user);
+    public void saveNewPassword(User user);
     public void delete(User user);
     public User searchById(User user);
     public User searchByUsername(User user);

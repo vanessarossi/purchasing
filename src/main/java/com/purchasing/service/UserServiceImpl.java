@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (userFound!= null && userFound.getId() != null){
+            if (userFound!= null && userFound.getId() != null && userFound.getLastAccess() != null){
                 userFound.setLastAccess(new Timestamp(new Date().getTime()));
                 userDAO.save(userFound);
             }
@@ -66,6 +66,16 @@ public class UserServiceImpl implements UserService {
         newUser.setUsername(user.getUsername().toLowerCase());
         newUser = userDAO.save(newUser);
         return newUser;
+    }
+
+    @Override
+    public void saveNewPassword(User user) {
+        try {
+            user.setPassword(Decrypter.encrypt(user.getPassword()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        userDAO.save(user);
     }
 
     @Override
