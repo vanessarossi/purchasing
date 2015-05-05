@@ -569,9 +569,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public File printerOrder(PurchaseOrder purchaseOrder) {
-        purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class,purchaseOrder.getId());
-        if (purchaseOrder.getStatus() == StatusEnum.BuyingProcess){
+        purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, purchaseOrder.getId());
+        if(purchaseOrder.getDateGenerate() == null){
             purchaseOrder.setDateGenerate(new Timestamp(new Date().getTime()));
+            purchaseOrderDAO.save(purchaseOrder);
+        }
+        if (purchaseOrder.getStatus() == StatusEnum.BuyingProcess){
             purchaseOrder.setStatus(StatusEnum.PurchaseMade);
             purchaseOrderDAO.save(purchaseOrder);
             for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
@@ -584,7 +587,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public File printerPurchaseOrder(Reception reception) {
-        reception = receptionDAO.findById(Reception.class,reception.getId());
+        reception = receptionDAO.findById(Reception.class, reception.getId());
         return purchaseOrderPrinter.generatePurchaseOrder(reception.getPurchaseOrder(), reception, this);
     }
 
