@@ -22,7 +22,7 @@
 	<title>
 		<band height="104" splitType="Stretch">
 			<image scaleImage="RetainShape">
-				<reportElement x="0" y="0" width="554" height="40" uuid="7249f8be-cf65-47ab-872b-a28c6dcd3990"/>
+				<reportElement x="0" y="0" width="554" height="63" uuid="7249f8be-cf65-47ab-872b-a28c6dcd3990"/>
 				<imageExpression><![CDATA[$P{img}]]></imageExpression>
 			</image>
 			<textField>

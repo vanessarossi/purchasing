@@ -48,4 +48,6 @@ public class ReceptionDAO extends DAOImpl<Reception,Long> {
         total = Integer.parseInt(criteria.uniqueResult().toString());
         return total;
     }
+
+
 }

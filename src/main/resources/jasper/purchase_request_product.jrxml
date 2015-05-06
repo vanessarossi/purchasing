@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="corporate_name" class="java.lang.String"/>
@@ -37,6 +37,10 @@
 	</background>
 	<title>
 		<band height="60" splitType="Stretch">
+			<image scaleImage="RetainShape" onErrorType="Blank">
+				<reportElement x="0" y="0" width="554" height="58" uuid="276c02fd-e32a-45ac-b3c5-c69b8646d673"/>
+				<imageExpression><![CDATA[$P{img}]]></imageExpression>
+			</image>
 			<staticText>
 				<reportElement x="0" y="39" width="555" height="20" uuid="1c64e8d5-42fb-4ff6-9804-fa5c7ce78caf"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -69,10 +73,6 @@
 			<line>
 				<reportElement x="0" y="58" width="555" height="1" uuid="293daa59-accf-4077-8d58-f827e7f52809"/>
 			</line>
-			<image scaleImage="RetainShape" onErrorType="Blank">
-				<reportElement x="0" y="0" width="554" height="39" uuid="276c02fd-e32a-45ac-b3c5-c69b8646d673"/>
-				<imageExpression><![CDATA[$P{img}]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
