@@ -253,7 +253,7 @@
       </div>
     </c:if>
 
-    <c:if test="${(purchaseOrder.alreadyPurchased == 'true' &&  purchaseOrder.status eq 'Open') || (purchaseOrder.paymentInformation.hasContract == 'true' && purchaseOrder.status eq 'Open') ||(purchaseOrder.status eq 'Approved') ||(purchaseOrder.status eq 'BuyingProcess') || (purchaseOrder.status eq 'PurchaseMade')}">
+    <c:if test="${(purchaseOrder.alreadyPurchased == 'true' &&  purchaseOrder.status eq 'Open') || (purchaseOrder.paymentInformation.hasContract == 'true' && purchaseOrder.status eq 'Open') ||(purchaseOrder.status eq 'Approved') ||(purchaseOrder.status eq 'BuyingProcess') || (purchaseOrder.status eq 'PurchaseMade') && (purchaseOrder.paymentInformation != null)}">
       <div class="row">
         <div class="col-sm-offset-9 col-md-offset-9">
           <div class="form-group">
