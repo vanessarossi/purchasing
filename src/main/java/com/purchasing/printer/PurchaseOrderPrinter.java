@@ -87,7 +87,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         }
 
         String number_request = purchaseOrder.getId().toString();
-        String date_purchase_request = purchaseOrder.getDateGenerate() == null ? "" : Conversor.converterDateTimeInString(purchaseOrder.getDateGenerate());
+        String date_purchase_request = reception.getDate() == null ? "" : Conversor.converterDateTimeInString(reception.getDate());
 
         /** Payment **/
         String mean_payment = reception.getPaymentInformation().getMeanPayment().getDescription();

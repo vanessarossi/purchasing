@@ -37,7 +37,7 @@
             <table id="orderRequestProductTable" class="table table-striped table-hover table-condensed">
               <thead>
                 <tr>
-                    <th style="width: 25%"><fmt:message key="table.costCenter"/></th>
+                    <th style="width: 15%"><fmt:message key="table.costCenter"/></th>
                     <th style="width: 50%"><fmt:message key="table.product"/></th>
                     <th style="width: 5%"><fmt:message key="table.abbreviatedQuantity"/></th>
                     <th style="width: 10%"><fmt:message key="table.unit"/></th>
@@ -53,7 +53,7 @@
                     <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.quantity}</td>
                     <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.unit.description}</td>
                     <td>${fn:replace(orderRequest.budgetQuotation.unityPrice,"." ,"," )}</td>
-                    <td>${fn:replace(orderRequest.budgetQuotation.quotationRequest.solicitationRequest.quantity * orderRequest.budgetQuotation.unityPrice,"." ,"," )}</td>
+                    <td><fmt:formatNumber type="number" value="${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.quantity * orderRequest.budgetQuotation.unityPrice}" minFractionDigits="2" maxFractionDigits="2" /></td>
                   </tr>
                 </c:forEach>
               </tbody>

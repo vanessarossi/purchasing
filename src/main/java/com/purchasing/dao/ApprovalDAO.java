@@ -15,4 +15,6 @@ public class ApprovalDAO extends DAOImpl<Approval,Long> {
     public ApprovalDAO(Session session) {
         super(session);
     }
+
+
 }

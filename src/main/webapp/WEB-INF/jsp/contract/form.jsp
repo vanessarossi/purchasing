@@ -103,7 +103,6 @@
             </div>
         </div>
     </form>
-
     <form action='<c:url value="/contrato/renovacao/salvar"></c:url>' method="post" id="renewalForm" enctype="multipart/form-data">
         <div class="container-fluid">
             <div class="page-header">

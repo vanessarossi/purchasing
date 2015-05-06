@@ -4,6 +4,7 @@ import com.purchasing.entity.OrderRequest;
 import com.purchasing.entity.Product;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -57,7 +58,13 @@ public class OrderRequestProductView implements Comparator<OrderRequestProductVi
                 orderRequestProductView.setProduct(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getProduct());
                 orderRequestProductView.setQuantity(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity());
                 orderRequestProductView.setUnityPrice(orderRequest.getBudgetQuotation().getUnityPrice());
-                orderRequestProductView.setTotalPrice(new BigDecimal(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity()).multiply(orderRequest.getBudgetQuotation().getUnityPrice()));
+
+            DecimalFormat decimalFormat = new DecimalFormat();
+            decimalFormat.setMaximumFractionDigits(2);
+            decimalFormat.setMinimumFractionDigits(2);
+            decimalFormat.setGroupingUsed(false);
+
+                orderRequestProductView.setTotalPrice(new BigDecimal(decimalFormat.format(new BigDecimal(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity()).multiply(orderRequest.getBudgetQuotation().getUnityPrice()))));
                 orderRequestProductV.add(orderRequestProductView);
         }
         return orderRequestProductV;
