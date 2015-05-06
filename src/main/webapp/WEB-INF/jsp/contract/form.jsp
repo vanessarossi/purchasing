@@ -92,7 +92,7 @@
             </div>
         </div>
             <div class="row">
-                <div class="col-sm-offset-9 col-md-offset-9">
+                <div class="col-sm-offset-7 col-md-offset-8">
                     <div class="form-group">
                         <input type="hidden" name="contract.id" value="${contract.id}" >
                         <a onclick="renewal()" type="button" class="btn btn-primary"><fmt:message key="button.renewal"/></a>
@@ -143,7 +143,7 @@
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="finalDateRenewal"><fmt:message key="label.finalDate"></fmt:message></label><span class="required"> *</span>
-                        <input type="text" class="form-control date" name="renewalContract.finalDate" id="finalDateRenewal" value= <fmt:formatDate pattern="dd/MM/yyyy" value="${renewalContract.finalDate}"/>">
+                        <input type="text" class="form-control date" name="renewalContract.finalDate" id="finalDateRenewal" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${renewalContract.finalDate}"/>">
                         <span class="required">${errors.from('renewalContract.finalDate')}</span>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-offset-9 col-md-offset-9">
+                <div class="col-sm-offset-8 col-md-offset-8">
                     <div class="form-group">
                         <input type="hidden" name="contract.id" value="${contract.id}" >
                         <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
