@@ -64,7 +64,6 @@
                 </div>
             </div>
 
-
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><fmt:message key="title.renewals" /></h3>
@@ -93,7 +92,7 @@
             </div>
         </div>
             <div class="row">
-                <div class="col-sm-offset-7 col-md-offset-7">
+                <div class="col-sm-offset-9 col-md-offset-9">
                     <div class="form-group">
                         <input type="hidden" name="contract.id" value="${contract.id}" >
                         <a onclick="renewal()" type="button" class="btn btn-primary"><fmt:message key="button.renewal"/></a>
@@ -104,8 +103,6 @@
             </div>
         </div>
     </form>
-
-
 
     <form action='<c:url value="/contrato/renovacao/salvar"></c:url>' method="post" id="renewalForm" enctype="multipart/form-data">
         <div class="container-fluid">
