@@ -215,6 +215,13 @@ public class PurchaseOrderController {
         return purchaseOrderService.printerPurchaseOrder(reception);
     }
 
+
+    @Post("/cancelar")
+    public void cancellation(PurchaseOrder purchaseOrder){
+        purchaseOrderService.saveCancelation(purchaseOrder);
+        result.redirectTo(this).list();
+    }
+
     /**  Listegem  **/
     @Get("/paginar")
     public void pagination(String sSearch, String sEcho, int iDisplayStart, int iDisplayLength) {

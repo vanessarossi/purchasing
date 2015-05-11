@@ -1,10 +1,11 @@
 $(document).ready(function() {
+	$('#cancellPurchasingOrderForm').hide();	
   $('input').keypress(function (e) {
         var code = null;
         code = (e.keyCode ? e.keyCode : e.which);
         return (code == 13) ? false : true;
   });
-  	oTable =  $('#purchasingOrderTable').dataTable({
+  oTable =  $('#purchasingOrderTable').dataTable({
       "oLanguage": {
         "sUrl": getContextPathDataTable()
       },
@@ -23,6 +24,7 @@ $(document).ready(function() {
       "bServerSide": true,
       "sAjaxSource": getContextPath()+'ordemCompra/paginar',
     });
+	
 });
 
 $('#status').change(function () {
@@ -75,4 +77,14 @@ function filtrar () {
 	      "bServerSide": true,
 	      "sAjaxSource": getContextPath()+'ordemCompra/paginar/filtro/'+status,
 	});
+}
+
+function openFormCancellation(idPurchaseOrder){
+	$('#purchaseOrder').val(idPurchaseOrder);
+	$('#cancellPurchasingOrderForm').show();	
+}
+
+function cancelForm(){
+	$('#purchaseOrder').val("");
+	$('#cancellPurchasingOrderForm').hide();	
 }

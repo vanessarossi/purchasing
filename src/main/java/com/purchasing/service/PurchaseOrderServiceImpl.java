@@ -192,6 +192,23 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public void saveCancelation(PurchaseOrder purchaseOrder) {
+        PurchaseOrder purchaseOrderFound = findById(purchaseOrder);
+        if (purchaseOrder.getStatus() != StatusEnum.Finished && purchaseOrder.getStatus() != StatusEnum.PartiallyFinished && purchaseOrder.getStatus() != StatusEnum.Reject && purchaseOrder.getStatus() != StatusEnum.Conferred){
+            purchaseOrderFound.setJustificationCancellation(purchaseOrder.getJustificationCancellation());
+            purchaseOrderFound.setStatus(StatusEnum.Canceled);
+            purchaseOrderDAO.save(purchaseOrderFound);
+
+            List<OrderRequest> orderRequests = purchaseOrderFound.getOrderRequests();
+            for (OrderRequest orderRequest : orderRequests){
+                Situation situation = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation().getSituation();
+                situation.setStatus(StatusEnum.PurchaseOrderCanceled);
+                situationDAO.save(situation);
+            }
+        }
+    }
+
+    @Override
     public PurchaseOrder findById(PurchaseOrder purchaseOrder) {
         PurchaseOrder purchaseOrderFound = new PurchaseOrder();
         if (purchaseOrder.getId() != null){
@@ -221,13 +238,14 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             String colStatus = purchaseOrder.getStatus().getDescription();
             String colButtonEdit = "<a href=/purchasing/ordemCompra/adicionar/informacao/" + purchaseOrder.getId() +"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
             String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/normal><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
-
+            String colButtonCancel = "<a onclick=openFormCancellation("+purchaseOrder.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String[] row = {
                     colCode,
                     colSupplier,
                     colStatus,
                     colButtonEdit,
                     colButtonView,
+                    colButtonCancel
             };
             purchaseOrderList.add(row);
         }
@@ -252,13 +270,14 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             String colStatus = purchaseOrder.getStatus().getDescription();
             String colButtonEdit = "<a href=/purchasing/ordemCompra/adicionar/informacao/" + purchaseOrder.getId() +"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
             String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/normal><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
-
+            String colButtonCancel = "<a openFormCancellation("+purchaseOrder.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String[] row = {
                     colCode,
                     colSupplier,
                     colStatus,
                     colButtonEdit,
                     colButtonView,
+                    colButtonCancel
             };
             purchaseOrderList.add(row);
         }

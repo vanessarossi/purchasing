@@ -28,7 +28,9 @@ public enum StatusEnum {
     Finished("Finalizada",true,true,true,false),
     PartiallyFinished("Finalizada parcialmente",true,false,true,false),
     CancellationRequest("Pedido de cancelamento",true,false,false,false),
-    Canceled("Cancelada",true,true,true,false);
+    Canceled("Cancelada",true,true,true,false),
+    QuotationCanceled("Cotação Cancelada",true,false,false,false),
+    PurchaseOrderCanceled("Ordem de Compra Cancelada",true,false,false,false);
 
     private String description;
     private Boolean hasOnSolicitation;

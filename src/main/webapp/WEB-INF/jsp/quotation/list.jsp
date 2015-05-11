@@ -43,11 +43,38 @@
                     <th style="width:15%"><fmt:message key="table.initialDate"/></th>
                     <th style="width:15%"><fmt:message key="table.finalDate"/></th>
                     <th style="width:2%"><fmt:message key="table.##"/></th>
+                    <th style="width:2%"><fmt:message key="table.##"/></th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
+        <form action='<c:url value="/cotacao/cancelar"></c:url>' method="post" id="cancellQuotationForm">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <fmt:message key="title.cancell.quotation"/>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="justification"><fmt:message key="label.justification"/></label>
+                                <textarea rows="4" cols="100" class="form-control" name="quotation.justificationCancellation" id="justification" required></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="quotation.id" id="quotation" value=""/>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-9 col-sm-offset-9">
+                            <input type="submit" value="<fmt:message key="button.save"/>" class="btn btn-success"/>
+                            <a  class="btn btn-danger" onclick="cancelForm()"><fmt:message key="button.cancel"/><a/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </html:template>
 </body>

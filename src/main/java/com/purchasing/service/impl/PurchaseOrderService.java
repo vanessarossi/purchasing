@@ -19,6 +19,8 @@ public interface PurchaseOrderService {
     public PurchaseOrder singleSaveWithJustification(Budget budget, String justification, Boolean exclusive);
     public void saveDeliveryAndPayment(PurchaseOrder purchaseOrder);
 
+    public void saveCancelation(PurchaseOrder purchaseOrder);
+
     public PurchaseOrder findById(PurchaseOrder purchaseOrder);
     public List<PurchaseOrder> findBySupplierOrderDate(Supplier supplier);
 

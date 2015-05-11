@@ -16,6 +16,8 @@ public interface QuotationService {
 
     public Quotation save(Quotation quotation);
 
+    public void saveCancellation(Quotation quotation);
+
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPagination(String sSearch);
 

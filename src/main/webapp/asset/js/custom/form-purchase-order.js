@@ -248,3 +248,10 @@ function fillTable(){
     "aLengthMenu": [[5, 10, 100], [5,10, 100]],
   });
 };
+
+function unlockInputs(){
+    $('#dateInput').attr("readonly",false);
+    $('#dateFirstInstallment').attr("readonly",false);
+    $('#dateLastInstallment').attr("readonly",false);
+    $('#expirationDate').attr("readonly",false);
+}

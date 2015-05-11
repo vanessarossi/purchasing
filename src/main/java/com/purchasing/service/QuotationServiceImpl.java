@@ -35,6 +35,29 @@ public class QuotationServiceImpl implements QuotationService {
     }
 
     @Override
+    public void saveCancellation(Quotation quotation) {
+        Quotation quotationFound = quotationDAO.findById(Quotation.class,quotation.getId());
+        if (quotationFound.getStatus() != StatusEnum.Finished){
+            quotationFound.setJustificationCancellation(quotation.getJustificationCancellation());
+            quotationFound.setFinalDate(new Timestamp(new Date().getTime()));
+            quotationFound.setStatus(StatusEnum.Canceled);
+            quotationDAO.save(quotationFound);
+            List<SolicitationRequest> solicitationRequests = new ArrayList<>();
+
+            List<QuotationRequest> quotationRequests =  quotationFound.getQuotationRequests();
+            for (QuotationRequest quotationRequest : quotationRequests){
+                solicitationRequests.add(quotationRequest.getSolicitationRequest());
+            }
+            for (SolicitationRequest solicitationRequest : solicitationRequests){
+                Solicitation solicitation = solicitationRequest.getSolicitation();
+                Situation situation =  solicitation.getSituation();
+                situation.setStatus(StatusEnum.QuotationCanceled);
+                situationDAO.save(situation);
+            }
+        }
+    }
+
+    @Override
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength) {
         String search = sSearch == null ? "" : sSearch;
         List<Quotation> quotations = quotationDAO.pagination(search,iDisplayStart,iDisplayLength);
@@ -48,6 +71,7 @@ public class QuotationServiceImpl implements QuotationService {
             String colInitialDate = Conversor.converterDateTimeInString(quotation.getInitialDate());
             String colFinalDate = Conversor.converterDateTimeInString(quotation.getFinalDate());
             String buttonView = "<a href=/purchasing/cotacao/editar/"+quotation.getId()+"><span class=\"fa fa-pencil-square-o btn btn-default btn-xs\"></span></a>";
+            String buttonCancel = "<a onclick=openFormCancellation("+quotation.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String [] row = {
                     colNumber,
                     colType,
@@ -55,7 +79,8 @@ public class QuotationServiceImpl implements QuotationService {
                     colStatus,
                     colInitialDate,
                     colFinalDate,
-                    buttonView
+                    buttonView,
+                    buttonCancel
             };
             quotationList.add(row);
         }
@@ -82,6 +107,7 @@ public class QuotationServiceImpl implements QuotationService {
             String colInitialDate = Conversor.converterDateTimeInString(quotation.getInitialDate());
             String colFinalDate = Conversor.converterDateTimeInString(quotation.getFinalDate());
             String buttonView = "<a href=/purchasing/cotacao/editar/"+quotation.getId()+"><span class=\"fa fa-pencil-square-o btn btn-default btn-xs\"></span></a>";
+            String buttonCancel = "<a onclick=openFormCancellation("+quotation.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String [] row = {
                     colNumber,
                     colType,
@@ -89,7 +115,8 @@ public class QuotationServiceImpl implements QuotationService {
                     colStatus,
                     colInitialDate,
                     colFinalDate,
-                    buttonView
+                    buttonView,
+                    buttonCancel
             };
             quotationList.add(row);
         }
@@ -105,7 +132,7 @@ public class QuotationServiceImpl implements QuotationService {
     @Override
     public Quotation searchById(Quotation quotation) {
         if (quotation.getId() != null){
-            quotation  = quotationDAO.findById(Quotation.class,quotation.getId());
+            quotation  = quotationDAO.findById(Quotation.class, quotation.getId());
         }else{
             quotation = new Quotation();
         }
@@ -159,7 +186,7 @@ public class QuotationServiceImpl implements QuotationService {
 
     @Override
     public void removeQuotationRequestByProduct(Quotation quotation, Product product) {
-        List<QuotationRequest> quotationRequests = searchQuotationRequestProductByProduct(quotation,product);
+        List<QuotationRequest> quotationRequests = searchQuotationRequestProductByProduct(quotation, product);
         for (QuotationRequest quotationRequest : quotationRequests){
             SolicitationRequest solicitationRequest = quotationRequest.getSolicitationRequest();
             solicitationRequest.setAddQuotation(false);
@@ -173,7 +200,7 @@ public class QuotationServiceImpl implements QuotationService {
 
     @Override
     public void removeQuotationRequest(QuotationRequest quotationRequest) {
-        QuotationRequest quotationRequestFound = quotationRequestDAO.findById(QuotationRequest.class,quotationRequest.getId());
+        QuotationRequest quotationRequestFound = quotationRequestDAO.findById(QuotationRequest.class, quotationRequest.getId());
         SolicitationRequest solicitationRequestFound = quotationRequestFound.getSolicitationRequest();
             solicitationRequestFound.setAddQuotation(false);
         solicitationRequestDAO.save(solicitationRequestFound);
@@ -193,7 +220,7 @@ public class QuotationServiceImpl implements QuotationService {
 
     @Override
     public List<QuotationRequest> searchQuotationRequestProductByProduct(Quotation quotation, Product product) {
-        return quotationRequestDAO.findQuotationRequestProductByProduct(quotation,product);
+        return quotationRequestDAO.findQuotationRequestProductByProduct(quotation, product);
     }
 
     @Override

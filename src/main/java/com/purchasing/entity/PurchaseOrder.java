@@ -42,6 +42,9 @@ public class PurchaseOrder {
     @JoinColumn(name = "budget_id", referencedColumnName = "id")
     private Budget budget;
 
+    @Column(name = "justification_cancellation")
+    private String justificationCancellation;
+
     @OneToOne
     @JoinColumn(name = "delivery_information_id", referencedColumnName = "id", nullable = true)
     private DeliveryInformation deliveryInformation;
@@ -57,7 +60,6 @@ public class PurchaseOrder {
     @OneToMany(mappedBy = "purchaseOrder")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Reception> receptions;
-
 
     public Long getId() {
         return id;
@@ -113,6 +115,14 @@ public class PurchaseOrder {
 
     public void setBudget(Budget budget) {
         this.budget = budget;
+    }
+
+    public String getJustificationCancellation() {
+        return justificationCancellation;
+    }
+
+    public void setJustificationCancellation(String justificationCancellation) {
+        this.justificationCancellation = justificationCancellation;
     }
 
     public DeliveryInformation getDeliveryInformation() {

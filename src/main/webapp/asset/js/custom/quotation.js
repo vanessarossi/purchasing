@@ -1,10 +1,10 @@
 $(document).ready(function() {
+	$('#cancellQuotationForm').hide();	
     $('input').keypress(function (e) {
         var code = null;
         code = (e.keyCode ? e.keyCode : e.which);
         return (code == 13) ? false : true;
     });
-
 	oTable =  $('#quotationTable').dataTable({
 	        "oLanguage": {
 	            "sUrl": getContextPathDataTable()
@@ -23,8 +23,7 @@ $(document).ready(function() {
 	        "bProcessing": false,
 	        "bServerSide": true,
 	        "sAjaxSource": getContextPath()+'cotacao/paginar',
-	});
-	
+	});	
 });
 
 $('#status').change(function () {
@@ -77,4 +76,14 @@ function filtrar () {
  		"bServerSide": true,
  		"sAjaxSource": getContextPath()+'cotacao/paginar/filtro/'+status,
  	});
+}
+
+function openFormCancellation(idQuotation){
+	$('#quotation').val(idQuotation);
+	$('#cancellQuotationForm').show();	
+}
+
+function cancelForm(){
+	$('#quotation').val("");
+	$('#cancellQuotationForm').hide();	
 }

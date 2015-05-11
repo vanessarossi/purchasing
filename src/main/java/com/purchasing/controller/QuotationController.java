@@ -3,7 +3,9 @@ package com.purchasing.controller;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
-import com.purchasing.annotation.*;
+import com.purchasing.annotation.Admin;
+import com.purchasing.annotation.Analyst;
+import com.purchasing.annotation.Purchaser;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.StatusEnum;
@@ -171,6 +173,13 @@ public class QuotationController {
         quotationService.removeQuotationRequest(quotationRequest);
         result.use(Results.json()).withoutRoot().from(true).serialize();
     }
+
+    @Post("/cancelar")
+    public void cancellation(Quotation quotation){
+        quotationService.saveCancellation(quotation);
+        result.redirectTo(this).list();
+    }
+
 
     /** Formulários **/
 

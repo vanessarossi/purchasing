@@ -315,6 +315,10 @@
                   <br>
                 </div>
               </div>
+              <div class="form-group">
+                  <br>
+                  <a onclick="unlockInputs()" class="btn btn-warning" ><fmt:message key="button.open.input"/></a>
+              </div>
             </div>
         </div>
       </div>
