@@ -100,7 +100,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.createAlias("budget.supplier", "supplier");
             criteria.createAlias("supplier.person", "person");
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
-            criteria.add(Restrictions.eq("status",StatusEnum.Open));
+            criteria.add(Restrictions.eq("status", StatusEnum.Open));
             criteria.add(Restrictions.isNull("approval.dateFirstApproval"));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
@@ -299,6 +299,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         criteria.createAlias("quotationRequest.solicitationRequest","solicitationRequest");
         criteria.add(Restrictions.in("status", StatusEnum.getStatusSearchJustificationSolicitation()));
         criteria.add(Restrictions.eq("solicitationRequest.solicitation",solicitation));
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List<PurchaseOrder> purchaseOrders =  criteria.list();
         return purchaseOrders;
     }

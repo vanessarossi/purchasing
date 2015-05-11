@@ -206,7 +206,15 @@
                 <div class="panel-body">
                     <c:forEach items="${purchaseOrders}" var="purchaseOrder">
                         <div class="row">
-                            <div class="col-md-11 col-sm-11">
+                            <div class="col-md-3 col-sm-3">
+                                <div class="form-group">
+                                    <label  class="control-label"><fmt:message key="label.code.purchase.order"/></label><br>
+                                    <span>
+                                      ${purchaseOrder.id}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8">
                                 <div class="form-group">
                                     <label  class="control-label"><fmt:message key="label.justification"/></label><br>
                                     <span>
@@ -259,7 +267,6 @@
             </div>
         </c:otherwise>
     </c:choose>
-
     <div class="modal fade" id="reproveSolicitation" tabindex="-1" role="dialog" aria-labelledby="reproveSolicitation" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

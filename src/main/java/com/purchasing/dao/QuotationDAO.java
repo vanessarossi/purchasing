@@ -90,9 +90,10 @@ public class QuotationDAO extends DAOImpl<Quotation,Long> {
     public List<Quotation> getAllCancelledBySolicitation(Solicitation solicitation){
         Criteria criteria = getSession().createCriteria(Quotation.class);
         criteria.createAlias("quotationRequests","quotationRequests");
-        criteria.createAlias("quotationRequests.solicitationRequest","solicitationRequest");
+        criteria.createAlias("quotationRequests.solicitationRequest", "solicitationRequest");
         criteria.add(Restrictions.eq("solicitationRequest.solicitation",solicitation));
         criteria.add(Restrictions.eq("status", StatusEnum.Canceled));
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List<Quotation> quotations =  criteria.list();
         return quotations;
     }
