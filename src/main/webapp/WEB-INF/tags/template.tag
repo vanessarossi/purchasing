@@ -13,17 +13,25 @@
                 <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.cadastre"/> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
+                <c:if test="${userLogged.role.id != 4}">
                     <li><a href="<c:url value="/categoria" ></c:url>"><fmt:message key="submenu.category"/></a></li>
                     <li><a href="<c:url value="/centroCusto" ></c:url>"><fmt:message key="submenu.costCenter"/></a></li>
+                </c:if>
                     <li><a href="<c:url value="/contrato" ></c:url>"><fmt:message key="submenu.contract"/></a></li>
+                <c:if test="${userLogged.role.id != 4}">
                     <li><a href="<c:url value="/formaPagamento" ></c:url>"><fmt:message key="submenu.formPayment"/></a></li>
+                </c:if>
                     <li><a href="<c:url value="/fornecedor" ></c:url>"><fmt:message key="submenu.supplier"/></a></li>
+                <c:if test="${userLogged.role.id != 4}">
                     <li><a href="<c:url value="/produto" ></c:url>"><fmt:message key="submenu.product"/></a></li>
                     <li><a href="<c:url value="/tipoServico" ></c:url>"><fmt:message key="submenu.typeService"/></a></li>
                     <li><a href="<c:url value="/unidade" ></c:url>"><fmt:message key="submenu.unit"/></a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header"><fmt:message key="submenu.headerConfiguration"/></li>
-                    <li><a href="<c:url value="/usuario" ></c:url>"><fmt:message key="submenu.user"/></a></li>
+                 </c:if>
+                 <c:if test="${userLogged.role.id == 1}">
+                     <li class="divider"></li>
+                     <li class="dropdown-header"><fmt:message key="submenu.headerConfiguration"/></li>
+                     <li><a href="<c:url value="/usuario" ></c:url>"><fmt:message key="submenu.user"/></a></li>
+                 </c:if>
                 </ul>
             </li>
             </c:if>
@@ -34,11 +42,17 @@
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<c:url value="/solicitacao/formulario" ></c:url>"><fmt:message key="submenu.new"/></a></li>
                     <li><a href="<c:url value="/solicitacao/listar/individual" ></c:url>"><fmt:message key="submenu.list"/></a></li>
-                    <li><a href="<c:url value="/solicitacao/listar" ></c:url>"><fmt:message key="submenu.generalList"/></a></li>
-                    <li><a href="<c:url value="/solicitacao/listar/pendente" ></c:url>"><fmt:message key="submenu.missingList"/></a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header"><fmt:message key="submenu.headerFinalizeInternal"/></li>
-                    <li><a href="<c:url value="/solicitacao/formulario/finalizacao" ></c:url>"><fmt:message key="submenu.finalize"/></a></li>
+                    <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 4 || userLogged.role.id == 5 || userLogged.role.id == 7}">
+                        <li><a href="<c:url value="/solicitacao/listar" ></c:url>"><fmt:message key="submenu.generalList"/></a></li>
+                    </c:if>
+                    <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 5 || userLogged.role.id == 6 || userLogged.role.id == 7}">
+                        <li><a href="<c:url value="/solicitacao/listar/pendente" ></c:url>"><fmt:message key="submenu.missingList"/></a></li>
+                    </c:if>
+                    <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 5 || userLogged.role.id == 7}">
+                        <li class="divider"></li>
+                        <li class="dropdown-header"><fmt:message key="submenu.headerFinalizeInternal"/></li>
+                        <li><a href="<c:url value="/solicitacao/formulario/finalizacao" ></c:url>"><fmt:message key="submenu.finalize"/></a></li>
+                    </c:if>
                 </ul>
             </li>
             </c:if>
