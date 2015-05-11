@@ -28,6 +28,8 @@ public class SolicitationServiceImpl implements SolicitationService {
     @Inject private SolicitationRequestDAO solicitationRequestDAO;
     @Inject private ServiceDAO serviceDAO;
     @Inject private CostCenterDAO costCenterDAO;
+    @Inject private PurchaseOrderDAO purchaseOrderDAO;
+    @Inject private QuotationDAO quotationDAO;
 
     @Override
     public Solicitation save(Solicitation solicitation) {
@@ -511,6 +513,16 @@ public class SolicitationServiceImpl implements SolicitationService {
     @Override
     public Solicitation findByApprovedPartiallyDelivered(Solicitation solicitation) {
         return solicitationDAO.findByApprovedPartiallyDelivered(solicitation);
+    }
+
+    @Override
+    public List<PurchaseOrder> getPurchaseOrdersWithJustification(Solicitation solicitation) {
+        return purchaseOrderDAO.findPurchaseWithJustification(solicitation);
+    }
+
+    @Override
+    public List<Quotation> getQuotationCancelledWithJustification(Solicitation solicitation) {
+        return quotationDAO.getAllCancelledBySolicitation(solicitation);
     }
 
     @Override

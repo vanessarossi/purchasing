@@ -180,7 +180,7 @@ function editProduct(index,code){
 
                 $('#addProduct').hide();
                 $('#confirmUpdate').show();
-                $('#confirmUpdate').attr('onclick', 'addProductWithId('+idSolicitationRequest+')');
+                $('#confirmUpdate').attr('onclick', 'confirmUpdate('+idSolicitationRequest+')');
             }else{
                 $('#product').val("Não foi encontrado um produto com este código");
                 $('#code').val("");
@@ -195,7 +195,7 @@ function editProduct(index,code){
 };
 
 function confirmUpdate(codeSolicitationRequest) {
-    if (codeSolicitationRequest == 0){
+    if (codeSolicitationRequest === 0){
         addProduct();
     }else{
         addProductWithId(codeSolicitationRequest);

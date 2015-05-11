@@ -2,6 +2,7 @@ package com.purchasing.dao;
 
 import com.purchasing.dao.base.DAOImpl;
 import com.purchasing.entity.Quotation;
+import com.purchasing.entity.Solicitation;
 import com.purchasing.enumerator.StatusEnum;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -56,7 +57,7 @@ public class QuotationDAO extends DAOImpl<Quotation,Long> {
         criteria.createAlias("user","u");
         disjunction.add(Restrictions.ilike("u.name", sSearch, MatchMode.ANYWHERE));
         criteria.add(disjunction);
-        criteria.add(Restrictions.eq("status",status));
+        criteria.add(Restrictions.eq("status", status));
         criteria.addOrder(Order.desc("id"));
         List<Quotation>quotations = new ArrayList<>();
         quotations.addAll(criteria.list());
@@ -79,10 +80,20 @@ public class QuotationDAO extends DAOImpl<Quotation,Long> {
 
     public Quotation findOpenById(Quotation quotation){
         Criteria criteria = getSession().createCriteria(Quotation.class);
-        criteria.add(Restrictions.eq("id",quotation.getId()));
+        criteria.add(Restrictions.eq("id", quotation.getId()));
         criteria.add(Restrictions.eq("status", StatusEnum.Open));
         Quotation quotationFound = new Quotation();
         quotationFound = (Quotation) criteria.uniqueResult();
         return quotationFound;
+    }
+
+    public List<Quotation> getAllCancelledBySolicitation(Solicitation solicitation){
+        Criteria criteria = getSession().createCriteria(Quotation.class);
+        criteria.createAlias("quotationRequests","quotationRequests");
+        criteria.createAlias("quotationRequests.solicitationRequest","solicitationRequest");
+        criteria.add(Restrictions.eq("solicitationRequest.solicitation",solicitation));
+        criteria.add(Restrictions.eq("status", StatusEnum.Canceled));
+        List<Quotation> quotations =  criteria.list();
+        return quotations;
     }
 }

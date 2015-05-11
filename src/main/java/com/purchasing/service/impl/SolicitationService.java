@@ -1,9 +1,6 @@
 package com.purchasing.service.impl;
 
-import com.purchasing.entity.Product;
-import com.purchasing.entity.Solicitation;
-import com.purchasing.entity.SolicitationRequest;
-import com.purchasing.entity.User;
+import com.purchasing.entity.*;
 import com.purchasing.enumerator.StatusEnum;
 
 import java.io.File;
@@ -54,4 +51,10 @@ public interface SolicitationService {
 
     /** Help finalization **/
     public Solicitation findByApprovedPartiallyDelivered(Solicitation solicitation);
+
+
+    /**  Justificativas **/
+
+    public List<PurchaseOrder> getPurchaseOrdersWithJustification(Solicitation solicitation);
+    public List<Quotation> getQuotationCancelledWithJustification(Solicitation solicitation);
 }

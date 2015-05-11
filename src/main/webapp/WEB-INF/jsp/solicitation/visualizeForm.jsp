@@ -177,6 +177,49 @@
                 </div>
             </div>
         </c:if>
+
+        <c:if test="${solicitation.situation.status eq 'QuotationCanceled' }">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><fmt:message key="title.justifications.quotation.canceled" /></h3>
+                </div>
+                <div class="panel-body">
+                    <c:forEach items="${quotations}" var="quotation">
+                        <div class="row">
+                            <div class="col-md-11 col-sm-11">
+                                <div class="form-group">
+                                    <label  class="control-label"><fmt:message key="label.justification"/></label><br>
+                                    <span>${quotation.justificationCancellation}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </c:if>
+
+        <c:if test="${solicitation.situation.status eq 'PurchaseOrderCanceled' || solicitation.situation.status eq 'PartiallyQuoteApproved' || solicitation.situation.status eq 'QuoteReject'  }">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><fmt:message key="title.justifications.purchase.order.canceled" /></h3>
+                </div>
+                <div class="panel-body">
+                    <c:forEach items="${purchaseOrders}" var="purchaseOrder">
+                        <div class="row">
+                            <div class="col-md-11 col-sm-11">
+                                <div class="form-group">
+                                    <label  class="control-label"><fmt:message key="label.justification"/></label><br>
+                                    <span>
+                                        <c:if test="${purchaseOrder.status eq 'Reject'}">${purchaseOrder.approval.justificationDisapproval}</c:if>
+                                        <c:if test="${purchaseOrder.status eq 'Canceled'}">${purchaseOrder.justificationCancellation}</c:if>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </c:if>
     </div>
     <c:choose>
         <c:when test="${type eq 'pendente' && (userLogged.role.id eq 6 || userLogged.role.id eq 5) && solicitation.situation.status eq 'WaitingApproval'}">
@@ -216,6 +259,7 @@
             </div>
         </c:otherwise>
     </c:choose>
+
     <div class="modal fade" id="reproveSolicitation" tabindex="-1" role="dialog" aria-labelledby="reproveSolicitation" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

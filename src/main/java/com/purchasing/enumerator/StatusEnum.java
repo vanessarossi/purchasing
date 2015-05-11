@@ -134,4 +134,11 @@ public enum StatusEnum {
         statusEnums.add(PartiallyFinished);
         return statusEnums;
     }
+
+    public static List<StatusEnum> getStatusSearchJustificationSolicitation(){
+        List<StatusEnum> statusEnums = new ArrayList<>();
+        statusEnums.add(Reject);
+        statusEnums.add(Canceled);
+        return statusEnums;
+    }
 }
