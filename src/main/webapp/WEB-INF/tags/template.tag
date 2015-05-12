@@ -59,40 +59,48 @@
 
             <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 5 || userLogged.role.id == 7}">
                 <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.quotation"/> <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="<c:url value="/cotacao/formulario" ></c:url>"><fmt:message key="submenu.new"/></a></li>
-                    <li><a href="<c:url value="/cotacao" ></c:url>"><fmt:message key="submenu.list"/></a></li>
-                </ul>
-            </li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.quotation"/> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="<c:url value="/cotacao/formulario" ></c:url>"><fmt:message key="submenu.new"/></a></li>
+                        <li><a href="<c:url value="/cotacao" ></c:url>"><fmt:message key="submenu.list"/></a></li>
+                    </ul>
+                </li>
             </c:if>
 
-            <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 4 || userLogged.role.id == 5 || userLogged.role.id == 7}">
+            <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 2 || userLogged.role.id == 3 || userLogged.role.id == 4 || userLogged.role.id == 5 || userLogged.role.id == 6|| userLogged.role.id == 7 || userLogged.role.id == 8}">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.purchaseOrder"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="<c:url value="/ordemCompra/listagem" ></c:url>"><fmt:message key="submenu.list"/></a></li>
-                        <li><a href="<c:url value="/ordemCompra/listagem/pendencia" ></c:url>"><fmt:message key="submenu.missingList"/></a></li>
-                        <li><a href="<c:url value="/ordemCompra/formulario/recepcao" ></c:url>"><fmt:message key="submenu.reception"/></a></li>
+                    <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 2 || userLogged.role.id == 3 || userLogged.role.id == 4 || userLogged.role.id == 5 || userLogged.role.id == 7}">
+                            <li><a href="<c:url value="/ordemCompra/listagem" ></c:url>"><fmt:message key="submenu.list"/></a></li>
+                            <li><a href="<c:url value="/ordemCompra/listagem/pendencia" ></c:url>"><fmt:message key="submenu.missingList"/></a></li>
+                    </c:if>
+                    <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 5 || userLogged.role.id == 6|| userLogged.role.id == 7 || userLogged.role.id == 8}">
+                            <li><a href="<c:url value="/ordemCompra/formulario/recepcao" ></c:url>"><fmt:message key="submenu.reception"/></a></li>
+                    </c:if>
+                    <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 5 || userLogged.role.id == 7}">
                         <li class="divider"></li>
-                        <li class="dropdown-header"><fmt:message key="submenu.headerPendenceFinalize"/></li>
-                        <li><a href="<c:url value="/ordemCompra/listagem/conferida" ></c:url>"><fmt:message key="submenu.searchConfered"/></a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header"><fmt:message key="submenu.headerSearch"/></li>
-                        <li><a href="<c:url value="/ordemCompra/pesquisar" ></c:url>"><fmt:message key="submenu.searchBySupplier"/></a></li>
+                            <li class="dropdown-header"><fmt:message key="submenu.headerPendenceFinalize"/></li>
+                            <li><a href="<c:url value="/ordemCompra/listagem/conferida" ></c:url>"><fmt:message key="submenu.searchConfered"/></a></li>
+                    </c:if>
+                    <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 5 || userLogged.role.id == 6|| userLogged.role.id == 7 || userLogged.role.id == 8}">
+                            <li class="divider"></li>
+                            <li class="dropdown-header"><fmt:message key="submenu.headerSearch"/></li>
+                            <li><a href="<c:url value="/ordemCompra/pesquisar" ></c:url>"><fmt:message key="submenu.searchBySupplier"/></a></li>
+                    </c:if>
                     </ul>
                 </li>
             </c:if>
 
             <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 2 || userLogged.role.id == 3 || userLogged.role.id == 4 || userLogged.role.id == 5 || userLogged.role.id == 6|| userLogged.role.id == 7 || userLogged.role.id == 8|| userLogged.role.id == 9}">
                 <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.indicators"/> <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                </ul>
-            </li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.indicators"/> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </li>
             </c:if>
         </ul>
         <ul class="nav navbar-nav navbar-right">
