@@ -183,7 +183,7 @@ public class SolicitationServiceImpl implements SolicitationService {
     public List<Object[]> findIndividualPagination(String sSearch, int iDisplayStart, int iDisplayLength) {
         String search = sSearch == null ? "" : sSearch;
         List<Solicitation> solicitations = new ArrayList<>();
-        if (getUserLogged().getRole().getId() <= 7){
+        if (getUserLogged().getRole().getId() <= 7 && getUserLogged().getRole().getId()  != 1){
             solicitations = solicitationDAO.paginationIndividualCoordinator(search, iDisplayStart, iDisplayLength, getUserLogged().getCostCenters());
         }else{
             solicitations = solicitationDAO.paginationIndividual(search, iDisplayStart, iDisplayLength, getUserLogged());
@@ -220,7 +220,7 @@ public class SolicitationServiceImpl implements SolicitationService {
     public Integer totalIndividualPagination(String sSearch) {
         String search = sSearch == null ? "" : sSearch;
         Integer quantity = 0;
-        if (getUserLogged().getRole().getId() <= 7){
+        if (getUserLogged().getRole().getId() <= 7 && getUserLogged().getRole().getId()  != 1){
             quantity = solicitationDAO.totalIndividualPaginationCoordinator(search, getUserLogged().getCostCenters());
         }else{
             quantity = solicitationDAO.totalIndividualPagination(search, getUserLogged());
