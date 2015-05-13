@@ -1,14 +1,6 @@
 package com.purchasing.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -43,6 +35,9 @@ public class Supplier {
 
     @OneToMany(mappedBy = "supplier")
     private List<Contract> contracts;
+
+    @Column(name = "active")
+    private Boolean active;
 
     public Long getId() {
         return id;
@@ -98,5 +93,13 @@ public class Supplier {
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

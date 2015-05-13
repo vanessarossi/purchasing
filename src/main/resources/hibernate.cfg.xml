@@ -8,7 +8,7 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="current_session_context_class">thread</property>
 
-        <!-- BANCO DEV LOCAL  -->
+        <!-- BANCO DEV LOCAL -->
 
             <property name="connection.url">jdbc:mysql://localhost:3306/purchasing</property>
             <property name="connection.username">root</property>
@@ -21,6 +21,7 @@
         <property name="connection.password">#unimed#250</property>
          -->
         <!-- BANCO TEST UNIMED -->
+
         <!--
             <property name="connection.url">jdbc:mysql://192.168.0.216/purchasing_dev</property>
             <property name="connection.username">purchasing</property>

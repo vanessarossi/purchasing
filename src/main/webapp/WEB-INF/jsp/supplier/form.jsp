@@ -36,6 +36,23 @@
                     <span class="required">${errors.from('supplier.category')}</span>
                 </div>
             </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="active"><fmt:message key="label.active"/></label>
+                    <br>
+                    <div class="radio-inline">
+                        <label class="control-label">
+                            <input type="radio" value="true" name="supplier.active" id="active" <c:if test="${supplier.urgency eq true}"> checked </c:if> > <fmt:message key="label.yes"/>
+                        </label>
+                    </div>
+                    <div class="radio-inline">
+                        <label class="control-label">
+                            <input type="radio" value="false" name="supplier.active" id="active" <c:if test="${supplier.urgency eq false}"> checked </c:if> > <fmt:message key="label.no"/>
+                        </label>
+                    </div>
+                    <br>
+                </div>
+            </div>
         </div>
         <div id="divNaturalPerson">
             <div class="row">

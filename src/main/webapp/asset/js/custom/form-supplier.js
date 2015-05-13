@@ -20,17 +20,11 @@ function actionTypePerson(){
    }
 };
 
-function checkByCpf() {
-};
-
-function checkByCnpj() {
-};
-
 $('#cpf').blur(function(){
   var cpf = $('#cpf').val();
   if ((cpf != null) || (cpf!= '')) { 
      $.ajax({
-          url: getContextPath() + 'fornecedor/pesquisar/cpf',
+          url: getContextPath() + 'fornecedor/pesquisar/cpf/json',
           type: 'POST',
           dataType: 'json',
           data: {cpf: cpf},
@@ -56,7 +50,7 @@ $('#cnpj').blur(function(){
   var cnpj = $('#cnpj').val();
   if ((cnpj != null) || (cnpj!= '')){
     $.ajax({
-            url: getContextPath() + 'fornecedor/pesquisar/cnpj',
+            url: getContextPath() + 'fornecedor/pesquisar/cnpj/json',
             type: 'POST',
             dataType: 'json',
             data: {cnpj: cnpj},
