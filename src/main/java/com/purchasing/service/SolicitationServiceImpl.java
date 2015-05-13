@@ -232,9 +232,9 @@ public class SolicitationServiceImpl implements SolicitationService {
     public List<Object[]> findMissingPagination(String sSearch, int iDisplayStart, int iDisplayLength) {
         String search = sSearch == null ? "" : sSearch;
         List<Solicitation> solicitations = new ArrayList<>();
-        if (getUserLogged().getRole().getId() == 5 || getUserLogged().getRole().getId() == 7  ){
+        if (getUserLogged().getRole().getId() == 5 || getUserLogged().getRole().getId() == 7 && getUserLogged().getRole().getId() != 1 ){
             solicitations = solicitationDAO.paginationMissingAnalyst(search, iDisplayStart, iDisplayLength, getUserLogged().getCostCenters());
-        }else if (getUserLogged().getRole().getId() <= 6 && getUserLogged().getRole().getId() != 5){
+        }else if (getUserLogged().getRole().getId() <= 6 && getUserLogged().getRole().getId() != 5 && getUserLogged().getRole().getId() != 1){
             solicitations = solicitationDAO.paginationMissingCoordinator(search, iDisplayStart, iDisplayLength, getUserLogged().getCostCenters());
         }
 
@@ -263,9 +263,9 @@ public class SolicitationServiceImpl implements SolicitationService {
     public Integer totalMissingPagination(String sSearch) {
         String search = sSearch == null ? "" : sSearch;
         Integer quantity = 0;
-        if (getUserLogged().getRole().getId() == 5 || getUserLogged().getRole().getId() == 7  ){
+        if (getUserLogged().getRole().getId() == 5 || getUserLogged().getRole().getId() == 7 && getUserLogged().getRole().getId() != 1 ){
             quantity = solicitationDAO.totalMissingPaginationAnalyst(search, getUserLogged().getCostCenters());
-        }else if (getUserLogged().getRole().getId() <= 6 && getUserLogged().getRole().getId() != 5){
+        }else if (getUserLogged().getRole().getId() <= 6 && getUserLogged().getRole().getId() != 5 && getUserLogged().getRole().getId() != 1){
             quantity = solicitationDAO.totalMissingPaginationCoordinator(search, getUserLogged().getCostCenters());
         }
         return quantity;

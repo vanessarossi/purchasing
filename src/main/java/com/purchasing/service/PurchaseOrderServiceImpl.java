@@ -952,6 +952,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         Integer difference = total.compareTo(totalDelivered);
         SolicitationRequest solicitationRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId()).getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
         if (difference == 0){
+            solicitationRequest.setDeliveryDate(new Date());
             solicitationRequest.setStatus(StatusEnum.Delivered);
         }
         if (difference == -1) {
