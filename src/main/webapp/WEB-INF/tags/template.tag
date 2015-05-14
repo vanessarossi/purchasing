@@ -92,7 +92,7 @@
                 </li>
             </c:if>
 
-            <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 2 || userLogged.role.id == 3 || userLogged.role.id == 4 || userLogged.role.id == 5 || userLogged.role.id == 6|| userLogged.role.id == 7 || userLogged.role.id == 8|| userLogged.role.id == 9}">
+            <c:if test="${userLogged.role.id == 1}">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.indicators"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
