@@ -76,6 +76,9 @@ function calculateTotalPriceMaterial(i){
                     centsSeparator: ',',
                     thousandsSeparator: ''
             }); 
+			
+			
+			
             if (parseInt(i) === parseInt(numberRequestMaterial)) {
                 totalFinalPriceMaterial = 0;
                 for (var j = 0; j <= parseInt(numberRequestMaterial); j++) {
@@ -96,6 +99,8 @@ function calculateTotalPriceMaterial(i){
                     centsSeparator: ',',
                     thousandsSeparator: ''
                 });
+				
+				
                 $('#totalPrice').val(totalPrice.toFixed(2).replace(".", ","));
                 $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
                 $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
@@ -114,6 +119,9 @@ function calculateTotalPriceMaterialTwo(i){
             unityPrice = unityPrice.replace(',', '.');
 
         totalPriceMaterial = parseFloat(quantity) * parseFloat(unityPrice);
+		
+		console.log(totalPriceMaterial);
+		
         $('#totalPriceMaterial'+i).val(totalPriceMaterial.toFixed(2).replace(".", ","));
         $('#totalPriceMaterial'+i).priceFormat({
                 prefix: 'R$ ',
@@ -143,6 +151,8 @@ function calculateTotalPriceMaterialTwo(i){
             $('#totalPrice').val(totalPrice.toFixed(2).replace(".", ","));
             $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
             $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
+			
+			console.log("TOTAL FINAL"+totalPrice);
         }
 };
 
