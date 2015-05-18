@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,6 +48,15 @@ public class ReceptionDAO extends DAOImpl<Reception,Long> {
         criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());
         return total;
+    }
+
+    public List<Reception> searchByDate(Date initialDate , Date finalDate) {
+        Criteria criteria = getSession().createCriteria(Reception.class);
+        criteria.add(Restrictions.between("date",initialDate,finalDate));
+        criteria.addOrder(Order.desc("date"));
+        List<Reception> receptions = new ArrayList<>();
+        receptions.addAll(criteria.list());
+        return receptions;
     }
 
 
