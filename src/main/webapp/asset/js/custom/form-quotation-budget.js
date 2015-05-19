@@ -119,9 +119,7 @@ function calculateTotalPriceMaterialTwo(i){
             unityPrice = unityPrice.replace(',', '.');
 
         totalPriceMaterial = parseFloat(quantity) * parseFloat(unityPrice);
-		
-		console.log(totalPriceMaterial);
-		
+				
         $('#totalPriceMaterial'+i).val(totalPriceMaterial.toFixed(2).replace(".", ","));
         $('#totalPriceMaterial'+i).priceFormat({
                 prefix: 'R$ ',
@@ -152,7 +150,6 @@ function calculateTotalPriceMaterialTwo(i){
             $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
             $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
 			
-			console.log("TOTAL FINAL"+totalPrice);
         }
 };
 
@@ -420,7 +417,7 @@ function calculateValueParcelWithInput(parcel,intervalDay){
         totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
         
-        totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(".", ","));
+        totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(",", "."));
        
         valueParcel = parseFloat(totalPriceLessInput) / parseFloat(parcel);
         $('#sharePrice').val(parseFloat(valueParcel).toFixed(2).replace(".", ","));

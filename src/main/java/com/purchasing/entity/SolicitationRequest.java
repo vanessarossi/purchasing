@@ -21,7 +21,7 @@ import java.util.Date;
  * @author vanessa
  */
 @Entity
-@Table(name = "solicitation_request", schema = "", catalog = "purchasing")
+@Table(name = "solicitation_request")
 public class SolicitationRequest {
 
     @Id

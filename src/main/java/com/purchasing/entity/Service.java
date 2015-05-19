@@ -9,7 +9,7 @@ import java.util.List;
  * @author vanessa
  */
 @Entity
-@Table(name = "service", schema = "", catalog = "purchasing")
+@Table(name = "service")
 public class Service {
 
     @Id

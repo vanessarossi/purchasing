@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  * @author vanessa
  */
 @Entity
-@Table(name = "person", schema = "", catalog = "purchasing")
+@Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
 

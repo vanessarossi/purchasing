@@ -156,7 +156,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         DeliveryInformation deliveryInformation = deliveryInformationDAO.save(purchaseOrder.getDeliveryInformation());
 
         PaymentInformation paymentInformation = new PaymentInformation();
-        if (purchaseOrder.getPaymentInformation().getHasContract() != null) {
+        if (purchaseOrder.getPaymentInformation().getHasContract() != null && purchaseOrder.getPaymentInformation().getHasContract() != false) {
             paymentInformation.setHasContract(purchaseOrder.getPaymentInformation().getHasContract());
             paymentInformation.setContract(purchaseOrder.getPaymentInformation().getContract());
         }

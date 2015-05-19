@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * @author vanessa
  */
 @Entity
-@Table(name = "payment_information_budget", schema = "", catalog = "purchasing")
+@Table(name = "payment_information_budget")
 public class PaymentInformationBudget {
 
     @Id

@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * @author vanessa
  */
 @Entity
-@Table(name = "natural_person", schema = "", catalog = "purchasing")
+@Table(name = "natural_person")
 @PrimaryKeyJoinColumn(name = "id")
 public class NaturalPerson extends Person {
 

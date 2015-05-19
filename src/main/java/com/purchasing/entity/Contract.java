@@ -21,7 +21,7 @@ import java.util.List;
  * @author vanessa
  */
 @Entity
-@Table(name = "contract", schema = "", catalog = "purchasing")
+@Table(name = "contract")
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

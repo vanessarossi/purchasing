@@ -19,7 +19,7 @@ import java.util.List;
  * @author vanessa
  */
 @Entity
-@Table(name="cost_center", schema = "", catalog = "purchasing")
+@Table(name="cost_center")
 public class CostCenter {
 
     @Id

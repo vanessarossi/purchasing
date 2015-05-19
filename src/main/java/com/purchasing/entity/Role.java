@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="role", schema = "", catalog = "purchasing")
+@Table(name="role")
 public class Role {
 
     @Id

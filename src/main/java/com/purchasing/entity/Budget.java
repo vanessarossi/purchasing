@@ -23,7 +23,7 @@ import java.util.List;
  * @author vanessa
  */
 @Entity
-@Table(name = "budget", schema = "", catalog = "purchasing")
+@Table(name = "budget")
 public class Budget {
 
     @Id
@@ -38,7 +38,6 @@ public class Budget {
     private Boolean chosenBudget;
 
     @NotBlank
-    @Length(min = 1, max = 20)
     @Column(name = "number_budget")
     private String numberBudget;
 

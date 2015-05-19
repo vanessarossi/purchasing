@@ -432,10 +432,10 @@ public class SolicitationServiceImpl implements SolicitationService {
     @Override
     public void alterStatus(Solicitation solicitation, StatusEnum statusEnum) {
         solicitation = solicitationDAO.findById(Solicitation.class,solicitation.getId());
-        if (solicitation.getSituation().getStatus().equals(StatusEnum.CancellationRequest)){
-            solicitation.setFinalDate(new Timestamp(new Date().getTime()));
-            alterStatus(solicitation,StatusEnum.Canceled);
-        }
+        Situation situation = solicitation.getSituation();
+        situation.setStatus(statusEnum);
+        situationDAO.save(situation);
+        solicitationDAO.save(solicitation);
     }
 
     @Override

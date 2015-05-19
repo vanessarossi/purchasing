@@ -11,7 +11,7 @@ import java.util.List;
  * @author vanessa
  */
 @Entity
-@Table(name = "form_payment", schema = "", catalog = "purchasing")
+@Table(name = "form_payment")
 public class FormPayment {
 
     @Id

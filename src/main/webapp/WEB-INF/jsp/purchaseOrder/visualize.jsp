@@ -98,22 +98,22 @@
       <div class="panel-body">
         <c:forEach items="${purchaseOrder.budget.quotation.budgets}" var="budget">
           <div class="row">
-            <div class="col-sm-5 col-md-5">
-              <div class="form-group">
+            <div class="col-sm-7 col-md-7">
+              <div class="form-group <c:if test="${purchaseOrder.budget.id eq budget.id}">has-success</c:if>" >
                   <label class="control-label"><fmt:message key="label.supplier" /></label>
-                  <input type="text" class="form-control" readonly value="${purchaseOrder.budget.supplier.person.name}" />
+                  <input type="text" class="form-control" readonly value="${budget.supplier.person.name}" />
               </div>
             </div>
             <div class="col-sm-2 col-md-2">
               <div class="form-group">
                 <label class="control-label"><fmt:message key="label.date"/></label>
-                <input type="text" class="form-control" readonly value="<fmt:formatDate value="${purchaseOrder.budget.date}" pattern="dd/MM/YYYY"/>"/>
+                <input type="text" class="form-control" readonly value="<fmt:formatDate value="${budget.date}" pattern="dd/MM/YYYY"/>"/>
               </div>
             </div>
             <div class="col-sm-2 col-md-2">
               <div class="form-group">
                 <label class="control-label"><fmt:message key="label.total.price"/></label>
-                <input type="text" class="form-control" readonly value="${fn:replace(purchaseOrder.budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}"/>
+                <input type="text" class="form-control" readonly value="${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}"/>
               </div>
             </div>
           </div>

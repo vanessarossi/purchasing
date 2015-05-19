@@ -16,7 +16,7 @@ import java.util.List;
  * @author vanessa
  */
 @Entity
-@Table(name = "type_service", schema = "", catalog = "purchasing")
+@Table(name = "type_service")
 public class TypeService {
 
     @Id

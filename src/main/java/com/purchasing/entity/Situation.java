@@ -20,7 +20,7 @@ import java.util.Date;
  * @author vanessa
  */
 @Entity
-@Table(name = "situation", schema = "", catalog = "purchasing")
+@Table(name = "situation")
 public class Situation {
 
     @Id

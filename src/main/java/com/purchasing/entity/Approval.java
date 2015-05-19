@@ -7,7 +7,7 @@ import java.util.Date;
  * @author vanessa
  */
 @Entity
-@Table(name = "approval", schema = "", catalog = "purchasing")
+@Table(name = "approval")
 public class Approval {
 
     @Id

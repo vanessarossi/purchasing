@@ -14,7 +14,7 @@ import javax.validation.constraints.Digits;
  * @author vanessa
  */
 @Entity
-@Table(name = "request_delivered", schema = "", catalog = "purchasing")
+@Table(name = "request_delivered")
 public class RequestDelivered {
 
     @Id

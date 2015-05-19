@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * @author vanessa
  */
 @Entity
-@Table(name = "budget_quotation", schema = "", catalog = "purchasing")
+@Table(name = "budget_quotation")
 public class BudgetQuotation {
 
     @Id

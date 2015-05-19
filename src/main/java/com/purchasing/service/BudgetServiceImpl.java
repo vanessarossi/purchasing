@@ -73,7 +73,7 @@ public class BudgetServiceImpl implements BudgetService {
         }
         for (PaymentInformationBudget paymentInformationBudget : budget.getPaymentInformationBudgets()){
             PaymentInformation paymentInformation = new PaymentInformation();
-            if (paymentInformationBudget.getPaymentInformation().getHasContract() != null) {
+            if (paymentInformationBudget.getPaymentInformation().getHasContract() != null && paymentInformationBudget.getPaymentInformation().getHasContract() != false) {
                 paymentInformation.setHasContract(paymentInformationBudget.getPaymentInformation().getHasContract());
                 paymentInformation.setContract(paymentInformationBudget.getPaymentInformation().getContract());
             }
