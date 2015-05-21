@@ -3,17 +3,21 @@ $(document).ready(function() {
 
 $('#confered').click(function(){
 	var tax_document = $("#taxDocument").val();
-	if(taxDocument != null && taxDocument != ''){
+	if(tax_document != null && tax_document != ''){
 		$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/conferir');
 		$('#confirmReceptionForm').submit();
+	}else{
+		alert("Informe o número da nota fiscal.");
 	}
 });
 
 $('#finalize').click(function(){
 	var tax_document = $("#taxDocument").val();
-	if(taxDocument != null && taxDocument != ''){
+	if(tax_document != null && tax_document != '' && tax_document != ' '){
 		$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/finalizar');
 		$('#confirmReceptionForm').submit();
+	}else{
+		alert("Informe o número da nota fiscal.");
 	}	
 });
 

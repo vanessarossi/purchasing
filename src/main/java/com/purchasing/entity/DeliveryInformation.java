@@ -38,6 +38,13 @@ public class DeliveryInformation {
     @Column(name = "receptor_name")
     private String receptorName;
 
+    @Length(min = 1, max = 45)
+    @Column(name = "zip_code")
+    private String zipCode;
+
+    @Length(min = 1, max = 100)
+    @Column(name = "city")
+    private String city;
 
     public Long getId() {
         return id;
@@ -94,4 +101,21 @@ public class DeliveryInformation {
     public void setReceptorName(String receptorName) {
         this.receptorName = receptorName;
     }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
 }

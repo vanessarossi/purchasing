@@ -33,6 +33,8 @@ public class Reception {
     @Column(name = "bar_code_tax_document")
     private Integer barCodeTaxDocument;
 
+    @Column(name = "observation")
+    private String observation;
 
     @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
@@ -53,7 +55,6 @@ public class Reception {
     @OneToMany(mappedBy = "reception")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<RequestDelivered> requestDelivereds;
-
 
     public Long getId() {
         return id;
@@ -85,6 +86,14 @@ public class Reception {
 
     public void setBarCodeTaxDocument(Integer barCodeTaxDocument) {
         this.barCodeTaxDocument = barCodeTaxDocument;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 
     public StatusEnum getStatus() {

@@ -244,6 +244,7 @@ $('#formPayment').change(function(){
                 var intervalDay = result["intervalDay"];
 
                 if (input == false &&  parcels == 0 && (intervalDay == 0 || intervalDay > 0)){
+					clearInputs();
                     $('#dateInput').attr("readonly",true);
                     $('#dateFirstInstallment').attr("readonly",true);
                     $('#dateLastInstallment').attr("readonly",true);
@@ -253,6 +254,7 @@ $('#formPayment').change(function(){
                     $('#discountPercentage').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
                     totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                 }else if (input == true &&  parcels > 0 && intervalDay > 0){
+					clearInputs();
                     $('#dateInput').attr("readonly",false);
                     $('#dateFirstInstallment').attr("readonly",false);
                     $('#inputPrice').attr("readonly",false);
@@ -261,6 +263,7 @@ $('#formPayment').change(function(){
                     $('#dateFirstInstallment').attr('onblur', 'calculateValueParcelWithInput('+parcels+','+intervalDay+')');
                     totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
+					clearInputs();
                     $('#dateInput').attr("readonly",true);
                     $('#dateFirstInstallment').attr("readonly",false);
                     $('#inputPrice').attr("readonly",true);
@@ -292,6 +295,7 @@ $('#formPaymentTwo').change(function(){
                 var intervalDay = result["intervalDay"];
 
                 if (input == false &&  parcels == 0 && (intervalDay == 0 || intervalDay > 0)){
+					clearInputs();
                     $('#dateInputTwo').attr("readonly",true);
                     $('#dateFirstInstallmentTwo').attr("readonly",true);
                     $('#dateLastInstallmentTwo').attr("readonly",true);
@@ -301,6 +305,7 @@ $('#formPaymentTwo').change(function(){
                     $('#discountPercentageTwo').attr('onblur', 'calculateFirstFormPaymentTwo('+intervalDay+')');
                     totalPrice =  ($('#totalPriceTwo').val() != "")? $('#totalPriceTwo').val() : "0,00";
                 }else if (input == true &&  parcels > 0 && intervalDay > 0){
+					clearInputs();
                     $('#dateInputTwo').attr("readonly",false);
                     $('#dateFirstInstallmentTwo').attr("readonly",false);
                     $('#inputPriceTwo').attr("readonly",false);
@@ -309,6 +314,7 @@ $('#formPaymentTwo').change(function(){
                      $('#dateFirstInstallmentTwo').attr('onblur', 'calculateValueParcelWithInputTwo('+parcels+','+intervalDay+')');
                      totalPrice =  ($('#totalPriceTwo').val() != "")? $('#totalPriceTwo').val() : "0,00";
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
+					clearInputs();
                     $('#dateInputTwo').attr("readonly",true);
                     $('#dateFirstInstallmentTwo').attr("readonly",false);
                     $('#inputPriceTwo').attr("readonly",true);
@@ -466,4 +472,12 @@ function calculateValueParcelWithInputTwo(parcel,intervalDay){
     } 
 };
 
+function clearInputs(){
+	$('#dateInput').val("");
+	$('#dateFirstInstallment').val("");
+	$('#dateLastInstallment').val("");
+	$('#inputPrice').val("");
+	$('#sharePrice').val("");
+	$('#expirationDate').val("");
+}
 

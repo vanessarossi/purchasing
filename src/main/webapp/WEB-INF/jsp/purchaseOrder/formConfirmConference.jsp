@@ -48,6 +48,21 @@
         </tbody>
       </table>
     </c:if>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <fmt:message key="title.observation.reception"/>
+        </h4>
+      </div>
+      <div class="panel-body">
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group">
+            <label  class="control-label" for="observation"><fmt:message key="label.observation"/></label>
+            <textarea rows="4" cols="100" class="form-control" id="observation" name="reception.observation" readonly>${reception.observation}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
     <form action='<c:url value="/ordemCompra/finalizar/conferencia"></c:url>' method="post" id="finishedConferenceForm">
       <div class="panel panel-default">
         <div class="panel-heading">

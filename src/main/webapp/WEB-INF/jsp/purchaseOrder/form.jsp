@@ -328,7 +328,7 @@
             <fmt:message key="title.information.delivery"/>
           </h4>
         </div>
-        <div class="panel-body">
+        <div class="panreceel-body">
           <div class="row">
               <div class="col-md-2 col-sm-2">
                   <div class="form-group">
@@ -352,6 +352,20 @@
               <div class="form-group">
                 <label class="control-label" for="number"><fmt:message key="label.number"/></label>
                 <input type="text" class="form-control" id="number" name="purchaseOrder.deliveryInformation.number" value="${purchaseOrder.purchaseOrder.deliveryInformation.number}"/>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-4">
+              <div class="form-group">
+                <label class="control-label" for="city"><fmt:message key="label.city"/></label>
+                <input type="text" class="form-control" id="city" name="purchaseOrder.deliveryInformation.city" value="${purchaseOrder.purchaseOrder.deliveryInformation.city}"/>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <div class="form-group">
+                <label class="control-label" for="zipCode"><fmt:message key="label.zipCode"/></label>
+                <input type="text" class="form-control" id="zipCode" name="purchaseOrder.deliveryInformation.zipCode" value="${purchaseOrder.purchaseOrder.deliveryInformation.zipCode}"/>
               </div>
             </div>
           </div>

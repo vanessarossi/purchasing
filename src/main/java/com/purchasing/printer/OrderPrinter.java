@@ -100,6 +100,8 @@ public class OrderPrinter extends PrinterImpl implements BasePrinter {
         String neighborhood_delivery = purchaseOrder.getDeliveryInformation().getNeighborhood();
         String number_delivery = purchaseOrder.getDeliveryInformation().getNumber();
         String receptor_name_delivery = purchaseOrder.getDeliveryInformation().getReceptorName();
+        String city = purchaseOrder.getDeliveryInformation().getCity();
+        String zip_code = purchaseOrder.getDeliveryInformation().getZipCode();
 
 
         map.put("img", img);
@@ -113,6 +115,10 @@ public class OrderPrinter extends PrinterImpl implements BasePrinter {
         map.put("neighborhood_delivery",neighborhood_delivery);
         map.put("number_delivery",number_delivery);
         map.put("receptor_name_delivery",receptor_name_delivery);
+
+        map.put("city",city);
+        map.put("zip_code",zip_code);
+
         map.put("mean_payment",mean_payment);
         map.put("date_first_installment",date_first_installment);
         map.put("date_last_installment",date_last_installment);

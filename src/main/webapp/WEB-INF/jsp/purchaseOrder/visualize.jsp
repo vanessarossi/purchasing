@@ -100,18 +100,18 @@
           <div class="row">
             <div class="col-sm-7 col-md-7">
               <div class="form-group <c:if test="${purchaseOrder.budget.id eq budget.id}">has-success</c:if>" >
-                  <label class="control-label"><fmt:message key="label.supplier" /></label>
+                  <label class="control-label"><fmt:message key="label.supplier" /> <c:if test="${purchaseOrder.budget.id eq budget.id}"> - <fmt:message key="label.selected" /></c:if> </label>
                   <input type="text" class="form-control" readonly value="${budget.supplier.person.name}" />
               </div>
             </div>
             <div class="col-sm-2 col-md-2">
-              <div class="form-group">
+              <div class="form-group <c:if test="${purchaseOrder.budget.id eq budget.id}">has-success</c:if>">
                 <label class="control-label"><fmt:message key="label.date"/></label>
                 <input type="text" class="form-control" readonly value="<fmt:formatDate value="${budget.date}" pattern="dd/MM/YYYY"/>"/>
               </div>
             </div>
             <div class="col-sm-2 col-md-2">
-              <div class="form-group">
+              <div class="form-group <c:if test="${purchaseOrder.budget.id eq budget.id}">has-success</c:if>">
                 <label class="control-label"><fmt:message key="label.total.price"/></label>
                 <input type="text" class="form-control" readonly value="${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}"/>
               </div>
@@ -219,9 +219,9 @@
         <table class="table table-striped table-hover table-condensed">
           <thead>
           <tr>
-            <th style="width: 50%"><fmt:message key="table.user"/></th>
-            <th style="width: 20%"><fmt:message key="table.tax.document"/></th>
-            <th style="width: 10%"><fmt:message key="table.date"/></th>
+            <th style="width: 25%"><fmt:message key="table.user"/></th>
+            <th style="width: 25%"><fmt:message key="table.tax.document"/></th>
+            <th style="width: 25%"><fmt:message key="table.date"/></th>
             <th style="width: 2%"><fmt:message key="table.##"/></th>
           </tr>
           </thead>
@@ -253,7 +253,7 @@
       </div>
     </c:if>
 
-    <c:if test="${(purchaseOrder.alreadyPurchased == 'true' &&  purchaseOrder.status eq 'Open') || (purchaseOrder.paymentInformation.hasContract == 'true' && purchaseOrder.status eq 'Open') ||(purchaseOrder.status eq 'Approved') ||(purchaseOrder.status eq 'BuyingProcess') || (purchaseOrder.status eq 'PurchaseMade') && (purchaseOrder.paymentInformation != null)}">
+    <c:if test="${(purchaseOrder.alreadyPurchased == 'true' &&  purchaseOrder.status eq 'Open') || (purchaseOrder.paymentInformation.hasContract == 'true' && purchaseOrder.status eq 'Open') ||(purchaseOrder.status eq 'Approved') ||(purchaseOrder.status eq 'BuyingProcess') || (purchaseOrder.status eq 'PurchaseMade') && (purchaseOrder.paymentInformation != null)|| (purchaseOrder.status eq 'Finished') && (purchaseOrder.paymentInformation != null) || (purchaseOrder.status eq 'PartiallyFinished') && (purchaseOrder.paymentInformation != null)}">
       <div class="row">
         <div class="col-sm-offset-9 col-md-offset-9">
           <div class="form-group">

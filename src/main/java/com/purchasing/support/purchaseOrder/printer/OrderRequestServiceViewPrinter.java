@@ -2,7 +2,6 @@ package com.purchasing.support.purchaseOrder.printer;
 
 import com.purchasing.entity.OrderRequest;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
 public class OrderRequestServiceViewPrinter {
 
     private String service;
-    private BigDecimal unityPrice;
+    private String unityPrice;
 
     public String getService() {
         return service;
@@ -22,11 +21,11 @@ public class OrderRequestServiceViewPrinter {
         this.service = service;
     }
 
-    public BigDecimal getUnityPrice() {
+    public String getUnityPrice() {
         return unityPrice;
     }
 
-    public void setUnityPrice(BigDecimal unityPrice) {
+    public void setUnityPrice(String unityPrice) {
         this.unityPrice = unityPrice;
     }
 
@@ -35,7 +34,7 @@ public class OrderRequestServiceViewPrinter {
         for (OrderRequest orderRequest : orderRequests) {
             OrderRequestServiceViewPrinter orderRequestServiceViewPrinter = new OrderRequestServiceViewPrinter();
             orderRequestServiceViewPrinter.setService(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getService().getDescription());
-            orderRequestServiceViewPrinter.setUnityPrice(orderRequest.getBudgetQuotation().getUnityPrice());
+            orderRequestServiceViewPrinter.setUnityPrice(orderRequest.getBudgetQuotation().getUnityPrice().toString().replace(".",","));
             orderRequestServiceV.add(orderRequestServiceViewPrinter);
 
         }

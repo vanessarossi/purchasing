@@ -43,6 +43,8 @@ function fillAdministrativeOffice () {
     $('#place').val("Sede Administrativa");
 	$('#street').val("Rua Francisquinho Dias");
 	$('#neighborhood').val("Centro");
+	$('#city').val("São José do Rio Pardo - SP");
+	$('#zipCode').val("13720-000");
 	$('#number').val("583");
 	$('#receptorName').val("Eloisa - Everton");
 }
@@ -50,20 +52,26 @@ function fillDiagnosticCenter () {
     $('#place').val("Centro de Diagnóstico");
 	$('#street').val("Rua Silvia Jardim");
 	$('#neighborhood').val("Centro");
+	$('#city').val("São José do Rio Pardo - SP");
+	$('#zipCode').val("13720-000");
 	$('#number').val("260/268");
-	$('#receptorName').val("Flavia - Fernando Prevital - Liliane/Nair");
+	$('#receptorName').val("Flavia - Fernando Prevital - Liliane");
 }
 function fillDrugstore () {
     $('#place').val("Farmácia");
 	$('#street').val("Rua Campos Salles");
 	$('#neighborhood').val("Centro");
+	$('#city').val("São José do Rio Pardo - SP");
+	$('#zipCode').val("13720-000");
 	$('#number').val("491");
-	$('#receptorName').val("Michel - Eliana/Daniel");
+	$('#receptorName').val("Michel - Eliana");
 }
 function fillOptica () {
     $('#place').val("Optica");
 	$('#street').val("Rua Campos Salles");
 	$('#neighborhood').val("Centro");
+	$('#city').val("São José do Rio Pardo - SP");
+	$('#zipCode').val("13720-000");
 	$('#number').val("491");
 	$('#receptorName').val("Ana Claudia");
 }
@@ -71,19 +79,25 @@ function fillReferenceCenter () {
     $('#place').val("Centro de Referencia");
 	$('#street').val("Rua Coronel Alípio Dias");
 	$('#neighborhood').val("Centro");
+	$('#city').val("São José do Rio Pardo - SP");
+	$('#zipCode').val("13720-000");
 	$('#number').val("885");
-	$('#receptorName').val("Alessandro - Natalie - Rafael - Marcelo");
+	$('#receptorName').val("Alessandro - Natalie");
 }
 function fillHospital () {
     $('#place').val("Hospital");
 	$('#street').val("Rua Alexandre Carlos de Melo");
 	$('#neighborhood').val("Jardim Aeroporto");
+	$('#city').val("São José do Rio Pardo - SP");
+	$('#zipCode').val("13720-000");
 	$('#number').val("118");
 	$('#receptorName').val("Everton - Eloisa");
 }
 function fillDepartmentOfOccupationalHealth() {
     $('#place').val("Departamento de Saúde Ocupacional");
 	$('#street').val("Rua Carlos Botelho");
+	$('#city').val("São José do Rio Pardo - SP");
+	$('#zipCode').val("13720-000");
 	$('#neighborhood').val("Centro");
 	$('#number').val("593");
 	$('#receptorName').val("Maria Tinti - Bruno");
@@ -92,6 +106,8 @@ function fillPreventiveMedicine () {
     $('#place').val("Medicina Preventiva");
 	$('#street').val("Rua Rui Barbosa");
 	$('#neighborhood').val("Centro");
+	$('#city').val("São José do Rio Pardo - SP");
+	$('#zipCode').val("13720-000");
 	$('#number').val("109");
 	$('#receptorName').val("Sueli - Regiane");
 }
@@ -99,6 +115,8 @@ function fillSpecialtyCenter () {
     $('#place').val("Centro de Especialidades");
 	$('#street').val("Rua Leôncio D’Ávilla Riberiro");
 	$('#neighborhood').val("Vila Brasil");
+	$('#city').val("São José do Rio Pardo - SP");
+	$('#zipCode').val("13720-000");
 	$('#number').val("11");
 	$('#receptorName').val("Fernanda - Regiane");
 }
@@ -106,6 +124,8 @@ function clear () {
     $('#place').val("");
 	$('#street').val("");
 	$('#neighborhood').val("");
+	$('#city').val("");
+	$('#zipCode').val("");
 	$('#number').val("");
 	$('#receptorName').val("");
 }
@@ -211,7 +231,7 @@ function calculateValueParcelWithInput(parcel,intervalDay){
         totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
         
-        totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(".", ","));
+        totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(",", "."));
        
         valueParcel = parseFloat(totalPriceLessInput) / parseFloat(parcel);
         $('#sharePrice').val(parseFloat(valueParcel).toFixed(2).replace(".", ","));
