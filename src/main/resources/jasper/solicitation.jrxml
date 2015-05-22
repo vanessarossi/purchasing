@@ -61,14 +61,14 @@
 				<text><![CDATA[Data]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="38" y="63" width="229" height="20" uuid="c1cd3850-0447-4a84-8a16-33a4c4db8e3a"/>
+				<reportElement x="41" y="63" width="226" height="20" uuid="c1cd3850-0447-4a84-8a16-33a4c4db8e3a"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{user}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="79" y="83" width="229" height="17" uuid="4b5c0b35-25f9-491e-adf1-a70f33e06b30"/>
+				<reportElement x="94" y="83" width="229" height="17" uuid="4b5c0b35-25f9-491e-adf1-a70f33e06b30"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -82,21 +82,21 @@
 				<textFieldExpression><![CDATA[$P{priority}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="63" width="38" height="20" uuid="4599beef-f71d-46f6-9702-ab74d9961383"/>
+				<reportElement x="0" y="63" width="41" height="20" uuid="4599beef-f71d-46f6-9702-ab74d9961383"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="9" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Usuário Solicitante]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="83" width="79" height="17" uuid="b7f568fe-0dba-450f-b2e0-5437e818ba9f"/>
+				<reportElement x="0" y="83" width="94" height="17" uuid="b7f568fe-0dba-450f-b2e0-5437e818ba9f"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="9" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Centro de Custo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="375" y="63" width="52" height="20" uuid="526e58cf-f203-435d-8a8d-675c20058ca9"/>
+				<reportElement x="368" y="63" width="59" height="20" uuid="526e58cf-f203-435d-8a8d-675c20058ca9"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="9" isBold="true" isUnderline="false"/>
 				</textElement>

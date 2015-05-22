@@ -12,6 +12,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import javax.inject.Inject;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,8 +52,13 @@ public class ReceptionDAO extends DAOImpl<Reception,Long> {
     }
 
     public List<Reception> searchByDate(Date initialDate , Date finalDate) {
+        Timestamp timestamp = new Timestamp(finalDate.getTime());
+        timestamp.setHours(23);
+        timestamp.setMinutes(59);
+        timestamp.setSeconds(59);
+
         Criteria criteria = getSession().createCriteria(Reception.class);
-        criteria.add(Restrictions.between("date",initialDate,finalDate));
+        criteria.add(Restrictions.between("date",initialDate,timestamp));
         criteria.addOrder(Order.desc("date"));
         List<Reception> receptions = new ArrayList<>();
         receptions.addAll(criteria.list());

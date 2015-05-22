@@ -295,7 +295,7 @@ $('#formPaymentTwo').change(function(){
                 var intervalDay = result["intervalDay"];
 
                 if (input == false &&  parcels == 0 && (intervalDay == 0 || intervalDay > 0)){
-					clearInputs();
+					clearInputsTwo();
                     $('#dateInputTwo').attr("readonly",true);
                     $('#dateFirstInstallmentTwo').attr("readonly",true);
                     $('#dateLastInstallmentTwo').attr("readonly",true);
@@ -305,7 +305,7 @@ $('#formPaymentTwo').change(function(){
                     $('#discountPercentageTwo').attr('onblur', 'calculateFirstFormPaymentTwo('+intervalDay+')');
                     totalPrice =  ($('#totalPriceTwo').val() != "")? $('#totalPriceTwo').val() : "0,00";
                 }else if (input == true &&  parcels > 0 && intervalDay > 0){
-					clearInputs();
+					clearInputsTwo();
                     $('#dateInputTwo').attr("readonly",false);
                     $('#dateFirstInstallmentTwo').attr("readonly",false);
                     $('#inputPriceTwo').attr("readonly",false);
@@ -314,7 +314,7 @@ $('#formPaymentTwo').change(function(){
                      $('#dateFirstInstallmentTwo').attr('onblur', 'calculateValueParcelWithInputTwo('+parcels+','+intervalDay+')');
                      totalPrice =  ($('#totalPriceTwo').val() != "")? $('#totalPriceTwo').val() : "0,00";
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
-					clearInputs();
+					clearInputsTwo();
                     $('#dateInputTwo').attr("readonly",true);
                     $('#dateFirstInstallmentTwo').attr("readonly",false);
                     $('#inputPriceTwo').attr("readonly",true);
@@ -453,7 +453,7 @@ function calculateValueParcelWithInputTwo(parcel,intervalDay){
         totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
         $('#totalFinalPriceTwo').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
         
-        totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(".", ","));
+        totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(",", "."));
        
         valueParcel = parseFloat(totalPriceLessInput) / parseFloat(parcel);
         $('#sharePriceTwo').val(parseFloat(valueParcel).toFixed(2).replace(".", ","));
@@ -479,5 +479,14 @@ function clearInputs(){
 	$('#inputPrice').val("");
 	$('#sharePrice').val("");
 	$('#expirationDate').val("");
+}
+
+function clearInputsTwo(){
+	$('#dateInputTwo').val("");
+	$('#dateFirstInstallmentwo').val("");
+	$('#dateLastInstallmentwo').val("");
+	$('#inputPricewo').val("");
+	$('#sharePricewo').val("");
+	$('#expirationDatewo').val("");
 }
 
