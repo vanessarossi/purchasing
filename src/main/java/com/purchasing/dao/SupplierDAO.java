@@ -28,10 +28,11 @@ public class SupplierDAO extends DAOImpl<Supplier,Long> {
         Criteria criteria = getSession().createCriteria(Supplier.class);
         Disjunction disjunction = Restrictions.disjunction();
             criteria.createAlias("person","person");
-            disjunction.add(Restrictions.ilike("person.name",text, MatchMode.ANYWHERE));
+            disjunction.add(Restrictions.ilike("person.name", text, MatchMode.ANYWHERE));
             disjunction.add(Restrictions.ilike("person.cpf",text, MatchMode.ANYWHERE));
             disjunction.add(Restrictions.ilike("person.companyName",text, MatchMode.ANYWHERE));
             disjunction.add(Restrictions.ilike("person.cnpj",text, MatchMode.ANYWHERE));
+            criteria.add(Restrictions.eq("active",true));
         criteria.add(disjunction);
         List<Supplier>suppliers = new ArrayList<>();
         suppliers.addAll(criteria.list());

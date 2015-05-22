@@ -42,12 +42,12 @@
                     <br>
                     <div class="radio-inline">
                         <label class="control-label">
-                            <input type="radio" value="true" name="supplier.active" id="active" <c:if test="${supplier.urgency eq true}"> checked </c:if> > <fmt:message key="label.yes"/>
+                            <input type="radio" value="true" name="supplier.active" id="active" <c:if test="${supplier.active eq true}"> checked </c:if> > <fmt:message key="label.yes"/>
                         </label>
                     </div>
                     <div class="radio-inline">
                         <label class="control-label">
-                            <input type="radio" value="false" name="supplier.active" id="active" <c:if test="${supplier.urgency eq false}"> checked </c:if> > <fmt:message key="label.no"/>
+                            <input type="radio" value="false" name="supplier.active" id="active" <c:if test="${supplier.active eq false}"> checked </c:if> > <fmt:message key="label.no"/>
                         </label>
                     </div>
                     <br>

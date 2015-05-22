@@ -73,6 +73,8 @@
                     <ul class="dropdown-menu" role="menu">
                     <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 2 || userLogged.role.id == 3 || userLogged.role.id == 4 || userLogged.role.id == 5 || userLogged.role.id == 7}">
                             <li><a href="<c:url value="/ordemCompra/listagem" ></c:url>"><fmt:message key="submenu.list"/></a></li>
+                    </c:if>
+                    <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 2 || userLogged.role.id == 3 || userLogged.role.id == 4 || userLogged.role.id == 5}">
                             <li><a href="<c:url value="/ordemCompra/listagem/pendencia" ></c:url>"><fmt:message key="submenu.missingList"/></a></li>
                     </c:if>
                     <c:if test="${userLogged.role.id == 1 || userLogged.role.id == 5 || userLogged.role.id == 6|| userLogged.role.id == 7 || userLogged.role.id == 8}">

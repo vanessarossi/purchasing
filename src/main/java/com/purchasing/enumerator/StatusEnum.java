@@ -20,7 +20,7 @@ public enum StatusEnum {
     QuoteReject("Cotação recusada",true,false,false,false),
     PartiallyQuoteApproved("Cotação parcialmente aprovada",true,false,false,false),
     BuyingProcess("Em processo de compra",true,false,false,false),
-    PurchaseMade("Compra realizada",true,false,true,false),
+    PurchaseMade("Compra realizada/Aguardando Entrega",true,false,true,false),
     Reproved("Reprovado",false,false,false,true),
     Delivered("Entregue",false,false,false,true),
     PartiallyDelivered("Entregue parcialmente",false,false,false,true),

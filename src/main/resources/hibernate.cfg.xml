@@ -13,16 +13,16 @@
                 <property name="connection.username">root</property>
                 <property name="connection.password">root</property>
          -->
-        <!-- BANCO TEST UNIMED-->
+        <!-- BANCO TEST UNIMED
             <property name="connection.url">jdbc:mysql://192.168.0.216/purchasing_dev</property>
             <property name="connection.username">purchasing</property>
             <property name="connection.password">#unimed#250</property>
-
-       <!-- BANCO PROD
+        -->
+       <!-- BANCO PROD-->
             <property name="connection.url">jdbc:mysql://192.168.0.216/purchasing</property>
             <property name="connection.username">purchasing</property>
             <property name="connection.password">#unimed#250</property>
-        -->
+
 
         <!-- Usando as configurações do C3PO para pool de conexões   -->
         <property name="connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
