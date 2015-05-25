@@ -228,14 +228,14 @@
 				<text><![CDATA[Informações de Pagamento]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="104" y="24" width="100" height="20" uuid="6673fa9b-2457-4918-9edb-f2516042f0a4"/>
+				<reportElement x="114" y="24" width="90" height="20" uuid="6673fa9b-2457-4918-9edb-f2516042f0a4"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{mean_payment}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="316" y="24" width="100" height="20" uuid="ef5c67a0-999f-41af-8528-d40adaca2109"/>
+				<reportElement x="337" y="24" width="88" height="20" uuid="ef5c67a0-999f-41af-8528-d40adaca2109"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
@@ -249,7 +249,7 @@
 				<textFieldExpression><![CDATA[$P{date_first_installment}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="310" y="44" width="79" height="20" uuid="95fd6191-3994-4435-beb0-08b4a697fde5"/>
+				<reportElement x="319" y="44" width="79" height="20" uuid="95fd6191-3994-4435-beb0-08b4a697fde5"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
@@ -263,14 +263,14 @@
 				<textFieldExpression><![CDATA[$P{date_input}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="310" y="104" width="93" height="20" uuid="46db7d72-969d-4ba2-841c-1a76fd263e07"/>
+				<reportElement x="325" y="104" width="87" height="20" uuid="46db7d72-969d-4ba2-841c-1a76fd263e07"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{expiration_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="84" width="66" height="20" uuid="896edebf-30d6-400f-a3f7-6a0285a39189"/>
+				<reportElement x="308" y="84" width="66" height="20" uuid="896edebf-30d6-400f-a3f7-6a0285a39189"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
@@ -291,28 +291,28 @@
 				<textFieldExpression><![CDATA[$P{total_price}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="64" width="57" height="20" uuid="ef98a62b-747f-443a-8eef-6f5133616680"/>
+				<reportElement x="308" y="64" width="57" height="20" uuid="ef98a62b-747f-443a-8eef-6f5133616680"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{discount_percentage}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="453" y="64" width="100" height="20" uuid="54754225-cd03-498a-a7fb-cef672903135"/>
+				<reportElement x="477" y="64" width="76" height="20" uuid="54754225-cd03-498a-a7fb-cef672903135"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_final_price}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="4" y="24" width="100" height="20" uuid="a3cbb260-c85e-4308-aaef-0a599dd96041"/>
+				<reportElement x="4" y="24" width="110" height="20" uuid="a3cbb260-c85e-4308-aaef-0a599dd96041"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Meio de pagamento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="24" width="107" height="20" uuid="d2c0dc2c-7eec-4dcf-920f-08db069a3331"/>
+				<reportElement x="218" y="24" width="119" height="20" uuid="d2c0dc2c-7eec-4dcf-920f-08db069a3331"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -326,7 +326,7 @@
 				<text><![CDATA[Data 1° parcela]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="44" width="101" height="20" uuid="8bdadde0-1418-46f3-abd8-559faf0767ab"/>
+				<reportElement x="218" y="44" width="101" height="20" uuid="8bdadde0-1418-46f3-abd8-559faf0767ab"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -340,14 +340,14 @@
 				<text><![CDATA[Valor total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="64" width="91" height="20" uuid="979423f2-297c-414e-bfd7-b6083122a13e"/>
+				<reportElement x="217" y="64" width="91" height="20" uuid="979423f2-297c-414e-bfd7-b6083122a13e"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Valor desconto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="357" y="64" width="96" height="20" uuid="9ed95844-3e09-4b27-8f72-ccf1d749f864"/>
+				<reportElement x="381" y="64" width="96" height="20" uuid="9ed95844-3e09-4b27-8f72-ccf1d749f864"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -361,7 +361,7 @@
 				<text><![CDATA[Valor da entrada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="84" width="91" height="20" uuid="5c6001b8-0950-4078-b330-bffe9a5e9abf"/>
+				<reportElement x="217" y="84" width="91" height="20" uuid="5c6001b8-0950-4078-b330-bffe9a5e9abf"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -375,7 +375,7 @@
 				<text><![CDATA[Data da entrada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="104" width="101" height="20" uuid="483826ab-1bf9-4dc1-b543-6b09cd2e6731"/>
+				<reportElement x="218" y="104" width="107" height="20" uuid="483826ab-1bf9-4dc1-b543-6b09cd2e6731"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -502,7 +502,7 @@
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="348" y="227" width="90" height="20" uuid="ef53c781-0da0-48b4-86e6-03e35794da1b"/>
+				<reportElement x="337" y="227" width="101" height="20" uuid="ef53c781-0da0-48b4-86e6-03e35794da1b"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>

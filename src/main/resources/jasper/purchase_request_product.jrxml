@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="412"/>
 	<parameter name="corporate_name" class="java.lang.String"/>
 	<parameter name="document_supplier" class="java.lang.String"/>
 	<parameter name="number_request" class="java.lang.String"/>
@@ -286,7 +286,7 @@
 				<text><![CDATA[Informações de Pagamento]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="99" y="22" width="100" height="20" uuid="6673fa9b-2457-4918-9edb-f2516042f0a4"/>
+				<reportElement x="104" y="22" width="95" height="20" uuid="6673fa9b-2457-4918-9edb-f2516042f0a4"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
@@ -314,28 +314,28 @@
 				<textFieldExpression><![CDATA[$P{date_last_installment}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="83" y="101" width="96" height="20" uuid="998e8aac-2179-49a6-883a-0c1176dfcf96"/>
+				<reportElement x="89" y="101" width="90" height="20" uuid="998e8aac-2179-49a6-883a-0c1176dfcf96"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{date_input}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="307" y="101" width="100" height="20" uuid="46db7d72-969d-4ba2-841c-1a76fd263e07"/>
+				<reportElement x="324" y="101" width="100" height="20" uuid="46db7d72-969d-4ba2-841c-1a76fd263e07"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{expiration_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="291" y="81" width="97" height="20" uuid="896edebf-30d6-400f-a3f7-6a0285a39189"/>
+				<reportElement x="301" y="81" width="87" height="20" uuid="896edebf-30d6-400f-a3f7-6a0285a39189"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{input_price}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="83" y="81" width="96" height="20" uuid="13920729-71da-4989-ab33-91761d90839d"/>
+				<reportElement x="89" y="81" width="90" height="20" uuid="13920729-71da-4989-ab33-91761d90839d"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
@@ -363,7 +363,7 @@
 				<textFieldExpression><![CDATA[$P{total_final_price}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="1" y="20" width="98" height="20" uuid="a3cbb260-c85e-4308-aaef-0a599dd96041"/>
+				<reportElement x="1" y="20" width="103" height="20" uuid="a3cbb260-c85e-4308-aaef-0a599dd96041"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -412,28 +412,28 @@
 				<text><![CDATA[Valor total final]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="81" width="83" height="20" uuid="ea131c54-9174-47ae-819a-3845093920ad"/>
+				<reportElement x="0" y="81" width="89" height="20" uuid="ea131c54-9174-47ae-819a-3845093920ad"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Valor da entrada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="81" width="81" height="20" uuid="5c6001b8-0950-4078-b330-bffe9a5e9abf"/>
+				<reportElement x="210" y="81" width="91" height="20" uuid="5c6001b8-0950-4078-b330-bffe9a5e9abf"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Valor da parcela]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="101" width="82" height="20" uuid="d369e2b9-cc3a-4af5-90e0-608a0bb573c7"/>
+				<reportElement x="1" y="101" width="88" height="20" uuid="d369e2b9-cc3a-4af5-90e0-608a0bb573c7"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Data da entrada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="101" width="97" height="20" uuid="483826ab-1bf9-4dc1-b543-6b09cd2e6731"/>
+				<reportElement x="210" y="101" width="114" height="20" uuid="483826ab-1bf9-4dc1-b543-6b09cd2e6731"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
