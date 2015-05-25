@@ -101,7 +101,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
                                         decimalFormat.setMaximumFractionDigits(2);
                                         decimalFormat.setMinimumFractionDigits(2);
                                         decimalFormat.setGroupingUsed(false);
-        String discount_percentage = decimalFormat.format((reception.getPaymentInformation().getTotalPrice().multiply(new BigDecimal(reception.getPaymentInformation().getDiscountPercentage()))).divide(new BigDecimal(100)));
+        String discount_percentage = decimalFormat.format((reception.getPaymentInformation().getTotalPrice().multiply(reception.getPaymentInformation().getDiscountPercentage())).divide(new BigDecimal(100)));
         String total_final_price = reception.getPaymentInformation().getTotalFinalPrice().toString();
 
         String form_payment = reception.getPaymentInformation().getFormPayment().getDescription();

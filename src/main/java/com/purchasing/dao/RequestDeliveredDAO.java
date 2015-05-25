@@ -26,7 +26,7 @@ public class RequestDeliveredDAO extends DAOImpl<RequestDelivered,Long> {
         criteria.add(Restrictions.eq("orderRequest",orderRequest));
         criteria.setProjection(Projections.sum("quantity"));
         Object object =  criteria.uniqueResult();
-        total = Float.parseFloat(object == null ? "0" : object.toString());
+        total = Float.parseFloat(object == null ? "1" : object.toString());
         return total;
     }
 

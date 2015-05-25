@@ -56,8 +56,9 @@ public class PaymentInformation {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
+    @Digits(integer = 10, fraction = 2)
     @Column(name = "discount_percentage")
-    private Integer discountPercentage;
+    private BigDecimal discountPercentage;
 
     @Digits(integer = 10, fraction = 2)
     @Column(name = "total_final_price")
@@ -151,11 +152,11 @@ public class PaymentInformation {
         this.totalPrice = totalPrice;
     }
 
-    public Integer getDiscountPercentage() {
+    public BigDecimal getDiscountPercentage() {
         return discountPercentage;
     }
 
-    public void setDiscountPercentage(Integer discountPercentage) {
+    public void setDiscountPercentage(BigDecimal discountPercentage) {
         this.discountPercentage = discountPercentage;
     }
 

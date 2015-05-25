@@ -35,7 +35,7 @@ public class Address {
     @Column(name = "number")
     private String number;
 
-    @Length(min = 15, max = 15)
+    @Length(min = 1, max = 15)
     @Column(name = "zip_code")
     private String zipCode;
 
