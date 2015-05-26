@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportReceptionByDate" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="338934ba-05ae-49ce-b2c6-0a1f29d9ea96">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="1433"/>
+	<property name="ireport.y" value="435"/>
 	<parameter name="img" class="java.awt.Image">
 		<defaultValueExpression><![CDATA[$P{img}]]></defaultValueExpression>
 	</parameter>
@@ -73,7 +73,7 @@
 	<columnHeader>
 		<band height="21" splitType="Stretch">
 			<staticText>
-				<reportElement x="40" y="0" width="180" height="20" uuid="d937cc6c-ce6c-4cfd-aec1-1fff64b143ab"/>
+				<reportElement x="35" y="0" width="185" height="20" uuid="d937cc6c-ce6c-4cfd-aec1-1fff64b143ab"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -108,7 +108,7 @@
 				<text><![CDATA[Nome do Receptor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="40" height="20" uuid="de1b5a02-1ca3-484b-b514-cfe9c9fd98e6"/>
+				<reportElement x="0" y="0" width="34" height="20" uuid="de1b5a02-1ca3-484b-b514-cfe9c9fd98e6"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -117,16 +117,16 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="16" splitType="Stretch">
+		<band height="12" splitType="Stretch">
 			<textField>
-				<reportElement x="40" y="0" width="203" height="12" uuid="875bfbe7-53d7-49ef-8ee2-413a67a79eaf"/>
+				<reportElement x="34" y="0" width="186" height="12" uuid="875bfbe7-53d7-49ef-8ee2-413a67a79eaf"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{supplier}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="40" height="12" uuid="200c4ebc-7dd2-42f1-be3d-53503e2e5a3a"/>
+				<reportElement x="0" y="0" width="34" height="12" uuid="200c4ebc-7dd2-42f1-be3d-53503e2e5a3a"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -147,15 +147,15 @@
 				<textFieldExpression><![CDATA[$F{expirationDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="362" y="0" width="68" height="12" uuid="9a1d1135-2454-4f7b-bea6-29568ba6fb73"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<reportElement x="368" y="0" width="57" height="12" uuid="9a1d1135-2454-4f7b-bea6-29568ba6fb73"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="430" y="2" width="125" height="12" uuid="1319f5a7-b49f-4da2-bcb7-e97e178e1388"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<reportElement x="430" y="0" width="125" height="12" uuid="1319f5a7-b49f-4da2-bcb7-e97e178e1388"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{receptorName}]]></textFieldExpression>

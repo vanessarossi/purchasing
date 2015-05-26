@@ -180,11 +180,10 @@ $('#formPayment').change(function(){
 
 /** Calculo de valor final sem parcelas e entrada   **/
 function calculateFirstFormPayment(intervalDay){
-    percentage = $('#discountPercentage').val();
+    percentage = $('#discountPercentage').val().replace(',', '.');
     if(totalPrice != 0 && percentage != '' ){
         while (totalPrice.indexOf(',') != -1)
-                totalPrice = totalPrice.replace(',', '.');        
-        percentage = $('#discountPercentage').val();
+                totalPrice = totalPrice.replace(',', '.');
         totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
     }else{
@@ -198,7 +197,7 @@ function calculateSecondFormPayment(parcel,intervalDay){
     while (totalPrice.indexOf(',') != -1)
         totalPrice = totalPrice.replace(',', '.');  
     if(totalPrice != 0 && percentage != null && dateFirstInstallment != null){
-        percentage = $('#discountPercentage').val();
+        percentage = $('#discountPercentage').val().replace(',', '.');
         totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
 
@@ -227,7 +226,7 @@ function calculateValueParcelWithInput(parcel,intervalDay){
     if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && inputValue != ''){
         while (totalPrice.indexOf(',') != -1)
             totalPrice = totalPrice.replace(',', '.');  
-        percentage = $('#discountPercentage').val();
+        percentage = $('#discountPercentage').val().replace(',', '.');
         totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
         

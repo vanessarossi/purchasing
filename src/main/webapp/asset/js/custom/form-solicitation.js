@@ -75,7 +75,7 @@ function addProduct() {
     var unit = $('#unit').val();
     var counter = $('#counter').val();
 
-    if (product != null && product != '') {
+    if (product != null && product != '' && quantity.trim() != null && quantity.trim() != '' ) {
         var row = "<tr id='"+counter+"'>";
         row += "<input type='hidden' name='solicitation.solicitationRequests["+counter+"].product.id' id='product"+counter+"' value="+code+">";
         row += "<input type='hidden' name='solicitation.solicitationRequests["+counter+"].quantity' id='quantity"+counter+"' value="+quantity+">";
@@ -96,6 +96,8 @@ function addProduct() {
         $('#quantity').val("");
         $('#unit').val("");
         $('#counter').val(parseInt(counter) + 1);
+    }else{
+        alert("Esta faltando o produto ou a quantidade");
     }
 };
 
@@ -106,7 +108,7 @@ function addProductWithId(codeSolicitationRequest) {
     var unit = $('#unit').val();
     var counter = $('#counter').val();
 
-    if (product != null && product != '') {
+    if (product != null && product != '' && quantity.trim() != null && quantity.trim() != '') {
         var row = "<tr id='"+counter+"'>";
         row += "<input type='hidden' name='solicitation.solicitationRequests["+counter+"].product.id' id='product"+counter+"' value="+code+">";
         row += "<input type='hidden' name='solicitation.solicitationRequests["+counter+"].quantity' id='quantity"+counter+"' value="+quantity+">";
@@ -128,6 +130,8 @@ function addProductWithId(codeSolicitationRequest) {
         $('#quantity').val("");
         $('#unit').val("");
         $('#counter').val(parseInt(counter) + 1);
+    }else{
+        alert("Esta faltando o produto ou a quantidade");
     }
 };
 
