@@ -26,6 +26,16 @@ public class RequestDeliveredDAO extends DAOImpl<RequestDelivered,Long> {
         criteria.add(Restrictions.eq("orderRequest",orderRequest));
         criteria.setProjection(Projections.sum("quantity"));
         Object object =  criteria.uniqueResult();
+        total = Float.parseFloat(object == null ? "0" : object.toString());
+        return total;
+    }
+
+    public Float totalDeliveredByOrderRequestService(OrderRequest orderRequest) {
+        Float total = 0f;
+        Criteria criteria = getSession().createCriteria(RequestDelivered.class);
+        criteria.add(Restrictions.eq("orderRequest",orderRequest));
+        criteria.setProjection(Projections.sum("quantity"));
+        Object object =  criteria.uniqueResult();
         total = Float.parseFloat(object == null ? "1" : object.toString());
         return total;
     }

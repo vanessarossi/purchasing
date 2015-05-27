@@ -49,7 +49,9 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         purchaseOrderViewPrinters = new PurchaseOrderViewPrinter().generateList(reception.getRequestDelivereds());
 
         purchaseOrderViewPrinterArrayList = purchaseOrderService.groupByCostCenter(purchaseOrderViewPrinters);
-        JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(purchaseOrderViewPrinterArrayList);
+
+
+        JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(addDiscount(purchaseOrderViewPrinterArrayList,reception.getPaymentInformation().getDiscountPercentage()));
 
         purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, purchaseOrder.getId());
 
@@ -202,6 +204,27 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         map.put("date_approval",date_approval);
 
         return map;
+    }
+
+    public List<PurchaseOrderViewPrinter> addDiscount(List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters, BigDecimal discount){
+        List<PurchaseOrderViewPrinter> orderViewPrinters = new ArrayList<>();
+        if (0 != discount.intValue()) {
+            for (PurchaseOrderViewPrinter purchaseOrderViewPrinter : purchaseOrderViewPrinters) {
+
+                DecimalFormat decimalFormat = new DecimalFormat();
+                decimalFormat.setMaximumFractionDigits(2);
+                decimalFormat.setMinimumFractionDigits(2);
+                decimalFormat.setGroupingUsed(false);
+
+
+                BigDecimal discountValue = new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",",".")).multiply(discount).divide(new BigDecimal(100));
+                purchaseOrderViewPrinter.setTotal_price(decimalFormat.format(new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",", ".")).subtract(discountValue)).toString());
+                orderViewPrinters.add(purchaseOrderViewPrinter);
+            }
+        }else{
+            orderViewPrinters = purchaseOrderViewPrinters;
+        }
+        return orderViewPrinters;
     }
 
 }

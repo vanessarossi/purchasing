@@ -658,7 +658,14 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public Float getQuantityDeliveredByOrderRequest(OrderRequest orderRequest) {
-        return requestDeliveredDAO.totalDeliveredByOrderRequest(orderRequest);
+        orderRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId());
+        Float total;
+            if (orderRequest.getBudgetQuotation().getQuotationRequest().getQuotation().getType().equals(TypeEnum.Material)){
+                total = requestDeliveredDAO.totalDeliveredByOrderRequest(orderRequest);
+            }else{
+                total = requestDeliveredDAO.totalDeliveredByOrderRequestService(orderRequest);
+            }
+        return total;
     }
 
     @Override

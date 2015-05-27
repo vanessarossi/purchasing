@@ -52,6 +52,12 @@
                                 <span id="category"></span>
                             </div>
                         </div>
+                        <div class="col-sm-2 col-md-2">
+                            <div class="form-group">
+                                <label class="control-label"><fmt:message key="label.active"></fmt:message></label><br>
+                                <span id="active"></span>
+                            </div>
+                        </div>
                     </div>
                     <div id="divNaturalPerson">
                         <div class="row">

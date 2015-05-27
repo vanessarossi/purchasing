@@ -90,5 +90,5 @@
 <html:notification/>
 <html:jsAssets/>
 <html:tableJsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/formPayment.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-payment.js"></script>
 </html>

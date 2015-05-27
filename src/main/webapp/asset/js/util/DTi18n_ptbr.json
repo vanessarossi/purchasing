@@ -13,7 +13,7 @@
   "paginate": {
     "first": "Primeiro",
     "last": "Último",
-    "next": "Primeiro",
+    "next": "Proximo",
     "previous": "Anterior"
   },
   "aria": {

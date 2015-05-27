@@ -47,7 +47,11 @@ function viewSupplier(supplier) {
         var zipCode = result["address"]["zipCode"];
 
         /** Category  **/
-        var category = result["category"]["description"]; 
+        var category = result["category"]["description"];
+
+        /** Ativo **/
+
+        var active = result["active"] == true ? 'Sim' : 'Não' ;
 
         /** Contact  **/
         var cellphone = result["contact"]["cellphone"];
@@ -91,6 +95,9 @@ function viewSupplier(supplier) {
         /** final Person **/  
 
         /** add value um span  **/
+
+        $('#active').text(active);
+
         $('#city').text(city);
         $('#neighborhood').text(neighborhood);
         $('#number').text(number);
@@ -117,6 +124,8 @@ function viewSupplier(supplier) {
 };
 
 function clearModal() {
+    $('#active').text("");
+
     $('#companyName').text("");
     $('#cnpj').text("");
     $('#stateInscription').text("");
