@@ -260,7 +260,7 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
         Criterion cancellationAndApproved = Restrictions.and(Restrictions.in("s.status", status));
         criteria.add(Restrictions.or(waitingApproval,cancellationAndApproved));
 
-        criteria.addOrder(Order.desc("id"));
+        criteria.addOrder(Order.asc("id"));
         List<Solicitation>solicitations = new ArrayList<>();
         solicitations.addAll(criteria.list());
         return solicitations;
@@ -281,7 +281,7 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
             criteria.add(Restrictions.in("costCenter", costCenters));
             criteria.add(Restrictions.eq("s.status", StatusEnum.WaitingApproval));
 
-            criteria.addOrder(Order.desc("id"));
+            criteria.addOrder(Order.asc("id"));
         List<Solicitation>solicitations = new ArrayList<>();
         solicitations.addAll(criteria.list());
         return solicitations;

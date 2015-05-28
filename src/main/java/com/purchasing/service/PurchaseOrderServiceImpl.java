@@ -882,6 +882,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         return  purchaseOrdersSaved;
     }
 
+    
     public void alterStatusSolicitationApproved(Solicitation solicitation){
         Integer totalApproved = solicitationRequestDAO.totalSolicitationRequestApprovedBySolicitation(solicitation);
         Integer total = solicitationRequestDAO.totalSolicitationRequestBySolicitation(solicitation);
