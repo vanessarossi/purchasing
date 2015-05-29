@@ -331,7 +331,7 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
 
     public Solicitation findByApprovedPartiallyDelivered(Solicitation solicitation){
         List<StatusEnum>status = new ArrayList<>();
-            status.add(StatusEnum.PartiallyDelivered);
+            status.add(StatusEnum.PartiallyFinished);
             status.add(StatusEnum.Approved);
         Criteria criteria = getSession().createCriteria(Solicitation.class);
             criteria.add(Restrictions.eq("id", solicitation.getId()));
