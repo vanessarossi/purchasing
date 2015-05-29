@@ -58,8 +58,9 @@ public class ReceptionDAO extends DAOImpl<Reception,Long> {
         timestamp.setSeconds(59);
 
         Criteria criteria = getSession().createCriteria(Reception.class);
-        criteria.add(Restrictions.between("date",initialDate,timestamp));
-        criteria.addOrder(Order.desc("date"));
+                criteria.createAlias("paymentInformation","paymentInformation");
+                criteria.add(Restrictions.between("date",initialDate,timestamp));
+        criteria.addOrder(Order.asc("paymentInformation.expirationDate"));
         List<Reception> receptions = new ArrayList<>();
         receptions.addAll(criteria.list());
         return receptions;
