@@ -126,8 +126,6 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
         return total;
     }
 
-
-
     public List<Solicitation> paginationWithFilter(String sSearch,StatusEnum status ,int iDisplayStart, int iDisplayLength) {
         Criteria criteria = getSession().createCriteria(Solicitation.class);
         criteria.setFirstResult(iDisplayStart);
@@ -163,7 +161,6 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
         total =  Integer.parseInt(criteria.uniqueResult().toString());
         return total;
     }
-
 
     public List<Solicitation> paginationIndividualCoordinatorWithFilter(String sSearch,StatusEnum status ,int iDisplayStart, int iDisplayLength, List<CostCenter> costCenters) {
         Criteria criteria = getSession().createCriteria(Solicitation.class);
@@ -201,7 +198,6 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
         return total;
     }
 
-
     public List<Solicitation> paginationIndividualWithFilter(String sSearch, StatusEnum status,int iDisplayStart, int iDisplayLength, User user) {
         Criteria criteria = getSession().createCriteria(Solicitation.class);
         criteria.setFirstResult(iDisplayStart);
@@ -237,7 +233,6 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
         total =  Integer.parseInt(criteria.uniqueResult().toString());
         return total;
     }
-
 
     public List<Solicitation> paginationMissingAnalyst(String sSearch, int iDisplayStart, int iDisplayLength, List<CostCenter> costCenters) {
         Criteria criteria = getSession().createCriteria(Solicitation.class);

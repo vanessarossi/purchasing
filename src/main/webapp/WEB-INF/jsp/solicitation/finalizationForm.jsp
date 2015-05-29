@@ -69,7 +69,7 @@
                            <div class="form-group">
                                <div class="checkbox-inline">
                                    <label class="control-label">
-                                       <input type="checkbox" id="statusSolicitationRequest"  name="solicitationRequest.status" value="${solicitationRequest.status}"  onclick="actionStatusSolicitationRequest()" <c:if test="${solicitationRequest.status eq 'Delivered'}">checked </c:if> /> <fmt:message key="label.delivered"/>
+                                       <input type="checkbox" id="statusSolicitationRequest"  name="solicitationRequest.status" value="${solicitationRequest.status}"  onclick="actionStatusSolicitationRequest()" <c:if test="${solicitationRequest.status eq 'Delivered'}">checked </c:if> /> <c:if test="${solicitation.solicitationRequests[i.index].addQuotation eq true}"> disabled </c:if> <fmt:message key="label.delivered"/>
                                        <input type="hidden" name="solicitationRequest.id" value="${solicitationRequest.id}" />
                                    </label>
                                </div>
@@ -106,7 +106,7 @@
                                            <td>${quantity}</td>
                                            <td>${solicitationRequest.product.unit.description}</td>
                                            <td>
-                                               <input type="checkbox" id="statusSolicitationRequest${i.index}"  name="solicitation.solicitationRequests[${i.index}].status" value="${solicitation.solicitationRequests[i.index].status}" onclick="actionChecked(${i.index})" <c:if test="${solicitation.solicitationRequests[i.index].status eq 'Delivered'}">checked </c:if> />
+                                               <input type="checkbox" id="statusSolicitationRequest${i.index}"  name="solicitation.solicitationRequests[${i.index}].status" value="${solicitation.solicitationRequests[i.index].status}" onclick="actionChecked(${i.index})" <c:if test="${solicitation.solicitationRequests[i.index].status eq 'Delivered'}">checked </c:if>  <c:if test="${solicitation.solicitationRequests[i.index].addQuotation eq true}"> disabled </c:if>  />
                                                <input type="hidden" name="solicitation.solicitationRequests[${i.index}].id" value="${solicitationRequest.id}" />
                                            </td>
                                        </tr>
