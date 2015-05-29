@@ -882,7 +882,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         return  purchaseOrdersSaved;
     }
 
-    
+
     public void alterStatusSolicitationApproved(Solicitation solicitation){
         Integer totalApproved = solicitationRequestDAO.totalSolicitationRequestApprovedBySolicitation(solicitation);
         Integer total = solicitationRequestDAO.totalSolicitationRequestBySolicitation(solicitation);
@@ -946,6 +946,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         Integer total = solicitationRequestDAO.totalSolicitationRequestBySolicitation(solicitation);
 
         if (total == totalDelivered){
+            solicitation.setFinalDate(new Date());
+            solicitationDAO.save(solicitation);
             situation.setStatus(StatusEnum.Finished);
         }else{
             situation.setStatus(StatusEnum.PartiallyFinished);

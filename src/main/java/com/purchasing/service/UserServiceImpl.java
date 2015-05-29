@@ -53,11 +53,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user){
         User newUser = user;
+        User userEdit = new User();
         if (user.getId() != null && user.getPassword() == null){
-            User userEdit = searchById(user);
+            userEdit = searchById(user);
+            newUser.setLastAccess(userEdit.getLastAccess());
             newUser.setPassword(userEdit.getPassword());
         }else{
             try {
+                userEdit = searchById(user);
+                newUser.setLastAccess(userEdit.getLastAccess());
                 newUser.setPassword(Decrypter.encrypt(user.getPassword()));
             } catch (Exception e) {
                 e.printStackTrace();
