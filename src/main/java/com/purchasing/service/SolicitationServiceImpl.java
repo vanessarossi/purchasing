@@ -474,14 +474,14 @@ public class SolicitationServiceImpl implements SolicitationService {
         }
         if (total == remainder){
             Situation situation = solicitationFound.getSituation();
-            situation.setStatus(StatusEnum.Approved);
+            situation.setStatus(null);
             solicitationFound.setFinalDate(null);
             situationDAO.save(situation);
             solicitationDAO.save(solicitationFound);
         }
         if ((totalDelivered > 0) && (total != totalDelivered)){
             Situation situation = solicitationFound.getSituation();
-            situation.setStatus(StatusEnum.PartiallyDelivered);
+            situation.setStatus(StatusEnum.PartiallyFinished);
             solicitationFound.setFinalDate(null);
             situationDAO.save(situation);
             solicitationDAO.save(solicitationFound);

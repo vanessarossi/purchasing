@@ -34,6 +34,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public Supplier save(Supplier supplier) {
             Contact contact = new Contact();
+            contact.setId(supplier.getContact().getId());
             contact.setPhone(supplier.getContact().getPhone());
             contact.setSecondaryPhone(supplier.getContact().getSecondaryPhone());
             contact.setCellPhone(supplier.getContact().getCellPhone());
@@ -44,6 +45,7 @@ public class SupplierServiceImpl implements SupplierService {
             contact = contactDAO.save(contact);
 
             Address address = new Address();
+            address.setId(supplier.getAddress().getId());
             address.setState(supplier.getAddress().getState());
             address.setStreet(supplier.getAddress().getStreet());
             address.setNeighborhood(supplier.getAddress().getNeighborhood());
@@ -56,17 +58,21 @@ public class SupplierServiceImpl implements SupplierService {
             switch (supplier.getPerson().getTypePerson()){
                 case JuristicPerson:
                     JuristicPerson juristicPerson = person.getJuristicPerson();
+                    person.setId(supplier.getPerson().getId());
                     person.setName(supplier.getPerson().getName());
                     person.setTypePerson(supplier.getPerson().getTypePerson());
                     juristicPerson.setPerson(person);
+                    juristicPerson.setId(supplier.getPerson().getId());
                     juristicPerson =  juristicPersonDAO.save(juristicPerson);
                     supplier.setPerson(juristicPerson);
                     break;
                 case NaturalPerson:
                     NaturalPerson naturalPerson = person.getNaturalPerson();
+                    person.setId(supplier.getPerson().getId());
                     person.setName(supplier.getPerson().getName());
                     person.setTypePerson(supplier.getPerson().getTypePerson());
                     naturalPerson.setPerson(person);
+                    naturalPerson.setId(supplier.getPerson().getId());
                     naturalPerson = naturalPersonDAO.save(naturalPerson);
                     supplier.setPerson(naturalPerson);
                     break;

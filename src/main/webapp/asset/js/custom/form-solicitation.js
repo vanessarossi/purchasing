@@ -140,7 +140,7 @@ function removeProduct(index,code) {
         $('#'+index).remove();
     }else{
         $.ajax({
-            url: getContextPath()+'solicitacao/remover/produto/'+code,
+            url: getContextPath()+'solicitacao/remover/produto/'+code+'/json',
             type: "GET",
             dataType: 'json',
             beforeSend: function(){

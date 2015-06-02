@@ -83,8 +83,7 @@ public class SupplierController {
         supplier.setPerson(person);
         supplier.setAddress(address);
         supplier.setContact(contact);
-        supplierService.save(supplier);
-        result.redirectTo(this).list();
+        supplierService.save(supplier);result.redirectTo(this).list();
     }
 
     @Get("/deletar/{supplier.id}")

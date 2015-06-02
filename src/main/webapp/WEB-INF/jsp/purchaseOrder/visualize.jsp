@@ -163,6 +163,39 @@
       </div>
     </c:if>
 
+    <c:if test="${purchaseOrder.approval != null && purchaseOrder.approval.justificationDisapproval == null}">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><fmt:message key="title.approvals"/></h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped table-hover table-condensed">
+            <thead>
+            <tr>
+              <th style="width: 50%"><fmt:message key="table.user"/></th>
+              <th style="width: 10%"><fmt:message key="table.date"/></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>${purchaseOrder.approval.userFirstApproval}</td>
+                  <td><fmt:formatDate value="${purchaseOrder.approval.dateFirstApproval}" pattern="dd/MM/YYYY HH:mm"/></td>
+                </tr>
+                <tr>
+                  <td>${purchaseOrder.approval.userSecondApproval}</td>
+                  <td><fmt:formatDate value="${purchaseOrder.approval.dateSecondApproval}" pattern="dd/MM/YYYY HH:mm"/></td>
+                </tr>
+                <tr>
+                  <td>${purchaseOrder.approval.userThirdApproval}</td>
+                  <td><fmt:formatDate value="${purchaseOrder.approval.dateThirdApproval}" pattern="dd/MM/YYYY HH:mm"/></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </c:if>
+
+
     <c:if test="${purchaseOrder.approval.justificationDisapproval != null}">
       <div class="panel panel-default">
         <div class="panel-heading">

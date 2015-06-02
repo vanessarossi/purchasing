@@ -31,7 +31,7 @@ $('#helpPlace').change(function(){
 	        fillDepartmentOfOccupationalHealth();
 	        break;
 	    case "8":
-	        fillP
+	        fillPreventiveMedicine();
 	        break;
 	   case "9":
 	        fillSpecialtyCenter();

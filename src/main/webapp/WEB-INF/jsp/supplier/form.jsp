@@ -227,6 +227,9 @@
         <div class="row">
             <div class="col-sm-offset-9 col-md-offset-9">
                 <div class="form-group">
+                    <input type="hidden" name="person.id" value="${supplier.person.id}" >
+                    <input type="hidden" name="address.id" value="${supplier.address.id}" >
+                    <input type="hidden" name="contact.id" value="${supplier.contact.id}" >
                     <input type="hidden" name="supplier.id" value="${supplier.id}" >
                     <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
                     <a href='<c:url value="/fornecedor"></c:url>' type="button" class="btn btn-danger"><fmt:message key="button.cancel"/></a>
