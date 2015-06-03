@@ -228,14 +228,14 @@
 				<text><![CDATA[Informações de Pagamento]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="114" y="24" width="90" height="20" uuid="6673fa9b-2457-4918-9edb-f2516042f0a4"/>
+				<reportElement x="114" y="24" width="103" height="20" uuid="6673fa9b-2457-4918-9edb-f2516042f0a4"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{mean_payment}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="337" y="24" width="88" height="20" uuid="ef5c67a0-999f-41af-8528-d40adaca2109"/>
+				<reportElement x="337" y="24" width="216" height="20" uuid="ef5c67a0-999f-41af-8528-d40adaca2109"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
@@ -401,7 +401,7 @@
 				<reportElement x="0" y="0" width="555" height="1" uuid="af8ccbd0-a5e2-42f3-a4bf-7d34df0eff32"/>
 			</line>
 			<textField>
-				<reportElement x="58" y="146" width="279" height="20" uuid="42f848d1-4d59-45b1-a979-271c6c0fac3a"/>
+				<reportElement x="57" y="146" width="279" height="20" uuid="42f848d1-4d59-45b1-a979-271c6c0fac3a"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -415,7 +415,7 @@
 				<textFieldExpression><![CDATA[$P{total_price_one}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="58" y="165" width="279" height="20" uuid="f1f23cf5-8b92-4887-afca-62299c62cfb4"/>
+				<reportElement x="57" y="165" width="279" height="20" uuid="f1f23cf5-8b92-4887-afca-62299c62cfb4"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>

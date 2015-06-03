@@ -107,7 +107,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         String total_final_price = reception.getPaymentInformation().getTotalFinalPrice().toString();
 
         String form_payment = reception.getPaymentInformation().getFormPayment().getDescription();
-        String input_price = reception.getPaymentInformation().getInputPrice() == null ? "" : purchaseOrder.getPaymentInformation().getInputPrice().toString();
+        String input_price = reception.getPaymentInformation().getInputPrice() == null ? "" : reception.getPaymentInformation().getInputPrice().toString();
 
         /** Budget **/
         List<Budget> budgets = budgetDAO.findByQuotationOrderPaymentInformation(purchaseOrder.getBudget().getQuotation());

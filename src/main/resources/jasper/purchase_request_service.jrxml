@@ -233,7 +233,7 @@
 				<textFieldExpression><![CDATA[$P{mean_payment}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="35" width="139" height="18" uuid="ef5c67a0-999f-41af-8528-d40adaca2109"/>
+				<reportElement x="345" y="35" width="209" height="18" uuid="ef5c67a0-999f-41af-8528-d40adaca2109"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
