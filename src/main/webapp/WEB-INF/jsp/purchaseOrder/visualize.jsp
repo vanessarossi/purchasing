@@ -189,6 +189,10 @@
                   <td>${purchaseOrder.approval.userThirdApproval}</td>
                   <td><fmt:formatDate value="${purchaseOrder.approval.dateThirdApproval}" pattern="dd/MM/YYYY HH:mm"/></td>
                 </tr>
+                <tr>
+                  <td>${purchaseOrder.approval.userFourthApproval}</td>
+                  <td><fmt:formatDate value="${purchaseOrder.approval.dateFourthApproval}" pattern="dd/MM/YYYY HH:mm"/></td>
+                </tr>
             </tbody>
           </table>
         </div>
