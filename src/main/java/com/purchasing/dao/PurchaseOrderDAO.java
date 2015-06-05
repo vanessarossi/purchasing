@@ -54,6 +54,12 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
     public Integer totalPagination(String sSearch) {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
+        criteria.createAlias("budget", "budget");
+        criteria.createAlias("budget.supplier", "supplier");
+        criteria.createAlias("supplier.person", "person");
+        disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+        criteria.add(disjunction);
         criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());
         return total;
