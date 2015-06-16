@@ -87,12 +87,12 @@ public class OrderPrinter extends PrinterImpl implements BasePrinter {
         String date_input = purchaseOrder.getPaymentInformation().getDateInput() == null ? "" : Conversor.converterDateInString(purchaseOrder.getPaymentInformation().getDateInput());
         String expiration_date = purchaseOrder.getPaymentInformation().getExpirationDate() == null ? "" : Conversor.converterDateInString(purchaseOrder.getPaymentInformation().getExpirationDate());
         String share_price = purchaseOrder.getPaymentInformation().getSharePrice() == null ? "" : purchaseOrder.getPaymentInformation().getSharePrice().toString();
-        String total_price = purchaseOrder.getPaymentInformation().getTotalPrice().toString();
-        String discount_percentage = purchaseOrder.getPaymentInformation().getDiscountPercentage().toString();
-        String total_final_price = purchaseOrder.getPaymentInformation().getTotalFinalPrice().toString();
+        String total_price = purchaseOrder.getPaymentInformation().getTotalPrice().toString().replace(".",",");
+        String discount_percentage = purchaseOrder.getPaymentInformation().getDiscountPercentage().toString().replace(".",",");
+        String total_final_price = purchaseOrder.getPaymentInformation().getTotalFinalPrice().toString().replace(".", ",");
 
         String form_payment = purchaseOrder.getPaymentInformation().getFormPayment().getDescription();
-        String input_price = purchaseOrder.getPaymentInformation().getInputPrice() == null ? "" : purchaseOrder.getPaymentInformation().getInputPrice().toString();
+        String input_price = purchaseOrder.getPaymentInformation().getInputPrice() == null ? "" : purchaseOrder.getPaymentInformation().getInputPrice().toString().replace(".",",");
 
         /** Delivery **/
         String place_delivery = purchaseOrder.getDeliveryInformation().getPlace();

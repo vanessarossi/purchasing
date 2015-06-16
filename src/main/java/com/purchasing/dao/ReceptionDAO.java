@@ -60,6 +60,7 @@ public class ReceptionDAO extends DAOImpl<Reception,Long> {
         Criteria criteria = getSession().createCriteria(Reception.class);
                 criteria.createAlias("paymentInformation","paymentInformation");
                 criteria.add(Restrictions.between("date",initialDate,timestamp));
+                criteria.add(Restrictions.eq("status",StatusEnum.Finished));
         criteria.addOrder(Order.asc("paymentInformation.expirationDate"));
         List<Reception> receptions = new ArrayList<>();
         receptions.addAll(criteria.list());

@@ -218,7 +218,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
 
 
                 BigDecimal discountValue = new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",",".")).multiply(discount).divide(new BigDecimal(100));
-                purchaseOrderViewPrinter.setTotal_price(decimalFormat.format(new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",", ".")).subtract(discountValue)).toString());
+                purchaseOrderViewPrinter.setTotal_price(decimalFormat.format(new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",", ".")).subtract(discountValue)).toString().replace(".",","));
                 orderViewPrinters.add(purchaseOrderViewPrinter);
             }
         }else{

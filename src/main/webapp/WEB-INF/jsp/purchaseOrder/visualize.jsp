@@ -199,7 +199,6 @@
       </div>
     </c:if>
 
-
     <c:if test="${purchaseOrder.approval.justificationDisapproval != null}">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -277,6 +276,24 @@
         </table>
       </div>
     </div>
+    </c:if>
+
+    <c:if test="${purchaseOrder.status == 'Canceled'}">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><fmt:message key="title.justification.cancellation"/></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label class="control-label" for="justification"><fmt:message key="label.justification"/></label>
+                <textarea rows="4" cols="100" class="form-control" readonly>${purchaseOrder.justificationCancellation}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </c:if>
 
     <c:if test="${approve == 'true' && purchaseOrder.status == 'Open'}">
