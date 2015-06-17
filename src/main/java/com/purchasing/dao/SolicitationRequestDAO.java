@@ -78,6 +78,7 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
             status.add(StatusEnum.Approved);
             status.add(StatusEnum.InAnalysis);
             status.add(StatusEnum.QuotingProcess);
+            status.add(StatusEnum.PartiallyFinished);
 
         List<SolicitationRequest>solicitationRequests = new ArrayList<>();
         Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
@@ -98,6 +99,7 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
             status.add(StatusEnum.Approved);
             status.add(StatusEnum.InAnalysis);
             status.add(StatusEnum.QuotingProcess);
+            status.add(StatusEnum.PartiallyFinished);
 
         List<SolicitationRequest>solicitationRequests = new ArrayList<>();
         Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
