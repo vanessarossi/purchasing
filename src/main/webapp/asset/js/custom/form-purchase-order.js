@@ -153,8 +153,8 @@ $('#formPayment').change(function(){
                     $('#discountPercentage').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
                     totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                     /** removendo atributo do calculo **/
-                    $('#discountPercentage').removeAttr("onblur");
-                    $('#dateFirstInstallment').removeAttr("onblur");
+                    //$('#discountPercentage').removeAttr("onblur");
+                   // $('#dateFirstInstallment').removeAttr("onblur");
 
                 }else if (input == true &&  parcels > 0 && intervalDay > 0){
                     $('#dateInput').attr("readonly",false);
@@ -164,8 +164,8 @@ $('#formPayment').change(function(){
                     $('#dateFirstInstallment').attr('onblur', 'calculateValueParcelWithInput('+parcels+','+intervalDay+')');
                     totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                     /** removendo atributo do calculo **/
-                    $('#discountPercentage').removeAttr("onblur");
-                    $('#dateFirstInstallment').removeAttr("onblur");
+                    //$('#discountPercentage').removeAttr("onblur");
+                    //$('#dateFirstInstallment').removeAttr("onblur");
 
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
                     $('#dateInput').attr("readonly",true);
@@ -175,7 +175,7 @@ $('#formPayment').change(function(){
                     $('#dateFirstInstallment').attr('onblur', 'calculateSecondFormPayment('+parcels+','+intervalDay+')');
                      totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                     /** removendo atributo do calculo **/
-                    $('#discountPercentage').removeAttr("onblur");
+                    //$('#discountPercentage').removeAttr("onblur");
                 }
            };
         },
@@ -201,13 +201,13 @@ function calculateFirstFormPayment(intervalDay){
 /** Calculo de valor final com parcela e sem entrada  **/
 function calculateSecondFormPayment(parcel,intervalDay){
     dateFirstInstallment = $('#dateFirstInstallment').val();
+    percentage = $('#discountPercentage').val().replace(',', '.');
     while (totalPrice.indexOf(',') != -1)
         totalPrice = totalPrice.replace(',', '.');  
     if(totalPrice != 0 && percentage != null && dateFirstInstallment != null){
         percentage = $('#discountPercentage').val().replace(',', '.');
         totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
-
         valueParcel = parseFloat(totalFinalPrice) / parseFloat(parcel);
         $('#sharePrice').val(parseFloat(valueParcel).toFixed(2).replace(".", ","));
 
@@ -229,7 +229,7 @@ function calculateSecondFormPayment(parcel,intervalDay){
 function calculateValueParcelWithInput(parcel,intervalDay){
     inputValue = $('#inputPrice').val();
     dateFirstInstallment = $('#dateFirstInstallment').val();
-    
+    percentage = $('#discountPercentage').val().replace(',', '.');
     if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && inputValue != ''){
         while (totalPrice.indexOf(',') != -1)
             totalPrice = totalPrice.replace(',', '.');  
