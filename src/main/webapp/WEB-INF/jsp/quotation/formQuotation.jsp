@@ -124,6 +124,9 @@
                     </tbody>
                 </table>
             </c:if>
+            <div class="col-sm-offset-8 col-md-offset-9">
+                <a href="<c:url value="/cotacao/imprimir/pedido/orcamento/${quotation.id}"></c:url>" target='_blank'> <span class="fa fa-print btn btn-default"> <fmt:message key="button.generateOrderBudget" /></span></a>
+            </div>
        </c:if>
     </div>
 </html:template>

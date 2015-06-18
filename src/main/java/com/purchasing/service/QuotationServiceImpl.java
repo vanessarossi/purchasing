@@ -3,12 +3,14 @@ package com.purchasing.service;
 import com.purchasing.dao.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.StatusEnum;
+import com.purchasing.printer.OrderBudgetPrinter;
 import com.purchasing.service.impl.QuotationService;
 import com.purchasing.support.date.Conversor;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -23,6 +25,7 @@ public class QuotationServiceImpl implements QuotationService {
     @Inject private QuotationRequestDAO quotationRequestDAO;
     @Inject private SolicitationDAO solicitationDAO;
     @Inject private SituationDAO situationDAO;
+    @Inject private OrderBudgetPrinter orderBudgetPrinter;
 
     @Override
     public Quotation save(Quotation quotation) {
@@ -255,6 +258,12 @@ public class QuotationServiceImpl implements QuotationService {
         }
 
         return quotationRequestProductViews;
+    }
+
+    @Override
+    public File printer(Quotation quotation) {
+        quotation = quotationDAO.findById(Quotation.class, quotation.getId());
+        return orderBudgetPrinter.generateOrderBudget(quotation.getId(),this);
     }
 
     public User getUserLogged(){

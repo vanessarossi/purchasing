@@ -21,6 +21,7 @@ import com.purchasing.support.quotation.QuotationRequestProductView;
 import com.purchasing.support.quotation.QuotationRequestServiceView;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -190,6 +191,11 @@ public class QuotationController {
     public void list() {
         result.include("status", StatusEnum.getStatusQuotation());
         result.include("controller", this.getClass().toString());
+    }
+
+    @Get("/imprimir/pedido/orcamento/{quotation.id}")
+    public File printerOrderBudget(Quotation quotation){
+        return quotationService.printer(quotation);
     }
 
 

@@ -4,6 +4,7 @@ import com.purchasing.entity.PurchaseOrder;
 import com.purchasing.entity.Reception;
 import com.purchasing.printer.base.Printer;
 import com.purchasing.service.impl.PurchaseOrderService;
+import com.purchasing.service.impl.QuotationService;
 
 import java.io.File;
 
@@ -20,6 +21,11 @@ public class PrinterImpl extends BasePrinterImpl implements Printer {
 
     @Override
     public File generateOrder(Long code, PurchaseOrderService purchaseOrderService) {
+        return null;
+    }
+
+    @Override
+    public File generateOrderBudget(Long code, QuotationService quotationService) {
         return null;
     }
 
