@@ -31,7 +31,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         criteria.createAlias("budget", "budget");
         disjunction.add(Restrictions.eq("budget.supplier", supplier));
         criteria.add(disjunction);
-        criteria.addOrder(Order.desc("dateGenerate"));
+        criteria.addOrder(Order.desc("id"));
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         purchaseOrders.addAll(criteria.list());
         return purchaseOrders;

@@ -26,14 +26,14 @@
 				<reportElement x="0" y="58" width="555" height="1" uuid="293daa59-accf-4077-8d58-f827e7f52809"/>
 			</line>
 			<staticText>
-				<reportElement x="385" y="18" width="100" height="20" uuid="f6b2e912-d71e-47b0-a58c-6c5a83596e73"/>
+				<reportElement x="363" y="18" width="110" height="20" uuid="f6b2e912-d71e-47b0-a58c-6c5a83596e73"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Número da cotação]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="486" y="18" width="69" height="20" uuid="136fbbce-8582-4530-8492-060d7d7b4362"/>
+				<reportElement x="473" y="18" width="82" height="20" uuid="136fbbce-8582-4530-8492-060d7d7b4362"/>
 				<textFieldExpression><![CDATA[$P{number_quotation}]]></textFieldExpression>
 			</textField>
 		</band>

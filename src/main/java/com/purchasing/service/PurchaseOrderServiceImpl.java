@@ -502,7 +502,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 }
 
                 purchaseOrder.setApproval(approval);
-                if ((compareMinimum == 1 || compareMinimum == 0) && (compareMaximum == -1 || compareMaximum == 0)) {
+                if ((compareMinimum == 1 || compareMinimum == 0)) {
                     purchaseOrder.setStatus(StatusEnum.Approved);
                 }
 
