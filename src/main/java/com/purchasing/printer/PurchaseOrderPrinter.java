@@ -208,7 +208,8 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
 
     public List<PurchaseOrderViewPrinter> addDiscount(List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters, BigDecimal discount){
         List<PurchaseOrderViewPrinter> orderViewPrinters = new ArrayList<>();
-        if (0 != discount.intValue()) {
+        Integer hasDiscount = discount.compareTo(new BigDecimal(0));
+        if (hasDiscount != 0) {
             for (PurchaseOrderViewPrinter purchaseOrderViewPrinter : purchaseOrderViewPrinters) {
 
                 DecimalFormat decimalFormat = new DecimalFormat();
