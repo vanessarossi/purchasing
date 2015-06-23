@@ -249,7 +249,7 @@
               <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                   <label class="control-label" for="discountPercentage"><fmt:message key="label.discountPercentage"/></label>
-                  <input type="text" class="form-control" id="discountPercentage" name="purchaseOrder.paymentInformation.discountPercentage" value="${purchaseOrder.purchaseOrder.paymentInformation.discountPercentage}">
+                  <input type="text" class="form-control" id="discountPercentage" name="purchaseOrder.paymentInformation.discountPercentage" value="${fn:replace(purchaseOrder.purchaseOrder.paymentInformation.discountPercentage,".",",")}">
                 </div>
               </div>
               <div class="col-md-2 col-sm-2">
@@ -402,8 +402,7 @@
           </div>
         </div>
       </div>
-
-        <div class="row">
+      <div class="row">
           <div class="col-sm-offset-10 col-md-offset-10">
             <div class="form-group">
               <input type="hidden" name="purchaseOrder.deliveryInformation.id" value="${purchaseOrder.purchaseOrder.deliveryInformation.id}">
@@ -413,7 +412,6 @@
             </div>
           </div>
         </div>
-
     </form>
   </div>
 </html:template>

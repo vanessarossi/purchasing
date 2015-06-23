@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="458"/>
+	<property name="ireport.x" value="256"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="corporate_name" class="java.lang.String"/>
 	<parameter name="document_supplier" class="java.lang.String"/>
 	<parameter name="number_request" class="java.lang.String"/>
@@ -115,7 +115,7 @@
 				<text><![CDATA[CNPJ/CPF]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="42" y="36" width="270" height="20" uuid="b707dfba-d84b-4f4c-b20e-b546dc2aeec8"/>
+				<reportElement x="44" y="36" width="270" height="20" uuid="b707dfba-d84b-4f4c-b20e-b546dc2aeec8"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -129,14 +129,14 @@
 				<textFieldExpression><![CDATA[$P{phone_contact}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="36" width="40" height="20" uuid="d71bea38-12cd-43db-a9b2-c0437efb6a1e"/>
+				<reportElement x="0" y="36" width="44" height="20" uuid="d71bea38-12cd-43db-a9b2-c0437efb6a1e"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Contato]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="337" y="36" width="41" height="20" uuid="e3f1c076-26d9-4859-a4fe-e150eff7221b"/>
+				<reportElement x="328" y="36" width="50" height="20" uuid="e3f1c076-26d9-4859-a4fe-e150eff7221b"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -157,7 +157,7 @@
 				<text><![CDATA[Distribuição de Centro de Custo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="22" width="133" height="20" uuid="9065176f-29b0-4968-a4d3-bb39a9cd70a4"/>
+				<reportElement x="0" y="22" width="150" height="20" uuid="9065176f-29b0-4968-a4d3-bb39a9cd70a4"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -182,7 +182,7 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="133" height="20" uuid="605c68e7-492b-4c74-b5bd-af739fa9ec54"/>
+				<reportElement x="0" y="0" width="150" height="20" uuid="605c68e7-492b-4c74-b5bd-af739fa9ec54"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -196,7 +196,7 @@
 				<textFieldExpression><![CDATA[$F{description_cost_center}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="454" y="0" width="100" height="20" uuid="991e7d38-9aa5-4f2b-a510-c94743947121"/>
+				<reportElement x="455" y="0" width="99" height="20" uuid="991e7d38-9aa5-4f2b-a510-c94743947121"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
