@@ -104,7 +104,6 @@ public class PurchaseOrderController {
         result.include("controller", this.getClass()).toString();
     }
 
-
      /** Actions **/
     @Get("/salvar/unico/{budget.id}")
     public void singleSave(Budget budget) {

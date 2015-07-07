@@ -45,6 +45,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Override
     public PurchaseOrder singleSave(Budget budget) {
         budget = budgetDAO.findById(Budget.class, budget.getId());
+            budget.setChosenBudget(true);
+        budget = budgetDAO.save(budget);
 
         PaymentInformation paymentInformation = new PaymentInformation();
           paymentInformation.setMeanPayment(budget.getPaymentInformationBudgets().get(0).getPaymentInformation().getMeanPayment());
@@ -104,6 +106,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Override
     public PurchaseOrder singleSaveWithJustification(Budget budget, String justification, Boolean exclusive) {
         budget = budgetDAO.findById(Budget.class, budget.getId());
+            budget.setChosenBudget(true);
+        budget = budgetDAO.save(budget);
 
         PaymentInformation paymentInformation = new PaymentInformation();
         paymentInformation.setMeanPayment(budget.getPaymentInformationBudgets().get(0).getPaymentInformation().getMeanPayment());
@@ -796,6 +800,11 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             purchaseOrder.setStatus(StatusEnum.Open);
 
             purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
+
+            Budget budget = budgetDAO.findById(Budget.class,purchaseOrder.getBudget().getId());
+            budget.setChosenBudget(true);
+            budgetDAO.save(budget);
+
             Quotation quotation = new Quotation();
             for (OrderRequest orderRequest : orderRequests) {
                 if (orderRequest.getBudgetQuotation().getChosenBudget() != null && orderRequest.getBudgetQuotation().getChosenBudget() == true) {
@@ -850,6 +859,11 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             purchaseOrder.setStatus(StatusEnum.Open);
 
             purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
+
+            Budget budget = budgetDAO.findById(Budget.class,purchaseOrder.getBudget().getId());
+            budget.setChosenBudget(true);
+            budgetDAO.save(budget);
+
             Quotation quotation = new Quotation();
             for (OrderRequest orderRequest : orderRequests) {
                 if (orderRequest.getBudgetQuotation().getChosenBudget()!= null && orderRequest.getBudgetQuotation().getChosenBudget() == true) {
@@ -881,7 +895,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         }
         return  purchaseOrdersSaved;
     }
-
 
     public void alterStatusSolicitationApproved(Solicitation solicitation){
         Integer totalApproved = solicitationRequestDAO.totalSolicitationRequestApprovedBySolicitation(solicitation);

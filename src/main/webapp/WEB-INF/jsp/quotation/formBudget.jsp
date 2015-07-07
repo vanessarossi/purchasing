@@ -226,7 +226,7 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="discountPercentage"><fmt:message key="label.discountPercentage"/></label>
-                                            <input  type="text" class="form-control" id="discountPercentage" name="budget.paymentInformationBudgets[0].paymentInformation.discountPercentage" value="${budget.paymentInformationBudgets[0].paymentInformation.discountPercentage}">
+                                            <input  type="text" class="form-control" id="discountPercentage" name="budget.paymentInformationBudgets[0].paymentInformation.discountPercentage" value="${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.discountPercentage,".",",")}">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
@@ -346,7 +346,7 @@
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label  class="control-label" for="discountPercentageTwo"><fmt:message key="label.discountPercentage"/></label>
-                                            <input  type="text" class="form-control" id="discountPercentageTwo" name="budget.paymentInformationBudgets[1].paymentInformation.discountPercentage" value="${budget.paymentInformationBudgets[1].paymentInformation.discountPercentage}" >
+                                            <input  type="text" class="form-control" id="discountPercentageTwo" name="budget.paymentInformationBudgets[1].paymentInformation.discountPercentage" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.discountPercentage,".",",")}" >
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
@@ -400,7 +400,7 @@
                 </div>
             </div>
 
-            <c:if test="${quotation.status eq 'Open'}">
+            <c:if test="${quotation.status eq 'Open' || budget.chosenBudget eq true}">
                 <div class="row">
                     <div class="col-sm-offset-11 col-md-offset-11">
                         <div class="form-group">

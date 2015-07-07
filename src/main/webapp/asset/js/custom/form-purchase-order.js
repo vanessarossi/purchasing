@@ -130,9 +130,19 @@ function clear () {
 	$('#receptorName').val("");
 }
 
+function clearInputs(){
+    $('#dateInput').val("");
+    $('#dateFirstInstallment').val("");
+    $('#dateLastInstallment').val("");
+    $('#inputPrice').val("");
+    $('#sharePrice').val("");
+    $('#expirationDate').val("");
+}
+
 $('#formPayment').change(function(){
     formPaymentId = $('#formPayment').val();
-    $.ajax({
+    if (formPaymentId != '') {
+        $.ajax({
         type: "GET",
         url: getContextPath()+'cotacao/pesquisar/detalhes/pagamento/'+formPaymentId+'/json',
         dataType: "json",
@@ -143,6 +153,7 @@ $('#formPayment').change(function(){
                 var input = result["input"];
                 var parcels = result["parcels"];
                 var intervalDay = result["intervalDay"];
+                clearInputs();
 
                 if (input == false &&  parcels == 0 && (intervalDay == 0 || intervalDay > 0)){
                     $('#dateInput').attr("readonly",true);
@@ -153,9 +164,7 @@ $('#formPayment').change(function(){
                     $('#discountPercentage').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
                     totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                     /** removendo atributo do calculo **/
-                    //$('#discountPercentage').removeAttr("onblur");
-                   // $('#dateFirstInstallment').removeAttr("onblur");
-
+                    $('#dateFirstInstallment').removeAttr("onblur");
                 }else if (input == true &&  parcels > 0 && intervalDay > 0){
                     $('#dateInput').attr("readonly",false);
                     $('#dateFirstInstallment').attr("readonly",false);
@@ -164,9 +173,7 @@ $('#formPayment').change(function(){
                     $('#dateFirstInstallment').attr('onblur', 'calculateValueParcelWithInput('+parcels+','+intervalDay+')');
                     totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                     /** removendo atributo do calculo **/
-                    //$('#discountPercentage').removeAttr("onblur");
-                    //$('#dateFirstInstallment').removeAttr("onblur");
-
+                    $('#discountPercentage').removeAttr("onblur");
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
                     $('#dateInput').attr("readonly",true);
                     $('#dateFirstInstallment').attr("readonly",false);
@@ -175,14 +182,15 @@ $('#formPayment').change(function(){
                     $('#dateFirstInstallment').attr('onblur', 'calculateSecondFormPayment('+parcels+','+intervalDay+')');
                      totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                     /** removendo atributo do calculo **/
-                    //$('#discountPercentage').removeAttr("onblur");
+                    $('#discountPercentage').removeAttr("onblur");
                 }
            };
         },
         error: function () {
             alert("Ocorreu um erro no processamento dos dados.");
         }
-    });   
+    }); 
+    };  
 });
 
 /** Calculo de valor final sem parcelas e entrada   **/

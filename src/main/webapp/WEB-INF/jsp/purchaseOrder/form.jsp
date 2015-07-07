@@ -32,6 +32,12 @@
                  value="${purchaseOrder.purchaseOrder.budget.supplier.person.name}"/>
         </div>
       </div>
+      <div class="col-sm-2 col-md-2">
+        <div class="form-group">
+            <label><fmt:message key="label.quotation" /></label>
+            <input type="text" class="form-control" readonly value="${purchaseOrder.purchaseOrder.budget.quotation.id}"/>
+        </div>
+      </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-body">
@@ -83,7 +89,7 @@
           <div class="col-sm-2 col-md-2 col-md-offset-10 col-sm-offset-10">
             <div class="form-group">
               <label class="control-label"><fmt:message key="label.total.price"/></label>
-              <input type="text" class="form-control" readonly value="${fn:replace(purchaseOrder.purchaseOrder.paymentInformation.totalPrice,"." ,"," )}"/>
+              <input type="text" class="form-control" readonly value="${fn:replace(purchaseOrder.purchaseOrder.budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}"/>
             </div>
           </div>
         </div>
@@ -232,8 +238,9 @@
                 <div class="form-group">
                   <label class="control-label" for="formPayment"><fmt:message key="label.formPayment"/></label>
                   <select class="form-control" id="formPayment" name="purchaseOrder.paymentInformation.formPayment.id" required>
+                    <option value=""><fmt:message key="label.select" /></option>
                     <c:forEach items="${formsPayment}" var="formPayment">
-                      <option value="${formPayment.id}" <c:if test="${formPayment.id eq purchaseOrder.purchaseOrder.paymentInformation.formPayment.id}"> selected </c:if> >${formPayment.description}</option>
+                      <option value="${formPayment.id}" <c:if test="${formPayment.id eq purchaseOrder.purchaseOrder.paymentInformation.formPayment.id && purchaseOrder.purchaseOrder.paymentInformation.totalFinalPrice != null }"> selected </c:if> >${formPayment.description}</option>
                     </c:forEach>
                   </select>
                 </div>
@@ -243,7 +250,7 @@
               <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                   <label class="control-label" for="totalPrice"><fmt:message key="label.totalPrice"/></label>
-                  <input type="text" class="form-control" id="totalPrice" name="purchaseOrder.paymentInformation.totalPrice" value="${fn:replace(purchaseOrder.purchaseOrder.paymentInformation.totalPrice,"." ,"," )}" readonly>
+                  <input type="text" class="form-control" id="totalPrice" name="purchaseOrder.paymentInformation.totalPrice" value="${fn:replace(purchaseOrder.purchaseOrder.budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}" readonly>
                 </div>
               </div>
               <div class="col-md-2 col-sm-2">
