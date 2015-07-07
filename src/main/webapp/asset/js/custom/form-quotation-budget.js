@@ -42,13 +42,11 @@ $('#code').blur(function () {
         $('#code').val('');
     }
 });
-
 function chooseSupplier(code,name){
     $('#supplier').val(name);
     $('#code').val(code);
     $('#searchSupplier').modal('hide');
 };
-
 function toggleChevron(e) {
     $(e.target)
         .prev('.panel-heading')
@@ -57,7 +55,6 @@ function toggleChevron(e) {
 }
 $('#accordion').on('hidden.bs.collapse', toggleChevron);
 $('#accordion').on('shown.bs.collapse', toggleChevron);
-
 function calculateTotalPriceMaterial(i){
     $('#unityPrice'+i).keypress(function(e) { 
         quantity = $('#quantity'+i).val();
@@ -108,7 +105,6 @@ function calculateTotalPriceMaterial(i){
             }  
     });     
 };
-
 function calculateTotalPriceMaterialTwo(i){
     quantity = $('#quantity'+i).val();
     unityPrice = $('#unityPrice'+i).val();
@@ -152,7 +148,6 @@ function calculateTotalPriceMaterialTwo(i){
 			
         }
 };
-
 function calculateTotalPriceService(i){
     $('#unityPrice'+i).keypress(function(e) { 
         unityPrice = $('#unityPrice'+i).val();
@@ -192,7 +187,6 @@ function calculateTotalPriceService(i){
             }  
     });     
 };
-
 function calculateTotalPriceServiceTwo(i){
     unityPrice = $('#unityPrice'+i).val();
     if (unityPrice != null && unityPrice.length >= 3) {
@@ -228,7 +222,6 @@ function calculateTotalPriceServiceTwo(i){
         }
     } 
 };
-
 $('#formPayment').change(function(){
     formPaymentId = $('#formPayment').val();
     $.ajax({
@@ -279,7 +272,6 @@ $('#formPayment').change(function(){
         }
     });   
 });
-
 $('#formPaymentTwo').change(function(){
     formPaymentId = $('#formPaymentTwo').val();
     $.ajax({
@@ -329,8 +321,7 @@ $('#formPaymentTwo').change(function(){
             alert("Ocorreu um erro no processamento dos dados.");
         }
     });   
-});
-
+}); 
 /** Calculo de valor final sem parcelas e entrada   **/
 function calculateFirstFormPayment(intervalDay){
     percentage = $('#discountPercentage').val().replace(',', '.');
@@ -344,7 +335,6 @@ function calculateFirstFormPayment(intervalDay){
         $('#totalFinalPrice').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     }
 };
-
 function calculateFirstFormPaymentTwo(intervalDay){
     percentage = $('#discountPercentageTwo').val();
     if(totalPrice != 0 && percentage != '' ){
@@ -357,7 +347,6 @@ function calculateFirstFormPaymentTwo(intervalDay){
         $('#totalFinalPriceTwo').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     }
 };
-
 /** Calculo de valor final com parcela e sem entrada  **/
 function calculateSecondFormPayment(parcel,intervalDay){
     dateFirstInstallment = $('#dateFirstInstallment').val();
@@ -384,7 +373,6 @@ function calculateSecondFormPayment(parcel,intervalDay){
         $('#totalFinalPrice').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     }
 };
-
 function calculateSecondFormPaymentTwo(parcel,intervalDay){
     dateFirstInstallment = $('#dateFirstInstallmentTwo').val();
     if(totalPrice != 0 && percentage != null && dateFirstInstallment != null){
@@ -410,7 +398,6 @@ function calculateSecondFormPaymentTwo(parcel,intervalDay){
         $('#totalFinalPriceTwo').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     } 
 };
-
 /** Calculo de valor final com parcela e  entrada  **/
 function calculateValueParcelWithInput(parcel,intervalDay){
     inputValue = $('#inputPrice').val();
@@ -441,7 +428,6 @@ function calculateValueParcelWithInput(parcel,intervalDay){
         $('#totalFinalPrice').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     } 
 };
-
 function calculateValueParcelWithInputTwo(parcel,intervalDay){
     inputValue = $('#inputPriceTwo').val();
     dateFirstInstallment = $('#dateFirstInstallmentTwo').val();
@@ -471,7 +457,6 @@ function calculateValueParcelWithInputTwo(parcel,intervalDay){
         $('#totalFinalPriceTwo').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     } 
 };
-
 function clearInputs(){
 	$('#dateInput').val("");
 	$('#dateFirstInstallment').val("");
@@ -479,8 +464,7 @@ function clearInputs(){
 	$('#inputPrice').val("");
 	$('#sharePrice').val("");
 	$('#expirationDate').val("");
-}
-
+};
 function clearInputsTwo(){
 	$('#dateInputTwo').val("");
 	$('#dateFirstInstallmentwo').val("");
@@ -488,5 +472,5 @@ function clearInputsTwo(){
 	$('#inputPricewo').val("");
 	$('#sharePricewo').val("");
 	$('#expirationDatewo').val("");
-}
+};
 

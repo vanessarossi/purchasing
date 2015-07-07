@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	 fillTable();
 });
-
 $('#helpPlace').change(function(){
 	helpPlace = $('#helpPlace').val();
 
@@ -38,7 +37,6 @@ $('#helpPlace').change(function(){
 	        break;
 	}
 });
-
 function fillAdministrativeOffice () {
     $('#place').val("Sede Administrativa");
 	$('#street').val("Rua Francisquinho Dias");
@@ -129,7 +127,6 @@ function clear () {
 	$('#number').val("");
 	$('#receptorName').val("");
 }
-
 function clearInputs(){
     $('#dateInput').val("");
     $('#dateFirstInstallment').val("");
@@ -138,7 +135,6 @@ function clearInputs(){
     $('#sharePrice').val("");
     $('#expirationDate').val("");
 }
-
 $('#formPayment').change(function(){
     formPaymentId = $('#formPayment').val();
     if (formPaymentId != '') {
@@ -192,7 +188,6 @@ $('#formPayment').change(function(){
     }); 
     };  
 });
-
 /** Calculo de valor final sem parcelas e entrada   **/
 function calculateFirstFormPayment(intervalDay){
     percentage = $('#discountPercentage').val().replace(',', '.');
@@ -205,7 +200,6 @@ function calculateFirstFormPayment(intervalDay){
         $('#totalFinalPrice').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     }
 };
-
 /** Calculo de valor final com parcela e sem entrada  **/
 function calculateSecondFormPayment(parcel,intervalDay){
     dateFirstInstallment = $('#dateFirstInstallment').val();
@@ -232,7 +226,6 @@ function calculateSecondFormPayment(parcel,intervalDay){
         $('#totalFinalPrice').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     }
 };
-
 /** Calculo de valor final com parcela e  entrada  **/
 function calculateValueParcelWithInput(parcel,intervalDay){
     inputValue = $('#inputPrice').val();
@@ -263,7 +256,6 @@ function calculateValueParcelWithInput(parcel,intervalDay){
         $('#totalFinalPrice').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
     } 
 };
-
 function fillTable(){
  var oTable =  $('#orderRequestProductTable').dataTable({
     "oLanguage": {
@@ -282,7 +274,6 @@ function fillTable(){
     "aLengthMenu": [[5, 10, 100], [5,10, 100]],
   });
 };
-
 function unlockInputs(){
     $('#dateInput').attr("readonly",false);
     $('#dateFirstInstallment').attr("readonly",false);
