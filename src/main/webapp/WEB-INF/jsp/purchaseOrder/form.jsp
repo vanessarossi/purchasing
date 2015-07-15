@@ -303,9 +303,11 @@
                   <input type="text" class="form-control date" id="expirationDate" name="purchaseOrder.paymentInformation.expirationDate" value="<fmt:formatDate value="${purchaseOrder.purchaseOrder.paymentInformation.expirationDate}" pattern="dd/MM/YYYY"/>"/>
                 </div>
               </div>
+            </div>
+            <div>
               <div class="col-md-2 col-sm-3">
                 <div class="form-group">
-                  <label class="control-label" for="contract"><fmt:message key="label.alreadyPurchased"/></label>
+                  <label class="control-label" for="alreadyPurchased"><fmt:message key="label.alreadyPurchased"/></label>
                   <br>
                   <div class="radio-inline">
                     <label class="control-label">
@@ -322,9 +324,28 @@
                   <br>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="col-md-3 col-sm-4">
+                <div class="form-group">
+                  <label class="control-label" for="investmentPurchase"><fmt:message key="label.investmentPurchase"/></label>
                   <br>
-                  <a onclick="unlockInputs()" class="btn btn-warning" ><fmt:message key="button.open.input"/></a>
+                  <div class="radio-inline">
+                    <label class="control-label">
+                      <input type="radio" value="true" name="purchaseOrder.investmentPurchase" id="investmentPurchase"
+                      <c:if test="${purchaseOrder.purchaseOrder.investmentPurchase eq true}"> checked </c:if>> <fmt:message key="label.yes"/>
+                    </label>
+                  </div>
+                  <div class="radio-inline">
+                    <label class="control-label">
+                      <input type="radio" value="false" name="purchaseOrder.investmentPurchase" id=investmentPurchase"
+                      <c:if test="${purchaseOrder.purchaseOrder.investmentPurchase eq false}"> checked </c:if>> <fmt:message key="label.no"/>
+                    </label>
+                  </div>
+                  <br>
+                </div>
+              </div>
+              <div class="form-group">
+                <br>
+                <a onclick="unlockInputs()" class="btn btn-warning" ><fmt:message key="button.open.input"/></a>
               </div>
             </div>
         </div>

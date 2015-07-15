@@ -61,6 +61,9 @@ public class PurchaseOrder {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Reception> receptions;
 
+    @Column(name = "investment_purchase")
+    private Boolean investmentPurchase;
+
     public Long getId() {
         return id;
     }
@@ -155,5 +158,13 @@ public class PurchaseOrder {
 
     public void setReceptions(List<Reception> receptions) {
         this.receptions = receptions;
+    }
+
+    public Boolean getInvestmentPurchase() {
+        return investmentPurchase;
+    }
+
+    public void setInvestmentPurchase(Boolean investmentPurchase) {
+        this.investmentPurchase = investmentPurchase;
     }
 }

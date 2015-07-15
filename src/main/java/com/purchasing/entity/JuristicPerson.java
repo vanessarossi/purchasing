@@ -24,7 +24,7 @@ public class JuristicPerson extends Person{
     @Length(min = 1, max = 45)
     @Column(name = "municipal_inscription")
     private String municipalInscription;
-    
+
     @Length(min = 1, max = 45)
     @Column(name = "state_inscription")
     private String stateInscription;

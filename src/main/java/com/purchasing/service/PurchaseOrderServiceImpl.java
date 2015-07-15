@@ -179,12 +179,14 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         paymentInformation = paymentInformationDAO.save(paymentInformation);
 
         Boolean alreadyPurchased = purchaseOrder.getAlreadyPurchased();
+        Boolean investmentPurchase = purchaseOrder.getInvestmentPurchase();
 
         purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, purchaseOrder.getId());
 
         purchaseOrder.setDeliveryInformation(deliveryInformation);
         purchaseOrder.setPaymentInformation(paymentInformation);
         purchaseOrder.setAlreadyPurchased(alreadyPurchased);
+        purchaseOrder.setInvestmentPurchase(investmentPurchase);
 
         if (purchaseOrder.getStatus().equals(StatusEnum.Approved)){
             purchaseOrder.setStatus(StatusEnum.BuyingProcess);

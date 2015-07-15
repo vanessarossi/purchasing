@@ -149,6 +149,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.add(Restrictions.isNotNull("approval.dateFirstApproval"));
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(Restrictions.eq("status", StatusEnum.Open));
             criteria.addOrder(Order.desc("id"));
             criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
@@ -168,6 +169,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.add(Restrictions.eq("approval.firstApproval", true));
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
+            criteria.add(Restrictions.eq("status", StatusEnum.Open));
             criteria.addOrder(Order.desc("id"));
             criteria.add(disjunction);
             criteria.setProjection(Projections.rowCount());
@@ -191,6 +193,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
+            criteria.add(Restrictions.eq("status", StatusEnum.Open));
             criteria.addOrder(Order.desc("id"));
         criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
@@ -211,6 +214,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
+            criteria.add(Restrictions.eq("status", StatusEnum.Open));
             criteria.addOrder(Order.desc("id"));
         criteria.add(disjunction);
         criteria.setProjection(Projections.rowCount());
@@ -234,6 +238,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             criteria.add(Restrictions.ge("paymentInformation.totalPrice", minimumValue));
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
+            criteria.add(Restrictions.eq("status", StatusEnum.Open));
             criteria.addOrder(Order.desc("id"));
         criteria.add(disjunction);
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
@@ -255,6 +260,7 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
             disjunction.add(Restrictions.ilike("person.name", sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
             criteria.addOrder(Order.desc("id"));
+            criteria.add(Restrictions.eq("status", StatusEnum.Open));
         criteria.add(disjunction);
         criteria.setProjection(Projections.rowCount());
         total = Integer.parseInt(criteria.uniqueResult().toString());
