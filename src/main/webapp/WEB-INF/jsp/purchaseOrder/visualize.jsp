@@ -307,14 +307,16 @@
       </div>
     </c:if>
 
-    <c:if test="${(purchaseOrder.alreadyPurchased == 'true' &&  purchaseOrder.status eq 'Open') || (purchaseOrder.paymentInformation.hasContract == 'true' && purchaseOrder.status eq 'Open') ||(purchaseOrder.status eq 'Approved') ||(purchaseOrder.status eq 'BuyingProcess') || (purchaseOrder.status eq 'PurchaseMade') && (purchaseOrder.paymentInformation != null)|| (purchaseOrder.status eq 'Finished') && (purchaseOrder.paymentInformation != null) || (purchaseOrder.status eq 'PartiallyFinished') && (purchaseOrder.paymentInformation != null)}">
-      <div class="row">
-        <div class="col-sm-offset-9 col-md-offset-9">
-          <div class="form-group">
-            <a href="<c:url value="/ordemCompra/imprimir/pedido/${purchaseOrder.id}"></c:url>" target='_blank'><span class="fa fa-print btn btn-default"> <fmt:message key="button.download.order" />  </span></a>
+    <c:if test="${userLogged.role.id eq '7' || userLogged.role.id eq '5'}">
+      <c:if test="${(purchaseOrder.alreadyPurchased == 'true' &&  purchaseOrder.status eq 'Open') || (purchaseOrder.paymentInformation.hasContract == 'true' && purchaseOrder.status eq 'Open')||(purchaseOrder.status eq 'BuyingProcess') || (purchaseOrder.status eq 'PurchaseMade')|| (purchaseOrder.status eq 'Finished') || (purchaseOrder.status eq 'PartiallyFinished')}">
+        <div class="row">
+          <div class="col-sm-offset-9 col-md-offset-9">
+            <div class="form-group">
+              <a href="<c:url value="/ordemCompra/imprimir/pedido/${purchaseOrder.id}"></c:url>" target='_blank'><span class="fa fa-print btn btn-default"> <fmt:message key="button.download.order" />  </span></a>
+            </div>
           </div>
         </div>
-      </div>
+      </c:if>
     </c:if>
 
   </div>
