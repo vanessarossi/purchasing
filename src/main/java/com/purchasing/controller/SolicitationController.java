@@ -108,7 +108,7 @@ public class SolicitationController {
                 }
             }
         }
-        if (solicitation.getSituation().getStatus() == StatusEnum.PurchaseOrderCanceled || solicitation.getSituation().getStatus() == StatusEnum.Reject || solicitation.getSituation().getStatus() == StatusEnum.PartiallyQuoteApproved){
+        if (solicitation.getSituation().getStatus() == StatusEnum.PurchaseOrderCanceled || solicitation.getSituation().getStatus() == StatusEnum.QuoteReject || solicitation.getSituation().getStatus() == StatusEnum.PartiallyQuoteApproved){
             result.include("purchaseOrders",solicitationService.getPurchaseOrdersWithJustification(solicitation));
         }else if (solicitation.getSituation().getStatus() == StatusEnum.QuotationCanceled){
             result.include("quotations",solicitationService.getQuotationCancelledWithJustification(solicitation));
