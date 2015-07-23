@@ -288,7 +288,7 @@
       </div>
     </c:if>
 
-    <c:if test="${userLogged.role.id eq '7' || userLogged.role.id eq '5'}">
+    <c:if test="${userLogged.role.id eq '7' || userLogged.role.id eq '5' || userLogged.role.id eq '1'}">
       <c:if test="${(purchaseOrder.alreadyPurchased == 'true' &&  purchaseOrder.status eq 'Open') || (purchaseOrder.paymentInformation.hasContract == 'true' && purchaseOrder.status eq 'Open')||(purchaseOrder.status eq 'BuyingProcess') || (purchaseOrder.status eq 'PurchaseMade')|| (purchaseOrder.status eq 'Finished') || (purchaseOrder.status eq 'PartiallyFinished')}">
         <div class="row">
           <div class="col-sm-offset-9 col-md-offset-9">

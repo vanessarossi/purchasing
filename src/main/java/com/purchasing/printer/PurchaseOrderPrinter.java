@@ -111,7 +111,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         String form_payment = reception.getPaymentInformation().getFormPayment().getDescription();
         String input_price = reception.getPaymentInformation().getInputPrice() == null ? "" : reception.getPaymentInformation().getInputPrice().toString();
         String freight = decimalFormat.format(reception.getPaymentInformation().getFreight());
-
+        String tax_document = reception.getTaxDocument();
 
         /** Budget **/
         List<Budget> budgets = budgetDAO.findByQuotationOrderPaymentInformation(purchaseOrder.getBudget().getQuotation());
@@ -208,6 +208,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         map.put("form_payment",form_payment);
         map.put("input_price",input_price.replace(".",","));
         map.put("freight",freight.replace(".",","));
+        map.put("tax_document",tax_document);
 
         map.put("supplier_one",supplier_one);
         map.put("total_price_one",total_price_one);

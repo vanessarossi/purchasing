@@ -140,7 +140,7 @@ public class OrderPrinter extends PrinterImpl implements BasePrinter {
         map.put("date_purchase_request",date_purchase_request);
         map.put("form_payment",form_payment);
         map.put("input_price",input_price.replace(".",","));
-        map.put("freight",freight);
+        map.put("freight",freight.replace(".",","));
 
         return map;
     }
