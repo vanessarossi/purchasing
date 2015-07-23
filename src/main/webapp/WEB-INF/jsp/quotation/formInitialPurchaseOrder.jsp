@@ -106,20 +106,24 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th></th>
-                                        <th>
-                                            <label class="control-label"><fmt:message key="label.totalPrice"/></label>
+                                        <th style="width: 10%">
+                                            <label class="control-label"><fmt:message key="label.totalPriceProducts"/></label>
                                         </th>
-                                        <th>
+                                        <th style="width: 10%">
                                             <input type="text" class="form-control" readonly="true" id="totalPrice${i.index}" value="${fn:replace(budget.budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,",") }"/>
                                         </th>
-                                        <th>
+                                        <th style="width: 10%">
+                                            <label class="control-label"><fmt:message key="label.totalPrice"/></label>
+                                        </th>
+                                        <th style="width: 10%">
+                                            <input type="text" class="form-control" readonly="true" id="totalPrice${i.index}" value="${fn:replace(budget.budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice,"." ,",") }"/>
+                                        </th>
+                                        <th style="width: 10%">
                                             <label class="control-label"><fmt:message key="label.totalPriceChoise"/></label>
                                         </th>
-                                        <th>
+                                        <th style="width: 10%">
                                             <input type="text" class="form-control" readonly="true" id="totalPriceChoise${i.index}" name="purchaseOrders[${i.index}].paymentInformation.totalPrice" value=""/>
                                         </th>
-                                        <th></th>
                                     </tr>
                                 </tfoot>
                             </table>

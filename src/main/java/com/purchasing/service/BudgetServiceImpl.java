@@ -84,6 +84,7 @@ public class BudgetServiceImpl implements BudgetService {
             paymentInformation.setExpirationDate(paymentInformationBudget.getPaymentInformation().getExpirationDate());
             paymentInformation.setInputPrice(paymentInformationBudget.getPaymentInformation().getInputPrice());
             paymentInformation.setSharePrice(paymentInformationBudget.getPaymentInformation().getSharePrice());
+            paymentInformation.setFreight(paymentInformationBudget.getPaymentInformation().getFreight());
             paymentInformation.setTotalPrice(paymentInformationBudget.getPaymentInformation().getTotalPrice());
             paymentInformation.setDiscountPercentage(paymentInformationBudget.getPaymentInformation().getDiscountPercentage());
             paymentInformation.setTotalFinalPrice(paymentInformationBudget.getPaymentInformation().getTotalFinalPrice());

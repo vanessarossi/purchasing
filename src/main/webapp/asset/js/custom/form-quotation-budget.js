@@ -8,10 +8,6 @@ $(document).ready(function(){
 
     var numberRequestMaterial = $('#numberRequestMaterial').val()-1;
     var numberRequestService = $('#numberRequestService').val()-1;
-    /**  variaveis para calculos de pagamento **/
-    var totalPrice = 0;   // total mostrado nas informações de pagamento 
-    var percentage = 0; // percentual de desconto
-    var totalFinalPrice = 0; // total mostrado nas informações de pagamento - desconto
     
 $('#code').blur(function () {
     var id = $('#code').val().trim();
@@ -100,7 +96,6 @@ function calculateTotalPriceMaterial(i){
 				
                 $('#totalPrice').val(totalPrice.toFixed(2).replace(".", ","));
                 $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
-                $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
                 }
             }  
     });     
@@ -143,9 +138,7 @@ function calculateTotalPriceMaterialTwo(i){
                 thousandsSeparator: ''
             });
             $('#totalPrice').val(totalPrice.toFixed(2).replace(".", ","));
-            $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
-            $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
-			
+            $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));	
         }
 };
 function calculateTotalPriceService(i){
@@ -182,7 +175,6 @@ function calculateTotalPriceService(i){
                 });
                 $('#totalPrice').val(totalPrice.toFixed(2).replace(".", ","));
                 $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
-                $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
                 }
             }  
     });     
@@ -218,7 +210,6 @@ function calculateTotalPriceServiceTwo(i){
             });
             $('#totalPrice').val(totalPrice.toFixed(2).replace(".", ","));
             $('#totalPriceTwo').val(totalPrice.toFixed(2).replace(".", ","));
-            $('#totalPriceThree').val(totalPrice.toFixed(2).replace(".", ","));
         }
     } 
 };
@@ -243,7 +234,7 @@ $('#formPayment').change(function(){
                     $('#dateLastInstallment').attr("readonly",true);
                     $('#inputPrice').attr("readonly",true);
                     $('#expirationDate').attr("readonly",false);
-                    $('#discountPercentage').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
+                    $('#freight').attr('onblur', 'calculateFirstFormPayment('+intervalDay+')');
                     totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                      /** removendo atributo do calculo **/
                     $('#dateFirstInstallment').removeAttr("onblur");
@@ -256,7 +247,7 @@ $('#formPayment').change(function(){
                     $('#dateFirstInstallment').attr('onblur', 'calculateValueParcelWithInput('+parcels+','+intervalDay+')');
                     totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                     /** removendo atributo do calculo **/
-                    $('#discountPercentage').removeAttr("onblur");
+                    $('#freight').removeAttr("onblur");
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
 					clearInputs();
                     $('#dateInput').attr("readonly",true);
@@ -266,7 +257,7 @@ $('#formPayment').change(function(){
                     $('#dateFirstInstallment').attr('onblur', 'calculateSecondFormPayment('+parcels+','+intervalDay+')');
                      totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
                      /** removendo atributo do calculo **/
-                    $('#discountPercentage').removeAttr("onblur");
+                    $('#freight').removeAttr("onblur");
                 }
            };
         },
@@ -297,7 +288,7 @@ $('#formPaymentTwo').change(function(){
                     $('#inputPriceTwo').attr("readonly",true);
                     $('#expirationDateTwo').attr("readonly",false);
 
-                    $('#discountPercentageTwo').attr('onblur', 'calculateFirstFormPaymentTwo('+intervalDay+')');
+                    $('#freightTwo').attr('onblur', 'calculateFirstFormPaymentTwo('+intervalDay+')');
                     totalPrice =  ($('#totalPriceTwo').val() != "")? $('#totalPriceTwo').val() : "0,00";
                      /** removendo atributo do calculo **/
                     $('#dateFirstInstallmentwo').removeAttr("onblur");
@@ -311,7 +302,7 @@ $('#formPaymentTwo').change(function(){
                      $('#dateFirstInstallmentTwo').attr('onblur', 'calculateValueParcelWithInputTwo('+parcels+','+intervalDay+')');
                      totalPrice =  ($('#totalPriceTwo').val() != "")? $('#totalPriceTwo').val() : "0,00";
                      /** removendo atributo do calculo **/
-                    $('#discountPercentageTwo').removeAttr("onblur");
+                    $('#freightTwo').removeAttr("onblur");
                 }else if (input == false &&  parcels > 0 && intervalDay > 0){
 					clearInputsTwo();
                     $('#dateInputTwo').attr("readonly",true);
@@ -322,7 +313,7 @@ $('#formPaymentTwo').change(function(){
                     $('#dateFirstInstallmentTwo').attr('onblur', 'calculateSecondFormPaymentTwo('+parcels+','+intervalDay+')');
                     totalPrice =  ($('#totalPriceTwo').val() != "")? $('#totalPriceTwo').val() : "0,00";
                     /** removendo atributo do calculo **/
-                    $('#discountPercentageTwo').removeAttr("onblur");
+                    $('#freightTwo').removeAttr("onblur");
                 }
            };
         },
@@ -334,11 +325,12 @@ $('#formPaymentTwo').change(function(){
 /** Calculo de valor final sem parcelas e entrada   **/
 function calculateFirstFormPayment(intervalDay){
     percentage = $('#discountPercentage').val().replace(',', '.');
-    if(totalPrice != 0 && percentage != '' ){
+    freight = $('#freight').val().replace(',', '.');
+    totalPrice = $('#totalPrice').val().replace(',', '.');
+    if(totalPrice != 0 && percentage != '' && freight != 0 && freight != ''){
         while (totalPrice.indexOf(',') != -1)
                 totalPrice = totalPrice.replace(',', '.');        
-        percentage = $('#discountPercentage').val().replace(',', '.');;
-        totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
+        totalFinalPrice =  (parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100))+parseFloat(freight);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
     }else{
         $('#totalFinalPrice').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
@@ -346,11 +338,13 @@ function calculateFirstFormPayment(intervalDay){
 };
 function calculateFirstFormPaymentTwo(intervalDay){
     percentage = $('#discountPercentageTwo').val();
-    if(totalPrice != 0 && percentage != '' ){
+    freight = $('#freightTwo').val().replace(',', '.');
+    totalPrice = $('#totalPriceTwo').val().replace(',', '.');
+    if(totalPrice != 0 && percentage != '' && freight != 0 && freight != ''){
         while (totalPrice.indexOf(',') != -1)
                 totalPrice = totalPrice.replace(',', '.');  
         percentage = $('#discountPercentageTwo').val().replace(',', '.');
-        totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
+        totalFinalPrice =  (parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100))+parseFloat(freight);
         $('#totalFinalPriceTwo').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
     }else{
         $('#totalFinalPriceTwo').val(parseFloat(totalPrice).toFixed(2).replace(".", ","));
@@ -359,11 +353,14 @@ function calculateFirstFormPaymentTwo(intervalDay){
 /** Calculo de valor final com parcela e sem entrada  **/
 function calculateSecondFormPayment(parcel,intervalDay){
     dateFirstInstallment = $('#dateFirstInstallment').val();
+    freight = $('#freight').val().replace(',', '.');
+    percentage = $('#discountPercentage').val().replace(',', '.');
+    totalPrice = $('#totalPrice').val().replace(',', '.');
     while (totalPrice.indexOf(',') != -1)
         totalPrice = totalPrice.replace(',', '.');  
-    if(totalPrice != 0 && percentage != null && dateFirstInstallment != null){
-        percentage = $('#discountPercentage').val().replace(',', '.');
-        totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
+    
+    if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && freight != 0 && freight != ''){
+        totalFinalPrice =  (parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100))+parseFloat(freight);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
 
         valueParcel = parseFloat(totalFinalPrice) / parseFloat(parcel);
@@ -384,11 +381,14 @@ function calculateSecondFormPayment(parcel,intervalDay){
 };
 function calculateSecondFormPaymentTwo(parcel,intervalDay){
     dateFirstInstallment = $('#dateFirstInstallmentTwo').val();
+    percentage = $('#discountPercentageTwo').val().replace(',', '.');
+    freight = $('#freightTwo').val().replace(',', '.');
+    totalPrice = $('#totalPriceTwo').val().replace(',', '.');
     if(totalPrice != 0 && percentage != null && dateFirstInstallment != null){
         while (totalPrice.indexOf(',') != -1)
             totalPrice = totalPrice.replace(',', '.');  
-        percentage = $('#discountPercentageTwo').val().replace(',', '.');
-        totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
+       
+        totalFinalPrice =  (parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100))+parseFloat(freight);
         $('#totalFinalPriceTwo').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
 
         valueParcel = parseFloat(totalFinalPrice) / parseFloat(parcel);
@@ -411,12 +411,14 @@ function calculateSecondFormPaymentTwo(parcel,intervalDay){
 function calculateValueParcelWithInput(parcel,intervalDay){
     inputValue = $('#inputPrice').val();
     dateFirstInstallment = $('#dateFirstInstallment').val();
-    
+    percentage = $('#discountPercentage').val().replace(',', '.');
+    freight = $('#freight').val().replace(',', '.');
+    totalPrice = $('#totalPrice').val().replace(',', '.');
     if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && inputValue != ''){
         while (totalPrice.indexOf(',') != -1)
             totalPrice = totalPrice.replace(',', '.');  
-        percentage = $('#discountPercentage').val().replace(',', '.');
-        totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
+        
+        totalFinalPrice =  (parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100))+parseFloat(freight);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
         
         totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(",", "."));
@@ -440,12 +442,14 @@ function calculateValueParcelWithInput(parcel,intervalDay){
 function calculateValueParcelWithInputTwo(parcel,intervalDay){
     inputValue = $('#inputPriceTwo').val();
     dateFirstInstallment = $('#dateFirstInstallmentTwo').val();
-    
+    percentage = $('#discountPercentageTwo').val().replace(',', '.');
+    freight = $('#freightTwo').val().replace(',', '.');
+    totalPrice = $('#totalPriceTwo').val().replace(',', '.');
     if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && inputValue != ''){
         while (totalPrice.indexOf(',') != -1)
             totalPrice = totalPrice.replace(',', '.');  
-        percentage = $('#discountPercentageTwo').val().replace(',', '.');
-        totalFinalPrice =  parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100);
+        
+        totalFinalPrice =  (parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100))+parseFloat(freight);
         $('#totalFinalPriceTwo').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
         
         totalPriceLessInput = parseFloat(totalFinalPrice) - parseFloat(inputValue.replace(",", "."));
@@ -473,6 +477,8 @@ function clearInputs(){
 	$('#inputPrice').val("");
 	$('#sharePrice').val("");
 	$('#expirationDate').val("");
+    $('#freight').val("");
+    $('#discountPercentage').val("");
 };
 function clearInputsTwo(){
 	$('#dateInputTwo').val("");
@@ -481,5 +487,7 @@ function clearInputsTwo(){
 	$('#inputPriceTwo').val("");
 	$('#sharePriceTwo').val("");
 	$('#expirationDateTwo').val("");
+    $('#freightTwo').val("");
+    $('#discountPercentageTwo').val("");
 };
 

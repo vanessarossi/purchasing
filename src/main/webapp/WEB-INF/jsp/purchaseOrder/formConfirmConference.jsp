@@ -109,6 +109,7 @@
               <div class="form-group">
                 <label class="control-label" for="formPayment"><fmt:message key="label.formPayment"/></label>
                 <select class="form-control" id="formPayment" name="reception.paymentInformation.formPayment.id" required>
+                  <option value=""><fmt:message key="label.select"/></option>
                   <c:forEach items="${formsPayment}" var="formPayment">
                     <option value="${formPayment.id}">${formPayment.description}</option>
                   </c:forEach>
@@ -120,7 +121,7 @@
             <div class="col-md-2 col-sm-2">
               <div class="form-group">
                 <label class="control-label" for="totalPrice"><fmt:message key="label.totalPrice"/></label>
-                <input type="text" class="form-control" id="totalPrice" name="reception.paymentInformation.totalPrice" value="${fn:replace(totalPrice,".","," )}">
+                <input type="text" class="form-control" id="totalPrice" name="reception.paymentInformation.totalPrice" value="${fn:replace(totalPrice,".","," )}" readonly>
               </div>
             </div>
             <div class="col-md-2 col-sm-2">
@@ -131,24 +132,30 @@
             </div>
             <div class="col-md-2 col-sm-2">
               <div class="form-group">
-                <label class="control-label" for="totalFinalPrice"><fmt:message key="label.totalFinalPrice"/></label>
-                <input type="text" class="form-control" id="totalFinalPrice" name="reception.paymentInformation.totalFinalPrice">
-              </div>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <div class="form-group">
                 <label class="control-label" for="inputPrice"><fmt:message key="label.inputPrice"/></label>
                 <input type="text" class="form-control" id="inputPrice" name="reception.paymentInformation.inputPrice">
               </div>
             </div>
             <div class="col-md-2 col-sm-2">
               <div class="form-group">
-                <label class="control-label" for="sharePrice"><fmt:message key="label.sharePrice"/></label>
-                <input type="text" class="form-control" id="sharePrice" name="reception.paymentInformation.sharePrice">
+                <label class="control-label" for="freight"><fmt:message key="label.freight"/></label>
+                <input type="text" class="form-control" id="freight" name="reception.paymentInformation.freight">
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <div class="form-group">
+                <label class="control-label" for="totalFinalPrice"><fmt:message key="label.totalFinalPrice"/></label>
+                <input type="text" class="form-control" id="totalFinalPrice" name="reception.paymentInformation.totalFinalPrice" readonly>
               </div>
             </div>
           </div>
           <div class="row">
+            <div class="col-md-2 col-sm-2">
+              <div class="form-group">
+                <label class="control-label" for="sharePrice"><fmt:message key="label.sharePrice"/></label>
+                <input type="text" class="form-control" id="sharePrice" name="reception.paymentInformation.sharePrice" readonly>
+              </div>
+            </div>
             <div class="col-md-2 col-sm-2">
               <div class="form-group">
                 <label class="control-label" for="dateInput"><fmt:message key="label.dateInput"/></label>
@@ -171,23 +178,6 @@
               <div class="form-group">
                 <label class="control-label" for="expirationDate"><fmt:message key="label.expiration_date"/></label>
                 <input type="text" class="form-control date" id="expirationDate" name="reception.paymentInformation.expirationDate">
-              </div>
-            </div>
-            <div class="col-md-2 col-sm-3">
-              <div class="form-group">
-                <label class="control-label" for="contract"><fmt:message key="label.alreadyPurchased"/></label>
-                <br>
-                <div class="radio-inline">
-                  <label class="control-label">
-                    <input type="radio" value="true" name="reception.alreadyPurchased" id="alreadyPurchased"> <fmt:message key="label.yes"/>
-                  </label>
-                </div>
-                <div class="radio-inline">
-                  <label class="control-label">
-                    <input type="radio" value="false" name="reception.alreadyPurchased" id="alreadyPurchased"> <fmt:message key="label.no"/>
-                  </label>
-                </div>
-                <br>
               </div>
             </div>
           </div>

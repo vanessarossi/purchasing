@@ -1,152 +1,5 @@
 $(document).ready(function(){
-	 fillTable();
 });
-
-function fillTable(){
- var oTable =  $('#orderRequestProductTable').dataTable({
-    "oLanguage": {
-      "sUrl": getContextPathDataTable()
-    },
-    "bAutoWidth":true,
-    "bLengthChange": false,
-    "bPaginate": true,
-    "bFilter": true,
-    "bSort": false,
-    "bInfo": true,
-    "processing": true,
-    "bJQueryUI": false,
-    "sPaginationType": "full_numbers",
-    "iDisplayLength":  10,
-    "aLengthMenu": [[5, 10, 100], [5,10, 100]],
-  });
-};
-
-$('#helpPlace').change(function(){
-	helpPlace = $('#helpPlace').val();
-
-	switch (helpPlace) {
-	    case "0":
-	        clear();
-	        break;
-	    case "1":
-	        fillAdministrativeOffice();
-	        break;
-	    case "2":
-	       fillDiagnosticCenter();
-	        break;
-	    case "3":
-	        fillDrugstore();
-	        break;
-	    case "4":
-	        fillOptica();
-	        break;
-	    case "5":
-	        fillReferenceCenter();
-	        break;
-	    case "6":
-	        fillHospital();
-	        break;
-	    case "7":
-	        fillDepartmentOfOccupationalHealth();
-	        break;
-	    case "8":
-	        fillPreventiveMedicine();
-	        break;
-	   case "9":
-	        fillSpecialtyCenter();
-	        break;
-	}
-});
-function fillAdministrativeOffice () {
-    $('#place').val("Sede Administrativa");
-	$('#street').val("Rua Francisquinho Dias");
-	$('#neighborhood').val("Centro");
-	$('#city').val("São José do Rio Pardo - SP");
-	$('#zipCode').val("13720-000");
-	$('#number').val("583");
-	$('#receptorName').val("Eloisa - Everton");
-}
-function fillDiagnosticCenter () {
-    $('#place').val("Centro de Diagnóstico");
-	$('#street').val("Rua Silvia Jardim");
-	$('#neighborhood').val("Centro");
-	$('#city').val("São José do Rio Pardo - SP");
-	$('#zipCode').val("13720-000");
-	$('#number').val("260/268");
-	$('#receptorName').val("Flavia - Fernando Prevital - Liliane");
-}
-function fillDrugstore () {
-    $('#place').val("Farmácia");
-	$('#street').val("Rua Campos Salles");
-	$('#neighborhood').val("Centro");
-	$('#city').val("São José do Rio Pardo - SP");
-	$('#zipCode').val("13720-000");
-	$('#number').val("491");
-	$('#receptorName').val("Michel - Eliana");
-}
-function fillOptica () {
-    $('#place').val("Optica");
-	$('#street').val("Rua Campos Salles");
-	$('#neighborhood').val("Centro");
-	$('#city').val("São José do Rio Pardo - SP");
-	$('#zipCode').val("13720-000");
-	$('#number').val("491");
-	$('#receptorName').val("Ana Claudia");
-}
-function fillReferenceCenter () {
-    $('#place').val("Centro de Referencia");
-	$('#street').val("Rua Coronel Alípio Dias");
-	$('#neighborhood').val("Centro");
-	$('#city').val("São José do Rio Pardo - SP");
-	$('#zipCode').val("13720-000");
-	$('#number').val("885");
-	$('#receptorName').val("Alessandro - Natalie");
-}
-function fillHospital () {
-    $('#place').val("Hospital");
-	$('#street').val("Rua Alexandre Carlos de Melo");
-	$('#neighborhood').val("Jardim Aeroporto");
-	$('#city').val("São José do Rio Pardo - SP");
-	$('#zipCode').val("13720-000");
-	$('#number').val("118");
-	$('#receptorName').val("Everton - Eloisa");
-}
-function fillDepartmentOfOccupationalHealth() {
-    $('#place').val("Departamento de Saúde Ocupacional");
-	$('#street').val("Rua Carlos Botelho");
-	$('#city').val("São José do Rio Pardo - SP");
-	$('#zipCode').val("13720-000");
-	$('#neighborhood').val("Centro");
-	$('#number').val("593");
-	$('#receptorName').val("Maria Tinti - Bruno");
-}
-function fillPreventiveMedicine () {
-    $('#place').val("Medicina Preventiva");
-	$('#street').val("Rua Rui Barbosa");
-	$('#neighborhood').val("Centro");
-	$('#city').val("São José do Rio Pardo - SP");
-	$('#zipCode').val("13720-000");
-	$('#number').val("109");
-	$('#receptorName').val("Sueli - Regiane");
-}
-function fillSpecialtyCenter () {
-    $('#place').val("Centro de Especialidades");
-	$('#street').val("Rua Leôncio D’Ávilla Riberiro");
-	$('#neighborhood').val("Vila Brasil");
-	$('#city').val("São José do Rio Pardo - SP");
-	$('#zipCode').val("13720-000");
-	$('#number').val("11");
-	$('#receptorName').val("Fernanda - Regiane");
-}
-function clear () {
-    $('#place').val("");
-	$('#street').val("");
-	$('#neighborhood').val("");
-	$('#city').val("");
-	$('#zipCode').val("");
-	$('#number').val("");
-	$('#receptorName').val("");
-}
 function clearInputs(){
     $('#dateInput').val("");
     $('#dateFirstInstallment').val("");
@@ -156,7 +9,7 @@ function clearInputs(){
     $('#expirationDate').val("");
     $('#freight').val("");
     $('#discountPercentage').val("");
-}
+};
 $('#formPayment').change(function(){
     formPaymentId = $('#formPayment').val();
     if (formPaymentId != '') {
@@ -199,7 +52,6 @@ $('#formPayment').change(function(){
                     $('#dateLastInstallment').attr("readonly",true);
                     $('#dateFirstInstallment').attr('onblur', 'calculateSecondFormPayment('+parcels+','+intervalDay+')');
                      totalPrice =  ($('#totalPrice').val() != "")? $('#totalPrice').val() : "0,00";
-
                     /** removendo atributo do calculo **/
                     $('#freight').removeAttr("onblur");
                 }

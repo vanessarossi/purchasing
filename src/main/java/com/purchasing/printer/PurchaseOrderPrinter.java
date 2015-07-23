@@ -50,8 +50,9 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
 
         purchaseOrderViewPrinterArrayList = purchaseOrderService.groupByCostCenter(purchaseOrderViewPrinters);
 
+        purchaseOrderViewPrinterArrayList = subtractDiscount(purchaseOrderViewPrinterArrayList, reception.getPaymentInformation().getDiscountPercentage());
 
-        JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(addDiscount(purchaseOrderViewPrinterArrayList,reception.getPaymentInformation().getDiscountPercentage()));
+        JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(addFreight(purchaseOrderViewPrinterArrayList,reception.getPaymentInformation().getFreight()));
 
         purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, purchaseOrder.getId());
 
@@ -90,6 +91,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
 
         String number_request = purchaseOrder.getId().toString();
         String date_purchase_request = reception.getDate() == null ? "" : Conversor.converterDateTimeInString(reception.getDate());
+        String status_purchase = reception.getPurchaseOrder().getStatus().getDescription();
 
         /** Payment **/
         String mean_payment = reception.getPaymentInformation().getMeanPayment().getDescription();
@@ -108,6 +110,8 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
 
         String form_payment = reception.getPaymentInformation().getFormPayment().getDescription();
         String input_price = reception.getPaymentInformation().getInputPrice() == null ? "" : reception.getPaymentInformation().getInputPrice().toString();
+        String freight = decimalFormat.format(reception.getPaymentInformation().getFreight());
+
 
         /** Budget **/
         List<Budget> budgets = budgetDAO.findByQuotationOrderPaymentInformation(purchaseOrder.getBudget().getQuotation());
@@ -173,12 +177,24 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
             date_approval = Conversor.converterDateTimeInString(approval.getDateFourthApproval());
         }
 
+        /** Observation Reception  **/
+
+        String observation_reception = "";
+
+            if (reception.getObservation() != null){
+                observation_reception = reception.getObservation();
+            }
+
+
         map.put("img", img);
+        map.put("number_request",number_request);
+        map.put("date_purchase_request",date_purchase_request);
+        map.put("status_purchase_order",status_purchase);
+
         map.put("corporate_name",corporate_name);
         map.put("document_supplier",document_supplier);
         map.put("name_contact",name_contact);
         map.put("phone_contact",phone_contact);
-        map.put("number_request",number_request);
 
         map.put("mean_payment",mean_payment);
         map.put("date_first_installment",date_first_installment);
@@ -189,9 +205,9 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         map.put("total_price",total_price.replace(".", ","));
         map.put("discount_percentage",discount_percentage.replace(".",","));
         map.put("total_final_price",total_final_price.replace(".", ","));
-        map.put("date_purchase_request",date_purchase_request);
         map.put("form_payment",form_payment);
         map.put("input_price",input_price.replace(".",","));
+        map.put("freight",freight.replace(".",","));
 
         map.put("supplier_one",supplier_one);
         map.put("total_price_one",total_price_one);
@@ -203,10 +219,12 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         map.put("name_user_approval",name_user_approval);
         map.put("date_approval",date_approval);
 
+        map.put("observation_reception",observation_reception);
+
         return map;
     }
 
-    public List<PurchaseOrderViewPrinter> addDiscount(List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters, BigDecimal discount){
+    public List<PurchaseOrderViewPrinter> subtractDiscount(List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters, BigDecimal discount){
         List<PurchaseOrderViewPrinter> orderViewPrinters = new ArrayList<>();
         Integer hasDiscount = discount.compareTo(new BigDecimal(0));
         if (hasDiscount != 0) {
@@ -220,6 +238,29 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
 
                 BigDecimal discountValue = new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",",".")).multiply(discount).divide(new BigDecimal(100));
                 purchaseOrderViewPrinter.setTotal_price(decimalFormat.format(new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",", ".")).subtract(discountValue)).toString().replace(".",","));
+                orderViewPrinters.add(purchaseOrderViewPrinter);
+            }
+        }else{
+            orderViewPrinters = purchaseOrderViewPrinters;
+        }
+        return orderViewPrinters;
+    }
+
+    public List<PurchaseOrderViewPrinter> addFreight(List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters, BigDecimal freight){
+        List<PurchaseOrderViewPrinter> orderViewPrinters = new ArrayList<>();
+        Integer hasFreight = freight.compareTo(new BigDecimal(0));
+
+        if (hasFreight != 0) {
+            for (PurchaseOrderViewPrinter purchaseOrderViewPrinter : purchaseOrderViewPrinters) {
+
+                DecimalFormat decimalFormat = new DecimalFormat();
+                decimalFormat.setMaximumFractionDigits(2);
+                decimalFormat.setMinimumFractionDigits(2);
+                decimalFormat.setGroupingUsed(false);
+
+                BigDecimal valueFreightDivision = freight.divide(new BigDecimal(purchaseOrderViewPrinters.size()));
+
+                purchaseOrderViewPrinter.setTotal_price(decimalFormat.format(new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",", ".")).add(valueFreightDivision)).toString().replace(".", ","));
                 orderViewPrinters.add(purchaseOrderViewPrinter);
             }
         }else{

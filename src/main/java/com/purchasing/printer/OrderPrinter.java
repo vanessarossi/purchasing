@@ -21,6 +21,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -91,6 +92,14 @@ public class OrderPrinter extends PrinterImpl implements BasePrinter {
         String discount_percentage = purchaseOrder.getPaymentInformation().getDiscountPercentage().toString().replace(".",",");
         String total_final_price = purchaseOrder.getPaymentInformation().getTotalFinalPrice().toString().replace(".", ",");
 
+        DecimalFormat decimalFormat = new DecimalFormat();
+        decimalFormat.setMaximumFractionDigits(2);
+        decimalFormat.setMinimumFractionDigits(2);
+        decimalFormat.setGroupingUsed(false);
+
+        String freight = decimalFormat.format(purchaseOrder.getPaymentInformation().getFreight());
+
+
         String form_payment = purchaseOrder.getPaymentInformation().getFormPayment().getDescription();
         String input_price = purchaseOrder.getPaymentInformation().getInputPrice() == null ? "" : purchaseOrder.getPaymentInformation().getInputPrice().toString().replace(".",",");
 
@@ -131,6 +140,7 @@ public class OrderPrinter extends PrinterImpl implements BasePrinter {
         map.put("date_purchase_request",date_purchase_request);
         map.put("form_payment",form_payment);
         map.put("input_price",input_price.replace(".",","));
+        map.put("freight",freight);
 
         return map;
     }

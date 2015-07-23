@@ -172,6 +172,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         paymentInformation.setInputPrice(purchaseOrder.getPaymentInformation().getInputPrice());
         paymentInformation.setSharePrice(purchaseOrder.getPaymentInformation().getSharePrice());
         paymentInformation.setTotalPrice(purchaseOrder.getPaymentInformation().getTotalPrice());
+        paymentInformation.setFreight(purchaseOrder.getPaymentInformation().getFreight());
         paymentInformation.setDiscountPercentage(purchaseOrder.getPaymentInformation().getDiscountPercentage());
         paymentInformation.setTotalFinalPrice(purchaseOrder.getPaymentInformation().getTotalFinalPrice());
         paymentInformation.setFormPayment(purchaseOrder.getPaymentInformation().getFormPayment());
@@ -731,6 +732,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         paymentInformation.setSharePrice(reception.getPaymentInformation().getSharePrice());
         paymentInformation.setTotalPrice(reception.getPaymentInformation().getTotalPrice());
         paymentInformation.setDiscountPercentage(reception.getPaymentInformation().getDiscountPercentage());
+        paymentInformation.setFreight(reception.getPaymentInformation().getFreight());
         paymentInformation.setTotalFinalPrice(reception.getPaymentInformation().getTotalFinalPrice());
         paymentInformation.setFormPayment(reception.getPaymentInformation().getFormPayment());
         paymentInformation.setId(reception.getPaymentInformation().getId());
@@ -744,6 +746,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         receptionDAO.save(reception);
 
         PurchaseOrder purchaseOrder = reception.getPurchaseOrder();
+
 
         for (RequestDelivered requestDelivered : reception.getRequestDelivereds()) {
             requestDelivered.setReception(reception);

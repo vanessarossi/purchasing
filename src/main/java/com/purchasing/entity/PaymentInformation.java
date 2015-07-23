@@ -72,6 +72,10 @@ public class PaymentInformation {
     @JoinColumn(name = "form_payment_id", referencedColumnName = "id" )
     private FormPayment formPayment;
 
+    @Digits(integer = 10, fraction = 2)
+    @Column(name = "freight")
+    private BigDecimal freight;
+
     public Long getId() {
         return id;
     }
@@ -182,5 +186,13 @@ public class PaymentInformation {
 
     public void setFormPayment(FormPayment formPayment) {
         this.formPayment = formPayment;
+    }
+
+    public BigDecimal getFreight() {
+        return freight;
+    }
+
+    public void setFreight(BigDecimal freight) {
+        this.freight = freight;
     }
 }

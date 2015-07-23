@@ -155,16 +155,11 @@
                   <input type="text" class="form-control" id="totalPrice"  value="${fn:replace(purchaseOrder.paymentInformation.totalPrice,"." ,"," )}" readonly>
                 </div>
               </div>
+
               <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                   <label class="control-label" for="discountPercentage"><fmt:message key="label.discountPercentage"/></label>
-                  <input type="text" class="form-control" id="discountPercentage"  value="${purchaseOrder.paymentInformation.discountPercentage}" readonly>
-                </div>
-              </div>
-              <div class="col-md-2 col-sm-2">
-                <div class="form-group">
-                  <label class="control-label" for="totalFinalPrice"><fmt:message key="label.totalFinalPrice"/></label>
-                  <input type="text" class="form-control" id="totalFinalPrice"  value="${fn:replace(purchaseOrder.paymentInformation.totalFinalPrice,"." ,"," )}" readonly>
+                  <input type="text" class="form-control" id="discountPercentage"  value="${fn:replace(purchaseOrder.paymentInformation.discountPercentage,".",",")}" readonly>
                 </div>
               </div>
               <div class="col-md-2 col-sm-2">
@@ -175,12 +170,24 @@
               </div>
               <div class="col-md-2 col-sm-2">
                 <div class="form-group">
-                  <label class="control-label" for="sharePrice"><fmt:message key="label.sharePrice"/></label>
-                  <input type="text" class="form-control" id="sharePrice"  value="${fn:replace(purchaseOrder.paymentInformation.sharePrice, ".","," )  }" readonly >
+                  <label class="control-label" for="freight"><fmt:message key="label.freight"/></label>
+                  <input type="text" class="form-control" id="freight" value="${purchaseOrder.paymentInformation.freight}" readonly>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-2">
+                <div class="form-group">
+                  <label class="control-label" for="totalFinalPrice"><fmt:message key="label.totalFinalPrice"/></label>
+                  <input type="text" class="form-control" id="totalFinalPrice"  value="${fn:replace(purchaseOrder.paymentInformation.totalFinalPrice,"." ,"," )}" readonly>
                 </div>
               </div>
             </div>
             <div class="row">
+              <div class="col-md-2 col-sm-2">
+                <div class="form-group">
+                  <label class="control-label" for="sharePrice"><fmt:message key="label.sharePrice"/></label>
+                  <input type="text" class="form-control" id="sharePrice"  value="${fn:replace(purchaseOrder.paymentInformation.sharePrice, ".","," )  }" readonly >
+                </div>
+              </div>
               <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                   <label class="control-label" for="dateInput"><fmt:message key="label.dateInput"/></label>
@@ -205,10 +212,18 @@
                   <input type="text" class="form-control" id="expirationDate" value="<fmt:formatDate value="${purchaseOrder.paymentInformation.expirationDate}" pattern="dd/MM/YYYY"/>" readonly>
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-md-2 col-sm-3">
                 <div class="form-group">
                   <label class="control-label" for="alreadyPurchased"><fmt:message key="label.alreadyPurchased"/></label>
                   <input type="text" class="form-control"  id="alreadyPurchased" value=" <c:if test="${purchaseOrder.alreadyPurchased eq true}"> <fmt:message key="label.yes"/> </c:if>" readonly>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-4">
+                <div class="form-group">
+                  <label class="control-label" for="investmentPurchase"><fmt:message key="label.investmentPurchase"/></label>
+                  <input type="text" class="form-control"  id="investmentPurchase" value=" <c:if test="${purchaseOrder.investmentPurchase eq true}"> <fmt:message key="label.yes"/> </c:if>" readonly>
                 </div>
               </div>
             </div>
