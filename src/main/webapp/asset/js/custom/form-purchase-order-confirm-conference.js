@@ -68,7 +68,7 @@ function calculateFirstFormPayment(intervalDay){
     percentage = $('#discountPercentage').val().replace(',', '.');
     freight = $('#freight').val().replace(',', '.');
     totalPrice = $('#totalPrice').val().replace(',', '.');
-    if(totalPrice != 0 && percentage != '' && freight != 0 && freight != ''){
+    if(totalPrice != 0 && percentage != null && freight != null){
         while (totalPrice.indexOf(',') != -1)
                 totalPrice = totalPrice.replace(',', '.');
         totalFinalPrice =  (parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100))+parseFloat(freight);
@@ -83,9 +83,10 @@ function calculateSecondFormPayment(parcel,intervalDay){
     freight = $('#freight').val().replace(',', '.');
     percentage = $('#discountPercentage').val().replace(',', '.');
     totalPrice = $('#totalPrice').val().replace(',', '.');
-    while (totalPrice.indexOf(',') != -1)
+    if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && freight != null){
+       while (totalPrice.indexOf(',') != -1)
         totalPrice = totalPrice.replace(',', '.');  
-    if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && freight != 0 && freight != ''){
+
         totalFinalPrice =  (parseFloat(totalPrice) - ((parseFloat(totalPrice) * parseFloat(percentage))/100))+parseFloat(freight);
         $('#totalFinalPrice').val(parseFloat(totalFinalPrice).toFixed(2).replace(".", ","));
         
@@ -112,7 +113,7 @@ function calculateValueParcelWithInput(parcel,intervalDay){
     percentage = $('#discountPercentage').val().replace(',', '.');
     freight = $('#freight').val().replace(',', '.');
     totalPrice = $('#totalPrice').val().replace(',', '.');
-    if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && inputValue != ''){
+    if(totalPrice != 0 && percentage != null && dateFirstInstallment != null && inputValue != null && freight != null){
         while (totalPrice.indexOf(',') != -1)
             totalPrice = totalPrice.replace(',', '.');  
      
