@@ -6,6 +6,7 @@ import com.purchasing.annotation.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.StatusEnum;
+import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.FormPaymentService;
 import com.purchasing.service.impl.PurchaseOrderService;
 import com.purchasing.support.datatable.DataTableModel;
@@ -13,6 +14,8 @@ import com.purchasing.support.purchaseOrder.PurchaseOrderView;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -174,6 +177,16 @@ public class PurchaseOrderController {
     @Post("/pesquisar/conferencia")
     public void searchConference(PurchaseOrder purchaseOrder){
         purchaseOrder = purchaseOrderService.findByConference(purchaseOrder.getId());
+        
+        if (purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material)){
+            Collections.sort(purchaseOrder.getOrderRequests(), new Comparator<OrderRequest>() {
+                @Override
+                public int compare(OrderRequest o1, OrderRequest o2) {
+                    return o1.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getProduct().getDescription().compareTo(o2.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getProduct().getDescription());
+                }
+            });
+        }
+
         result.include("purchaseOrder",purchaseOrder);
         result.redirectTo(this).formReception();
     }
@@ -275,3 +288,5 @@ public class PurchaseOrderController {
         result.use(Results.json()).withoutRoot().from(receivable).serialize();
     }
 }
+
+
