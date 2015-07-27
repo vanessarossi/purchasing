@@ -106,7 +106,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th style="width: 10%">
+                                        <th style="width: 10% ; text-align: right ">
                                             <label class="control-label"><fmt:message key="label.totalPriceProducts"/></label>
                                         </th>
                                         <th style="width: 10%">
