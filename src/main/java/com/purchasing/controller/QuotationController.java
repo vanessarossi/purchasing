@@ -22,6 +22,8 @@ import com.purchasing.support.quotation.QuotationRequestServiceView;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -94,7 +96,14 @@ public class QuotationController {
         quotation = quotationService.searchById(quotation);
         if (quotation.getType().equals(TypeEnum.Material)){
             List<QuotationRequestProductView> quotationRequests = quotationService.groupByProduct(quotation);
-            result.include("quotationRequests",quotationRequests);
+
+            Collections.sort(quotationRequests, new Comparator<QuotationRequestProductView>() {
+                @Override
+                public int compare(QuotationRequestProductView q1, QuotationRequestProductView q2) {
+                    return q1.getProduct().getDescription().compareTo(q2.getProduct().getDescription());
+                }
+            });
+            result.include("quotationRequests", quotationRequests);
         }else if(quotation.getType().equals(TypeEnum.Service)){
             List<QuotationRequestServiceView> quotationRequests = new QuotationRequestServiceView().generateList(quotationService.searchQuotationRequestServiceByQuotation(quotation));
             result.include("quotationRequests",quotationRequests);
@@ -110,6 +119,15 @@ public class QuotationController {
         quotation = quotationService.searchById(quotation);
         if (quotation.getType().equals(TypeEnum.Material)){
             List<QuotationRequestProductView> quotationRequests = quotationService.groupByProduct(quotation);
+
+            Collections.sort(quotationRequests, new Comparator<QuotationRequestProductView>() {
+                @Override
+                public int compare(QuotationRequestProductView o1, QuotationRequestProductView o2) {
+                    return o1.getProduct().getDescription().compareTo(o2.getProduct().getDescription());
+                }
+            });
+
+
             result.include("quotationRequests",quotationRequests);
         }else if(quotation.getType().equals(TypeEnum.Service)){
             List<QuotationRequestServiceView> quotationRequests = new QuotationRequestServiceView().generateList(quotationService.searchQuotationRequestServiceByQuotation(quotation));
@@ -131,6 +149,15 @@ public class QuotationController {
     @Get("/editar/{quotation.id}")
     public void edit(Quotation quotation) {
         quotation = quotationService.searchById(quotation);
+
+        Collections.sort(quotation.getQuotationRequests(), new Comparator<QuotationRequest>() {
+            @Override
+            public int compare(QuotationRequest o1, QuotationRequest o2) {
+                return o1.getSolicitationRequest().getProduct().getDescription().compareTo(o2.getSolicitationRequest().getProduct().getDescription());
+            }
+        });
+
+
         result.include("quotation",quotation);
         result.redirectTo(this).formQuotation();
     }
@@ -256,6 +283,13 @@ public class QuotationController {
     public void listRequestMaterial(Quotation quotation) {
         List<QuotationRequestProductView> listGroupQuotationRequest = quotationService.groupByProduct(quotation);
         if (listGroupQuotationRequest != null){
+            Collections.sort(listGroupQuotationRequest, new Comparator<QuotationRequestProductView>() {
+                @Override
+                public int compare(QuotationRequestProductView o1, QuotationRequestProductView o2) {
+                    return o1.getProduct().getDescription().compareTo(o2.getProduct().getDescription());
+                }
+            });
+
             result.use(Results.json()).withoutRoot().from(listGroupQuotationRequest).include("product").include("product.unit").serialize();
         }else{
             result.use(Results.json()).withoutRoot().from(false).serialize();
@@ -298,6 +332,14 @@ public class QuotationController {
         budget = budgetService.findById(budget);
         if (budget.getQuotation().getType().equals(TypeEnum.Material)) {
             List<BudgetQuotationProductView> budgetQuotations = budgetService.groupProductBudget(budget);
+
+            Collections.sort(budgetQuotations, new Comparator<BudgetQuotationProductView>() {
+                @Override
+                public int compare(BudgetQuotationProductView o1, BudgetQuotationProductView o2) {
+                    return o1.getProduct().getDescription().compareTo(o2.getProduct().getDescription());
+                }
+            });
+            
             result.use(Results.json()).withoutRoot().from(budgetQuotations).include("product").include("product.unit").serialize();
         }else if (budget.getQuotation().getType().equals(TypeEnum.Service)) {
             List<BudgetQuotationServiceView> budgetQuotations = new BudgetQuotationServiceView().generateList(budget.getBudgetQuotations());

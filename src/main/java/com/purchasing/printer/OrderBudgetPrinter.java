@@ -20,10 +20,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Vanessa
@@ -45,6 +43,14 @@ public class OrderBudgetPrinter extends PrinterImpl implements BasePrinter {
             url = "/jasper/order_budget_product.jrxml";
             List<QuotationRequestProductView> quotationRequestProductViews =  quotationService.groupByProduct(quotation);
             orderBudgetViewProducts= new OrderBudgetViewProduct().generateList(quotationRequestProductViews);
+
+            Collections.sort(orderBudgetViewProducts, new Comparator<OrderBudgetViewProduct>() {
+                @Override
+                public int compare(OrderBudgetViewProduct o1, OrderBudgetViewProduct o2) {
+                    return o1.getDescription().compareTo(o2.getDescription());
+                }
+            });
+
             jrBeanCollectionDataSource = new JRBeanCollectionDataSource(orderBudgetViewProducts);
 
         }else{
