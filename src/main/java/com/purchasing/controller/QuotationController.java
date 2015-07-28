@@ -339,7 +339,7 @@ public class QuotationController {
                     return o1.getProduct().getDescription().compareTo(o2.getProduct().getDescription());
                 }
             });
-            
+
             result.use(Results.json()).withoutRoot().from(budgetQuotations).include("product").include("product.unit").serialize();
         }else if (budget.getQuotation().getType().equals(TypeEnum.Service)) {
             List<BudgetQuotationServiceView> budgetQuotations = new BudgetQuotationServiceView().generateList(budget.getBudgetQuotations());
