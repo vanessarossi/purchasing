@@ -78,7 +78,14 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
             status.add(StatusEnum.Approved);
             status.add(StatusEnum.InAnalysis);
             status.add(StatusEnum.QuotingProcess);
+            status.add(StatusEnum.AnalysisQuote);
+            status.add(StatusEnum.QuoteApproved);
+            status.add(StatusEnum.BuyingProcess);
+            status.add(StatusEnum.PurchaseMade);
+            status.add(StatusEnum.Conferred);
             status.add(StatusEnum.PartiallyFinished);
+            status.add(StatusEnum.QuotationCanceled);
+            status.add(StatusEnum.PurchaseOrderCanceled);
 
         List<SolicitationRequest>solicitationRequests = new ArrayList<>();
         Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
@@ -99,7 +106,14 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
             status.add(StatusEnum.Approved);
             status.add(StatusEnum.InAnalysis);
             status.add(StatusEnum.QuotingProcess);
+            status.add(StatusEnum.AnalysisQuote);
+            status.add(StatusEnum.QuoteApproved);
+            status.add(StatusEnum.BuyingProcess);
+            status.add(StatusEnum.PurchaseMade);
+            status.add(StatusEnum.Conferred);
             status.add(StatusEnum.PartiallyFinished);
+            status.add(StatusEnum.QuotationCanceled);
+            status.add(StatusEnum.PurchaseOrderCanceled);
 
         List<SolicitationRequest>solicitationRequests = new ArrayList<>();
         Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
@@ -117,9 +131,17 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
 
     public SolicitationRequest findSolicitationRequestServiceBySolicitation(Solicitation solicitation){
         List<StatusEnum>status = new ArrayList<>();
-        status.add(StatusEnum.Approved);
-        status.add(StatusEnum.InAnalysis);
-        status.add(StatusEnum.QuotingProcess);
+            status.add(StatusEnum.Approved);
+            status.add(StatusEnum.InAnalysis);
+            status.add(StatusEnum.QuotingProcess);
+            status.add(StatusEnum.AnalysisQuote);
+            status.add(StatusEnum.QuoteApproved);
+            status.add(StatusEnum.BuyingProcess);
+            status.add(StatusEnum.PurchaseMade);
+            status.add(StatusEnum.Conferred);
+            status.add(StatusEnum.PartiallyFinished);
+            status.add(StatusEnum.QuotationCanceled);
+            status.add(StatusEnum.PurchaseOrderCanceled);
 
         SolicitationRequest solicitationRequest = new SolicitationRequest();
         Criteria criteria = getSession().createCriteria(SolicitationRequest.class);
