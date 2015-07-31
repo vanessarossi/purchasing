@@ -180,7 +180,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         paymentInformation = paymentInformationDAO.save(paymentInformation);
 
         Boolean alreadyPurchased = purchaseOrder.getAlreadyPurchased();
-        Boolean investmentPurchase = purchaseOrder.getInvestmentPurchase();
+        Boolean investmentPurchase = purchaseOrder.getInvestmentPurchase() == null ? false : purchaseOrder.getInvestmentPurchase();
 
         purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, purchaseOrder.getId());
 
@@ -746,7 +746,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         receptionDAO.save(reception);
 
         PurchaseOrder purchaseOrder = reception.getPurchaseOrder();
-
 
         for (RequestDelivered requestDelivered : reception.getRequestDelivereds()) {
             requestDelivered.setReception(reception);

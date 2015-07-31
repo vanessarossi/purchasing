@@ -206,7 +206,7 @@
                             <div class="row">
                                 <div class="col-md-2 col-sm-2 col-md-offset-10 col-sm-offset-10">
                                      <c:if test="${quotation.status eq 'Open'}">
-                                        <a onclick="validateSingleBudgetChoose(${i.index},${fn:length(budgets)},'<c:url value="/ordemCompra/salvar/unico/${budget.budget.id}"></c:url>')" class="btn btn-primary btn-sm" id="send" > <fmt:message key="button.generatePurchaseOrder"/> </a>
+                                        <a onclick="validateSingleBudgetChoose(${i.index},${fn:length(budgets)},'<c:url value="/ordemCompra/salvar/unico/${budget.budget.id}"></c:url>')" class="btn btn-success btn-sm" id="send" > <fmt:message key="button.generatePurchaseOrder"/> </a>
                                      </c:if>
                                 </div>
                             </div>

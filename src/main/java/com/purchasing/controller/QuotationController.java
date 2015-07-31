@@ -150,12 +150,14 @@ public class QuotationController {
     public void edit(Quotation quotation) {
         quotation = quotationService.searchById(quotation);
 
-        Collections.sort(quotation.getQuotationRequests(), new Comparator<QuotationRequest>() {
-            @Override
-            public int compare(QuotationRequest o1, QuotationRequest o2) {
-                return o1.getSolicitationRequest().getProduct().getDescription().compareTo(o2.getSolicitationRequest().getProduct().getDescription());
-            }
-        });
+        if (quotation.getType().equals(TypeEnum.Material)){
+            Collections.sort(quotation.getQuotationRequests(), new Comparator<QuotationRequest>() {
+                @Override
+                public int compare(QuotationRequest o1, QuotationRequest o2) {
+                    return o1.getSolicitationRequest().getProduct().getDescription().compareTo(o2.getSolicitationRequest().getProduct().getDescription());
+                }
+            });
+        }
 
 
         result.include("quotation",quotation);
