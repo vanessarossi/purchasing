@@ -11,6 +11,7 @@ import com.purchasing.support.quotation.QuotationRequestProductView;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -247,8 +248,8 @@ public class QuotationServiceImpl implements QuotationService {
                     if (quotationRequestProductView.getQuantity() == null){
                         quotationRequestProductView.setQuantity(0f);
                     }
-                    Float quantity = quotationRequestProductView.getQuantity() + quotationRequestProductV.getQuantity();
-                    quotationRequestProductV.setQuantity(quantity);
+                    BigDecimal quantity = (  new BigDecimal(quotationRequestProductView.getQuantity().toString()).add(new BigDecimal(quotationRequestProductV.getQuantity().toString()))    );
+                    quotationRequestProductV.setQuantity(Float.parseFloat(quantity.toString()));
                 }
             }
 

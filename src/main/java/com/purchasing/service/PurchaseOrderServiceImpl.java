@@ -419,7 +419,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 if (orderRequestProductView.getTotalPrice() == null){
                     orderRequestProductView.setTotalPrice(orderRequestProductV.getTotalPrice());
                 }
-                Float quantity = orderRequestProductView.getQuantity() + orderRequestProductV.getQuantity();
+                BigDecimal quantity = new BigDecimal(orderRequestProductView.getQuantity().toString()).add(new BigDecimal(orderRequestProductV.getQuantity().toString()));
                 BigDecimal totalPrice = orderRequestProductV.getTotalPrice().add(orderRequestProductView.getTotalPrice());
 
                 DecimalFormat decimalFormat = new DecimalFormat();
@@ -428,7 +428,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 decimalFormat.setGroupingUsed(false);
 
 
-                orderRequestProductV.setQuantity(quantity);
+                orderRequestProductV.setQuantity(Float.parseFloat(quantity.toString()));
                 orderRequestProductV.setTotalPrice(new BigDecimal(decimalFormat.format(totalPrice)));
             }
         }
