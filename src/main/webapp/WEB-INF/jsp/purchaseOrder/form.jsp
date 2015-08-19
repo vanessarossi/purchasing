@@ -89,7 +89,7 @@
           <div class="col-sm-2 col-md-2 col-md-offset-10 col-sm-offset-10">
             <div class="form-group">
               <label class="control-label"><fmt:message key="label.total.price"/></label>
-              <input type="text" class="form-control" readonly value="${fn:replace(purchaseOrder.purchaseOrder.budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}"/>
+              <input type="text" class="form-control" readonly value="${fn:replace(purchaseOrder.purchaseOrder.paymentInformation.totalPrice,"." ,"," )}"/>
             </div>
           </div>
         </div>
@@ -250,7 +250,7 @@
               <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                   <label class="control-label" for="totalPrice"><fmt:message key="label.totalPrice"/></label>
-                  <input type="text" class="form-control" id="totalPrice" name="purchaseOrder.paymentInformation.totalPrice" value="${fn:replace(purchaseOrder.purchaseOrder.budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}" readonly>
+                  <input type="text" class="form-control" id="totalPrice" name="purchaseOrder.paymentInformation.totalPrice" value="${fn:replace(purchaseOrder.purchaseOrder.paymentInformation.totalPrice,"." ,"," )}" readonly>
                 </div>
               </div>
               <div class="col-md-2 col-sm-2">
