@@ -22,6 +22,7 @@ public class BudgetServiceImpl implements BudgetService {
     @Inject private PaymentInformationDAO paymentInformationDAO;
     @Inject private PaymentInformationBudgetDAO paymentInformationBudgetDAO;
     @Inject private QuotationRequestDAO quotationRequestDAO;
+    @Inject private PurchaseOrderDAO purchaseOrderDAO;
 
     @Override
     public Budget saveBudget(Budget budget) {
@@ -39,7 +40,7 @@ public class BudgetServiceImpl implements BudgetService {
                             newBudgetQuotation.setBudget(budgetSaved);
                             newBudgetQuotation.setQuotationRequest(budgetQuotat.getQuotationRequest());
                             newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
-                            newBudgetQuotation.setChosenBudget(false);
+                            newBudgetQuotation.setChosenBudget(budgetQuotation.getChosenBudget());
                             budgetQuotationDAO.save(newBudgetQuotation);
                             updateStatusSolicitation(budgetQuotat.getQuotationRequest().getSolicitationRequest().getSolicitation());
                         }
@@ -51,7 +52,7 @@ public class BudgetServiceImpl implements BudgetService {
                             newBudgetQuotation.setBudget(budgetSaved);
                             newBudgetQuotation.setQuotationRequest(quotationRequest);
                             newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
-                            newBudgetQuotation.setChosenBudget(false);
+                            newBudgetQuotation.setChosenBudget(budgetQuotation.getChosenBudget());
 
                             budgetQuotationDAO.save(newBudgetQuotation);
                             updateStatusSolicitation(quotationRequest.getSolicitationRequest().getSolicitation());
@@ -64,7 +65,7 @@ public class BudgetServiceImpl implements BudgetService {
                 newBudgetQuotation.setBudget(budgetSaved);
                 newBudgetQuotation.setQuotationRequest(budgetQuotation.getQuotationRequest());
                 newBudgetQuotation.setUnityPrice(budgetQuotation.getUnityPrice());
-                newBudgetQuotation.setChosenBudget(false);
+                newBudgetQuotation.setChosenBudget(budgetQuotation.getChosenBudget());
                 budgetQuotationDAO.save(newBudgetQuotation);
                 QuotationRequest quotationRequest = new QuotationRequest();
                 quotationRequest = quotationRequestDAO.findById(QuotationRequest.class, newBudgetQuotation.getQuotationRequest().getId());
@@ -97,6 +98,15 @@ public class BudgetServiceImpl implements BudgetService {
                 newPaymentInformationBudget.setBudget(budgetSaved);
                 newPaymentInformationBudget.setPaymentInformation(paymentInformationSaved);
             paymentInformationBudgetDAO.save(newPaymentInformationBudget);
+        }
+
+        if (budgetSaved.getChosenBudget() != null && budgetSaved.getChosenBudget()  == true){
+           List<PurchaseOrder> purchasesOrder = purchaseOrderDAO.findByBudget(budgetSaved);
+           if (purchasesOrder.size() == 1){
+               PurchaseOrder purchaseOrder = purchasesOrder.get(0);
+               PaymentInformation paymentInformation = purchaseOrder.getPaymentInformation();
+               paymentInformation.setTotalPrice(budgetSaved.getPaymentInformationBudgets().get(0).getPaymentInformation().getTotalPrice());
+           }
         }
         return budgetSaved;
     }

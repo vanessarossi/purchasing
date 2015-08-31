@@ -416,6 +416,7 @@
                 <div class="row">
                     <div class="col-sm-offset-11 col-md-offset-11">
                         <div class="form-group">
+                            <input type="hidden" name="budget.chosenBudget" value="${budget.chosenBudget}" >
                             <input type="hidden" name="budget.id" value="${budget.id}" >
                             <input type="hidden" name="budget.quotation.id" value="${quotation.id}" >
                             <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>

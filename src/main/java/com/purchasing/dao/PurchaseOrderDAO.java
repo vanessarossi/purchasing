@@ -1,6 +1,7 @@
 package com.purchasing.dao;
 
 import com.purchasing.dao.base.DAOImpl;
+import com.purchasing.entity.Budget;
 import com.purchasing.entity.PurchaseOrder;
 import com.purchasing.entity.Solicitation;
 import com.purchasing.entity.Supplier;
@@ -30,6 +31,18 @@ public class PurchaseOrderDAO extends DAOImpl<PurchaseOrder,Long> {
         Disjunction disjunction = Restrictions.disjunction();
         criteria.createAlias("budget", "budget");
         disjunction.add(Restrictions.eq("budget.supplier", supplier));
+        criteria.add(disjunction);
+        criteria.addOrder(Order.desc("id"));
+        List<PurchaseOrder> purchaseOrders = new ArrayList<>();
+        purchaseOrders.addAll(criteria.list());
+        return purchaseOrders;
+    }
+
+    public List<PurchaseOrder> findByBudget(Budget budget){
+        Criteria criteria = getSession().createCriteria(PurchaseOrder.class);
+        Disjunction disjunction = Restrictions.disjunction();
+        criteria.createAlias("budget", "budget");
+        disjunction.add(Restrictions.eq("budget", budget));
         criteria.add(disjunction);
         criteria.addOrder(Order.desc("id"));
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
