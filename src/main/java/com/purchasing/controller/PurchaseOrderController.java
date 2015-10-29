@@ -142,9 +142,9 @@ public class PurchaseOrderController {
         result.redirectTo(this).formSearch();
     }
 
-    @Get("/aprovar/{purchaseOrder.id}")
-    public void approvePurchaseOrder(PurchaseOrder purchaseOrder){
-        purchaseOrderService.approve(purchaseOrder);
+    @Post("/aprovar")
+    public void approvePurchaseOrder(PurchaseOrder purchaseOrder, String observation){
+        purchaseOrderService.approve(purchaseOrder,observation);
         result.redirectTo(this).missingList();
     }
 

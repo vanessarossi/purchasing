@@ -5,6 +5,7 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="img" class="java.awt.Image"/>
 	<parameter name="number_quotation" class="java.lang.String"/>
+	<parameter name="observation" class="java.lang.String"/>
 	<field name="description" class="java.lang.String"/>
 	<field name="quantity" class="java.lang.String"/>
 	<field name="unity" class="java.lang.String"/>
@@ -111,6 +112,24 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="7" splitType="Stretch"/>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="553" height="19" uuid="73f3c39d-4e7a-4c17-99ce-e8b288145723"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observação]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="19" width="555" height="20" uuid="44e1b6c2-7abd-4da0-a660-84c3515c9dd5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{observation}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="0" width="553" height="1" uuid="759deea2-bcfc-4538-bdb1-0de31ab06346"/>
+			</line>
+		</band>
 	</summary>
 </jasperReport>

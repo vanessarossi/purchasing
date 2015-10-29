@@ -57,6 +57,17 @@ public class Approval {
     @Column(name = "justification_disapproval")
     private String justificationDisapproval;
 
+    @Column(name = "observation_first_approval")
+    private String observationFirstApproval;
+
+    @Column(name = "observation_second_approval")
+    private String observationSecondApproval;
+
+    @Column(name = "observation_third_approval")
+    private String observationThirdApproval;
+
+    @Column(name = "observation_fourth_approval")
+    private String observationFourthApproval;
 
     public Long getId() {
         return id;
@@ -168,5 +179,37 @@ public class Approval {
 
     public void setJustificationDisapproval(String justificationDisapproval) {
         this.justificationDisapproval = justificationDisapproval;
+    }
+
+    public String getObservationFirstApproval() {
+        return observationFirstApproval;
+    }
+
+    public void setObservationFirstApproval(String observationFirstApproval) {
+        this.observationFirstApproval = observationFirstApproval;
+    }
+
+    public String getObservationSecondApproval() {
+        return observationSecondApproval;
+    }
+
+    public void setObservationSecondApproval(String observationSecondApproval) {
+        this.observationSecondApproval = observationSecondApproval;
+    }
+
+    public String getObservationThirdApproval() {
+        return observationThirdApproval;
+    }
+
+    public void setObservationThirdApproval(String observationThirdApproval) {
+        this.observationThirdApproval = observationThirdApproval;
+    }
+
+    public String getObservationFourthApproval() {
+        return observationFourthApproval;
+    }
+
+    public void setObservationFourthApproval(String observationFourthApproval) {
+        this.observationFourthApproval = observationFourthApproval;
     }
 }

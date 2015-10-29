@@ -172,31 +172,113 @@
           <table class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
-              <th style="width: 50%"><fmt:message key="table.user"/></th>
+              <th style="width: 15%"><fmt:message key="table.user"/></th>
+              <th style="width: 40%"><fmt:message key="table.observation"/></th>
               <th style="width: 10%"><fmt:message key="table.date"/></th>
             </tr>
             </thead>
             <tbody>
                 <tr>
                   <td>${purchaseOrder.approval.userFirstApproval}</td>
+                  <td>${purchaseOrder.approval.observationFirstApproval}</td>
                   <td><fmt:formatDate value="${purchaseOrder.approval.dateFirstApproval}" pattern="dd/MM/YYYY HH:mm"/></td>
                 </tr>
                 <tr>
                   <td>${purchaseOrder.approval.userSecondApproval}</td>
+                  <td>${purchaseOrder.approval.observationSecondApproval}</td>
                   <td><fmt:formatDate value="${purchaseOrder.approval.dateSecondApproval}" pattern="dd/MM/YYYY HH:mm"/></td>
                 </tr>
                 <tr>
                   <td>${purchaseOrder.approval.userThirdApproval}</td>
+                  <td>${purchaseOrder.approval.observationThirdApproval}</td>
                   <td><fmt:formatDate value="${purchaseOrder.approval.dateThirdApproval}" pattern="dd/MM/YYYY HH:mm"/></td>
                 </tr>
                 <tr>
                   <td>${purchaseOrder.approval.userFourthApproval}</td>
+                  <td>${purchaseOrder.approval.observationFourthApproval}</td>
                   <td><fmt:formatDate value="${purchaseOrder.approval.dateFourthApproval}" pattern="dd/MM/YYYY HH:mm"/></td>
                 </tr>
             </tbody>
           </table>
         </div>
       </div>
+    </c:if>
+
+    <c:if test="${purchaseOrder.receptions != null && fn:length(purchaseOrder.receptions) > 0}">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><fmt:message key="title.receptions"/></h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped table-hover table-condensed">
+            <thead>
+            <tr>
+              <th style="width: 25%"><fmt:message key="table.user"/></th>
+              <th style="width: 25%"><fmt:message key="table.tax.document"/></th>
+              <th style="width: 25%"><fmt:message key="table.date"/></th>
+              <th style="width: 2%"><fmt:message key="table.##"/></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${purchaseOrder.receptions}" var="reception" >
+              <c:if test="${reception.status == 'Finished'}">
+                <tr>
+                  <td>${reception.user.name}</td>
+                  <td>${reception.taxDocument}</td>
+                  <td><fmt:formatDate value="${reception.date}" pattern="dd/MM/YYYY HH:mm"/></td>
+                  <td><a href="<c:url value="/ordemCompra/imprimir/ordem/${reception.id}"></c:url>" target='_blank'><span class="fa fa-print btn btn-default"></span></a></td>
+                </tr>
+              </c:if>
+            </c:forEach>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </c:if>
+
+    <c:if test="${purchaseOrder.status == 'Canceled'}">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><fmt:message key="title.justification.cancellation"/></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label class="control-label" for="justification"><fmt:message key="label.justification"/></label>
+                <textarea rows="4" cols="100" class="form-control" readonly>${purchaseOrder.justificationCancellation}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </c:if>
+
+    <c:if test="${approve == 'true' && purchaseOrder.status == 'Open'}">
+      <form action='<c:url value="/ordemCompra/aprovar"></c:url>' method="post" id="approveForm">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><fmt:message key="title.observation"/></h3>
+          </div>
+          <div class="panel-body">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label class="control-label" for="observation"><fmt:message key="label.observation.observation"/></label>
+                <input type="hidden" name="purchaseOrder.id" value="${purchaseOrder.id}">
+                <textarea rows="4" cols="100" class="form-control" id="observation"  name="observation"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="col-sm-offset-10 col-md-offset-10">
+              <div class="form-group">
+                <input type="submit" class="btn btn-success" value="<fmt:message key="button.approve"/>" >
+                <a onclick="reprove()" class="btn btn-warning"><fmt:message key="button.reprove"/></a>
+              </div>
+            </div>
+          </div>
+        </div>
+     </form>
     </c:if>
 
     <form action='<c:url value="/ordemCompra/reprovar"></c:url>' method="post" id="reprovePurchaseOrderForm">
@@ -226,67 +308,6 @@
         </div>
       </div>
     </form>
-
-    <c:if test="${purchaseOrder.receptions != null}">
-      <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><fmt:message key="title.receptions"/></h3>
-      </div>
-      <div class="panel-body">
-        <table class="table table-striped table-hover table-condensed">
-          <thead>
-          <tr>
-            <th style="width: 25%"><fmt:message key="table.user"/></th>
-            <th style="width: 25%"><fmt:message key="table.tax.document"/></th>
-            <th style="width: 25%"><fmt:message key="table.date"/></th>
-            <th style="width: 2%"><fmt:message key="table.##"/></th>
-          </tr>
-          </thead>
-          <tbody>
-          <c:forEach items="${purchaseOrder.receptions}" var="reception" >
-            <c:if test="${reception.status == 'Finished'}">
-              <tr>
-                <td>${reception.user.name}</td>
-                <td>${reception.taxDocument}</td>
-                <td><fmt:formatDate value="${reception.date}" pattern="dd/MM/YYYY HH:mm"/></td>
-                <td><a href="<c:url value="/ordemCompra/imprimir/ordem/${reception.id}"></c:url>" target='_blank'><span class="fa fa-print btn btn-default"></span></a></td>
-              </tr>
-            </c:if>
-          </c:forEach>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    </c:if>
-
-    <c:if test="${purchaseOrder.status == 'Canceled'}">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title"><fmt:message key="title.justification.cancellation"/></h3>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-12 col-sm-12">
-              <div class="form-group">
-                <label class="control-label" for="justification"><fmt:message key="label.justification"/></label>
-                <textarea rows="4" cols="100" class="form-control" readonly>${purchaseOrder.justificationCancellation}</textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </c:if>
-
-    <c:if test="${approve == 'true' && purchaseOrder.status == 'Open'}">
-      <div class="row">
-        <div class="col-sm-offset-9 col-md-offset-9">
-          <div class="form-group">
-            <a href='<c:url value="/ordemCompra/aprovar/${purchaseOrder.id}"></c:url>' class="btn btn-success"><fmt:message key="button.approve"/></a>
-            <a onclick="reprove()" class="btn btn-warning"><fmt:message key="button.reprove"/></a>
-          </div>
-        </div>
-      </div>
-    </c:if>
 
     <c:if test="${userLogged.role.id eq '7' || userLogged.role.id eq '5' || userLogged.role.id eq '1'}">
       <c:if test="${(purchaseOrder.alreadyPurchased == 'true' &&  purchaseOrder.status eq 'Open') || (purchaseOrder.paymentInformation.hasContract == 'true' && purchaseOrder.status eq 'Open')||(purchaseOrder.status eq 'BuyingProcess') || (purchaseOrder.status eq 'PurchaseMade')|| (purchaseOrder.status eq 'Finished') || (purchaseOrder.status eq 'PartiallyFinished')}">

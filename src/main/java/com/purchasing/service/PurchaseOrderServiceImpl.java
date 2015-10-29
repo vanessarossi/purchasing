@@ -466,7 +466,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
-    public void approve(PurchaseOrder purchaseOrder) {
+    public void approve(PurchaseOrder purchaseOrder, String observation) {
         purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class,purchaseOrder.getId());
         Approval approval = new Approval();
         if (purchaseOrder.getApproval() != null) {
@@ -480,6 +480,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 approval.setFourthApproval(true);
                 approval.setDateFourthApproval(new Timestamp(new Date().getTime()));
                 approval.setUserFourthApproval(getUserLogged().getName());
+                approval.setObservationFourthApproval(observation);
                 approval = approvalDAO.save(approval);
 
                 for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
@@ -499,6 +500,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 approval.setThirdApproval(true);
                 approval.setDateThirdApproval(new Timestamp(new Date().getTime()));
                 approval.setUserThirdApproval(getUserLogged().getName());
+                approval.setObservationThirdApproval(observation);
                 approval = approvalDAO.save(approval);
 
                 for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
@@ -519,6 +521,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 approval.setSecondApproval(true);
                 approval.setDateSecondApproval(new Timestamp(new Date().getTime()));
                 approval.setUserSecondApproval(getUserLogged().getName());
+                approval.setObservationSecondApproval(observation);
                 approval = approvalDAO.save(approval);
 
                 for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
@@ -538,6 +541,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     approval.setFirstApproval(true);
                     approval.setDateFirstApproval(new Timestamp(new Date().getTime()));
                     approval.setUserFirstApproval(getUserLogged().getName());
+                    approval.setObservationFirstApproval(observation);
                     approval = approvalDAO.save(approval);
 
                 for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {

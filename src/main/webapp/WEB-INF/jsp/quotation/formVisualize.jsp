@@ -61,8 +61,8 @@
                 <th style="width: 7%"><fmt:message key="table.date"/></th>
                 <th style="width: 10%"><fmt:message key="table.number"/> </th>
                 <th style="width: 10%"><fmt:message key="table.abbreviated.total.price"/></th>
-                <th style="width: 10%"><fmt:message key="table.abbreviated.total.final.price"/> <fmt:message key="table.one"/></th>
-                <th style="width: 10%"><fmt:message key="table.abbreviated.total.final.price"/> <fmt:message key="table.two"/></th>
+                <th style="width: 10%"><fmt:message key="table.abbreviated.total.final.price.first.payment.information"/></th>
+                <th style="width: 10%"><fmt:message key="table.abbreviated.total.final.price.second.payment.information"/></th>
                 <th style="width: 3%"><fmt:message key="table.##"/></th>
                 <th style="width: 3%"><fmt:message key="table.##"/></th>
             </tr>

@@ -42,7 +42,7 @@ public interface PurchaseOrderService {
 
     public List<PurchaseOrderViewPrinter> groupByCostCenter(List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters);
 
-    public void approve(PurchaseOrder purchaseOrder);
+    public void approve(PurchaseOrder purchaseOrder, String observation);
     public void reprove(PurchaseOrder purchaseOrder, String justification);
 
     public File printerOrder(PurchaseOrder purchaseOrder);

@@ -44,6 +44,9 @@ public class Quotation {
     @Column(name = "justification_cancellation")
     private String justificationCancellation;
 
+    @Column(name = "observation")
+    private String observation;
+
     @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status;
@@ -114,6 +117,14 @@ public class Quotation {
 
     public void setJustificationCancellation(String justificationCancellation) {
         this.justificationCancellation = justificationCancellation;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 
     public StatusEnum getStatus() {

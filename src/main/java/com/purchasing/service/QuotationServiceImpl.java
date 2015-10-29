@@ -39,6 +39,14 @@ public class QuotationServiceImpl implements QuotationService {
     }
 
     @Override
+    public Quotation saveObservation(Quotation quotation) {
+        Quotation quotationFound = quotationDAO.findById(Quotation.class, quotation.getId());
+        quotationFound.setObservation(quotation.getObservation());
+        Quotation quotationSaved = quotationDAO.save(quotation);
+        return quotationSaved;
+    }
+
+    @Override
     public void saveCancellation(Quotation quotation) {
         Quotation quotationFound = quotationDAO.findById(Quotation.class,quotation.getId());
         if (quotationFound.getStatus() != StatusEnum.Finished){

@@ -77,7 +77,7 @@ public class OrderBudgetPrinter extends PrinterImpl implements BasePrinter {
         Image img = new ImageIcon(getClass().getResource("/jasper/img/img.jpg")).getImage();
         map.put("img", img);
         map.put("number_quotation",quotation.getId().toString());
-
+        map.put("observation",quotation.getObservation() == null ? "" : quotation.getObservation());
         return map;
     }
 

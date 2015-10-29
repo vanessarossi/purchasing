@@ -60,6 +60,13 @@ public class QuotationController {
         result.redirectTo(this).formQuotation();
     }
 
+    @Post("/salvar/observation")
+    public void saveObservation(Quotation quotation) {
+        Quotation quotationSaved =  quotationService.save(quotation);
+        result.include("quotation",quotationSaved);
+        result.redirectTo(this).formQuotation();
+    }
+
     @Post("/salvar/pedido/material")
     public void saveRequestMaterial(Quotation quotation, List<SolicitationRequest> solicitationRequests) {
         quotationService.addQuotationRequestProduct(quotation,solicitationRequests);

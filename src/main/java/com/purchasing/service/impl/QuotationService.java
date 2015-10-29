@@ -13,6 +13,7 @@ import java.util.List;
 public interface QuotationService {
 
     public Quotation save(Quotation quotation);
+    public Quotation saveObservation(Quotation quotation);
 
     public void saveCancellation(Quotation quotation);
 

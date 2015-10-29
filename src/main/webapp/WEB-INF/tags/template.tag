@@ -117,6 +117,6 @@
     </div><!--/.nav-collapse -->
   </div>
 </nav>
-<section class="container">
+<section class="container-fluid">
     <jsp:doBody/>
 </section>

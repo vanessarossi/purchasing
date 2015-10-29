@@ -7,7 +7,7 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
+    <br class="container-fluid">
         <div class="page-header">
             <h2><fmt:message key="title.quotation" /> - <fmt:message key="title.general.information" /></h2>
          </div>
@@ -124,9 +124,36 @@
                     </tbody>
                 </table>
             </c:if>
+
+        <form action='<c:url value="/cotacao/salvar/observation"></c:url>' method="post" id="quotationForm">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><fmt:message key="title.observation.quotation"/></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label"><fmt:message key="title.observation"/></label>
+                                <input type="hidden" name="quotation.id" value="${quotation.id}">
+                                <textarea rows="4" cols="100" class="form-control"  name="quotation.observation" >${quotation.observation}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <c:if test="${quotation.status eq 'Open'}">
+                        <div class="col-sm-offset-11 col-md-offset-11">
+                            <button type="submit" class="btn btn-success"><fmt:message key="button.save"/></button>
+                        </div>
+                    </c:if>
+                </div>
+            </div>
+        </form>
             <div class="col-sm-offset-8 col-md-offset-9">
                 <a href="<c:url value="/cotacao/imprimir/pedido/orcamento/${quotation.id}"></c:url>" target='_blank'> <span class="fa fa-print btn btn-default"> <fmt:message key="button.generateOrderBudget" /></span></a>
             </div>
+            </br>
        </c:if>
     </div>
 </html:template>
@@ -139,5 +166,4 @@
 <c:if test="${quotation.type == 'Service'}">
     <script src="${pageContext.request.contextPath}/asset/js/custom/list_request_quotation_service.js"></script>
 </c:if>
-
 </html>
