@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="438"/>
+	<property name="ireport.x" value="280"/>
+	<property name="ireport.y" value="506"/>
 	<parameter name="corporate_name" class="java.lang.String"/>
 	<parameter name="document_supplier" class="java.lang.String"/>
 	<parameter name="number_request" class="java.lang.String"/>
@@ -411,7 +411,7 @@
 				<text><![CDATA[Valor total]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="308" y="61" width="85" height="20" uuid="84541add-634e-424f-8489-07245e101751"/>
+				<reportElement x="485" y="61" width="69" height="20" uuid="84541add-634e-424f-8489-07245e101751"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
@@ -432,7 +432,7 @@
 				<text><![CDATA[Data de vencimento]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="485" y="61" width="70" height="20" uuid="92eedead-646d-42de-9bf5-d5ce6100ba8c"/>
+				<reportElement x="308" y="61" width="70" height="20" uuid="92eedead-646d-42de-9bf5-d5ce6100ba8c"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>

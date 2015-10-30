@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="280"/>
 	<property name="ireport.y" value="443"/>
 	<parameter name="corporate_name" class="java.lang.String"/>
 	<parameter name="document_supplier" class="java.lang.String"/>
@@ -269,14 +269,14 @@
 				<textFieldExpression><![CDATA[$P{expiration_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="484" y="73" width="70" height="20" uuid="896edebf-30d6-400f-a3f7-6a0285a39189"/>
+				<reportElement x="307" y="73" width="70" height="20" uuid="896edebf-30d6-400f-a3f7-6a0285a39189"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{input_price}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="307" y="73" width="85" height="20" uuid="13920729-71da-4989-ab33-91761d90839d"/>
+				<reportElement x="484" y="73" width="70" height="20" uuid="13920729-71da-4989-ab33-91761d90839d"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
