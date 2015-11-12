@@ -769,10 +769,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public BigDecimal sumTotal(List<RequestDelivered> requestDelivereds) {
-        BigDecimal total = new BigDecimal("0");
+        BigDecimal total = new BigDecimal("0.00");
 
         for (RequestDelivered requestDelivered : requestDelivereds){
-            BigDecimal quantity = requestDelivered.getQuantity() == null ? new BigDecimal("1") : new BigDecimal(requestDelivered.getQuantity());
+            BigDecimal quantity = requestDelivered.getQuantity() == null ? new BigDecimal("1.00") : new BigDecimal(requestDelivered.getQuantity());
             BigDecimal unitPrice = requestDelivered.getOrderRequest().getBudgetQuotation().getUnityPrice();
             BigDecimal totalRequest = quantity.multiply(unitPrice);
             total = total.add(totalRequest);

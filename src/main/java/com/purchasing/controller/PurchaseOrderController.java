@@ -14,6 +14,7 @@ import com.purchasing.support.purchaseOrder.PurchaseOrderView;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -209,7 +210,9 @@ public class PurchaseOrderController {
     public void confirmConference(Reception reception){
         reception = purchaseOrderService.findReceptionById(reception);
         /** gambiarra **/
-        result.include("totalPrice",purchaseOrderService.sumTotal(reception.getRequestDelivereds()));
+
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        result.include("totalPrice",decimalFormat.format(purchaseOrderService.sumTotal(reception.getRequestDelivereds())));
         result.include("reception",reception);
         result.include("formsPayment", formPaymentService.findAll());
         result.include("meansPayment", MeanPaymentEnum.values());
