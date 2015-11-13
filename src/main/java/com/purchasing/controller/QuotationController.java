@@ -177,6 +177,21 @@ public class QuotationController {
         if (budget.getQuotation().getType().equals(TypeEnum.Material)) {
             List<QuotationRequestProductView> quotationRequests = quotationService.groupByProduct(budget.getQuotation());
             List<BudgetQuotationProductView> budgetQuotations = budgetService.groupProductBudget(budget);
+
+            Collections.sort(quotationRequests, new Comparator<QuotationRequestProductView>() {
+                @Override
+                public int compare(QuotationRequestProductView o1, QuotationRequestProductView o2) {
+                     return o1.getProduct().getDescription().compareTo(o2.getProduct().getDescription());
+                }
+            });
+
+            Collections.sort(budgetQuotations, new Comparator<BudgetQuotationProductView>() {
+                @Override
+                public int compare(BudgetQuotationProductView o1, BudgetQuotationProductView o2) {
+                    return o1.getProduct().getDescription().compareTo(o2.getProduct().getDescription());
+                }
+            });
+
             result.include("quotationRequests", quotationRequests);
             result.include("budgetQuotations", budgetQuotations);
         } else if (budget.getQuotation().getType().equals(TypeEnum.Service)) {

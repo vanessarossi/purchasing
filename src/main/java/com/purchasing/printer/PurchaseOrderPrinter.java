@@ -90,6 +90,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         }
 
         String number_request = purchaseOrder.getId().toString();
+        String reception_id = reception.getId().toString();
         String date_purchase_request = reception.getDate() == null ? "" : Conversor.converterDateTimeInString(reception.getDate());
         String status_purchase = reception.getPurchaseOrder().getStatus().getDescription();
 
@@ -188,6 +189,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
 
         map.put("img", img);
         map.put("number_request",number_request);
+        map.put("reception_id",reception_id);
         map.put("date_purchase_request",date_purchase_request);
         map.put("status_purchase_order",status_purchase);
 
