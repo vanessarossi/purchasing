@@ -240,17 +240,16 @@
 
                                 <div class="radio-inline">
                                     <label class="control-label">
-                                        <input type="radio" value="true" name="quo.urgency" id="exclusive"
+                                        <input type="radio" value="true" name="quotation.exclusiveSupplier" id="exclusive"
                                         <c:if test="${quotation.exclusiveSupplier eq true}"> checked </c:if> > <fmt:message
                                             key="label.yes"/>
                                     </label>
                                 </div>
                                 <div class="radio-inline">
                                     <label class="control-label">
-                                        <input type="radio" value="false" name="solicitation.urgency" id="exclusive"
+                                        <input type="radio" value="false" name="quotation.exclusiveSupplier" id="exclusive"
                                         <c:if test="${quotation.exclusiveSupplier  eq false}"> checked </c:if> >
-                                        <fmt:message
-                                                key="label.no"/>
+                                        <fmt:message key="label.no"/>
                                     </label>
                                 </div>
                                 <br>

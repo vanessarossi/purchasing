@@ -42,8 +42,8 @@ public class QuotationServiceImpl implements QuotationService {
     public Quotation saveObservation(Quotation quotation) {
         Quotation quotationFound = quotationDAO.findById(Quotation.class, quotation.getId());
         quotationFound.setObservation(quotation.getObservation());
-        Quotation quotationSaved = quotationDAO.save(quotation);
-        return quotationSaved;
+        quotation = quotationDAO.save(quotationFound);
+        return quotation;
     }
 
     @Override

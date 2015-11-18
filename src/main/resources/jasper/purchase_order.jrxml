@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="44"/>
-	<property name="ireport.y" value="572"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="corporate_name" class="java.lang.String"/>
 	<parameter name="document_supplier" class="java.lang.String"/>
 	<parameter name="number_request" class="java.lang.String"/>
@@ -60,7 +60,7 @@
 				<textFieldExpression><![CDATA[$P{number_request}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="355" y="0" width="57" height="16" uuid="dd000921-95a1-4d80-97a3-ed31d674fc3a"/>
+				<reportElement x="352" y="0" width="65" height="16" uuid="dd000921-95a1-4d80-97a3-ed31d674fc3a"/>
 				<textElement>
 					<font isBold="true" isItalic="false"/>
 				</textElement>
@@ -71,7 +71,7 @@
 				<textFieldExpression><![CDATA[$P{date_purchase_request}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="354" y="32" width="58" height="16" uuid="ebef3281-835b-4467-97a6-33eb8478f4ce"/>
+				<reportElement x="352" y="32" width="65" height="16" uuid="ebef3281-835b-4467-97a6-33eb8478f4ce"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -82,14 +82,14 @@
 				<textFieldExpression><![CDATA[$P{status_purchase_order}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="355" y="48" width="57" height="16" uuid="580d1416-2bb4-488a-b5d5-f8dcbbb45920"/>
+				<reportElement x="352" y="48" width="66" height="16" uuid="580d1416-2bb4-488a-b5d5-f8dcbbb45920"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Status]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="354" y="16" width="58" height="16" uuid="9c53bb36-6571-445c-a386-93b0875ec6e3"/>
+				<reportElement x="352" y="16" width="66" height="16" uuid="9c53bb36-6571-445c-a386-93b0875ec6e3"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>

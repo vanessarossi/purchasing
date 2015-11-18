@@ -601,7 +601,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     }
                 break;
             case 4: /** Gerente **/
-                approval.setSecondApproval(true);
+                approval.setSecondApproval(false);
                 approval.setDateSecondApproval(new Timestamp(new Date().getTime()));
                 approval.setUserSecondApproval(getUserLogged().getName());
                 approval.setJustificationDisapproval(justification);
@@ -618,7 +618,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     }
                 break;
             case 5: /** Analista **/
-                approval.setFirstApproval(true);
+                approval.setFirstApproval(false);
                 approval.setDateFirstApproval(new Timestamp(new Date().getTime()));
                 approval.setUserFirstApproval(getUserLogged().getName());
                 approval.setJustificationDisapproval(justification);

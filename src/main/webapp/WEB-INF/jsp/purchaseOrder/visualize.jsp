@@ -131,7 +131,7 @@
             <div class="col-md-2 col-sm-2">
               <div class="form-group">
                 <label class="control-label"><fmt:message key="label.exclusive"/></label>
-                <input type="text" class="form-control" readonly value="<c:if test="${purchaseOrder.budget.quotation.exclusiveSupplier eq true}"> <fmt:message key="label.yes" /> </c:if>"/>
+                <input type="text" class="form-control" readonly value="<c:if test="${purchaseOrder.budget.quotation.exclusiveSupplier eq true}"> <fmt:message key="label.yes" /> </c:if> <c:if test="${purchaseOrder.budget.quotation.exclusiveSupplier eq false}"> <fmt:message key="label.no" /> </c:if>"/>
               </div>
             </div>
             <div class="col-md-10 col-sm-10">
@@ -148,14 +148,26 @@
     <c:if test="${purchaseOrder.approval != null && purchaseOrder.approval.justificationDisapproval != null}">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title"><fmt:message key="title.justification.disapproval"/></h3>
+          <h4 class="panel-title">
+            <fmt:message key="title.justification.disapproval"/>
+          </h4>
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-sm-12 col-md-12">
+            <div class="col-md-5 col-sm-5">
+              <label class="control-label"><fmt:message key="label.username"/></label>
+              <input type="text" class="form-control" readonly value="<c:if test="${purchaseOrder.approval.firstApproval == false}">${purchaseOrder.approval.userFirstApproval}</c:if>  <c:if test="${purchaseOrder.approval.secondApproval == false}">${purchaseOrder.approval.userSecondApproval}</c:if>   <c:if test="${purchaseOrder.approval.thirdApproval == false}">${purchaseOrder.approval.userThirdApproval}</c:if>">
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <label class="control-label"><fmt:message key="label.date"/></label>
+              <input type="text" class="form-control" readonly value="<c:if test="${purchaseOrder.approval.firstApproval == false}"><fmt:formatDate type="both"  dateStyle="short" timeStyle="short"  value="${purchaseOrder.approval.dateFirstApproval}" /></c:if>  <c:if test="${purchaseOrder.approval.secondApproval == false}"><fmt:formatDate type="both"  dateStyle="short" timeStyle="short"  value="${purchaseOrder.approval.dateSecondApproval}"/></c:if>   <c:if test="${purchaseOrder.approval.thirdApproval == false}"><fmt:formatDate type="both"  dateStyle="short" timeStyle="short"  value="${purchaseOrder.approval.dateThirdApproval}"/></c:if>">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <label class="control-label"><fmt:message key="title.justification.disapproval"/></label>
-                <textarea rows="4" cols="100" class="form-control" <c:if test="${purchaseOrder.approval.justificationDisapproval != null}">readonly</c:if> >${purchaseOrder.approval.justificationDisapproval}</textarea>
+                <label class="control-label"><fmt:message key="label.justification"/></label>
+                <textarea rows="4" cols="100" class="form-control" readonly>${purchaseOrder.approval.justificationDisapproval}</textarea>
               </div>
             </div>
           </div>

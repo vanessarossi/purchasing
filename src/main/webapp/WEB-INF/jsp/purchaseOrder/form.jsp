@@ -126,25 +126,6 @@
         </c:forEach>
       </div>
     </div>
-    <c:if test="${purchaseOrder.purchaseOrder.approval != null && purchaseOrder.purchaseOrder.approval.justificationDisapproval != null}">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <fmt:message key="title.justification.disapproval"/>
-          </h4>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-sm-12 col-md-12">
-              <div class="form-group">
-                <label class="control-label"><fmt:message key="title.justification.disapproval"/></label>
-                <textarea rows="4" cols="100" class="form-control">${purchaseOrder.purchaseOrder.approval.justificationDisapproval}</textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </c:if>
     <c:if test="${purchaseOrder.purchaseOrder.budget.quotation.justification != null}">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -157,7 +138,7 @@
             <div class="col-md-2 col-sm-2">
               <div class="form-group">
                 <label class="control-label"><fmt:message key="label.exclusive"/></label>
-                <input type="text" class="form-control" readonly value="<c:if test="${purchaseOrder.purchaseOrder.budget.quotation.exclusiveSupplier eq true}"> <fmt:message key="label.yes" /> </c:if>"/>
+                <input type="text" class="form-control" readonly value="<c:if test="${purchaseOrder.purchaseOrder.budget.quotation.exclusiveSupplier eq true}"> <fmt:message key="label.yes" /> </c:if> <c:if test="${purchaseOrder.purchaseOrder.budget.quotation.exclusiveSupplier eq false}"> <fmt:message key="label.no" /> </c:if>"/>
               </div>
             </div>
             <div class="col-md-10 col-sm-10">
@@ -179,11 +160,20 @@
         </div>
         <div class="panel-body">
           <div class="row">
+            <div class="col-md-5 col-sm-5">
+                <label class="control-label"><fmt:message key="label.username"/></label>
+                <input type="text" class="form-control" readonly value="<c:if test="${purchaseOrder.purchaseOrder.approval.firstApproval == false}">${purchaseOrder.purchaseOrder.approval.userFirstApproval}</c:if>  <c:if test="${purchaseOrder.purchaseOrder.approval.secondApproval == false}">${purchaseOrder.purchaseOrder.approval.userSecondApproval}</c:if>   <c:if test="${purchaseOrder.purchaseOrder.approval.thirdApproval == false}">${purchaseOrder.purchaseOrder.approval.userThirdApproval}</c:if>">
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <label class="control-label"><fmt:message key="label.date"/></label>
+              <input type="text" class="form-control" readonly value="<c:if test="${purchaseOrder.purchaseOrder.approval.firstApproval == false}"><fmt:formatDate type="both"  dateStyle="short" timeStyle="short"  value="${purchaseOrder.purchaseOrder.approval.dateFirstApproval}" /></c:if>  <c:if test="${purchaseOrder.purchaseOrder.approval.secondApproval == false}"><fmt:formatDate type="both"  dateStyle="short" timeStyle="short"  value="${purchaseOrder.purchaseOrder.approval.dateSecondApproval}"/></c:if>   <c:if test="${purchaseOrder.purchaseOrder.approval.thirdApproval == false}"><fmt:formatDate type="both"  dateStyle="short" timeStyle="short"  value="${purchaseOrder.purchaseOrder.approval.dateThirdApproval}"/></c:if>">
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <label class="control-label"><fmt:message key="label.justification"/></label>
-                <textarea rows="4" cols="100" class="form-control"
-                          readonly>${purchaseOrder.purchaseOrder.approval.justificationDisapproval}</textarea>
+                <textarea rows="4" cols="100" class="form-control" readonly>${purchaseOrder.purchaseOrder.approval.justificationDisapproval}</textarea>
               </div>
             </div>
           </div>
@@ -437,7 +427,7 @@
         </div>
       </div>
       <div class="row">
-          <div class="col-sm-offset-10 col-md-offset-10">
+          <div class="col-sm-offset-11 col-md-offset-11">
             <div class="form-group">
               <input type="hidden" name="purchaseOrder.deliveryInformation.id" value="${purchaseOrder.purchaseOrder.deliveryInformation.id}">
               <input type="hidden" name="purchaseOrder.paymentInformation.id" value="${purchaseOrder.purchaseOrder.paymentInformation.id}">

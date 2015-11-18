@@ -62,7 +62,7 @@ public class QuotationController {
 
     @Post("/salvar/observation")
     public void saveObservation(Quotation quotation) {
-        Quotation quotationSaved =  quotationService.save(quotation);
+        Quotation quotationSaved =  quotationService.saveObservation(quotation);
         result.include("quotation",quotationSaved);
         result.redirectTo(this).formQuotation();
     }
