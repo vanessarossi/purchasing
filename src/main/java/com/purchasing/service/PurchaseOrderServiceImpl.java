@@ -436,6 +436,13 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             OrderRequestProductView orderRequestProductView = map.get(key);
             orderRequestProductViews.add(orderRequestProductView);
         }
+
+        Collections.sort(orderRequestProductViews, new Comparator<OrderRequestProductView>() {
+            @Override
+            public int compare(OrderRequestProductView o1, OrderRequestProductView o2) {
+                return o1.getProduct().getDescription().compareTo(o2.getProduct().getDescription());
+            }
+        });
         return orderRequestProductViews;
     }
 

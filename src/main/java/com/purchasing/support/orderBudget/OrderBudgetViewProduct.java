@@ -3,6 +3,8 @@ package com.purchasing.support.orderBudget;
 import com.purchasing.support.quotation.QuotationRequestProductView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -53,6 +55,15 @@ public class OrderBudgetViewProduct {
             orderBudgetViewProduct.setUnity(unity);
             ordersBudgetViewProduct.add(orderBudgetViewProduct);
         }
+
+        Collections.sort(ordersBudgetViewProduct, new Comparator<OrderBudgetViewProduct>() {
+            @Override
+            public int compare(OrderBudgetViewProduct o1, OrderBudgetViewProduct o2) {
+                return o1.getDescription().compareTo(o2.getDescription());
+            }
+        });
+
+
         return ordersBudgetViewProduct;
     }
 }

@@ -80,6 +80,7 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
             status.add(StatusEnum.QuotingProcess);
             status.add(StatusEnum.AnalysisQuote);
             status.add(StatusEnum.QuoteApproved);
+            status.add(StatusEnum.PartiallyQuoteApproved);
             status.add(StatusEnum.BuyingProcess);
             status.add(StatusEnum.PurchaseMade);
             status.add(StatusEnum.Conferred);
@@ -108,6 +109,7 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
             status.add(StatusEnum.QuotingProcess);
             status.add(StatusEnum.AnalysisQuote);
             status.add(StatusEnum.QuoteApproved);
+            status.add(StatusEnum.PartiallyQuoteApproved);
             status.add(StatusEnum.BuyingProcess);
             status.add(StatusEnum.PurchaseMade);
             status.add(StatusEnum.Conferred);
@@ -136,6 +138,7 @@ public class SolicitationRequestDAO extends DAOImpl<SolicitationRequest,Long> {
             status.add(StatusEnum.QuotingProcess);
             status.add(StatusEnum.AnalysisQuote);
             status.add(StatusEnum.QuoteApproved);
+            status.add(StatusEnum.PartiallyQuoteApproved);
             status.add(StatusEnum.BuyingProcess);
             status.add(StatusEnum.PurchaseMade);
             status.add(StatusEnum.Conferred);

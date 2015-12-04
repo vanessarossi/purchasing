@@ -159,6 +159,9 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
                 total_price_three = budgets.get(2).getPaymentInformationBudgets().get(0).getPaymentInformation().getTotalPrice().toString().replace(".",",");
         }
 
+        /** Justificativa Fornecedor **/
+        String supplier_justification = purchaseOrder.getBudget().getQuotation().getJustification();
+
         /** Approval **/
         Approval approval = purchaseOrder.getApproval();
         String name_user_approval = "";
@@ -218,6 +221,8 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
         map.put("total_price_two",total_price_two);
         map.put("supplier_three",supplier_three);
         map.put("total_price_three",total_price_three);
+
+        map.put("supplier_justification",supplier_justification);
 
         map.put("name_user_approval",name_user_approval);
         map.put("date_approval",date_approval);

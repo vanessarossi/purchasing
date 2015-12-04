@@ -3,7 +3,6 @@ package com.purchasing.support.purchaseOrder.printer;
 import com.purchasing.support.purchaseOrder.OrderRequestProductView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -94,12 +93,6 @@ public class OrderRequestProductViewPrinter implements Comparator<OrderRequestPr
             count += 1;
         }
 
-        Collections.sort(orderRequestProductV, new Comparator<OrderRequestProductViewPrinter>() {
-            @Override
-            public int compare(OrderRequestProductViewPrinter o1, OrderRequestProductViewPrinter o2) {
-                return o1.getDescription().compareTo(o2.getDescription());
-            }
-        });
 
         return orderRequestProductV;
     }
