@@ -8,7 +8,6 @@
 <body>
 <html:template>
     <form action='<c:url value="/produto/salvar"></c:url>' method="post" id="productForm">
-        <div class="container-fluid">
             <div class="page-header">
                 <h3><fmt:message key="title.product" /></h3>
             </div>
@@ -96,7 +95,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </form>
 </html:template>
 </body>

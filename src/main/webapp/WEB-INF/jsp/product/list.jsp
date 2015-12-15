@@ -7,17 +7,16 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.products" /></h3>
-        </div>
-       <div class="row">
+    </div>
+    <div class="row">
            <a   href="<c:url value="/produto/formulario" ></c:url>" type="button" class="btn btn-primary">
                <fmt:message key="button.newProduct"/>
            </a>
        </div>
-        <br/><br/>
-        <table id="productTable" class="table table-striped table-hover table-condensed">
+    <br/>
+    <table id="productTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
                 <th style="width: 3%"><fmt:message key="table.code"/></th>
@@ -33,7 +32,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
     <div class="modal fade" id="viewProduct" tabindex="-1" role="dialog" aria-labelledby="viewProduct" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

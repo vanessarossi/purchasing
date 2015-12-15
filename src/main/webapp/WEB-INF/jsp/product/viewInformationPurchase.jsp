@@ -7,12 +7,11 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
         <div class="page-header">
             <h3><fmt:message key="title.information.purchase"/></h3>
         </div>
         <div class="row">
-            <div class="col-sm-5 col-md-5">
+            <div class="col-sm-2 col-md-2">
                 <div class="form-group">
                     <label class="control-label"><fmt:message key="label.code"></fmt:message></label>
                     <input type="text" class="form-control" id="code" name="product.id" value="${product.id}" readonly/>
@@ -71,7 +70,6 @@
                 <a href="<c:url value="/produto" ></c:url>" class="btn btn-danger"> <fmt:message key="button.cancel"/> </a>
             </div>
         </div>
-    </div>
 </html:template>
 </body>
 <html:jsAssets/>
