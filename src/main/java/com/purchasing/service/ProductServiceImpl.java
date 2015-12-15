@@ -2,9 +2,12 @@ package com.purchasing.service;
 
 import com.purchasing.dao.CategoryDAO;
 import com.purchasing.dao.ProductDAO;
+import com.purchasing.dao.RequestDeliveredDAO;
 import com.purchasing.dao.UnitDAO;
 import com.purchasing.entity.Product;
+import com.purchasing.entity.RequestDelivered;
 import com.purchasing.service.impl.ProductService;
+import com.purchasing.support.date.Conversor;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -16,8 +19,9 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Inject private ProductDAO productDAO;
-    @Inject  private UnitDAO unitDAO;
-    @Inject  private CategoryDAO categoryDAO;
+    @Inject private UnitDAO unitDAO;
+    @Inject private CategoryDAO categoryDAO;
+    @Inject private RequestDeliveredDAO requestDeliveredDAO;
 
     @Override
     public Product save(Product product) {
@@ -53,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
             String buttonView = "<a onclick='viewProduct("+product.getId()+")' ><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
             String buttonEdit = "<a href=/purchasing/produto/editar/"+product.getId()+"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
             String buttonRemove = "<a onclick='confirmDetele("+product.getId()+")'><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
+            String buttonInformationPurchase = "<a href=/purchasing/produto/visualizar/informacao/compra/"+product.getId()+" ><span class=\"fa fa-plus btn btn-default btn-xs\"></span></a>";
             String [] row = {
                     colCode,
                     colDescription,
@@ -60,7 +65,8 @@ public class ProductServiceImpl implements ProductService {
                     colMark,
                     buttonView,
                     buttonEdit,
-                    buttonRemove
+                    buttonRemove,
+                    buttonInformationPurchase
             };
             productsList.add(row);
         }
@@ -78,6 +84,42 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product searchById(Product product) {
         return productDAO.findById(Product.class,product.getId());
+    }
+
+    @Override
+    public List<Object[]> findPaginationInformationPurchase(Product product, String sSearch, int iDisplayStart, int iDisplayLength) {
+        String search = sSearch == null ? "" : sSearch;
+        List<RequestDelivered> requestsDelivered = requestDeliveredDAO.paginationByProduct(product, search, iDisplayStart, iDisplayLength);
+        List<Object[]> requestDeliveredList = new ArrayList<>();
+
+        for (RequestDelivered requestDelivered : requestsDelivered){
+
+            String colDate = Conversor.converterDateTimeInString(requestDelivered.getOrderRequest().getPurchaseOrder().getDateGenerate());
+            String colSupplier = requestDelivered.getOrderRequest().getBudgetQuotation().getBudget().getSupplier().getPerson().getName();
+            String colQuantity = requestDelivered.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity().toString().replace(".",",");
+            String colUnitPrice = requestDelivered.getOrderRequest().getBudgetQuotation().getUnityPrice().toString().replace(".",",");
+            String colDeliveredQuantity = requestDelivered.getQuantity().toString().replace(".",",");
+            String colCostCenter = requestDelivered.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation().getCostCenter().getDescription();
+
+            String [] row = {
+                    colDate,
+                    colSupplier,
+                    colQuantity,
+                    colUnitPrice,
+                    colDeliveredQuantity,
+                    colCostCenter
+            };
+            requestDeliveredList.add(row);
+        }
+        return requestDeliveredList;
+    }
+
+    @Override
+    public Integer totalPaginationInformationPurchase(Product product, String sSearch) {
+        String search = sSearch == null ? "" : sSearch;
+        Integer total= 0;
+        total = requestDeliveredDAO.totalPaginationByProduct(product,search);
+        return total;
     }
 
 }

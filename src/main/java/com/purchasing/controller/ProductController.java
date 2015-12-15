@@ -63,6 +63,13 @@ public class ProductController {
         result.include("controller", this.getClass().toString());
     }
 
+    @Purchaser
+    @Analyst
+    @Admin
+    @Path("/informacao/compra")
+    public void viewInformationPurchase(){
+    }
+
     @Post("/salvar")
     public void save(@Valid Product product){
         validator.ensure(product.getCategory().getId() != null , new I18nMessage("product.category","message.notBlank"));
@@ -85,6 +92,13 @@ public class ProductController {
            result.redirectTo(this).form();
     }
 
+    @Get("/visualizar/informacao/compra/{product.id}")
+    public void visualizeInformationPurchase(Product product){
+        Product productFound = productService.searchById(product);
+        result.include("product",productFound);
+        result.redirectTo(this).viewInformationPurchase();
+    }
+
     @Get("/pesquisar/{product.id}/json")
     public void searchById(Product product){
         Product productFound = productService.searchById(product);
@@ -103,6 +117,17 @@ public class ProductController {
             dataTableModel.setiTotalRecords(productService.totalPagination(sSearch));
             dataTableModel.setiTotalDisplayRecords(productService.totalPagination(sSearch));
             dataTableModel.setAaData(productObjects.toArray());
+        result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
+    }
+
+    @Get("/paginar/informacao/pagamento/{product.id}")
+    public void paginationRequestDeliveredByProduct(Product product,String sSearch, String sEcho, int iDisplayStart, int iDisplayLength){
+        List<Object[]> productObjects = productService.findPaginationInformationPurchase(product, sSearch, iDisplayStart,iDisplayLength);
+        DataTableModel dataTableModel = new DataTableModel();
+        dataTableModel.setsEcho(sEcho);
+        dataTableModel.setiTotalRecords(productService.totalPaginationInformationPurchase(product,sSearch));
+        dataTableModel.setiTotalDisplayRecords(productService.totalPaginationInformationPurchase(product,sSearch));
+        dataTableModel.setAaData(productObjects.toArray());
         result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }
 

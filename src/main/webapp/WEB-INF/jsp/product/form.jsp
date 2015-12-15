@@ -82,7 +82,7 @@
                 <div class="col-sm-5 col-md-5">
                     <div class="form-group">
                         <label class="control-label"><fmt:message key="label.observation"></fmt:message></label>
-                        <textarea rows="6" cols="9" class="form-control" id="observation" name="produto.observation">${product.observation}</textarea>
+                        <textarea rows="6" cols="9" class="form-control" id="observation" name="product.observation">${product.observation}</textarea>
                         <span class="required">${errors.from('product.observation')}</span>
                     </div>
                 </div>

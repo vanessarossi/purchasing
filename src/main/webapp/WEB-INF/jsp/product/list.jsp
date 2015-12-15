@@ -11,20 +11,23 @@
         <div class="page-header">
             <h3><fmt:message key="title.products" /></h3>
         </div>
-        <a   href="<c:url value="/produto/formulario" ></c:url>" type="button" class="btn btn-primary">
-            <fmt:message key="button.newProduct"/>
-        </a>
+       <div class="row">
+           <a   href="<c:url value="/produto/formulario" ></c:url>" type="button" class="btn btn-primary">
+               <fmt:message key="button.newProduct"/>
+           </a>
+       </div>
         <br/><br/>
         <table id="productTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
-                <th style="width: 3%"><fmt:message key="table.code" /></th>
-                <th style="width: 35%" ><fmt:message key="table.description" /></th>
-                <th style="width: 35%" ><fmt:message key="table.model" /></th>
-                <th style="width: 15%"><fmt:message key="table.mark" /></th>
-                <th style="width: 2%" ><fmt:message key="table.##" /></th>
-                <th style="width: 2%" ><fmt:message key="table.##" /></th>
-                <th style="width: 2%" ><fmt:message key="table.##" /></th>
+                <th style="width: 3%"><fmt:message key="table.code"/></th>
+                <th style="width: 35%" ><fmt:message key="table.description"/></th>
+                <th style="width: 35%" ><fmt:message key="table.model"/></th>
+                <th style="width: 15%"><fmt:message key="table.mark"/></th>
+                <th style="width: 2%" ><fmt:message key="table.##"/></th>
+                <th style="width: 2%" ><fmt:message key="table.##"/></th>
+                <th style="width: 2%" ><fmt:message key="table.##"/></th>
+                <th style="width: 2%" ><fmt:message key="table.##"/></th>
             </tr>
             </thead>
             <tbody>

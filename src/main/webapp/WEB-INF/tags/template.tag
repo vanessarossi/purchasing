@@ -93,8 +93,6 @@
                     </ul>
                 </li>
             </c:if>
-
-
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.indicators"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -102,7 +100,6 @@
 
                     </ul>
                 </li>
-
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
