@@ -240,12 +240,17 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         List<Object[]> purchaseOrderList = new ArrayList<>();
 
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
+            String onclickCancel = "";
+            if (purchaseOrder.getStatus() != StatusEnum.Finished && purchaseOrder.getStatus() != StatusEnum.PartiallyFinished ){
+                onclickCancel = "onclick=openFormCancellation("+purchaseOrder.getId()+")";
+            }
+
             String colCode = purchaseOrder.getId().toString();
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
             String colStatus = purchaseOrder.getStatus().getDescription();
             String colButtonEdit = "<a href=/purchasing/ordemCompra/adicionar/informacao/" + purchaseOrder.getId() +"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
             String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/normal><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
-            String colButtonCancel = "<a onclick=openFormCancellation("+purchaseOrder.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
+            String colButtonCancel = "<a "+onclickCancel+" ><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String[] row = {
                     colCode,
                     colSupplier,
@@ -272,12 +277,18 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         List<Object[]> purchaseOrderList = new ArrayList<>();
 
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
+
+            String onclickCancel = "";
+            if (purchaseOrder.getStatus() != StatusEnum.Reject && purchaseOrder.getStatus() != StatusEnum.Finished && purchaseOrder.getStatus() != StatusEnum.PartiallyFinished && purchaseOrder.getStatus() != StatusEnum.Conferred && purchaseOrder.getStatus() != StatusEnum.Canceled ){
+                onclickCancel = "onclick=openFormCancellation("+purchaseOrder.getId()+")";
+            }
+
             String colCode = purchaseOrder.getId().toString();
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
             String colStatus = purchaseOrder.getStatus().getDescription();
             String colButtonEdit = "<a href=/purchasing/ordemCompra/adicionar/informacao/" + purchaseOrder.getId() +"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
             String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/normal><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
-            String colButtonCancel = "<a openFormCancellation("+purchaseOrder.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
+            String colButtonCancel = "<a "+ onclickCancel +" ><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String[] row = {
                     colCode,
                     colSupplier,

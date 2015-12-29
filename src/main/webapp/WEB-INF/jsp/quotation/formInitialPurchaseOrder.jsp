@@ -235,19 +235,18 @@
                     <div class="row">
                         <div class="col-md-2 col-sm-2">
                             <div class="form-group">
-                                <label class="control-label" for="exclusive"><fmt:message key="label.exclusive"/></label>
+                                <label class="control-label" for="exclusiveTrue"><fmt:message key="label.exclusive"/></label>
                                 <br>
-
                                 <div class="radio-inline">
                                     <label class="control-label">
-                                        <input type="radio" value="true" name="quotation.exclusiveSupplier" id="exclusive"
+                                        <input type="radio" value="true" name="exclusive" id="exclusiveTrue"
                                         <c:if test="${quotation.exclusiveSupplier eq true}"> checked </c:if> > <fmt:message
                                             key="label.yes"/>
                                     </label>
                                 </div>
                                 <div class="radio-inline">
                                     <label class="control-label">
-                                        <input type="radio" value="false" name="quotation.exclusiveSupplier" id="exclusive"
+                                        <input type="radio" value="false" name="exclusive" id="exclusiveFalse"
                                         <c:if test="${quotation.exclusiveSupplier  eq false}"> checked </c:if> >
                                         <fmt:message key="label.no"/>
                                     </label>
@@ -257,9 +256,8 @@
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="form-group">
-                                <label class="control-label" for="justification"><fmt:message
-                                        key="label.justification"/></label>
-                                <textarea rows="4" cols="100" class="form-control" id="justification" required></textarea>
+                                <label class="control-label" for="justification"><fmt:message key="label.justification"/></label>
+                                <textarea rows="4" cols="100" class="form-control" id="justification" name="justification" required></textarea>
                             </div>
                         </div>
                         <input type="hidden" name="budget.id" id="budgetChoised" value=""/>
