@@ -15,6 +15,11 @@
         <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
     </listener>
 
+    <context-param>
+        <param-name>br.com.caelum.vraptor.environment</param-name>
+        <param-value>production</param-value>
+    </context-param>
+
     <filter>
         <filter-name>vraptor</filter-name>
         <filter-class>br.com.caelum.vraptor.VRaptor</filter-class>
@@ -33,11 +38,6 @@
     <context-param>
         <param-name>br.com.caelum.vraptor.packages</param-name>
         <param-value>br.com.caelum.vraptor.serialization.gson</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>br.com.caelum.vraptor.environment</param-name>
-        <param-value>production</param-value>
     </context-param>
 
     <filter-mapping>

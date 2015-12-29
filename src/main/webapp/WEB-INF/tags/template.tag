@@ -96,8 +96,9 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="menu.indicators"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="<c:url value="/relatorio/recepcao/data" ></c:url>"><fmt:message key="submenu.reception"/></a></li>
-
+                        <li><a href="<c:url value="/relatorio/gerencial" ></c:url>"><fmt:message key="submenu.management"/></a></li>
+                        <li><a href="<c:url value="/relatorio/operacional" ></c:url>"><fmt:message key="submenu.operational"/></a></li>
+                        <li><a href="<c:url value="/relatorio/financeiro" ></c:url>"><fmt:message key="submenu.financial"/></a></li>
                     </ul>
                 </li>
         </ul>
