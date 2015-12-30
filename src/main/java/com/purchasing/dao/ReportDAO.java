@@ -4,7 +4,7 @@ import com.purchasing.dao.base.DAOImpl;
 import org.hibernate.Session;
 
 import javax.inject.Inject;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by Vanessa on 12/29/15.
@@ -16,7 +16,8 @@ public class ReportDAO extends DAOImpl<Object,Integer> {
         super(session);
     }
 
-    public List<Object> getPaymentForecastReport(){
-       return   getSession().createSQLQuery("SELECT * FROM payment_forecast_report").list();
+    public Collection<Object> getPaymentForecastReport(){
+        Collection<Object> objects = getSession().createSQLQuery("SELECT * FROM payment_forecast_report").list();
+       return  objects ;
     }
 }

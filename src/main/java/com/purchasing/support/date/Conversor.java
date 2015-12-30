@@ -68,5 +68,16 @@ public class Conversor {
                 System.out.println(ex);
             }
             return dateString;
+    }
+
+    public static String converterDateInStringForReport(Date date) {
+        String dateString = null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            dateString = simpleDateFormat.format(date);
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
+        return dateString;
+    }
 }

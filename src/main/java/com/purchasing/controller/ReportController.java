@@ -3,6 +3,7 @@ package com.purchasing.controller;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.observer.download.Download;
 import com.purchasing.service.impl.ReportService;
 
 import javax.inject.Inject;
@@ -40,7 +41,7 @@ public class ReportController {
     }
 
     @Path("/financeiro")
-    public void paymentForecastReport(){
-        reportService.getPaymentForecastReport();
+    public Download paymentForecastReport(){
+      return reportService.exportPaymentForecastReport();
     }
 }
