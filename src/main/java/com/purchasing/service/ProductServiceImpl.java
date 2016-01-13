@@ -122,4 +122,10 @@ public class ProductServiceImpl implements ProductService {
         return total;
     }
 
+    @Override
+    public List<Product> searchSimilarProduct(Product product) {
+        product = productDAO.findById(Product.class,product.getId());
+        return productDAO.searchSimilarProduct(product);
+    }
+
 }

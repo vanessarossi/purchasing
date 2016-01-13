@@ -137,4 +137,10 @@ public class ProductController {
         result.use(Results.json()).withoutRoot().from(products).include("category").include("unit").serialize();
     }
 
+    @Get("/pesquisar/semelhante/{product.id}/json")
+    public void searchSimilarProduct(Product product){
+        List<Product> products = productService.searchSimilarProduct(product);
+        result.use(Results.json()).withoutRoot().from(products).include("category").include("unit").serialize();
+    }
+
 }

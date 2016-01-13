@@ -34,6 +34,9 @@ function fillTable() {
 	                            row += "<td>";
 	                            row += '<a onclick="expandProducts('+productId+','+quotationId+')"><span class="fa fa-expand btn btn-default btn-xs"></span></a>';
 	                            row += "</td>";
+                              row += "<td>";
+                              row += '<a onclick="changeProducts('+productId+','+quotationId+')"><span class="fa fa-refresh btn btn-default btn-xs"></span></a>';
+                              row += "</td>";
 	                            row += "<td>";
 	                            row += '<a onclick="confirmDetele('+productId+','+quotationId+')"><span class="fa fa-trash-o btn btn-default btn-xs"></span></a>';
 	                            row += "</td>";
@@ -49,6 +52,45 @@ function fillTable() {
         });
     }
 };
+
+function changeProducts (productId,quotation) {
+  $.ajax({
+            url: getContextPath() + 'produto/pesquisar/semelhante/'+productId+'/json',
+            type: 'GET',
+            dataType: 'json',
+            beforeSend: function(){
+            },
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                      var code = result[i]["id"];
+                      var description = result[i]["description"];
+                      var model = ((result[i]["model"] == null) ? '' : result[i]["model"]);
+                      var mark = ((result[i]["mark"] == null) ? '' : result[i]["mark"]);
+                      var unit = result[i]["unit"]["description"];
+                      var category = result[i]["category"]["description"];
+
+                      var product = description.replace('"','')+" "+model.replace('"','')+" "+mark.replace('"','');
+
+                    var row = '<tr onclick="confirmChangeProduct('+productId+','+code+','+quotation+')">';
+                    row += "<td>"+code+"</td>";
+                    row += "<td>"+product+"</td>";
+                    row += "<td>"+unit+"</td>";
+                    row += "<td>"+category+"</td>";
+                    row += "</tr>";
+
+                      $('#tableChangeProduct > tbody').append(row);
+                  }
+            },
+            error: function (result) {
+                alert('Ocorreu um erro ao tentar realizar esta ação');
+            }
+        });
+  $('#modalChangeProduct').modal('show');
+};
+
+$('#modalChangeProduct').on('hide.bs.modal', function (e) {
+      $('#tableChangeProduct > tbody > tr').remove();
+});
 
 function expandProducts(product,quotation){
 	   productId = product;
@@ -134,6 +176,32 @@ function removeQuotationRequestUnit(codeQuotationRequest){
         });
     };
 };
+
+function confirmChangeProduct(oldProduct,newProduct,quotation){
+   $.ajax({
+      type: "GET",                
+      url: getContextPath()+'cotacao/alterar/produto/'+oldProduct+'/'+newProduct+'/'+quotation+'/json',
+      dataType: "json",
+      beforeSend: function(){
+      },
+      success: function (result) {
+        $('#modalSuccess').modal('show');
+          setTimeout(function () {
+          $("#modalSuccess").modal('hide');
+          location.href=getContextPath()+'cotacao/pesquisar/'+quotationId; 
+        }, 1050)
+
+     },
+     error: function () {
+        $('#modalError').modal('show');
+           setTimeout(function () {
+           $("#modalError").modal('hide');
+           location.href=getContextPath()+'cotacao/pesquisar/'+quotationId; 
+        }, 1050)
+      }     
+    });
+};
+
 
 $('#btn-confirm').click(function(){
 	if (productId != 0 && quotationId != 0) {

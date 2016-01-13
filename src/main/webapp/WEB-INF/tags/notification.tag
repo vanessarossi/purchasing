@@ -35,7 +35,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="alert alert-success">Item removido!</div>
+                <div class="alert alert-success">Operação realizada com sucesso!</div>
             </div>
         </div>
     </div>

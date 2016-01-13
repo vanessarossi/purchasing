@@ -42,4 +42,7 @@ public interface QuotationService {
     public List<QuotationRequestProductView> groupByProduct(Quotation quotation);
 
     public File printer(Quotation quotation);
+
+    public void updateChangedProduct(Product oldProduct, Product newProduct, Quotation quotation);
 }
+

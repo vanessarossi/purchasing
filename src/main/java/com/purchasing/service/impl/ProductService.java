@@ -18,4 +18,5 @@ public interface ProductService {
 
     public List<Object[]> findPaginationInformationPurchase(Product product,String sSearch, int iDisplayStart, int iDisplayLength);
     public Integer totalPaginationInformationPurchase(Product product,String sSearch);
+    public List<Product> searchSimilarProduct(Product product);
 }

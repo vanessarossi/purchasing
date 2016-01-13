@@ -7,7 +7,7 @@
 </head>
 <body>
 <html:template>
-    <br class="container-fluid">
+    <div class="container-fluid">
         <div class="page-header">
             <h2><fmt:message key="title.quotation" /> - <fmt:message key="title.general.information" /></h2>
          </div>
@@ -81,11 +81,12 @@
                 <table id="quotationMaterialTable" class="table table-striped table-hover table-condensed">
                     <thead>
                     <tr>
-                        <th style="width: 50%"><fmt:message key="table.product" /></th>
-                        <th style="width: 10%" ><fmt:message key="table.quantity" /></th>
-                        <th style="width: 18%" ><fmt:message key="table.unit" /></th>
-                        <th style="width: 2%" ><fmt:message key="table.##" /></th>
-                        <th style="width: 2%" ><fmt:message key="table.##" /></th>
+                        <th><fmt:message key="table.product" /></th>
+                        <th><fmt:message key="table.quantity" /></th>
+                        <th><fmt:message key="table.unit" /></th>
+                        <th><fmt:message key="table.##" /></th>
+                        <th><fmt:message key="table.##" /></th>
+                        <th><fmt:message key="table.##" /></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -124,7 +125,6 @@
                     </tbody>
                 </table>
             </c:if>
-
         <form action='<c:url value="/cotacao/salvar/observation"></c:url>' method="post" id="quotationForm">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -150,11 +150,39 @@
                 </div>
             </div>
         </form>
-            <div class="col-sm-offset-8 col-md-offset-9">
+        <div class="col-sm-offset-8 col-md-offset-9">
                 <a href="<c:url value="/cotacao/imprimir/pedido/orcamento/${quotation.id}"></c:url>" target='_blank'> <span class="fa fa-print btn btn-default"> <fmt:message key="button.generateOrderBudget" /></span></a>
             </div>
-            </br>
+       </br>
        </c:if>
+     </div>
+    <div class="modal fade " id="modalChangeProduct" tabindex="-1" role="dialog" aria-labelledby="modalChangeProduct" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form role="form" id="formChangeProduct" method="post" action='<c:url value="/categoria/salvar" ></c:url>'>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title"><fmt:message key="title.changed.product" /></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <table class="table table-hover" id="tableChangeProduct">
+                                <thead>
+                                <tr>
+                                    <th><fmt:message key="table.code"/></th>
+                                    <th><fmt:message key="table.product"/></th>
+                                    <th><fmt:message key="table.unit"/></th>
+                                    <th><fmt:message key="table.category"/></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </html:template>
 </body>

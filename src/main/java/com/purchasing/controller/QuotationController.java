@@ -372,4 +372,11 @@ public class QuotationController {
             result.use(Results.json()).withoutRoot().from(false).serialize();
         }
     }
+
+    /**Alteração de produto **/
+    @Get("/alterar/produto/{oldProduct.id}/{newProduct.id}/{quotation.id}/json")
+    public void updateChangeProduct(Product oldProduct, Product newProduct, Quotation quotation){
+        quotationService.updateChangedProduct(oldProduct,newProduct,quotation);
+        result.use(Results.json()).withoutRoot().from(true).serialize();
+    }
 }

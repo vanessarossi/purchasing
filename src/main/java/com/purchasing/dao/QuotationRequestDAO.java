@@ -51,6 +51,4 @@ public class QuotationRequestDAO extends DAOImpl<QuotationRequest,Long> {
         quotationRequests.addAll(criteria.list());
         return quotationRequests;
     }
-
-
 }

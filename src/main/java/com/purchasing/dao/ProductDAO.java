@@ -63,4 +63,12 @@ public class ProductDAO extends DAOImpl<Product,Long> {
         products.addAll(criteria.list());
         return products;
     }
+
+    public List<Product> searchSimilarProduct(Product product){
+        List<Product> products = new ArrayList<>();
+        Criteria criteria = getSession().createCriteria(Product.class);
+        criteria.add(Restrictions.eq("description", product.getDescription()));
+        products = criteria.list();
+        return products;
+    }
 }

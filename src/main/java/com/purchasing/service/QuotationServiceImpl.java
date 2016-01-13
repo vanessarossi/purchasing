@@ -275,6 +275,17 @@ public class QuotationServiceImpl implements QuotationService {
         return orderBudgetPrinter.generateOrderBudget(quotation.getId(),this);
     }
 
+    @Override
+    public void updateChangedProduct(Product oldProduct, Product newProduct, Quotation quotation) {
+        List<QuotationRequest> quotationRequests = quotationRequestDAO.findQuotationRequestProductByProduct(quotation,oldProduct);
+        for (QuotationRequest quotationRequest : quotationRequests){
+            SolicitationRequest solicitationRequest = new SolicitationRequest();
+            solicitationRequest = quotationRequest.getSolicitationRequest();
+            solicitationRequest.setProduct(newProduct);
+            solicitationRequestDAO.save(solicitationRequest);
+        }
+    }
+
     public User getUserLogged(){
         User user = (User) httpSession.getAttribute("userLogged");
         return  user;

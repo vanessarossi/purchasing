@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="26"/>
+	<property name="ireport.y" value="40"/>
 	<parameter name="corporate_name" class="java.lang.String"/>
 	<parameter name="document_supplier" class="java.lang.String"/>
 	<parameter name="number_request" class="java.lang.String"/>
@@ -221,7 +221,7 @@
 		<band height="15" splitType="Stretch">
 			<rectangle>
 				<reportElement x="-1" y="0" width="557" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="c610d83b-20bd-4295-8d07-95580446a0a6">
-					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)  ]]></printWhenExpression>
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<textField>
@@ -283,7 +283,7 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="169" splitType="Stretch">
+		<band height="187" splitType="Stretch">
 			<staticText>
 				<reportElement x="1" y="0" width="555" height="15" uuid="09b9f7ea-b52c-4c30-a0e5-94d4df4fdd2b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -575,6 +575,13 @@
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Meio de pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="177" width="554" height="10" uuid="cb6a9a18-2112-4dac-bbd2-de98e16b14dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENHOR FORNECEDOR, INFORMAR O NÚMERO DESTE PEDIDO NA NOTA FISCAL.]]></text>
 			</staticText>
 		</band>
 	</summary>
