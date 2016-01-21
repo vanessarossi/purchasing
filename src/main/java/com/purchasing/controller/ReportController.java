@@ -30,13 +30,8 @@ public class ReportController {
     }
 
     /** Pages  **/
-    @Path("/gerencial")
-    public void management(){
-        result.include("controller", this.getClass().toString());
-    }
-
-    @Path("/operacional")
-    public void operational(){
+    @Path("/")
+    public void index(){
         result.include("controller", this.getClass().toString());
     }
 

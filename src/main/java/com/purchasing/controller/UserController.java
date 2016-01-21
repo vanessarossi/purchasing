@@ -8,7 +8,6 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
-import com.purchasing.annotation.Admin;
 import com.purchasing.entity.User;
 import com.purchasing.service.impl.UserService;
 import com.purchasing.support.datatable.DataTableModel;

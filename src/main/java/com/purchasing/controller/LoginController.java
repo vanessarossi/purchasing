@@ -2,7 +2,6 @@ package com.purchasing.controller;
 
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
-import com.purchasing.annotation.Public;
 import com.purchasing.entity.User;
 import com.purchasing.service.impl.UserService;
 import com.purchasing.support.user.UserSession;
