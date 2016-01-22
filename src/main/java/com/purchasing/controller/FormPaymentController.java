@@ -1,8 +1,10 @@
 package com.purchasing.controller;
 
+import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.access.EighthLevelAccessRule;
 import com.purchasing.entity.FormPayment;
 import com.purchasing.service.impl.FormPaymentService;
 import com.purchasing.support.datatable.DataTableModel;
@@ -31,9 +33,7 @@ public class FormPaymentController {
         this.formPaymentService = formPaymentService;
     }
 
-    @Purchaser
-    @Analyst
-    @Admin
+    @CustomBrutauthRules(EighthLevelAccessRule.class)
     @Path("")
     public void index() {
         result.include("controller", this.getClass().toString());

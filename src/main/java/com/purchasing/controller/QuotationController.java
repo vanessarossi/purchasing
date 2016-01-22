@@ -231,10 +231,6 @@ public class QuotationController {
 
 
     /** Formulários **/
-
-    @Purchaser
-    @Analyst
-    @Admin
     @Path("/")
     public void list() {
         result.include("status", StatusEnum.getStatusQuotation());
@@ -246,10 +242,6 @@ public class QuotationController {
         return quotationService.printer(quotation);
     }
 
-
-    @Purchaser
-    @Analyst
-    @Admin
     @Path("/formulario")
     public void formQuotation() {
         result.include("types", TypeEnum.findTypeQuotation());

@@ -1,14 +1,9 @@
 package com.purchasing.controller;
 
-import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
-import com.purchasing.annotation.*;
 import com.purchasing.entity.Product;
 import com.purchasing.entity.Solicitation;
 import com.purchasing.entity.SolicitationRequest;
@@ -17,6 +12,7 @@ import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.service.impl.SolicitationService;
 import com.purchasing.service.impl.TypeServiceService;
 import com.purchasing.support.datatable.DataTableModel;
+
 import javax.inject.Inject;
 import java.io.File;
 import java.util.ArrayList;
@@ -133,50 +129,24 @@ public class SolicitationController {
 
 
     /** Formulários **/
-    @Purchaser
-    @Analyst
-    @Manager
-    @Admin
     @Path("/listar")
     public void list() {
         result.include("status", StatusEnum.getStatusSolicitation());
         result.include("controller", this.getClass().toString());
     }
 
-    @Solicitor
-    @SolicitorReceptionist
-    @Purchaser
-    @Coordinato
-    @Analyst
-    @Manager
-    @Director
-    @Council
-    @Admin
     @Path("/listar/individual")
     public void individualList(){
         result.include("status", StatusEnum.getStatusSolicitation());
         result.include("controller", this.getClass().toString());
     }
 
-    @Purchaser
-    @Coordinato
-    @Analyst
-    @Manager
-    @Admin
     @Path("/listar/pendente")
     public void missingList() {
            result.include("controller", this.getClass().toString());
        }
 
-    @Solicitor
-    @SolicitorReceptionist
-    @Purchaser
-    @Coordinato
-    @Analyst
-    @Manager
-    @Director
-    @Council
-    @Admin
+
     @Path("/formulario")
     public void form() {
             result.include("typesService",typeServiceService.findAll());
@@ -190,9 +160,6 @@ public class SolicitationController {
             result.include("controller", this.getClass().toString());
         }
 
-    @Purchaser
-    @Analyst
-    @Admin
     @Path("/formulario/finalizacao")
     public void finalizationForm(){
         result.include("controller", this.getClass().toString());

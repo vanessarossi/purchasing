@@ -1,9 +1,11 @@
 package com.purchasing.controller;
 
+import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.access.EighthLevelAccessRule;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.TypePersonEnum;
 import com.purchasing.service.impl.CategoryService;
@@ -37,19 +39,13 @@ public class SupplierController {
         this.validator = validator;
     }
 
-    @Purchaser
-    @Analyst
-    @Manager
-    @Admin
+    @CustomBrutauthRules(EighthLevelAccessRule.class)
     @Path("")
     public void list() {
         result.include("controller", this.getClass().toString());
     }
 
-    @Purchaser
-    @Analyst
-    @Manager
-    @Admin
+    @CustomBrutauthRules(EighthLevelAccessRule.class)
     @Path("/formulario")
     public void form() {
         TypePersonEnum[] typesPerson  = TypePersonEnum.values();
@@ -65,14 +61,11 @@ public class SupplierController {
     public void save(@Valid Supplier supplier, @Valid Contact contact , @Valid Address address , @Valid Person person , NaturalPerson naturalPerson , JuristicPerson juristicPerson){
         validator.ensure(supplier.getCategory().getId() != null , new I18nMessage("supplier.category","message.notBlank"));
         validator.ensure(address.getState().getId() != null, new I18nMessage("address.state","message.notBlank"));
-
         validator.addIf(person.getTypePerson().equals(TypePersonEnum.NaturalPerson) &&  naturalPerson.getCpf() == null,new I18nMessage("naturalPerson.cpf","message.notBlank"));
         validator.addIf(person.getTypePerson().equals(TypePersonEnum.NaturalPerson) &&  naturalPerson.getRg() == null,new I18nMessage("naturalPerson.rg","message.notBlank"));
         validator.addIf(person.getTypePerson().equals(TypePersonEnum.NaturalPerson) &&  naturalPerson.getEmittingOrgan() == null,new I18nMessage("naturalPerson.emittingOrgan","message.notBlank"));
-
         validator.addIf(person.getTypePerson().equals(TypePersonEnum.JuristicPerson) && juristicPerson.getCompanyName() == null,new I18nMessage("juristicPerson.companyName","message.notBlank"));
         validator.addIf(person.getTypePerson().equals(TypePersonEnum.JuristicPerson) && juristicPerson.getCnpj() == null,new I18nMessage("juristicPerson.cnpj","message.notBlank"));
-
         validator.onErrorForwardTo(this).form();
         person.setNaturalPerson(naturalPerson);
         person.setJuristicPerson(juristicPerson);

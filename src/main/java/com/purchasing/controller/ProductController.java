@@ -1,5 +1,6 @@
 package com.purchasing.controller;
 
+import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -8,6 +9,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.access.EighthLevelAccessRule;
 import com.purchasing.entity.Product;
 import com.purchasing.service.impl.CategoryService;
 import com.purchasing.service.impl.ProductService;
@@ -42,17 +44,13 @@ public class ProductController {
          this.categoryService = categoryService;
      }
 
-    @Purchaser
-    @Analyst
-    @Admin
+    @CustomBrutauthRules(EighthLevelAccessRule.class)
     @Path("")
     public void list() {
          result.include("controller", this.getClass().toString());
      }
 
-    @Purchaser
-    @Analyst
-    @Admin
+    @CustomBrutauthRules(EighthLevelAccessRule.class)
     @Path("/formulario")
     public void form() {
         result.include("units",unitService.findAllOrderDescription());
@@ -60,9 +58,6 @@ public class ProductController {
         result.include("controller", this.getClass().toString());
     }
 
-    @Purchaser
-    @Analyst
-    @Admin
     @Path("/informacao/compra")
     public void viewInformationPurchase(){
     }

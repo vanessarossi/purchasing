@@ -1,5 +1,6 @@
 package com.purchasing.controller;
 
+import br.com.caelum.brutauth.auth.annotations.Public;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
 import com.purchasing.entity.User;

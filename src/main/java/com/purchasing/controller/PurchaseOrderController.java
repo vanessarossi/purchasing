@@ -2,7 +2,6 @@ package com.purchasing.controller;
 
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
-import com.purchasing.annotation.*;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.StatusEnum;
@@ -42,52 +41,27 @@ public class PurchaseOrderController {
     }
 
     /** Forms **/
-
-    @Purchaser
-    @Analyst
-    @Manager
-    @Director
-    @Council
-    @Admin
     @Path("/listagem")
     public void list(){
         result.include("status", StatusEnum.getStatusPurchaseOrder());
         result.include("controller", this.getClass()).toString();
     }
 
-    @Analyst
-    @Manager
-    @Director
-    @Council
-    @Admin
     @Path("/listagem/pendencia")
     public void missingList(){
         result.include("controller", this.getClass()).toString();
     }
 
-    @Purchaser
-    @Analyst
-    @Admin
     @Path("/listagem/conferida")
     public void missingConferedList(){
         result.include("controller", this.getClass()).toString();
     }
 
-    @SolicitorReceptionist
-    @Purchaser
-    @Coordinato
-    @Analyst
-    @Admin
     @Path("/formulario/recepcao")
     public void formReception(){
         result.include("controller", this.getClass()).toString();
     }
 
-    @SolicitorReceptionist
-    @Purchaser
-    @Coordinato
-    @Analyst
-    @Admin
     @Path("/pesquisar")
     public void formSearch(){
         result.include("controller", this.getClass()).toString();
@@ -229,7 +203,6 @@ public class PurchaseOrderController {
     public File printerPurchaseOrder(Reception reception){
         return purchaseOrderService.printerPurchaseOrder(reception);
     }
-
 
     @Post("/cancelar")
     public void cancellation(PurchaseOrder purchaseOrder){

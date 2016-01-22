@@ -1,12 +1,10 @@
 package com.purchasing.controller;
 
-import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Result;
+import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
+import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.access.EighthLevelAccessRule;
 import com.purchasing.entity.Category;
 import com.purchasing.service.impl.CategoryService;
 import com.purchasing.support.datatable.DataTableModel;
@@ -35,9 +33,7 @@ public class CategoryController {
         this.validator = validator;
     }
 
-    @Admin
-    @Analyst
-    @Purchaser
+    @CustomBrutauthRules(EighthLevelAccessRule.class)
     @Path("")
     public void index() {
         result.include("controller", this.getClass().toString());
