@@ -29,6 +29,6 @@ public class LoggedHandler implements RuleHandler {
 
     @Override
     public void handle() {
-        result.redirectTo(LoginController.class).formPerfil();
+        result.redirectTo(LoginController.class).login();
     }
 }

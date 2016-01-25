@@ -1,7 +1,12 @@
 package com.purchasing.controller;
 
+import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
+import com.purchasing.access.EighthLevelAccessRule;
+import com.purchasing.access.FourthLevelAccessRule;
+import com.purchasing.access.SixthLevelAccessRule;
+import com.purchasing.access.ThirdLevelAccessRule;
 import com.purchasing.entity.*;
 import com.purchasing.enumerator.MeanPaymentEnum;
 import com.purchasing.enumerator.StatusEnum;
@@ -41,12 +46,14 @@ public class PurchaseOrderController {
     }
 
     /** Forms **/
+    @CustomBrutauthRules(ThirdLevelAccessRule.class)
     @Path("/listagem")
     public void list(){
         result.include("status", StatusEnum.getStatusPurchaseOrder());
         result.include("controller", this.getClass()).toString();
     }
 
+    @CustomBrutauthRules(FourthLevelAccessRule.class)
     @Path("/listagem/pendencia")
     public void missingList(){
         result.include("controller", this.getClass()).toString();
@@ -57,16 +64,19 @@ public class PurchaseOrderController {
         result.include("controller", this.getClass()).toString();
     }
 
+    @CustomBrutauthRules(SixthLevelAccessRule.class)
     @Path("/formulario/recepcao")
     public void formReception(){
         result.include("controller", this.getClass()).toString();
     }
 
+    @CustomBrutauthRules(SixthLevelAccessRule.class)
     @Path("/pesquisar")
     public void formSearch(){
         result.include("controller", this.getClass()).toString();
     }
 
+    @CustomBrutauthRules(EighthLevelAccessRule.class)
     @Path("/formulario")
     public void form(){
         result.include("controller", this.getClass()).toString();
@@ -77,6 +87,7 @@ public class PurchaseOrderController {
         result.include("controller", this.getClass()).toString();
     }
 
+    @CustomBrutauthRules(EighthLevelAccessRule.class)
     @Path("/formulario/confirma/conferencia")
     public void formConfirmConference() {
         result.include("controller", this.getClass()).toString();

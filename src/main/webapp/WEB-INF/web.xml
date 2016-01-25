@@ -17,7 +17,7 @@
 
     <context-param>
         <param-name>br.com.caelum.vraptor.environment</param-name>
-        <param-value>production</param-value>
+        <param-value>development</param-value>
     </context-param>
 
     <filter>
@@ -49,7 +49,7 @@
 
     <jsp-config>
         <jsp-property-group>
-            <description>Gestão de compras</description>
+            <description>Gestão de Solicitações de Compras</description>
             <display-name>Compras</display-name>
             <url-pattern>*.jsp</url-pattern>
             <page-encoding>UTF-8</page-encoding>
