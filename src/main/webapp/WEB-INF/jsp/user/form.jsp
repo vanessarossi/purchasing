@@ -8,11 +8,10 @@
 <body>
 <html:template>
     <form action='<c:url value="/usuario/salvar"></c:url>' method="post" id="userForm">
-        <div class="container-fluid">
-            <div class="page-header">
+        <div class="page-header">
                 <h3><fmt:message key="title.user" /></h3>
             </div>
-            <div class="row">
+        <div class="row">
                 <div class="col-sm-4 col-md-4">
                     <div class="form-group">
                         <label class="control-label"><fmt:message key="label.name"></fmt:message></label><span class="required"> *</span>
@@ -35,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+        <div class="row">
                 <div class="col-sm-4 col-md-4">
                     <div class="form-group">
                         <label class="control-label"><fmt:message key="label.email"></fmt:message></label><span class="required"> *</span>
@@ -74,10 +73,10 @@
                     <span class="redText">${errors.from('user.role')}</span>
                 </div>
             </div>
-            <div class="page-header">
+        <div class="page-header">
                         <h3><fmt:message key="title.cost.center.user" /></h3>
             </div>
-            <div class="row">
+        <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="form-group">
                             <label for="company" class="control-label"> <fmt:message key="label.company"/></label>
@@ -104,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+        <div class="row">
                 <table id="userCostCenterTable" class="table table-striped table-hover table-condensed">
                     <thead>
                         <tr>
@@ -125,15 +124,14 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row">
-                <div class="col-sm-offset-9 col-md-offset-9">
+        <div class="row">
+            <div class="col-sm-offset-9 col-md-offset-9">
                     <div class="form-group">
                         <input type="hidden" name="user.id" value="${user.id}" >
                         <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>
                         <a href='<c:url value="/usuario"></c:url>' type="button" class="btn btn-danger"><fmt:message key="button.cancel"/></a>
                     </div>
                 </div>
-            </div>
         </div>
     </form>
 </html:template>

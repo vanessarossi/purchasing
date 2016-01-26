@@ -7,11 +7,10 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.quotations" /></h3>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-3 col-sm-3">
                 <div class="form-group">
                     <label  class="control-label" for="status"><fmt:message key="label.status"/></label></span>
@@ -24,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <c:if test="${!empty errorQuotatioFinalized }">
+    <c:if test="${!empty errorQuotatioFinalized }">
             <div class="row">
                 <div class="alert alert-danger alert-dismissible text-center" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -32,8 +31,8 @@
                 </div>
             </div>
         </c:if>
-        <br/>
-        <table id="quotationTable" class="table table-striped table-hover table-condensed">
+    <br/>
+    <table id="quotationTable" class="table table-striped table-hover table-condensed">
             <thead>
                 <tr>
                     <th style="width:2%"><fmt:message key="table.code"/></th>
@@ -49,8 +48,8 @@
             <tbody>
             </tbody>
         </table>
-        <form action='<c:url value="/cotacao/cancelar"></c:url>' method="post" id="cancellQuotationForm">
-            <div class="panel panel-default">
+    <form action='<c:url value="/cotacao/cancelar"></c:url>' method="post" id="cancellQuotationForm">
+        <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <fmt:message key="title.cancell.quotation"/>
@@ -74,8 +73,7 @@
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
+    </form>
 </html:template>
 </body>
 <html:jsAssets/>

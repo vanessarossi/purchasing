@@ -7,11 +7,10 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.finalization" /></h3>
-        </div>
-        <form action='<c:url value="/solicitacao/pesquisar/finalizacao"></c:url>' method="post" id="finalizationSolicitationForm">
+    </div>
+    <form action='<c:url value="/solicitacao/pesquisar/finalizacao"></c:url>' method="post" id="finalizationSolicitationForm">
             <div class="row">
                 <div class="col-md-2 col-sm-2 ">
                     <label class="control-label"><fmt:message key="label.code" /></label>
@@ -44,14 +43,14 @@
            </div>
          </div>
        </form>
-       <c:if test="${! empty messageNotSolicitation}">
+    <c:if test="${! empty messageNotSolicitation}">
          <div class="row">
                <div class="col-md-12 col-sm-12 text-center">
                    <span class="message-error"><fmt:message key="${messageNotSolicitation}"/></span>
                </div>
              </div>
        </c:if>
-       <form action="<c:url value="/solicitacao/finalizar"></c:url>" method="post" id="finalizationForm">
+    <form action="<c:url value="/solicitacao/finalizar"></c:url>" method="post" id="finalizationForm">
            <c:if test="${solicitation.type eq 'Service' or solicitation.type eq 'MaterialService'}">
                <div id="divService">
                    <div class="row">
@@ -129,7 +128,6 @@
                </div>
            </div>
        </form>
-     </div>
 </html:template>
 </body>
 <html:jsAssets/>

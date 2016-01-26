@@ -9,11 +9,10 @@
 <body>
 <html:template>
 <form role="form" id="formSupplier" method="post" action='<c:url value="/fornecedor/salvar" ></c:url>'>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.supplier" /></h3>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-sm-2 col-md-2">
                 <div class="form-group">
                     <label class="control-label"><fmt:message key="label.typePerson"></fmt:message></label>
@@ -54,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div id="divNaturalPerson">
+    <div id="divNaturalPerson">
             <div class="row">
                 <div class="col-md-2 col-sm-2">
                     <div class="form-group" id="divCpf">
@@ -80,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div id="divJuristicPerson">
+    <div id="divJuristicPerson">
             <div class="row">
                 <div class="col-md-4 col-sm-4">
                     <div class="form-group">
@@ -111,7 +110,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="name"><fmt:message key="label.name"></fmt:message>/<fmt:message key="label.corporateName"></fmt:message></label><span class="required"> *</span>
@@ -134,7 +133,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-4 col-sm-4">
                 <div class="form-group">
                     <label class="control-label" for="neighborhood"><fmt:message key="label.neighborhood"></fmt:message></label><span class="required"> *</span>
@@ -162,7 +161,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                     <label  class="control-label" for="zipCode"><fmt:message key="label.zipCode"></fmt:message></label><span class="required"> *</span>
@@ -199,7 +198,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-4 col-sm-4">
                 <div class="form-group">
                     <label class="control-label" for="email"><fmt:message key="label.email"></fmt:message></label>
@@ -215,7 +214,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-5 col-sm-5">
                 <div class="form-group">
                     <label class="control-label" for="contactName"><fmt:message key="label.contactName"></fmt:message></label>
@@ -224,8 +223,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-offset-9 col-md-offset-9">
+    <div class="row">
+        <div class="col-sm-offset-9 col-md-offset-9">
                 <div class="form-group">
                     <input type="hidden" name="person.id" value="${supplier.person.id}" >
                     <input type="hidden" name="address.id" value="${supplier.address.id}" >
@@ -235,7 +234,6 @@
                     <a href='<c:url value="/fornecedor"></c:url>' type="button" class="btn btn-danger"><fmt:message key="button.cancel"/></a>
                 </div>
             </div>
-        </div>
     </div>
 </form>
 </html:template>

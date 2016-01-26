@@ -7,12 +7,11 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.solicitations" /></h3>
         </div>
-        <br/><br/>
-        <table id="solicitationTable" class="table table-striped table-hover table-condensed">
+    <br/><br/>
+    <table id="solicitationTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
                 <th style="width: 3%"><fmt:message key="table.code" /></th>
@@ -26,7 +25,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
 </html:template>
 </body>
 <html:notification/>

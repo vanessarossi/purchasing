@@ -7,11 +7,10 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.solicitation" /></h3>
         </div>
-        <div class="panel panel-default">
+    <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><fmt:message key="title.general.information" /></h3>
             </div>
@@ -92,8 +91,7 @@
                 </div>
             </div>
         </div>
-
-        <c:if test="${solicitation.type eq 'Service' or solicitation.type eq 'MaterialService'}">
+    <c:if test="${solicitation.type eq 'Service' or solicitation.type eq 'MaterialService'}">
             <div class="panel panel-default divService">
                 <div class="panel-heading">
                     <h3 class="panel-title"><fmt:message key="title.solicitation.service" /></h3>
@@ -116,8 +114,7 @@
                 </div>
             </div>
         </c:if>
-
-        <c:if test="${solicitation.type eq 'Material' or solicitation.type eq 'MaterialService'}">
+    <c:if test="${solicitation.type eq 'Material' or solicitation.type eq 'MaterialService'}">
             <div class="panel panel-default divMaterial">
                 <div class="panel-heading">
                     <h3 class="panel-title"><fmt:message key="title.solicitation.products" /></h3>
@@ -141,8 +138,7 @@
                 </div>
             </div>
         </c:if>
-
-        <c:if test="${solicitation.situation.justificationCancellation != null }">
+    <c:if test="${solicitation.situation.justificationCancellation != null }">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><fmt:message key="title.justification.cancellation" /></h3>
@@ -159,8 +155,7 @@
                 </div>
             </div>
         </c:if>
-
-        <c:if test="${solicitation.situation.justificationDisapproval != null }">
+    <c:if test="${solicitation.situation.justificationDisapproval != null }">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><fmt:message key="title.justification.disapproval" /></h3>
@@ -177,8 +172,7 @@
                 </div>
             </div>
         </c:if>
-
-        <c:if test="${solicitation.situation.status eq 'QuotationCanceled' }">
+    <c:if test="${solicitation.situation.status eq 'QuotationCanceled' }">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><fmt:message key="title.justifications.quotation.canceled" /></h3>
@@ -197,8 +191,7 @@
                 </div>
             </div>
         </c:if>
-
-        <c:if test="${solicitation.situation.status eq 'PurchaseOrderCanceled' || solicitation.situation.status eq 'PartiallyQuoteApproved' || solicitation.situation.status eq 'QuoteReject'  }">
+    <c:if test="${solicitation.situation.status eq 'PurchaseOrderCanceled' || solicitation.situation.status eq 'PartiallyQuoteApproved' || solicitation.situation.status eq 'QuoteReject'  }">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><fmt:message key="title.justifications.purchase.order.canceled" /></h3>
@@ -228,7 +221,7 @@
                 </div>
             </div>
         </c:if>
-    </div>
+
     <c:choose>
         <c:when test="${type eq 'pendente' && (userLogged.role.id eq 6 || userLogged.role.id eq 5) && solicitation.situation.status eq 'WaitingApproval'}">
             <form action='<c:url value="/solicitacao/aprovar"></c:url>' method="post" id="solicitationConfirmForm">

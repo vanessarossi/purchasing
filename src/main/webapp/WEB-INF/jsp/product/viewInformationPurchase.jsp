@@ -7,10 +7,10 @@
 </head>
 <body>
 <html:template>
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.information.purchase"/></h3>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-sm-2 col-md-2">
                 <div class="form-group">
                     <label class="control-label"><fmt:message key="label.code"></fmt:message></label>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" >
+    <div class="row" >
             <div class="col-sm-4 col-md-4">
                 <div class="form-group">
                     <label class="control-label"><fmt:message key="label.mark"></fmt:message></label>
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <table id="informationPurchaseTable" class="table table-striped table-hover table-condensed">
+    <table id="informationPurchaseTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
                 <th><fmt:message key="table.date"/></th>
@@ -64,8 +64,8 @@
             <tbody>
             </tbody>
         </table>
-        <br>
-        <div class="row">
+    <br>
+    <div class="row">
             <div class="col-sm-offset-11 col-md-offset-11">
                 <a href="<c:url value="/produto" ></c:url>" class="btn btn-danger"> <fmt:message key="button.cancel"/> </a>
             </div>

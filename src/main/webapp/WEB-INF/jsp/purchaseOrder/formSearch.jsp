@@ -7,7 +7,6 @@
 </head>
 <body>
 <html:template>
-  <div class="container-fluid">
     <div class="page-header">
       <h3><fmt:message key="title.search.purchase.order"/></h3>
     </div>
@@ -55,7 +54,6 @@
         </c:forEach>
       </tbody>
     </table>
-  </div>
 </html:template>
 </body>
 <html:searchSupplier/>

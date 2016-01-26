@@ -7,7 +7,6 @@
 </head>
 <body>
 <html:template>
-  <div class="container-fluid">
     <div class="page-header">
       <h3><fmt:message key="title.purchasingOrders"/></h3>
     </div>
@@ -64,7 +63,6 @@
         </div>
       </div>
     </form>
-  </div>
 </html:template>
 </body>
 <html:notification/>

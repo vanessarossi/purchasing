@@ -7,21 +7,20 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.units" /></h3>
         </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newUnit">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newUnit">
             <fmt:message key="button.newUnit"/>
         </button>
-        <br/><br/>
-        <c:forEach var="error" items="${errors}">
+    <br/><br/>
+    <c:forEach var="error" items="${errors}">
             <span class="label label-danger">
                        ${error.message}
             </span>
             <br />
         </c:forEach>
-        <table class="table table-striped table-hover table-condensed" id="unitTable">
+    <table class="table table-striped table-hover table-condensed" id="unitTable">
             <thead>
             <tr>
                 <th style="width: 50%"><fmt:message key="table.description" /></th>
@@ -32,7 +31,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
     <div class="modal fade" id="newUnit" tabindex="-1" role="dialog" aria-labelledby="newUnit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

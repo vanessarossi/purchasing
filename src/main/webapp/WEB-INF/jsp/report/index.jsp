@@ -7,7 +7,7 @@
 <body>
 <html:template>
   <div class="row">
-    <div class="panel panel-default col-xs-6 col-md-6 col-sm-6 col-lg-6">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
           <fmt:message key="title.financial.management.report" />
@@ -61,10 +61,12 @@
           </div>
         </div>
         <br>
-        <input type="submit" class="btn btn-primary btn-sm" />
+        <input type="submit" class="btn btn-primary btn-sm" value="<fmt:message key="button.generate" />" />
       </div>
     </div>
-    <div class="panel panel-default col-xs-6 col-md-6 col-sm-6 col-lg-6">
+  </div>
+  <div class="row">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
           <fmt:message key="title.financial.management.report" />
@@ -118,7 +120,7 @@
           </div>
         </div>
         <br>
-        <input type="submit" class="btn btn-primary btn-sm" />
+        <input type="submit" class="btn btn-primary btn-sm" value="<fmt:message key="button.generate" />" />
       </div>
     </div>
   </div>

@@ -7,7 +7,6 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
         <div class="page-header">
             <h2><fmt:message key="title.quotation" /> - <fmt:message key="title.view.details" /></h2>
         </div>
@@ -25,7 +24,6 @@
                 <a class="btn btn-default" href="<c:url value="/cotacao/formulario/iniciar/ordem/${quotation.id}"></c:url>"><fmt:message key="button.menu.init.purchase.order" /> </a>
             </div>
         </div>
-    </div>
     <!-- Informações -->
     <div class="row">
         <div class="col-md-2 col-sm-2">

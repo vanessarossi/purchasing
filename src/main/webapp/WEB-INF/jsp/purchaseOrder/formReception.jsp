@@ -7,11 +7,10 @@
 </head>
 <body>
 <html:template>
-  <div class="container-fluid">
-    <div class="page-header">
+  <div class="page-header">
       <h3><fmt:message key="title.purchasing.order.reception"/></h3>
     </div>
-    <form action='<c:url value="/ordemCompra/pesquisar/conferencia"></c:url>' method="post" id="receptionForm">
+  <form action='<c:url value="/ordemCompra/pesquisar/conferencia"></c:url>' method="post" id="receptionForm">
       <div class="row">
         <div class="col-md-2 col-sm-2 ">
           <label class="control-label"><fmt:message key="label.code"/></label>
@@ -36,8 +35,8 @@
         </div>
       </div>
     </form>
-    <br>
-    <form action='' method="post" id="confirmReceptionForm">
+  <br>
+  <form action='' method="post" id="confirmReceptionForm">
       <div class="row">
         <div class="col-md-3 col-sm-3 ">
           <label class="control-label"><fmt:message key="label.tax.document"/></label>
@@ -256,7 +255,6 @@
         </c:if>
       </c:if>
     </form>
-  </div>
 </html:template>
 </body>
 <html:notification/>

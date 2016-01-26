@@ -7,11 +7,10 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h2><fmt:message key="title.quotation" /> - <fmt:message key="title.include.material.service" /> </h2>
         </div>
-        <div class="panel-body well well-sm">
+    <div class="panel-body well well-sm">
             <div class="col-md-3 col-sm-3">
                 <a class="btn btn-default" href="<c:url value="/cotacao/editar/${quotation.id}"></c:url>"><fmt:message key="button.menu.quotation" /> </a>
             </div>
@@ -25,7 +24,7 @@
                 <a class="btn btn-default" href="<c:url value="/cotacao/formulario/iniciar/ordem/${quotation.id}"></c:url>"><fmt:message key="button.menu.init.purchase.order" /> </a>
             </div>
         </div>
-        <div class="row">
+    <div class="row">
                 <div class="col-md-2 col-sm-2">
                     <div class="form-group">
                         <label  class="control-label" for="number"><fmt:message key="label.number"/></label>
@@ -49,7 +48,7 @@
                     </div>
                 </div>
         </div>
-        <form action='<c:url value="/cotacao/salvar/pedido/material"></c:url>' method="post" id="addRequestQuotationMaterialForm">
+    <form action='<c:url value="/cotacao/salvar/pedido/material"></c:url>' method="post" id="addRequestQuotationMaterialForm">
             <c:if test="${quotation.type == 'Material'}">
                 <div  id="divMaterial">
                     <h3><fmt:message key="title.products" /></h3>
@@ -125,9 +124,9 @@
                 </div>
             </c:if>
         </form>
-        <form action='<c:url value="/cotacao/salvar/pedido/servico"></c:url>' method="post" id="addRequestQuotationServiceForm">
-            <c:if test="${quotation.type == 'Service'}">
-                <div  id="divService">
+    <form action='<c:url value="/cotacao/salvar/pedido/servico"></c:url>' method="post" id="addRequestQuotationServiceForm">
+        <c:if test="${quotation.type == 'Service'}">
+            <div  id="divService">
                     <h3><fmt:message key="title.services" /></h3>
                     <div class="row">
                             <div class="col-md-2 col-sm-2">
@@ -169,9 +168,8 @@
                         </div>
                     </c:if>
                 </div>
-            </c:if>
-        </form>
-    </div>
+        </c:if>
+    </form>
 </html:template>
 </body>
 <html:jsAssets/>

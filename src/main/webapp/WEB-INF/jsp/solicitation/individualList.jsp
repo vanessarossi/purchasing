@@ -7,11 +7,10 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.solicitations" /></h3>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-3 col-sm-3">
                 <div class="form-group">
                     <label  class="control-label" for="status"><fmt:message key="label.status"/></label></span>
@@ -24,15 +23,15 @@
                 </div>
             </div>
         </div>
-        <c:if test="${! empty messageErrorEdit}">
+    <c:if test="${! empty messageErrorEdit}">
             <div class="row">
                 <div class="col-md-12 col-sm-12 text-center">
                     <span class="message-error"><fmt:message key="${messageErrorEdit}"/></span>
                 </div>
             </div>
         </c:if>
-        <br/><br/>
-        <table id="solicitationTable" class="table table-striped table-hover table-condensed">
+    <br/><br/>
+    <table id="solicitationTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
                 <th style="width: 2%"><fmt:message key="table.code" /></th>
@@ -49,7 +48,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
     <div class="modal fade" id="cancelSolicitation" tabindex="-1" role="dialog" aria-labelledby="cancelSolicitation" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

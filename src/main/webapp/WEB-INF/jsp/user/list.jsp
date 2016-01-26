@@ -7,15 +7,14 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.users" /></h3>
         </div>
-        <a type="button" class="btn btn-primary" href="<c:url value="/usuario/formulario" ></c:url>">
+    <a type="button" class="btn btn-primary" href="<c:url value="/usuario/formulario" ></c:url>">
             <fmt:message key="button.newUser"/>
         </a>
-        <br/><br/>
-        <table id="userTable" class="table table-striped table-hover table-condensed">
+    <br/><br/>
+    <table id="userTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
                 <th style="width: 30%"><fmt:message key="table.name" /></th>
@@ -30,7 +29,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
     <div class="modal fade" id="viewUser" tabindex="-1" role="dialog" aria-labelledby="viewUser" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

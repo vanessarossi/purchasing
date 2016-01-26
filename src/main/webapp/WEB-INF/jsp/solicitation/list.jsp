@@ -7,11 +7,10 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.solicitations" /></h3>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-3 col-sm-3">
                 <div class="form-group">
                     <label  class="control-label" for="status"><fmt:message key="label.status"/></label></span>
@@ -24,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <table id="solicitationTable" class="table table-striped table-hover table-condensed">
+    <table id="solicitationTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
                 <th style="width: 3%"><fmt:message key="table.code" /></th>
@@ -40,7 +39,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
     <div class="modal fade" id="reproveSolicitation" tabindex="-1" role="dialog" aria-labelledby="reproveSolicitation" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

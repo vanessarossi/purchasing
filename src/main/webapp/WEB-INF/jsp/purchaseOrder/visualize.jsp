@@ -7,7 +7,6 @@
 </head>
 <body>
 <html:template>
-  <div class="container-fluid">
     <div class="page-header">
       <h3><fmt:message key="title.purchasing.order"/></h3>
     </div>
@@ -120,7 +119,6 @@
         </c:forEach>
       </div>
     </div>
-
     <c:if test="${purchaseOrder.budget.quotation.justification != null}">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -144,7 +142,6 @@
         </div>
       </div>
     </c:if>
-
     <c:if test="${purchaseOrder.approval != null && purchaseOrder.approval.justificationDisapproval != null}">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -174,7 +171,6 @@
         </div>
       </div>
     </c:if>
-
     <c:if test="${purchaseOrder.approval != null && purchaseOrder.approval.justificationDisapproval == null}">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -215,7 +211,6 @@
         </div>
       </div>
     </c:if>
-
     <c:if test="${purchaseOrder.receptions != null && fn:length(purchaseOrder.receptions) > 0}">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -247,7 +242,6 @@
         </div>
       </div>
     </c:if>
-
     <c:if test="${purchaseOrder.status == 'Canceled'}">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -265,7 +259,6 @@
         </div>
       </div>
     </c:if>
-
     <c:if test="${approve == 'true' && purchaseOrder.status == 'Open'}">
       <form action='<c:url value="/ordemCompra/aprovar"></c:url>' method="post" id="approveForm">
         <div class="panel panel-default">
@@ -292,7 +285,6 @@
         </div>
      </form>
     </c:if>
-
     <form action='<c:url value="/ordemCompra/reprovar"></c:url>' method="post" id="reprovePurchaseOrderForm">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -320,7 +312,6 @@
         </div>
       </div>
     </form>
-
     <c:if test="${userLogged.role.id eq '7' || userLogged.role.id eq '5' || userLogged.role.id eq '1'}">
       <c:if test="${(purchaseOrder.alreadyPurchased == 'true' &&  purchaseOrder.status eq 'Open') || (purchaseOrder.paymentInformation.hasContract == 'true' && purchaseOrder.status eq 'Open')||(purchaseOrder.status eq 'BuyingProcess') || (purchaseOrder.status eq 'PurchaseMade')|| (purchaseOrder.status eq 'Finished') || (purchaseOrder.status eq 'PartiallyFinished')}">
         <div class="row">
@@ -332,8 +323,6 @@
         </div>
       </c:if>
     </c:if>
-
-  </div>
 </html:template>
 </body>
 <html:jsAssets/>

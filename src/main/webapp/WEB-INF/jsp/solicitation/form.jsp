@@ -8,8 +8,7 @@
 <body>
 <html:template>
 <form action='<c:url value="/solicitacao/salvar"></c:url>' method="post" id="solicitationForm">
-    <div class="container-fluid">
-        <c:if test="${!empty errors.from('message.error.solicitiation.material')}">
+    <c:if test="${!empty errors.from('message.error.solicitiation.material')}">
             <div class="row">
                 <div class="alert alert-danger alert-dismissible text-center" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -17,23 +16,22 @@
                 </div>
             </div>
         </c:if>
-        <c:if test="${!empty errors.from('message.error.solicitiation.service')}">
+    <c:if test="${!empty errors.from('message.error.solicitiation.service')}">
             <div class="alert alert-danger alert-dismissible text-center" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong> <fmt:message key="label.atention" /> </strong> <span>${errors.from('message.error.solicitiation.service')}</span>
             </div>
         </c:if>
-        <c:if test="${!empty errors.from('message.error.solicitiation.service.material')}">
+    <c:if test="${!empty errors.from('message.error.solicitiation.service.material')}">
             <div class="alert alert-danger alert-dismissible text-center" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong > <fmt:message key="label.atention" /> </strong> <span>${errors.from('message.error.solicitiation.service.material')}</span>
             </div>
         </c:if>
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.solicitation" /></h3>
         </div>
-
-        <div class="row">
+    <div class="row">
             <div class="col-md-2 col-sm-2">
                 <div class="form-group">
                     <label  class="control-label" for="type"><fmt:message key="label.type"/></label>
@@ -57,7 +55,7 @@
                 </select>
             </div>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-3 col-sm-3">
                 <div class="form-group">
                     <label class="control-label" for="urgency"><fmt:message key="label.urgency"/></label>
@@ -93,8 +91,7 @@
                 </div>
             </div>
         </div>
-
-        <div  id="divService" class="panel panel-default">
+    <div  id="divService" class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><fmt:message key="title.solicitation.service" /></h3>
                 </div>
@@ -121,8 +118,7 @@
                     </div>
                 </div>
             </div>
-
-        <div  id="divMaterial" class="panel panel-default">
+    <div  id="divMaterial" class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><fmt:message key="title.solicitation.products" /></h3>
             </div>
@@ -199,8 +195,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
+    <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                     <label  class="control-label" for="observation"><fmt:message key="label.observation"/></label>
@@ -208,8 +203,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
+    <div class="row">
             <div class="col-sm-offset-10 col-md-offset-10">
                 <div class="form-group">
                     <input type="hidden" name="solicitation.id" value="${solicitation.id}" >
@@ -218,7 +212,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </form>
 </html:template>
 </body>

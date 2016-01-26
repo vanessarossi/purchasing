@@ -7,21 +7,20 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.types.service" /></h3>
         </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTypeService">
-            <fmt:message key="button.newTypeService"/>
-        </button>
-        <br/>
-        <c:forEach var="error" items="${errors}">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTypeService">
+        <fmt:message key="button.newTypeService"/>
+    </button>
+    <br/>
+    <c:forEach var="error" items="${errors}">
             <span class="label label-danger">
                        ${error.message}
             </span>
             <br />
         </c:forEach>
-        <table class="table table-striped table-hover table-condensed" id="typeServiceTable">
+    <table class="table table-striped table-hover table-condensed" id="typeServiceTable">
             <thead>
             <tr>
                 <th style="width: 50%"><fmt:message key="table.description" /></th>
@@ -32,7 +31,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
     <div class="modal fade" id="newTypeService" tabindex="-1" role="dialog" aria-labelledby="newTypeService" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

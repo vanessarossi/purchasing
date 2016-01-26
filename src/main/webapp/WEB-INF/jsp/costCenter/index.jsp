@@ -7,15 +7,14 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.costs.center" /></h3>
         </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCostCenter">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCostCenter">
             <fmt:message key="button.newCostCenter"/>
         </button>
-        <br/>
-        <table id="costCenterTable" class="table table-striped table-hover table-condensed">
+    <br/>
+    <table id="costCenterTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
                 <th style="width:3%"><fmt:message key="table.code"></fmt:message></th>
@@ -28,8 +27,7 @@
             <tbody>
             </tbody>
         </table>
-    </div>
-        <div class="modal fade" id="newCostCenter" tabindex="-1" role="dialog" aria-labelledby="newCostCenter" aria-hidden="true">
+    <div class="modal fade" id="newCostCenter" tabindex="-1" role="dialog" aria-labelledby="newCostCenter" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                   <form role="form" id="formCostCenter" method="post" action='<c:url value="/centroCusto/salvar" ></c:url>'>

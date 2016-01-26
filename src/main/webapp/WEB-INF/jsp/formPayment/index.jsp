@@ -7,15 +7,14 @@
 </head>
 <body>
 <html:template>
-    <div class="container-fluid">
-        <div class="page-header">
+    <div class="page-header">
             <h3><fmt:message key="title.forms.payment" /></h3>
         </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newFormPayment">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newFormPayment">
             <fmt:message key="button.newFormPayment"/>
         </button>
-        <br/>
-        <table class="table table-striped table-hover table-condensed" id="formPaymentTable">
+    <br/>
+    <table class="table table-striped table-hover table-condensed" id="formPaymentTable">
             <thead>
             <tr>
                 <th style="width: 50%"><fmt:message key="table.description" /></th>
@@ -26,7 +25,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>
     <div class="modal fade" id="newFormPayment" tabindex="-1" role="dialog" aria-labelledby="newFormPayment" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
