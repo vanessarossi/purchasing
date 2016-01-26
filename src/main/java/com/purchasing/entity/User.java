@@ -177,4 +177,13 @@ public class User {
     public void setSolicitations(List<Solicitation> solicitations) {
         this.solicitations = solicitations;
     }
+
+    public boolean containsCostCenter(CostCenter costCenter){
+            for (CostCenter costC : this.getCostCenters()){
+                if (costCenter.getId() == costC.getId()){
+                    return true;
+                }
+            }
+        return false ;
+    }
 }

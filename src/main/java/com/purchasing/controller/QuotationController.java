@@ -246,7 +246,7 @@ public class QuotationController {
     }
 
     @CustomBrutauthRules(EighthLevelAccessRule.class)
-    @Path("/formulario") 
+    @Path("/formulario")
     public void formQuotation() {
         result.include("types", TypeEnum.findTypeQuotation());
         result.include("controller", this.getClass().toString());

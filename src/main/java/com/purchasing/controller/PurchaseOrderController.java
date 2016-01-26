@@ -59,6 +59,7 @@ public class PurchaseOrderController {
         result.include("controller", this.getClass()).toString();
     }
 
+    @CustomBrutauthRules(EighthLevelAccessRule.class)
     @Path("/listagem/conferida")
     public void missingConferedList(){
         result.include("controller", this.getClass()).toString();

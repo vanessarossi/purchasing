@@ -33,10 +33,12 @@ public class NinthLevelAccessRule implements CustomBrutauthRule {
     }
 
     public boolean isAllowed() {
+        CostCenter costCenter = costCenterDAO.findById(CostCenter.class,new Long(18));
         return  userSession.getUser().getRole().getId() == 1 ||
                 userSession.getUser().getRole().getId() == 5 ||
-                (   userSession.getUser().getRole().getId() == 6 &&
-                    userSession.getUser().getCostCenters().contains(costCenterDAO.findById(CostCenter.class,new Long(18)))
+                (   userSession.getUser().getRole().getId() == 6
+                        &&
+                    userSession.getUser().containsCostCenter(costCenter)
                 ) ||
                 userSession.getUser().getRole().getId() == 7;
     }
