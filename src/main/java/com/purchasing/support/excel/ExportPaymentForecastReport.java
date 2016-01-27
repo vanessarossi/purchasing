@@ -20,7 +20,7 @@ import java.util.List;
 public class ExportPaymentForecastReport extends BaseFolderImpl implements BaseFile {
 
     @Override
-    public File generatReport(Collection<Object> objects) {
+    public File generateReport(Collection<Object> objects) {
 
         File file = null;
         List<PaymentForecastReport> paymentForecastReports = new PaymentForecastReport().convertListObjectInList(objects);
@@ -56,7 +56,6 @@ public class ExportPaymentForecastReport extends BaseFolderImpl implements BaseF
 
         return file;
     }
-
 
     public void generateTitleRow(Row row, CellStyle cellStyle){
         Cell cell = row.createCell(0);

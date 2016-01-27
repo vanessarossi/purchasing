@@ -8,5 +8,5 @@ import java.util.Collection;
  */
 public interface BaseFile {
 
-    public File generatReport(Collection<Object> objects);
+    public File generateReport(Collection<Object> objects);
 }

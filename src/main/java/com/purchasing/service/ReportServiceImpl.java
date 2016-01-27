@@ -24,7 +24,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public FileDownload exportPaymentForecastReport() {
         Collection<Object> objects =  reportDAO.getPaymentForecastReport();
-        File file = exportPaymentForecastReport.generatReport(objects);
+        File file = exportPaymentForecastReport.generateReport(objects);
 
         FileDownload fileDownload = null;
         String nameFile = file.getName();

@@ -99,7 +99,7 @@
           <div class="row">
             <div class="col-sm-7 col-md-7">
               <div class="form-group <c:if test="${purchaseOrder.budget.id eq budget.id}">has-success</c:if>" >
-                  <label class="control-label"><fmt:message key="label.supplier" /> <c:if test="${purchaseOrder.budget.id eq budget.id}"> - <fmt:message key="label.selected" /></c:if> </label>
+                  <label class="control-label"><fmt:message key="label.supplier" /> <c:if test="${purchaseOrder.budget.id eq budget.id}"> - <fmt:message key="label.select" /></c:if> </label>
                   <input type="text" class="form-control" readonly value="${budget.supplier.person.name}" />
               </div>
             </div>
