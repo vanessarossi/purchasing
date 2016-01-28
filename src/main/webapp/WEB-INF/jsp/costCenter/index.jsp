@@ -9,7 +9,7 @@
 <html:template>
     <div class="page-header">
             <h3><fmt:message key="title.costs.center" /></h3>
-        </div>
+    </div>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCostCenter">
             <fmt:message key="button.newCostCenter"/>
         </button>
@@ -62,7 +62,7 @@
                               </div>
                           </div>
                       </div>
-                      <input type="hidden" name="category.id" id="id"  value="" />
+                      <input type="hidden" name="costCenter.id" id="id"  value="" />
                       <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="button.cancel" /></button>
                           <button type="submit" class="btn btn-success"><fmt:message key="button.save" /></button>

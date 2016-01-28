@@ -65,6 +65,8 @@ public class QuotationServiceImpl implements QuotationService {
                 Situation situation =  solicitation.getSituation();
                 situation.setStatus(StatusEnum.QuotationCanceled);
                 situationDAO.save(situation);
+                solicitation.setFinalDate(new Timestamp(new Date().getTime()));
+                solicitationDAO.save(solicitation);
             }
         }
     }

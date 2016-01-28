@@ -211,6 +211,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 Situation situation = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation().getSituation();
                 situation.setStatus(StatusEnum.PurchaseOrderCanceled);
                 situationDAO.save(situation);
+                Solicitation solicitation = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation();
+                solicitation.setFinalDate(new Timestamp(new Date().getTime()));
             }
         }
     }

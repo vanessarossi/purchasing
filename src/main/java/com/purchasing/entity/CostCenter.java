@@ -32,7 +32,7 @@ public class CostCenter {
     private String code;
 
     @NotBlank
-    @Length(min = 1, max = 20)
+    @Length(min = 1, max = 100)
     @Column(name = "description")
     private String description;
 

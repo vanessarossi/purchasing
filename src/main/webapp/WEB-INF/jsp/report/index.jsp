@@ -120,7 +120,7 @@
         <div class="col-xs-4 col-sm-4 col-md-2  col-lg-2">
           <div class="form-group">
             <label><fmt:message key="label.expiration_date" /></label>
-            <input type="text" class="form-control" id="expirationDate" name="report.expirationDate">
+            <input type="text" class="form-control date" id="expirationDate" name="report.expirationDate">
           </div>
         </div>
         <br>
@@ -133,4 +133,6 @@
 </body>
 <html:jsAssets/>
 <script src="${pageContext.request.contextPath}/asset/js/custom/form_report.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/vendor/jquery.mask.min.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form-contract.js"></script>
 </html>

@@ -323,6 +323,7 @@
         </div>
       </c:if>
     </c:if>
+
 </html:template>
 </body>
 <html:jsAssets/>

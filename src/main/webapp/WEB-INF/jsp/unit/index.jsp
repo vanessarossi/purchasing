@@ -19,7 +19,7 @@
                        ${error.message}
             </span>
             <br />
-        </c:forEach>
+    </c:forEach>
     <table class="table table-striped table-hover table-condensed" id="unitTable">
             <thead>
             <tr>
