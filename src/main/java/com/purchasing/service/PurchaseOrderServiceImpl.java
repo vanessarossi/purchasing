@@ -204,6 +204,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         if (purchaseOrder.getStatus() != StatusEnum.Finished && purchaseOrder.getStatus() != StatusEnum.PartiallyFinished && purchaseOrder.getStatus() != StatusEnum.Reject && purchaseOrder.getStatus() != StatusEnum.Conferred){
             purchaseOrderFound.setJustificationCancellation(purchaseOrder.getJustificationCancellation());
             purchaseOrderFound.setStatus(StatusEnum.Canceled);
+            purchaseOrder.setFinalizationDate(new Timestamp(new Date().getTime()));
             purchaseOrderDAO.save(purchaseOrderFound);
 
             List<OrderRequest> orderRequests = purchaseOrderFound.getOrderRequests();
@@ -213,6 +214,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 situationDAO.save(situation);
                 Solicitation solicitation = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation();
                 solicitation.setFinalDate(new Timestamp(new Date().getTime()));
+                solicitationDAO.save(solicitation);
             }
         }
     }
@@ -594,8 +596,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 approval.setUserFourthApproval(getUserLogged().getName());
                 approval.setJustificationDisapproval(justification);
                 approval = approvalDAO.save(approval);
+
                 purchaseOrder.setStatus(StatusEnum.Reject);
                 purchaseOrder.setApproval(approval);
+                purchaseOrder.setFinalizationDate(new Timestamp(new Date().getTime()));
                 purchaseOrderDAO.save(purchaseOrder);
                 for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
                     SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
@@ -610,9 +614,11 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 approval.setUserThirdApproval(getUserLogged().getName());
                 approval.setJustificationDisapproval(justification);
                 approval = approvalDAO.save(approval);
-                    purchaseOrder.setStatus(StatusEnum.Reject);
-                    purchaseOrder.setApproval(approval);
-                    purchaseOrderDAO.save(purchaseOrder);
+
+                purchaseOrder.setStatus(StatusEnum.Reject);
+                purchaseOrder.setApproval(approval);
+                purchaseOrder.setFinalizationDate(new Timestamp(new Date().getTime()));
+                purchaseOrderDAO.save(purchaseOrder);
                     for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
                         SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
                         solicitationRequest.setStatus(StatusEnum.Reproved);
@@ -626,10 +632,11 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 approval.setUserSecondApproval(getUserLogged().getName());
                 approval.setJustificationDisapproval(justification);
                 approval = approvalDAO.save(approval);
-                    purchaseOrder.setStatus(StatusEnum.Reject);
-                    purchaseOrder.setApproval(approval);
-                    purchaseOrderDAO.save(purchaseOrder);
-                    purchaseOrder.setApproval(approval);
+
+                purchaseOrder.setStatus(StatusEnum.Reject);
+                purchaseOrder.setApproval(approval);
+                purchaseOrder.setFinalizationDate(new Timestamp(new Date().getTime()));
+                purchaseOrderDAO.save(purchaseOrder);
                     for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
                         SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
                         solicitationRequest.setStatus(StatusEnum.Reproved);
@@ -643,9 +650,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 approval.setUserFirstApproval(getUserLogged().getName());
                 approval.setJustificationDisapproval(justification);
                 approval = approvalDAO.save(approval);
+
                 purchaseOrder.setStatus(StatusEnum.Reject);
                 purchaseOrder.setApproval(approval);
-                    purchaseOrderDAO.save(purchaseOrder);
+                purchaseOrder.setFinalizationDate(new Timestamp(new Date().getTime()));
+                purchaseOrderDAO.save(purchaseOrder);
+
                 for (OrderRequest orderRequest : purchaseOrder.getOrderRequests()) {
                     SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
                     solicitationRequest.setStatus(StatusEnum.Reproved);
@@ -735,7 +745,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     alterStatusFinishedOrPartiallyFinished(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
                 }
             }
-           alterStatusPurchaseOrder(purchaseOrder);
+
+            alterStatusPurchaseOrder(purchaseOrder);
+            purchaseOrder.setFinalizationDate(new Timestamp(new Date().getTime()));
             purchaseOrderDAO.save(purchaseOrder);
         }
     }
@@ -779,6 +791,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         }
 
         alterStatusPurchaseOrder(purchaseOrder);
+        purchaseOrder.setFinalizationDate(new Timestamp(new Date().getTime()));
         purchaseOrderDAO.save(purchaseOrder);
     }
 
@@ -944,6 +957,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         if (totalReproved == total) {
             situation.setStatus(StatusEnum.QuoteReject);
             situationDAO.save(situation);
+            solicitation.setFinalDate(new Timestamp(new Date().getTime()));
         }
     }
 
@@ -977,6 +991,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 statusEnum = statusEnum.PartiallyFinished;
             }
         }
+        purchaseOrder.setFinalizationDate(new Date());
         purchaseOrder.setStatus(statusEnum);
     }
 
@@ -994,7 +1009,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             situation.setStatus(StatusEnum.PartiallyFinished);
         }
         situationDAO.save(situation);
-
     }
 
     public void alterStatusProduct(OrderRequest orderRequest){

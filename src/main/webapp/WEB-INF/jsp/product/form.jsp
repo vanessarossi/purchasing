@@ -63,6 +63,23 @@
             <div class="row">
                 <div class="col-sm-2 col-md-2">
                     <div class="form-group">
+                        <label class="control-label"><fmt:message key="label.active"></fmt:message></label><span class="required"> *</span>
+                        <br>
+                        <div class="radio-inline">
+                            <label class="control-label">
+                                <input type="radio" value="true" name="product.active" id="input" <c:if test="${product.active eq true}" > checked </c:if> > <fmt:message key="label.yes"/>
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label class="control-label">
+                                <input type="radio" value="false" name="product.active" id="input" <c:if test="${product.active eq false}" > checked </c:if> > <fmt:message key="label.no"/>
+                            </label>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                    <div class="form-group">
                         <label class="control-label"><fmt:message key="label.minimumStock"></fmt:message></label>
                         <c:set var="minimumStock" value="${fn:replace(product.minimumStock,'.', ',')}" />
                         <input type="text" class="form-control" id="minimumStock" name="product.minimumStock" value="${minimumStock}"/>

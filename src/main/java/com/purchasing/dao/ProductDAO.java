@@ -45,6 +45,7 @@ public class ProductDAO extends DAOImpl<Product,Long> {
             disjunction.add(Restrictions.ilike("model",text, MatchMode.ANYWHERE));
             disjunction.add(Restrictions.ilike("mark", text, MatchMode.ANYWHERE ));
         criteria.add(disjunction);
+        criteria.add(Restrictions.eq("active",true));
         products = criteria.list();
         return products;
     }
@@ -68,6 +69,7 @@ public class ProductDAO extends DAOImpl<Product,Long> {
         List<Product> products = new ArrayList<>();
         Criteria criteria = getSession().createCriteria(Product.class);
         criteria.add(Restrictions.eq("description", product.getDescription()));
+        criteria.add(Restrictions.eq("active",true));
         products = criteria.list();
         return products;
     }

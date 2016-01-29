@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -43,6 +44,10 @@ public class Product {
     @Column(name = "minimum_stock")
     private Float minimumStock;
 
+    @NotNull
+    @Column(name = "active")
+    private Boolean active;
+
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Category category;
@@ -53,7 +58,6 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<SolicitationRequest> solicitationRequests;
-
 
     public Long getId() {
         return id;
@@ -109,6 +113,14 @@ public class Product {
 
     public void setMinimumStock(Float minimumStock) {
         this.minimumStock = minimumStock;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Category getCategory() {

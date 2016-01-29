@@ -46,6 +46,7 @@ function viewProduct(product) {
         var category = result["category"]["description"];
         var minimumStock = result["minimumStock"];
         var barCode = result["barCode"];
+        var active = result["active"] == true ? "Sim" : "Não";
 
         $('#description').text(description);
         $('#mark').text(mark);
@@ -55,6 +56,7 @@ function viewProduct(product) {
         $('#observation').text(observation);
         $('#minimumStock').text(minimumStock);
         $('#barCode').text(barCode);
+        $('#active').text(active);
         $('#viewProduct').modal('show');
       },
       error: function () {
@@ -72,6 +74,7 @@ function clearModal() {
   $('#minimumStock').text("");
   $('#barCode').text("");
   $('#observation').text("");
+  $('#active').text("");
 }
 
 function confirmDetele(id) {

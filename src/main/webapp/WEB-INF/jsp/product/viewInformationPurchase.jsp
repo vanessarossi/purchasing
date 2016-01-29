@@ -11,7 +11,7 @@
             <h3><fmt:message key="title.information.purchase"/></h3>
         </div>
     <div class="row">
-            <div class="col-sm-2 col-md-2">
+            <div class="col-sm-2 col-md-1">
                 <div class="form-group">
                     <label class="control-label"><fmt:message key="label.code"></fmt:message></label>
                     <input type="text" class="form-control" id="code" name="product.id" value="${product.id}" readonly/>
@@ -37,13 +37,19 @@
                     <input type="text" class="form-control" id="mark" name="product.mark" value="${product.mark}" readonly/>
                 </div>
             </div>
-            <div class="col-sm-3 col-md-3">
+            <div class="col-sm-2 col-md-1">
+                <div class="form-group">
+                    <label class="control-label"><fmt:message key="label.active"></fmt:message></label>
+                    <input type="text" class="form-control" id="active" name="product.active" value="<c:if test="${product.active eq true}" > <fmt:message key="label.yes" /> </c:if> <c:if test="${product.active eq false}" > <fmt:message key="label.no" /> </c:if>" readonly/>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-2">
                 <div class="form-group">
                     <label class="control-label"><fmt:message key="label.unit"></fmt:message></label>
                     <input type="text" class="form-control" id="unit" name="product.unit.description" value="${product.unit.description}" readonly/>
                 </div>
             </div>
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-4 col-md-3">
                 <div class="form-group">
                     <label class="control-label"><fmt:message key="label.category"></fmt:message></label>
                     <input type="text" class="form-control" id="category" name="product.category.description" value="${product.category.description}" readonly/>

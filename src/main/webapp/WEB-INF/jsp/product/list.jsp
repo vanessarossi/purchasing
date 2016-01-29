@@ -10,11 +10,11 @@
     <div class="page-header">
             <h3><fmt:message key="title.products" /></h3>
     </div>
-    <div class="row">
-           <a   href="<c:url value="/produto/formulario" ></c:url>" type="button" class="btn btn-primary">
+
+    <a   href="<c:url value="/produto/formulario" ></c:url>" type="button" class="btn btn-primary">
                <fmt:message key="button.newProduct"/>
-           </a>
-       </div>
+    </a>
+
     <br/>
     <table id="productTable" class="table table-striped table-hover table-condensed">
             <thead>
@@ -75,6 +75,12 @@
                         </div>
                     </div>
                     <div class="row" >
+                        <div class="col-sm-2 col-md-2">
+                            <div class="form-group">
+                                <label class="control-label"><fmt:message key="label.active"></fmt:message></label><br>
+                                <span id="active"></span>
+                            </div>
+                        </div>
                         <div class="col-sm-2 col-md-2">
                             <div class="form-group">
                                 <label class="control-label"><fmt:message key="label.minimumStock"></fmt:message></label><br>
