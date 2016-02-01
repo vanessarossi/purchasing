@@ -204,7 +204,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         if (purchaseOrder.getStatus() != StatusEnum.Finished && purchaseOrder.getStatus() != StatusEnum.PartiallyFinished && purchaseOrder.getStatus() != StatusEnum.Reject && purchaseOrder.getStatus() != StatusEnum.Conferred){
             purchaseOrderFound.setJustificationCancellation(purchaseOrder.getJustificationCancellation());
             purchaseOrderFound.setStatus(StatusEnum.Canceled);
-            purchaseOrder.setFinalizationDate(new Timestamp(new Date().getTime()));
+            purchaseOrderFound.setFinalizationDate(new Timestamp(new Date().getTime()));
             purchaseOrderDAO.save(purchaseOrderFound);
 
             List<OrderRequest> orderRequests = purchaseOrderFound.getOrderRequests();
