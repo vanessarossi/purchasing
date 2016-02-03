@@ -6,22 +6,22 @@ package com.purchasing.support.excel.entity;
  */
 public class PurchaseOrderAndSolicitationReport {
 
-    private Integer month;
-    private Integer total;
+    private String month;
+    private String total;
 
-    public Integer getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(Integer month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
-    public Integer getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 }

@@ -88,7 +88,7 @@
         <div class="col-xs-4 col-sm-4 col-md-2  col-lg-2">
               <div class="form-group">
                 <label class="control-label"><fmt:message key="label.final.month" /></label>
-                <select class="form-control" id="finalMonth" name="report.finalMonth">
+                <select class="form-control" id="lastMonth" name="report.lastMonth">
                   <option value=""><fmt:message key="label.select" /></option>
                   <option value="01"><fmt:message key="label.month.january" /></option>
                   <option value="02"><fmt:message key="label.month.february" /></option>
@@ -132,7 +132,7 @@
 </html:template>
 </body>
 <html:jsAssets/>
-<script src="${pageContext.request.contextPath}/asset/js/custom/form_report.js"></script>
 <script src="${pageContext.request.contextPath}/asset/js/vendor/jquery.mask.min.js"></script>
-<script src="${pageContext.request.contextPath}/asset/js/custom/form-contract.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/commons/formCommons.js"></script>
+<script src="${pageContext.request.contextPath}/asset/js/custom/form_report.js"></script>
 </html>

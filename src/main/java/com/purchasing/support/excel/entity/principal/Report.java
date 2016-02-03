@@ -10,7 +10,7 @@ public class Report {
 
     private Integer year;
     private Integer initialMonth;
-    private Integer finalMonth;
+    private Integer lastMonth;
     private Integer supplier;
     private Date expirationDate;
 
@@ -30,12 +30,12 @@ public class Report {
         this.initialMonth = initialMonth;
     }
 
-    public Integer getFinalMonth() {
-        return finalMonth;
+    public Integer getLastMonth() {
+        return lastMonth;
     }
 
-    public void setFinalMonth(Integer finalMonth) {
-        this.finalMonth = finalMonth;
+    public void setLastMonth(Integer lastMonth) {
+        this.lastMonth = lastMonth;
     }
 
     public Integer getSupplier() {

@@ -6,14 +6,15 @@ package com.purchasing.support.excel.entity;
  */
 public class FinancialManagementByCostCenterReport {
 
-    private Integer month;
+    private String month;
     private String costCenter;
+    private String total;
 
-    public Integer getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(Integer month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
@@ -23,5 +24,13 @@ public class FinancialManagementByCostCenterReport {
 
     public void setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
     }
 }

@@ -6,16 +6,16 @@ package com.purchasing.support.excel.entity;
  */
 public class PurchasedServiceTypeReport {
 
-    private Integer month;
+    private String month;
     private String typeService;
-    private Double value;
-    private Float total;
+    private String value;
+    private String total;
 
-    public Integer getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(Integer month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
@@ -27,19 +27,19 @@ public class PurchasedServiceTypeReport {
         this.typeService = typeService;
     }
 
-    public Double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
-    public Float getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(Float total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 }
