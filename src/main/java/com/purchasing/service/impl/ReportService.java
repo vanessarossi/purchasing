@@ -15,4 +15,8 @@ public interface ReportService {
     public FileDownload exportPurchaseOrderForSupplierAndExpirationDateReport(Report report);
 
     public FileDownload exportPurchasedProductClassificationReport(Report report);
+
+    public FileDownload exportPurchasedServiceTypeReport(Report report);
+
+    public FileDownload exportManagementByCostCenterReport(Report report);
 }

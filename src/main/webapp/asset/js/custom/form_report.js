@@ -12,44 +12,51 @@ $(document).ready(function() {
 $('input[type="radio"]').on('change', function() {
    var typeReport = $('input[name=report]:checked').val();
    if(typeReport == 'financialManagementReport'){
+
       addActionForm('formReportOne',getContextPath()+'relatorio/financeiro/gerencial');
    		$('#formReportOne').show();
   		$('#formReportTwo').hide();
-  		
   		clearFormReportOne();
   		clearFormReportTwo();
+      
    }if(typeReport == 'totalPurchasedProductClassificationReport'){
+
       addActionForm('formReportOne',getContextPath()+'relatorio/relacao/compras/classificada/categoria/produto');
    		$('#formReportOne').show();
   		$('#formReportTwo').hide();
-  		
   		clearFormReportOne();
   		clearFormReportTwo();
+
    }if(typeReport == 'totalPurchasedServiceTypeReport'){
+
+      addActionForm('formReportOne',getContextPath()+'relatorio/relacao/compras/classificada/tipo/servico');
    		$('#formReportOne').show();
   		$('#formReportTwo').hide();
-  		
   		clearFormReportOne();
   		clearFormReportTwo();
+
    }if(typeReport == 'financialManagementByCostCenterReport'){
+
    		$('#formReportOne').show();
   		$('#formReportTwo').hide();
-  		
   		clearFormReportOne();
   		clearFormReportTwo();
+
    }if(typeReport == 'purchaseOrderAndSolicitationReport'){
+
    		$('#formReportOne').show();
   		$('#formReportTwo').hide();
-  		
   		clearFormReportOne();
   		clearFormReportTwo();
+
    }if (typeReport == 'purchaseOrderForSupplierAndExpirationDateReport'){
-    addActionForm('formReportTwo',getContextPath()+'relatorio/relacao/ordem/fornecedor/vencimento');
+
+      addActionForm('formReportTwo',getContextPath()+'relatorio/relacao/ordem/fornecedor/vencimento');
    		$('#formReportOne').hide();
   		$('#formReportTwo').show();
-
   		clearFormReportOne();
   		clearFormReportTwo();
+
    }
 });
 

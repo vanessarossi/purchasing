@@ -65,5 +65,11 @@ public class ReportController {
         return reportService.exportPurchasedProductClassificationReport(report);
     }
 
+    @CustomBrutauthRules(SecondLevelAccessRule.class)
+    @Post("/relacao/compras/classificada/tipo/servico")
+    public Download purchasedServiceTypeReport(Report report){
+        return reportService.exportPurchasedServiceTypeReport(report);
+    }
+
 }
 

@@ -3,10 +3,7 @@ package com.purchasing.service;
 import br.com.caelum.vraptor.observer.download.FileDownload;
 import com.purchasing.dao.ReportDAO;
 import com.purchasing.service.impl.ReportService;
-import com.purchasing.support.excel.ExportFinancialManagementReport;
-import com.purchasing.support.excel.ExportPaymentForecastReport;
-import com.purchasing.support.excel.ExportPurchaseOrderForSupplierAndExpirationDateReport;
-import com.purchasing.support.excel.ExportPurchasedProductClassificationReport;
+import com.purchasing.support.excel.*;
 import com.purchasing.support.excel.entity.principal.Report;
 
 import javax.inject.Inject;
@@ -30,6 +27,8 @@ public class ReportServiceImpl implements ReportService {
     private ExportPurchaseOrderForSupplierAndExpirationDateReport exportPurchaseOrderForSupplierAndExpirationDateReport;
     @Inject
     private ExportPurchasedProductClassificationReport exportPurchasedProductClassificationReport;
+    @Inject
+    private ExportPurchasedServiceTypeReport exportPurchasedServiceTypeReport;
 
     @Override
     public FileDownload exportPaymentForecastReport() {
@@ -97,6 +96,28 @@ public class ReportServiceImpl implements ReportService {
             e.printStackTrace();
         }
         return fileDownload;
+    }
+
+    @Override
+    public FileDownload exportPurchasedServiceTypeReport(Report report) {
+        Collection<Object> objects = reportDAO.getTotalPurchasedServiceTypeReport(report);
+        File file = exportPurchasedServiceTypeReport.generateReport(objects);
+
+        FileDownload fileDownload = null;
+        String nameFile = file.getName();
+        String contentType = "application/vnd.ms-excel";
+
+        try {
+            fileDownload = new FileDownload(file,contentType,nameFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return fileDownload;
+    }
+
+    @Override
+    public FileDownload exportManagementByCostCenterReport(Report report) {
+        return null;
     }
 
 
