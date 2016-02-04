@@ -1,7 +1,6 @@
 package com.purchasing.dao;
 
 import com.purchasing.dao.base.DAOImpl;
-import com.purchasing.entity.CostCenter;
 import com.purchasing.support.excel.entity.principal.Report;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -9,7 +8,6 @@ import org.hibernate.Session;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Vanessa on 12/29/15.
@@ -56,13 +54,13 @@ public class ReportDAO extends DAOImpl<Object,Integer> {
         return  objects ;
     }
 
-    public Collection<Object> getFinancialManagementByCostCenterReport(Report report,List<CostCenter> costCenters){
+    public Collection<Object> getFinancialManagementByCostCenterReport(Report report,Long costCenter){
         Collection<Object> objects = new ArrayList<>();
-        SQLQuery sqlQuery =  getSession().createSQLQuery("CALL financial_management_by_cost_center_report_monthly(:year,:initialMonth,:lastMonth,:costCenters)");
+        SQLQuery sqlQuery =  getSession().createSQLQuery("CALL financial_management_by_cost_center_report_monthly(:year,:initialMonth,:lastMonth,:costCenter)");
         sqlQuery.setParameter("year",report.getYear());
         sqlQuery.setParameter("initialMonth",report.getInitialMonth());
         sqlQuery.setParameter("lastMonth",report.getLastMonth());
-        sqlQuery.setParameter("costCenters",costCenters);
+        sqlQuery.setParameter("costCenter",costCenter);
         objects = sqlQuery.list();
         return  objects ;
     }

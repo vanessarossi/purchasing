@@ -54,6 +54,12 @@ public class ReportController {
     }
 
     @CustomBrutauthRules(SecondLevelAccessRule.class)
+    @Post("/financeiro/gerencial/centro/custo")
+    public Download financialManagementByCostCenterReport(Report report){
+        return reportService.exportFinancialManagementByCostCenterReport(report);
+    }
+
+    @CustomBrutauthRules(SecondLevelAccessRule.class)
     @Post("/relacao/ordem/fornecedor/vencimento")
     public Download purchaseOrderForSupplierAndExpirationDateReport(Report report){
         return reportService.exportPurchaseOrderForSupplierAndExpirationDateReport(report);

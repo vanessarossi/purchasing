@@ -37,6 +37,7 @@ $('input[type="radio"]').on('change', function() {
 
    }if(typeReport == 'financialManagementByCostCenterReport'){
 
+      addActionForm('formReportOne',getContextPath()+'relatorio/financeiro/gerencial/centro/custo');
    		$('#formReportOne').show();
   		$('#formReportTwo').hide();
   		clearFormReportOne();
@@ -64,7 +65,7 @@ $('input[type="radio"]').on('change', function() {
 function clearFormReportOne() {
 	$('#year').val('');
 	$('#initialMonth').val('');
-	$('#finalMonth').val('');
+	$('#lastMonth').val('');
 };
 
 function clearFormReportTwo() {
