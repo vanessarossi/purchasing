@@ -44,6 +44,7 @@ $('input[type="radio"]').on('change', function() {
 
    }if(typeReport == 'purchaseOrderAndSolicitationReport'){
 
+      addActionForm('formReportOne',getContextPath()+'relatorio/relacao/solicitacao/ordem/compra');
    		$('#formReportOne').show();
   		$('#formReportTwo').hide();
   		clearFormReportOne();

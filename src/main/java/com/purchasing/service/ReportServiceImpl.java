@@ -29,6 +29,8 @@ public class ReportServiceImpl implements ReportService {
     private ExportPurchasedProductClassificationReport exportPurchasedProductClassificationReport;
     @Inject
     private ExportPurchasedServiceTypeReport exportPurchasedServiceTypeReport;
+    @Inject
+    private ExportPurchaseOrderAndSolicitationReport exportPurchaseOrderAndSolicitationReport;
 
     @Override
     public FileDownload exportPaymentForecastReport() {
@@ -118,6 +120,22 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public FileDownload exportManagementByCostCenterReport(Report report) {
         return null;
+    }
+
+    @Override
+    public FileDownload exportPurchaseOrderAndSolicitationReport(Report report) {
+        File file = exportPurchaseOrderAndSolicitationReport.generateReportWithMultipleSearch(report);
+
+        FileDownload fileDownload = null;
+        String nameFile = file.getName();
+        String contentType = "application/vnd.ms-excel";
+
+        try {
+            fileDownload = new FileDownload(file,contentType,nameFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return fileDownload;
     }
 
 

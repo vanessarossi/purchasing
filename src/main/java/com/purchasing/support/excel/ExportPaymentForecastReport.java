@@ -3,6 +3,7 @@ package com.purchasing.support.excel;
 import com.purchasing.support.date.Conversor;
 import com.purchasing.support.excel.base.BaseFile;
 import com.purchasing.support.excel.entity.PaymentForecastReport;
+import com.purchasing.support.excel.entity.principal.Report;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -55,6 +56,11 @@ public class ExportPaymentForecastReport extends BaseFolderImpl implements BaseF
         }
 
         return file;
+    }
+
+    @Override
+    public File generateReportWithMultipleSearch(Report report) {
+        return null;
     }
 
     public void generateTitleRow(Row row, CellStyle cellStyle){

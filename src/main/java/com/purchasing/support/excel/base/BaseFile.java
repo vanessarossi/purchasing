@@ -1,5 +1,7 @@
 package com.purchasing.support.excel.base;
 
+import com.purchasing.support.excel.entity.principal.Report;
+
 import java.io.File;
 import java.util.Collection;
 
@@ -9,4 +11,6 @@ import java.util.Collection;
 public interface BaseFile {
 
     public File generateReport(Collection<Object> objects);
+
+    public File generateReportWithMultipleSearch(Report report);
 }
