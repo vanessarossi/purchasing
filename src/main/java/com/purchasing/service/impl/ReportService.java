@@ -16,7 +16,11 @@ public interface ReportService {
 
     public FileDownload exportPurchasedProductClassificationReport(Report report);
 
+    public FileDownload exportPurchasedProductClassificationByCostCenterReport(Report report);
+
     public FileDownload exportPurchasedServiceTypeReport(Report report);
+
+    public FileDownload exportPurchasedServiceTypeByCostCenterReport(Report report);
 
     public FileDownload exportFinancialManagementByCostCenterReport(Report report);
 

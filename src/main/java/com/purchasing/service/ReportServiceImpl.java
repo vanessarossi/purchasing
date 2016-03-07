@@ -32,7 +32,11 @@ public class ReportServiceImpl implements ReportService {
     @Inject
     private ExportPurchasedProductClassificationReport exportPurchasedProductClassificationReport;
     @Inject
+    private ExportPurchasedProductClassificationByCostCenterReport exportPurchasedProductClassificationByCostCenterReport;
+    @Inject
     private ExportPurchasedServiceTypeReport exportPurchasedServiceTypeReport;
+    @Inject
+    private ExportPurchasedServiceTypeByCostCenterReport exportPurchasedServiceTypeByCostCenterReport;
     @Inject
     private ExportPurchaseOrderAndSolicitationReport exportPurchaseOrderAndSolicitationReport;
     @Inject
@@ -107,9 +111,43 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
+    public FileDownload exportPurchasedProductClassificationByCostCenterReport(Report report) {
+        Collection<Object> objects = reportDAO.getTotalPurchasedProductClassificationByCostCenterReport(report);
+        File file = exportPurchasedProductClassificationByCostCenterReport.generateReport(objects);
+
+        FileDownload fileDownload = null;
+        String nameFile = file.getName();
+        String contentType = "application/vnd.ms-excel";
+
+        try {
+            fileDownload = new FileDownload(file,contentType,nameFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return fileDownload;
+    }
+
+    @Override
     public FileDownload exportPurchasedServiceTypeReport(Report report) {
         Collection<Object> objects = reportDAO.getTotalPurchasedServiceTypeReport(report);
         File file = exportPurchasedServiceTypeReport.generateReport(objects);
+
+        FileDownload fileDownload = null;
+        String nameFile = file.getName();
+        String contentType = "application/vnd.ms-excel";
+
+        try {
+            fileDownload = new FileDownload(file,contentType,nameFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return fileDownload;
+    }
+
+    @Override
+    public FileDownload exportPurchasedServiceTypeByCostCenterReport(Report report) {
+        Collection<Object> objects = reportDAO.getTotalPurchasedServiceTypeByCostCenterReport(report);
+        File file = exportPurchasedServiceTypeByCostCenterReport.generateReport(objects);
 
         FileDownload fileDownload = null;
         String nameFile = file.getName();

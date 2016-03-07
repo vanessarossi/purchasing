@@ -27,6 +27,14 @@ $('input[type="radio"]').on('change', function() {
   		clearFormReportOne();
   		clearFormReportTwo();
 
+   }if(typeReport == 'totalPurchasedProductClassificationByCostCenterReport'){
+
+      addActionForm('formReportOne',getContextPath()+'relatorio/relacao/compras/classificada/categoria/produto/centro/custo');
+      $('#formReportOne').show();
+      $('#formReportTwo').hide();
+      clearFormReportOne();
+      clearFormReportTwo();
+
    }if(typeReport == 'totalPurchasedServiceTypeReport'){
 
       addActionForm('formReportOne',getContextPath()+'relatorio/relacao/compras/classificada/tipo/servico');
@@ -34,6 +42,14 @@ $('input[type="radio"]').on('change', function() {
   		$('#formReportTwo').hide();
   		clearFormReportOne();
   		clearFormReportTwo();
+
+   }if(typeReport == 'totalPurchasedServiceTypeByCostCenterReport'){
+
+      addActionForm('formReportOne',getContextPath()+'relatorio/relacao/compras/classificada/tipo/servico/centro/custo');
+      $('#formReportOne').show();
+      $('#formReportTwo').hide();
+      clearFormReportOne();
+      clearFormReportTwo();
 
    }if(typeReport == 'financialManagementByCostCenterReport'){
 

@@ -31,6 +31,16 @@
               </label>
             </div>
             </c:if>
+
+            <c:if test="${rules[EighthLevelAccessRule].isAllowed()}">
+              <div class="radio">
+                <label class="control-label">
+                  <input type="radio" value="totalPurchasedProductClassificationByCostCenterReport" name="report" id="report"> <fmt:message key="label.total.purchased.product.classification.cost.center.report"/>
+                </label>
+              </div>
+            </c:if>
+
+
             <c:if test="${rules[EighthLevelAccessRule].isAllowed()}">
               <div class="radio">
               <label class="control-label">
@@ -38,6 +48,15 @@
               </label>
             </div>
             </c:if>
+
+            <c:if test="${rules[EighthLevelAccessRule].isAllowed()}">
+              <div class="radio">
+                <label class="control-label">
+                  <input type="radio" value="totalPurchasedServiceTypeByCostCenterReport" name="report" id="report"> <fmt:message key="label.total.purchased.service.type.cost.center.report"/>
+                </label>
+              </div>
+            </c:if>
+
             <c:if test="${rules[SeventhLevelAccessRule].isAllowed()}">
               <div class="radio">
               <label class="control-label">

@@ -34,11 +34,12 @@
                 <th style="width: 2%" ><fmt:message key="table.##" /></th>
                 <th style="width: 2%" ><fmt:message key="table.##" /></th>
                 <th style="width: 2%" ><fmt:message key="table.##" /></th>
+                <th style="width: 2%" ><fmt:message key="table.##" /></th>
             </tr>
             </thead>
             <tbody>
             </tbody>
-        </table>
+    </table>
     <div class="modal fade" id="reproveSolicitation" tabindex="-1" role="dialog" aria-labelledby="reproveSolicitation" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -66,6 +67,68 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="viewQuick" tabindex="-1" role="dialog" aria-labelledby="viewQuick" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title"><fmt:message key="title.solicitation" /></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div class="form-group">
+                                <label  class="control-label"><fmt:message key="label.code"/></label>
+                                <input  class="form-control" readonly value="" id="solicitationCode">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class="form-group">
+                                <label  class="control-label"><fmt:message key="label.costCenter"/></label>
+                                <input  class="form-control" readonly value="" id="solicitationCostCenter">
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                            <div class="form-group">
+                                <label  class="control-label"><fmt:message key="label.user"/></label>
+                                <input  class="form-control" readonly value="" id="solicitationUser">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row productType">
+                        <table id="productTable" class="table table-striped table-hover table-condensed">
+                            <thead>
+                            <tr>
+                                <th><fmt:message key="table.code" /></th>
+                                <th><fmt:message key="table.description"/></th>
+                                <th><fmt:message key="table.model" /></th>
+                                <th><fmt:message key="table.mark" /></th>
+                                <th><fmt:message key="table.abbreviatedQuantity" /></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row serviceType">
+                        <table id="serviceTable" class="table table-striped table-hover table-condensed">
+                            <thead>
+                            <tr>
+                                <th><fmt:message key="table.type" /></th>
+                                <th><fmt:message key="table.description"/></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </html:template>
 </body>
 <html:notification/>

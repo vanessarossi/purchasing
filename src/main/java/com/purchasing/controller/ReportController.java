@@ -72,9 +72,21 @@ public class ReportController {
     }
 
     @CustomBrutauthRules(SecondLevelAccessRule.class)
+    @Post("/relacao/compras/classificada/categoria/produto/centro/custo")
+    public Download purchasedProductClassificationByCostCenterReport(Report report){
+        return reportService.exportPurchasedProductClassificationByCostCenterReport(report);
+    }
+
+    @CustomBrutauthRules(SecondLevelAccessRule.class)
     @Post("/relacao/compras/classificada/tipo/servico")
     public Download purchasedServiceTypeReport(Report report){
         return reportService.exportPurchasedServiceTypeReport(report);
+    }
+
+    @CustomBrutauthRules(SecondLevelAccessRule.class)
+    @Post("/relacao/compras/classificada/tipo/servico/centro/custo")
+    public Download purchasedServiceTypeByCostCenterReport(Report report){
+        return reportService.exportPurchasedServiceTypeByCostCenterReport(report);
     }
 
     @CustomBrutauthRules(SecondLevelAccessRule.class)

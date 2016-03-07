@@ -155,6 +155,7 @@ public class SolicitationServiceImpl implements SolicitationService {
             String colCostCenter = solicitation.getCostCenter().getDescription();
             String colName = solicitation.getUser().getName();
             String colStatus = solicitation.getSituation().getStatus().getDescription();
+            String buttonQuick = "<a onclick=viewMore("+solicitation.getId()+")><span class=\"fa fa-expand btn btn-default btn-xs\"></span></a>";
             String buttonView = "<a href=/purchasing/solicitacao/visualizar/"+solicitation.getId()+"/geral><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
             String buttonPrinter= "<a href=/purchasing/solicitacao/imprimir/"+solicitation.getId()+"  target='_blank'><span class=\"fa fa-print btn btn-default btn-xs\"></span></a>";
             String buttonCancel = "<a  onclick=reproveSolicitation("+solicitation.getId()+")><span class=\"fa fa-times btn btn-default btn-xs\"></span></a>";
@@ -164,6 +165,7 @@ public class SolicitationServiceImpl implements SolicitationService {
                     colCostCenter,
                     colName,
                     colStatus,
+                    buttonQuick,
                     buttonView,
                     buttonPrinter,
                     buttonCancel

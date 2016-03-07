@@ -44,9 +44,29 @@ public class ReportDAO extends DAOImpl<Object,Integer> {
         return  objects ;
     }
 
+    public Collection<Object> getTotalPurchasedProductClassificationByCostCenterReport(Report report){
+        Collection<Object> objects = new ArrayList<>();
+        SQLQuery sqlQuery =  getSession().createSQLQuery("CALL total_purchased_product_classification_report_monthly_by_cc(:year,:initialMonth,:lastMonth)");
+        sqlQuery.setParameter("year",report.getYear());
+        sqlQuery.setParameter("initialMonth",report.getInitialMonth());
+        sqlQuery.setParameter("lastMonth",report.getLastMonth());
+        objects = sqlQuery.list();
+        return  objects ;
+    }
+
     public Collection<Object> getTotalPurchasedServiceTypeReport(Report report){
         Collection<Object> objects = new ArrayList<>();
         SQLQuery sqlQuery =  getSession().createSQLQuery("CALL total_purchased_service_type_report_monthly(:year,:initialMonth,:lastMonth)");
+        sqlQuery.setParameter("year",report.getYear());
+        sqlQuery.setParameter("initialMonth",report.getInitialMonth());
+        sqlQuery.setParameter("lastMonth",report.getLastMonth());
+        objects = sqlQuery.list();
+        return  objects ;
+    }
+
+    public Collection<Object> getTotalPurchasedServiceTypeByCostCenterReport(Report report){
+        Collection<Object> objects = new ArrayList<>();
+        SQLQuery sqlQuery =  getSession().createSQLQuery("CALL total_purchased_service_type_report_monthly_cc(:year,:initialMonth,:lastMonth)");
         sqlQuery.setParameter("year",report.getYear());
         sqlQuery.setParameter("initialMonth",report.getInitialMonth());
         sqlQuery.setParameter("lastMonth",report.getLastMonth());

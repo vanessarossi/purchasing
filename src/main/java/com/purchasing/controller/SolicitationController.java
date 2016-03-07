@@ -120,6 +120,17 @@ public class SolicitationController {
         result.redirectTo(this).visualizeForm();
      }
 
+    @Get("/visualizacao/rapida/{solicitation.id}/json")
+    public void visualizeQick(Solicitation solicitation) {
+        solicitation = solicitationService.searchById(solicitation);
+        if (solicitation.getType() == TypeEnum.Material) {
+            result.use(Results.json()).withoutRoot().from(solicitation).include("costCenter").include("user").include("solicitationRequests").include("solicitationRequests.product").serialize();
+        }else{
+            result.use(Results.json()).withoutRoot().from(solicitation).include("costCenter").include("user").include("solicitationRequests").include("solicitationRequests.service").include("solicitationRequests.service.typeService").serialize();
+        }
+    }
+
+
     @Get("/remover/produto/{solicitationRequest.id}/json")
     public void removeProduct(SolicitationRequest solicitationRequest){
         solicitationService.removeSolicitationRequest(solicitationRequest);
