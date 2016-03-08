@@ -17,7 +17,7 @@
 
     <context-param>
         <param-name>br.com.caelum.vraptor.environment</param-name>
-        <param-value>production</param-value>
+        <param-value>development</param-value>
     </context-param>
 
     <filter>
