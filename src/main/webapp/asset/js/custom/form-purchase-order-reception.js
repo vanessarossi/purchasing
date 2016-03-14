@@ -4,6 +4,7 @@ $(document).ready(function() {
 $('#confered').click(function(){
 	var tax_document = $("#taxDocument").val();
 	if(tax_document != null && tax_document != ''){
+        $('#observation').attr('required','true');
 		$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/conferir');
 		$('#confirmReceptionForm').submit();
 	}else{
