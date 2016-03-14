@@ -3,12 +3,12 @@ $(document).ready(function() {
 
 $('#confered').click(function(){
 	var tax_document = $("#taxDocument").val();
-	if(tax_document != null && tax_document != ''){
-        $('#observation').attr('required','true');
+    var observation = $('#observation').val();
+	if(tax_document != null && tax_document != '' && observation != null && observation != ''){
 		$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/conferir');
 		$('#confirmReceptionForm').submit();
 	}else{
-		alert("Informe o número da nota fiscal.");
+		alert("Existem informações obrigatórias a serem preenchidas (Ex: Número da nota ou observação de recepção).");
 	}
 });
 
