@@ -9,7 +9,8 @@
 <html:template>
     <div class="page-header">
             <h3><fmt:message key="title.solicitations" /></h3>
-        </div>
+    </div>
+
     <div class="row">
             <div class="col-md-3 col-sm-3">
                 <div class="form-group">
@@ -23,6 +24,7 @@
                 </div>
             </div>
         </div>
+
     <table id="solicitationTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
@@ -40,6 +42,7 @@
             <tbody>
             </tbody>
     </table>
+
     <div class="modal fade" id="reproveSolicitation" tabindex="-1" role="dialog" aria-labelledby="reproveSolicitation" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

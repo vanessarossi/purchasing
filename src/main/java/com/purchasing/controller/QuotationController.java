@@ -213,6 +213,25 @@ public class QuotationController {
            result.redirectTo(this).formQuotation();
     }
 
+    @Get("/visualizacao/rapida/{quotation.id}/json")
+    public void visualizeQick(Quotation quotation) {
+        quotation = quotationService.searchById(quotation);
+        result.use(Results.json()).withoutRoot().from(quotation).include("user").serialize();
+    }
+
+    @Get("/pesquisa/pedido/visualizacao/rapida/{quotation.id}/json")
+    public void searchRequestvisualizeQick(Quotation quotation) {
+        quotation = quotationService.searchById(quotation);
+        if (quotation.getType() == TypeEnum.Material){
+           List<QuotationRequestProductView> quotationRequests =  quotationService.groupByProduct(quotation);
+            result.use(Results.json()).withoutRoot().from(quotationRequests).include("product").serialize();
+        }else{
+            List<QuotationRequest> quotationRequests = quotationService.searchQuotationRequestServiceByQuotation(quotation);
+            result.use(Results.json()).withoutRoot().from(quotationRequests).include("solicitationRequest").serialize();
+        }
+    }
+
+
     @Get("/deletar/pedido/material/total/{quotation.id}/{product.id}/json")
     public void removeQuotationRequestProductByProduct(Quotation quotation,Product product) {
         quotationService.removeQuotationRequestByProduct(quotation, product);

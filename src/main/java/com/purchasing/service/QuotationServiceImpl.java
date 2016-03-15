@@ -75,29 +75,7 @@ public class QuotationServiceImpl implements QuotationService {
     public List<Object[]> findPagination(String sSearch, int iDisplayStart, int iDisplayLength) {
         String search = sSearch == null ? "" : sSearch;
         List<Quotation> quotations = quotationDAO.pagination(search,iDisplayStart,iDisplayLength);
-        List<Object[]> quotationList = new ArrayList<>();
-
-        for (Quotation quotation : quotations){
-            String colNumber = quotation.getId().toString();
-            String colType = quotation.getType().getDescription();
-            String colUser = quotation.getUser().getName();
-            String colStatus = quotation.getStatus().getDescription();
-            String colInitialDate = Conversor.converterDateTimeInString(quotation.getInitialDate());
-            String colFinalDate = Conversor.converterDateTimeInString(quotation.getFinalDate());
-            String buttonView = "<a href=/purchasing/cotacao/editar/"+quotation.getId()+"><span class=\"fa fa-pencil-square-o btn btn-default btn-xs\"></span></a>";
-            String buttonCancel = "<a onclick=openFormCancellation("+quotation.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
-            String [] row = {
-                    colNumber,
-                    colType,
-                    colUser,
-                    colStatus,
-                    colInitialDate,
-                    colFinalDate,
-                    buttonView,
-                    buttonCancel
-            };
-            quotationList.add(row);
-        }
+        List<Object[]> quotationList = generateRowsTable(quotations);
         return quotationList;
     }
 
@@ -111,29 +89,7 @@ public class QuotationServiceImpl implements QuotationService {
     public List<Object[]> findPaginationWithFilter(String sSearch, StatusEnum status, int iDisplayStart, int iDisplayLength) {
         String search = sSearch == null ? "" : sSearch;
         List<Quotation> quotations = quotationDAO.paginationWithFilter(search,status,iDisplayStart,iDisplayLength);
-        List<Object[]> quotationList = new ArrayList<>();
-
-        for (Quotation quotation : quotations){
-            String colNumber = quotation.getId().toString();
-            String colType = quotation.getType().getDescription();
-            String colUser = quotation.getUser().getName();
-            String colStatus = quotation.getStatus().getDescription();
-            String colInitialDate = Conversor.converterDateTimeInString(quotation.getInitialDate());
-            String colFinalDate = Conversor.converterDateTimeInString(quotation.getFinalDate());
-            String buttonView = "<a href=/purchasing/cotacao/editar/"+quotation.getId()+"><span class=\"fa fa-pencil-square-o btn btn-default btn-xs\"></span></a>";
-            String buttonCancel = "<a onclick=openFormCancellation("+quotation.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
-            String [] row = {
-                    colNumber,
-                    colType,
-                    colUser,
-                    colStatus,
-                    colInitialDate,
-                    colFinalDate,
-                    buttonView,
-                    buttonCancel
-            };
-            quotationList.add(row);
-        }
+        List<Object[]> quotationList = generateRowsTable(quotations);
         return quotationList;
     }
 
@@ -190,7 +146,6 @@ public class QuotationServiceImpl implements QuotationService {
             quotationRequestDAO.save(quotationRequest);
 
             SolicitationRequest solicitationRequestFound = solicitationRequestDAO.findById(SolicitationRequest.class, solicitationRequest.getId());
-
             solicitationRequestFound.setAddQuotation(true);
             solicitationRequestDAO.save(solicitationRequestFound);
 
@@ -324,6 +279,34 @@ public class QuotationServiceImpl implements QuotationService {
 
     public Integer getTotalSolicitationRequest(Solicitation solicitation){
         return solicitationRequestDAO.totalSolicitationRequestBySolicitation(solicitation);
+    }
+
+    public List<Object[]> generateRowsTable(List<Quotation> quotations){
+        List<Object[]> quotationList = new ArrayList<>();
+        for (Quotation quotation : quotations){
+            String colNumber = quotation.getId().toString();
+            String colType = quotation.getType().getDescription();
+            String colUser = quotation.getUser().getName();
+            String colStatus = quotation.getStatus().getDescription();
+            String colInitialDate = Conversor.converterDateTimeInString(quotation.getInitialDate());
+            String colFinalDate = Conversor.converterDateTimeInString(quotation.getFinalDate());
+            String buttonView = "<a onclick=viewQuick("+quotation.getId()+")><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
+            String buttonEdit = "<a href=/purchasing/cotacao/editar/"+quotation.getId()+"><span class=\"fa fa-pencil-square-o btn btn-default btn-xs\"></span></a>";
+            String buttonCancel = "<a onclick=openFormCancellation("+quotation.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
+            String [] row = {
+                    colNumber,
+                    colType,
+                    colUser,
+                    colStatus,
+                    colInitialDate,
+                    colFinalDate,
+                    buttonView,
+                    buttonEdit,
+                    buttonCancel
+            };
+            quotationList.add(row);
+        }
+        return quotationList;
     }
 
 }
