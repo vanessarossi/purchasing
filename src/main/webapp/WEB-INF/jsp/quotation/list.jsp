@@ -121,6 +121,7 @@
                         <table id="serviceTable" class="table table-striped table-hover table-condensed">
                             <thead>
                             <tr>
+                                <th><fmt:message key="table.costCenter" /></th>
                                 <th><fmt:message key="table.type" /></th>
                                 <th><fmt:message key="table.description"/></th>
                             </tr>

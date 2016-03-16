@@ -111,7 +111,24 @@ function viewQuick(id){
 			        beforeSend: function(){
 			        },
 			        success: function (result) {
-			 
+			        	if (result != false) {
+				        		for (var i = 0; i < result.length; i++) {
+			                  	
+			                  	var typeService = result[i]['solicitationRequest']['service']['typeService']['description'];
+			                  	var service = result[i]['solicitationRequest']['service']['description'];
+			                  	var costCenter = result[i]['solicitationRequest']['solicitation']['costCenter']['description'];
+			                  	
+			    
+				                var row = '<tr>';
+				                row += "<td>"+costCenter+"</td>";
+				                row += "<td>"+typeService+"</td>";
+				                row += "<td>"+service+"</td>";
+				                row += "</tr>";
+
+			                  	$('#serviceTable > tbody').append(row);
+              				}
+			        	}
+
 			        },
 			        error: function () {
 			            alert("Ocorreu um erro no processamento dos dados.");
@@ -131,26 +148,27 @@ function viewQuick(id){
 			        beforeSend: function(){
 			        },
 			        success: function (result) {
-			 			
-			 			for (var i = 0; i < result.length; i++) {
-		                  	var code = result[i]['product']['id'];
-	
-		                  	var description = result[i]['product']['description'];
-		                  	var model = ((result[i]['product']['model'] == null) ? '' : result[i]['product']['model']);
-		                  	var mark = ((result[i]['product']['mark'] == null) ? '' : result[i]['product']['mark']);
-		                  	
-		                  	var quantity = result[i]['quantity'];
+			 			if (result != false) {
+				 			for (var i = 0; i < result.length; i++) {
+			                  	var code = result[i]['product']['id'];
+		
+			                  	var description = result[i]['product']['description'];
+			                  	var model = ((result[i]['product']['model'] == null) ? '' : result[i]['product']['model']);
+			                  	var mark = ((result[i]['product']['mark'] == null) ? '' : result[i]['product']['mark']);
+			                  	
+			                  	var quantity = result[i]['quantity'];
 
-			                var row = '<tr>';
-			                row += "<td>"+code+"</td>";
-			                row += "<td>"+description+"</td>";
-			                row += "<td>"+model+"</td>";
-			                row += "<td>"+mark+"</td>";
-			                row += "<td>"+quantity+"</td>";
-			                row += "</tr>";
+				                var row = '<tr>';
+				                row += "<td>"+code+"</td>";
+				                row += "<td>"+description+"</td>";
+				                row += "<td>"+model+"</td>";
+				                row += "<td>"+mark+"</td>";
+				                row += "<td>"+quantity+"</td>";
+				                row += "</tr>";
 
-		                  	$('#productTable > tbody').append(row);
-              			}
+			                  	$('#productTable > tbody').append(row);
+	              			}
+	              		}	
 
 			        },
 			        error: function () {

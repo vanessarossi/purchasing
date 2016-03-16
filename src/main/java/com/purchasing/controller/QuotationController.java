@@ -224,10 +224,18 @@ public class QuotationController {
         quotation = quotationService.searchById(quotation);
         if (quotation.getType() == TypeEnum.Material){
            List<QuotationRequestProductView> quotationRequests =  quotationService.groupByProduct(quotation);
-            result.use(Results.json()).withoutRoot().from(quotationRequests).include("product").serialize();
+            if (quotationRequests != null){
+                result.use(Results.json()).withoutRoot().from(quotationRequests).include("product").serialize();
+            }else{
+                result.use(Results.json()).withoutRoot().from(false).serialize();
+            }
         }else{
             List<QuotationRequest> quotationRequests = quotationService.searchQuotationRequestServiceByQuotation(quotation);
-            result.use(Results.json()).withoutRoot().from(quotationRequests).include("solicitationRequest").serialize();
+           if (quotationRequests != null){
+               result.use(Results.json()).withoutRoot().from(quotationRequests).include("solicitationRequest").include("solicitationRequest.service").include("solicitationRequest.service.typeService").include("solicitationRequest.solicitation").include("solicitationRequest.solicitation.costCenter").serialize();
+           }else{
+               result.use(Results.json()).withoutRoot().from(false).serialize();
+           }
         }
     }
 
