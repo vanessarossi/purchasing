@@ -60,9 +60,8 @@ public class User {
     @Column(name = "active")
     private Boolean active;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "last_access")
-    private Date lastAccess;
+    @Column(name = "first_access")
+    private Boolean FirstAccess;
 
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
@@ -75,12 +74,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Reception> receptions;
-
-    @OneToMany(mappedBy = "user")
-    private List<Quotation> quotations;
-
-    @OneToMany(mappedBy = "user")
-    private List<Solicitation> solicitations;
 
     public Long getId() {
         return id;
@@ -130,12 +123,12 @@ public class User {
         this.active = active;
     }
 
-    public Date getLastAccess() {
-        return lastAccess;
+    public Boolean getFirstAccess() {
+        return FirstAccess;
     }
 
-    public void setLastAccess(Date lastAccess) {
-        this.lastAccess = lastAccess;
+    public void setFirstAccess(Boolean firstAccess) {
+        FirstAccess = firstAccess;
     }
 
     public Role getRole() {
@@ -177,6 +170,14 @@ public class User {
     public void setSolicitations(List<Solicitation> solicitations) {
         this.solicitations = solicitations;
     }
+
+    @OneToMany(mappedBy = "user")
+    private List<Quotation> quotations;
+
+    @OneToMany(mappedBy = "user")
+    private List<Solicitation> solicitations;
+
+
 
     public boolean containsCostCenter(CostCenter costCenter){
             for (CostCenter costC : this.getCostCenters()){

@@ -17,9 +17,7 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
 import javax.inject.Inject;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,10 +40,6 @@ public class UserServiceImpl implements UserService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (userFound!= null && userFound.getId() != null && userFound.getLastAccess() != null){
-                userFound.setLastAccess(new Timestamp(new Date().getTime()));
-                userDAO.save(userFound);
-            }
         }
         return userFound;
     }
@@ -56,12 +50,12 @@ public class UserServiceImpl implements UserService {
         User userEdit = new User();
         if (user.getId() != null && user.getPassword() == null){
             userEdit = searchById(user);
-            newUser.setLastAccess(userEdit.getLastAccess());
+            newUser.setFirstAccess(userEdit.getFirstAccess());
             newUser.setPassword(userEdit.getPassword());
         }else{
             try {
                 userEdit = searchById(user);
-                newUser.setLastAccess(userEdit.getLastAccess());
+                newUser.setFirstAccess(userEdit.getFirstAccess());
                 newUser.setPassword(Decrypter.encrypt(user.getPassword()));
             } catch (Exception e) {
                 e.printStackTrace();

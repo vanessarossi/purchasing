@@ -5,68 +5,39 @@
     <html:head />
     <link href="${pageContext.request.contextPath}/asset/css/login.css" rel="stylesheet">
 </head>
-<body class="login">
-<div class="logo">
-    <img alt='logoEmpresa' src='<c:url value="/asset/images/logo/logo_compras.png"></c:url>' width="15%">
-</div>
-<div class="box">
-    <div class="content">
-        <form class="form-vertical login-form form" id="login" method="post" action='<c:url value="login/autenticar" ></c:url>'>
-            <h3 class="form-title"><fmt:message key="title.sign" /> </h3>
-            <div class="form-group">
-                <div class="input-icon">
-                    <input type="text" name="user.username" class="form-control" placeholder="Usuário" autofocus="autofocus" data-rule-required="true" id="username" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="input-icon">
-                    <input type="password" name="user.password" class="form-control" placeholder="Senha" data-rule-required="true" id="password" />
-                </div>
-            </div>
-            <div class="form-group ">
-                <span class="messageNullLogin message-error"></span>
-            </div>
-            <div class="form-actions">
-                <a onclick="submitLogin()" class="submit btn btn-success pull-right">
-                    <fmt:message key="button.signIn" /> <i class="icon-angle-right"></i>
-                </a>
-            </div>
-            <br>
-            <br>
-            <c:if test="${! empty errorSign}">
-                <div class="form-group">
-                    <span class="message-error"><fmt:message key="${errorSign}"/></span>
-                </div>
-            </c:if>
-        </form>
-    </div>
-    <div class="inner-box">
-        <div class="content">
-            <i class="icon-remove close hide-default"></i>
-            <a href="#" class="forgot-password-link"><fmt:message key="link.forgotPassword" /></a>
-            <form class="form-vertical forgot-password-form hide-default" id="newPassword" method="post" action='<c:url value="login/nova/senha" ></c:url>'>
-                <div class="form-group">
-                    <div class="input-icon">
-                        <i class="icon-envelope"></i>
-                        <input type="text" name="user.email" id="email" class="form-control" placeholder="Adicione seu e-mail" data-rule-required="true" data-rule-email="true" data-msg-required="Please enter your email." />
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <span class="messageNullNewPassword message-error"></span>
-                </div>
-                <a onclick="submitNewPassword()" class="submit btn btn-default btn-block">
-                    <fmt:message key="button.newPassword"/>
-                </a>
-                <a onclick="returnLogin()"><span><fmt:message key="link.return"/></span></a>
+<body>
+    <div class="container">
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="${pageContext.request.contextPath}/asset/images/logo/logo_compras.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin" method="post" action="<c:url value="/login/autenticar" ></c:url>" id="loginForm">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" name="user.username" class="form-control" placeholder="Usuário" autofocus="autofocus" data-rule-required="true" id="username" <c:if test="${userLogged.id != null}">readonly</c:if> value="${userLogged.username}" />
+                <input type="password" id="password" name="user.password" class="form-control" placeholder="Senha" data-rule-required="true" <c:if test="${userLogged.id != null}">readonly</c:if>  />
+
+                <span class="custom-error">${errors.from('message.not.blank.login')}</span>
+
+                <c:if test="${! empty errorSign}">
+                    <span class="custom-error"><fmt:message key="${errorSign}"/></span>
+                </c:if>
+
+                <c:if test="${userLogged.id == null}">
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"><fmt:message key="button.signIn" /></button>
+                </c:if>
+
+                <c:if test="${userLogged.id != null}">
+                    <a class="btn btn-lg btn-success btn-block btn-signin" href="<c:url value="/home" ></c:url>">
+                        <fmt:message key="button.return" />
+                    </a>
+                </c:if>
             </form>
-            <div class="forgot-password-done hide-default">
-                <i class="icon-ok success-icon"></i>
-                <span><fmt:message key="message.sentEmail"/></span>
-                <a onclick="returnLogin()"><span><fmt:message key="link.return"/></span></a>
-            </div>
+            <c:if test="${userLogged.id == null}">
+                <a href="<c:url value="/login/esqueceu/senha" ></c:url>" class="forgot-password">
+                    <fmt:message key="link.forgot.password" />
+                </a>
+            </c:if>
         </div>
     </div>
-</div>
 </body>
 <html:jsAssets/>
 <script src="${pageContext.request.contextPath}/asset/js/custom/login.js"></script>

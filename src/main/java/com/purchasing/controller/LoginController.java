@@ -2,15 +2,14 @@ package com.purchasing.controller;
 
 import br.com.caelum.brutauth.auth.annotations.Public;
 import br.com.caelum.vraptor.*;
-import br.com.caelum.vraptor.view.Results;
+import br.com.caelum.vraptor.validator.I18nMessage;
+import br.com.caelum.vraptor.validator.Validator;
 import com.purchasing.entity.User;
 import com.purchasing.service.impl.UserService;
 import com.purchasing.support.user.UserSession;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * @author vanessa
@@ -23,16 +22,18 @@ public class LoginController {
     private UserSession userSession;
     private HttpSession httpSession;
     private UserService userService;
+    private Validator validator;
 
     @Deprecated
     public LoginController(){}
 
     @Inject
-    public LoginController(Result result, UserSession userSession, HttpSession httpSession, UserService userService) {
+    public LoginController(Result result, UserSession userSession, HttpSession httpSession, UserService userService, Validator validator) {
         this.result = result;
         this.userSession = userSession;
         this.httpSession = httpSession;
         this.userService = userService;
+        this.validator = validator;
     }
 
     @Public
@@ -40,6 +41,13 @@ public class LoginController {
     public void login() {
         result.include("controller", this.getClass().toString());
     }
+
+    @Public
+    @Path("/esqueceu/senha")
+    public void formNewPassword() {
+        result.include("controller", this.getClass().toString());
+    }
+
 
     @Path("/formulario/perfil")
     public void formPerfil() {
@@ -49,12 +57,14 @@ public class LoginController {
     @Public
     @Post("/autenticar")
     public void authenticate(User user){
+        validator.addIf(user.getUsername() == null  || user.getPassword() == null, new I18nMessage("message.not.blank.login","message.not.blank.login"));
+        validator.onErrorForwardTo(this).login();
         User userFound = userService.authenticate(user);
         if (userFound != null && userFound.getId() != null){
             httpSession.setAttribute("userLogged",userFound);
             userSession.setUser(userFound);
-            if (userFound.getLastAccess() == null){
-                userFound.setLastAccess(new Timestamp(new Date().getTime()));
+            if (userFound.getFirstAccess() == true){
+                userFound.setFirstAccess(false);
                 userService.save(userFound);
                 result.include("user",userFound);
                 result.redirectTo(this).formPerfil();
@@ -83,14 +93,14 @@ public class LoginController {
     }
 
     @Public
-    @Path("/nova/senha")
+    @Post("/nova/senha")
     public void newPassword(User user){
+        validator.addIf(user.getEmail() == null , new I18nMessage("message.not.blank.email","message.not.blank.email"));
+        validator.onErrorForwardTo(this).formNewPassword();
         User userFound = userService.sendNewPassword(user);
-        if (userFound != null){
-            result.use(Results.json()).from(true).serialize();
-        }else{
-            result.use(Results.json()).from(false).serialize();
-        }
+        result.include("sendEmail","message.sentEmail");
+        result.include("user",userFound);
+        result.redirectTo(this).formNewPassword();
     }
 
     @Get("/logoff")
