@@ -57,7 +57,7 @@ public class OrderRequestProductView implements Comparator<OrderRequestProductVi
                 orderRequestProductView.setProduct(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getProduct());
                 orderRequestProductView.setQuantity(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity());
                 orderRequestProductView.setUnityPrice(orderRequest.getBudgetQuotation().getUnityPrice());
-            
+
             BigDecimal quantity = new BigDecimal(orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getQuantity());
             BigDecimal unityPrice =  orderRequest.getBudgetQuotation().getUnityPrice();
             BigDecimal totalPriceFormat = quantity.multiply(unityPrice).setScale(2,BigDecimal.ROUND_HALF_EVEN);

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -437,14 +436,11 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 BigDecimal quantity = new BigDecimal(orderRequestProductView.getQuantity().toString()).add(new BigDecimal(orderRequestProductV.getQuantity().toString()));
                 BigDecimal totalPrice = orderRequestProductV.getTotalPrice().add(orderRequestProductView.getTotalPrice());
 
-                DecimalFormat decimalFormat = new DecimalFormat();
-                decimalFormat.setMaximumFractionDigits(2);
-                decimalFormat.setMinimumFractionDigits(2);
-                decimalFormat.setGroupingUsed(false);
+
 
 
                 orderRequestProductV.setQuantity(Float.parseFloat(quantity.toString()));
-                orderRequestProductV.setTotalPrice(new BigDecimal(decimalFormat.format(totalPrice)));
+                orderRequestProductV.setTotalPrice(totalPrice.setScale(2,BigDecimal.ROUND_HALF_EVEN));
             }
         }
         for (Long key : map.keySet()){

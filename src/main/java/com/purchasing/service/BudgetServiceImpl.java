@@ -9,7 +9,6 @@ import com.purchasing.support.budget.BudgetQuotationProductView;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -128,16 +127,10 @@ public class BudgetServiceImpl implements BudgetService {
         Map<Long, BudgetQuotationProductView> map = new HashMap<>();
         budgetQuotationProductViewList = new BudgetQuotationProductView().generateList(budgetQuotations);
 
-        DecimalFormat decimalFormat = new DecimalFormat();
-        decimalFormat.setMaximumFractionDigits(2);
-        decimalFormat.setMinimumFractionDigits(2);
-        decimalFormat.setGroupingUsed(false);
-
-
         for (BudgetQuotationProductView budgetQuotationProductView : budgetQuotationProductViewList) {
             Long idProduct = budgetQuotationProductView.getProduct().getId();
             if (!map.containsKey(idProduct)) {
-                budgetQuotationProductView.setTotalPrice(new BigDecimal(decimalFormat.format(budgetQuotationProductView.getUnityPrice().multiply(new BigDecimal(budgetQuotationProductView.getQuantity())))));
+                budgetQuotationProductView.setTotalPrice((budgetQuotationProductView.getUnityPrice().multiply(new BigDecimal(budgetQuotationProductView.getQuantity()))).setScale(2,BigDecimal.ROUND_HALF_EVEN));
                 map.put(budgetQuotationProductView.getProduct().getId(), budgetQuotationProductView);
             } else {
                 BudgetQuotationProductView budgetQuotationProductV = map.get(idProduct);
@@ -150,7 +143,7 @@ public class BudgetServiceImpl implements BudgetService {
                 BigDecimal totalPrice = budgetQuotationProductV.getTotalPrice().add(budgetQuotationProductView.getUnityPrice().multiply(new BigDecimal(budgetQuotationProductView.getQuantity())));
 
                 budgetQuotationProductV.setQuantity(quantity);
-                budgetQuotationProductV.setTotalPrice(new BigDecimal(decimalFormat.format(totalPrice)));
+                budgetQuotationProductV.setTotalPrice(totalPrice.setScale(2,BigDecimal.ROUND_HALF_EVEN));
             }
         }
 
