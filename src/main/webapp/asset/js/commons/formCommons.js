@@ -13,6 +13,8 @@ $(document).ready(function () {
     $(".rg").mask("00.000.000-0");
     $(".cpf").mask("000.000.000-00");
     $(".date").mask("00/00/0000", {placeholder: "__/__/____"});
+    $(".competence").mask("00/0000", {placeholder: "__/____"});
+    $('.money').mask("#.##0,00", {reverse: true});
     $(".zip").mask("00000-000");
     $(".phone").mask(mask9, options);
     $(".cnpj").mask("99.999.999/9999-99");

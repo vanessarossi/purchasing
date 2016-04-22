@@ -28,6 +28,7 @@
         <property name="use_sql_comments">true</property>
 
         <!-- Entidades -->
+        <mapping class="com.purchasing.entity.Account"/>
         <mapping class="com.purchasing.entity.Role"/>
         <mapping class="com.purchasing.entity.User"/>
         <mapping class="com.purchasing.entity.Company"/>

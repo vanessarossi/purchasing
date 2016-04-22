@@ -6,8 +6,6 @@ $(document).ready(function(){
     });
 });
 
-totalItem ;
-
 $('#code').blur(function () {
     var id = $('#code').val().trim();
     if (id != null && id != '') {

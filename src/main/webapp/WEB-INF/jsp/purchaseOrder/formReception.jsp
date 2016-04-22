@@ -207,7 +207,7 @@
               </div>
               <div class="col-md-2 col-sm-2">
                 <div class="form-group">
-                  <label class="control-label" for="expirationDate"><fmt:message key="label.expiration_date"/></label>
+                  <label class="control-label" for="expirationDate"><fmt:message key="label.expiration.date"/></label>
                   <input type="text" class="form-control" id="expirationDate" value="<fmt:formatDate value="${purchaseOrder.paymentInformation.expirationDate}" pattern="dd/MM/YYYY"/>" readonly>
                 </div>
               </div>

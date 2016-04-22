@@ -146,7 +146,7 @@
               </div>
               <div class="col-xs-8 col-sm-8 col-md-4  col-lg-4">
                 <div class="form-group">
-                  <label><fmt:message key="label.expiration_date" /></label>
+                  <label><fmt:message key="label.expiration.date" /></label>
                   <input type="text" class="form-control date" id="expirationDate" name="report.expirationDate">
                 </div>
               </div>

@@ -274,7 +274,7 @@
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
-                                            <label  class="control-label" for="expirationDate"><fmt:message key="label.expiration_date"/></label>
+                                            <label  class="control-label" for="expirationDate"><fmt:message key="label.expiration.date"/></label>
                                             <input type="text" class="form-control date" id="expirationDate" name="budget.paymentInformationBudgets[0].paymentInformation.expirationDate" value="<fmt:formatDate value="${budget.paymentInformationBudgets[0].paymentInformation.expirationDate}" pattern="dd/MM/YYYY"/>" />
                                         </div>
                                     </div>
@@ -400,7 +400,7 @@
                                     </div>
                                     <div class="col-md-2 col-sm-2">
                                         <div class="form-group">
-                                            <label  class="control-label" for="expirationDateTwo"><fmt:message key="label.expiration_date"/></label>
+                                            <label  class="control-label" for="expirationDateTwo"><fmt:message key="label.expiration.date"/></label>
                                             <input type="text" class="form-control date" id="expirationDateTwo" name="budget.paymentInformationBudgets[1].paymentInformation.expirationDate" value="<fmt:formatDate value="${budget.paymentInformationBudgets[1].paymentInformation.expirationDate}" pattern="dd/MM/YYYY" />"/>
                                         </div>
                                     </div>

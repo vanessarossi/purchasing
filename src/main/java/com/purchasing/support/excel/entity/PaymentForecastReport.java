@@ -148,7 +148,7 @@ public class PaymentForecastReport {
             paymentForecastReport.setSupplier(arrayObj[1].toString());
             paymentForecastReport.setCostCenter(arrayObj[2].toString());
             paymentForecastReport.setTotalPriceCostCenter(arrayObj[3].toString());
-            paymentForecastReport.setAlreadyPurchased(arrayObj[4].toString());
+            paymentForecastReport.setAlreadyPurchased(arrayObj[4]!= null ? arrayObj[4].toString(): "");
             paymentForecastReport.setInvestmentPurchase(arrayObj[5].toString());
             paymentForecastReport.setFormPayment(arrayObj[6].toString());
             paymentForecastReport.setDateFirstInstallment(arrayObj[7].toString());
