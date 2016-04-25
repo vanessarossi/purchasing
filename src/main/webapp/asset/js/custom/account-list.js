@@ -2,6 +2,35 @@
  * Created by vanessa on 22/04/2016.
  */
 
+ $('#type').change(function () {
+    var type = $('#type').val();
+    switch(type) {
+        case "A":
+            $('#phone').attr("readonly",true);
+            $('#signatureType').attr("readonly",true);
+            $('#typeService').attr("readonly",true);
+            cleamInputTelephony();
+            break;
+        case "E":
+            $('#phone').attr("readonly",true);
+            $('#signatureType').attr("readonly",true);
+            $('#typeService').attr("readonly",true);
+            cleamInputTelephony();
+            break;
+        case "T":
+            $('#phone').attr("readonly",false);
+            $('#signatureType').attr("readonly",false);
+            $('#typeService').attr("readonly",false);
+            break;
+    }
+});
+
+function cleamInputTelephony() {
+    $('#phone').val("");
+    $('#signatureType').val("");
+    $('#typeService').val("");
+}
+
 $('#address').change(function () {
     $('#place').val("");
     var address = $('#address').val();
@@ -37,15 +66,17 @@ function search() {
         beforeSend: function(){
         },
         success: function (result) {
+             $('#postingAccountTable > tbody > tr').remove();
             if (result != false){
-                var totalAccount = "0,00";
+                var totalAccount = 0;
                 for (var i = result.length - 1; i >= 0; i--) {
                     
                     var id = result[i]['id'];
                     var type = result[i]['type'] ;
                     var competence = result[i]['competence'];
                     var place = result[i]['place'];
-                    var address = result[i]['address'];
+                    var signatureType = result[i]['signatureType'];
+                    var typeService = result[i]['typeService'];
                     var value = result[i]['value'].toFixed(2).replace(".", ",");
                     var discount = result[i]['discount'].toFixed(2).replace(".", ",");
                     var totalValue = result[i]['totalValue'].toFixed(2).replace(".", ",");
@@ -54,7 +85,8 @@ function search() {
                     row += "<td>" + type + "</td>";
                     row += "<td>" + competence + "</td>";
                     row += "<td>" + place + "</td>";
-                    row += "<td>" + address + "</td>";
+                    row += "<td>" + signatureType + "</td>";
+                    row += "<td>" + typeService + "</td>";
                     row += "<td>" + value + "</td>";
                     row += "<td>" + discount + "</td>";
                     row += "<td>" + totalValue + "</td>";
@@ -68,15 +100,12 @@ function search() {
 
                     $('#postingAccountTable').append(row);
 
-
-                    while (totalValue.indexOf(',') != -1)
                         totalValue = totalValue.replace(',', '.');
-                    while (totalAccount.indexOf(',') != -1)
-                        totalAccount = totalAccount.replace(',', '.');
 
-                    var totalAccount = parseFloat(totalAccount) + parseFloat(totalValue);
-                    $('#totalAccount').val(totalAccount.toFixed(2).replace(".", ","));
+                        totalAccount = parseFloat(totalAccount) + parseFloat(totalValue);
                 }
+
+                $('#totalAccount').val(totalAccount.toFixed(2).replace(".", ","));
             }
         },
         error: function () {

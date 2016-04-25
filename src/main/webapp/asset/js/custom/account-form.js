@@ -57,10 +57,11 @@ $('#discount').blur(function () {
     var value = $('#value').val();
     var discount = $('#discount').val();
 
-    while (value.indexOf(',') != -1)
-            value = value.replace(',', '.');
-    while (discount.indexOf(',') != -1)
-            discount = discount.replace(',', '.');
+    value = value.replace('.','');
+    value = value.replace(',', '.');
+
+    discount = discount.replace('.','');
+    discount = discount.replace(',', '.');
 
     var totalValue = parseFloat(value) - parseFloat(discount);
     $('#totalValue').val(totalValue.toFixed(2).replace(".", ","));

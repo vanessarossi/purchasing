@@ -10,30 +10,32 @@ import java.util.List;
  */
 public enum AddressEnum {
 
-    @SerializedName("Rua Francisquinho Dias, nº 583, Centro, São José do Rio Pardo - SP")
-    SEDE("Sede","Rua Francisquinho Dias, nº 583, Centro, São José do Rio Pardo - SP"),
+    @SerializedName("Rua Padre de Angelis, nº 39 , Caconde - SP")
+    CACONDE("Posto de Caconde","Rua Padre de Angelis, nº 39 , Caconde - SP"),
     @SerializedName("Rua Silvia Jardim,  nº 260 Centro, São José do Rio Pardo - SP")
     CDU("Centro de Diagnóstico","Rua Silvia Jardim,  nº 260 Centro, São José do Rio Pardo - SP"),
     @SerializedName("Rua Silvia Jardim, nº 268, Centro, São José do Rio Pardo - SP")
     CDUANEXO("Centro de Diagnóstico - Anexo","Rua Silvia Jardim, nº 268, Centro, São José do Rio Pardo - SP"),
-    @SerializedName("Rua Campos Salles, nº 491, Centro, São José do Rio Pardo – SP")
-    FARMACIA("Farmácia","Rua Campos Salles, nº 491, Centro, São José do Rio Pardo – SP"),
-    @SerializedName("Rua Coronel Alípio Dias, nº 885, Centro, São José do Rio Pardo - SP")
-    CRU("Centro de Referência","Rua Coronel Alípio Dias, nº 885, Centro, São José do Rio Pardo - SP"),
-    @SerializedName("Rua Alexandre Carlos de Melo, nº 118, Jardim Aeroporto, São José do Rio Pardo - SP")
-    HOSPITAL("Hospital","Rua Alexandre Carlos de Melo, nº 118, Jardim Aeroporto, São José do Rio Pardo - SP"),
-    @SerializedName("Rua Carlos Botelho, n° 593, Centro, São José do Rio Pardo – SP")
-    DSO("Departamento de Saúde Ocupacional","Rua Carlos Botelho, n° 593, Centro, São José do Rio Pardo – SP"),
-    @SerializedName("Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP")
-    MEDPREV("Medicina Preventiva","Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP"),
     @SerializedName("Rua Leôncio D’Ávilla Riberiro, n° 11, Vila Brasil, São José do Rio Pardo – SP")
     CEU("Centro de Especialidades","Rua Leôncio D’Ávilla Riberiro, n° 11, Vila Brasil, São José do Rio Pardo – SP"),
-    @SerializedName("Rua Padre de Angelis, nº 39 , Caconde - SP")
-    CACONDE("Posto de Caconde","Rua Padre de Angelis, nº 39 , Caconde - SP"),
+    @SerializedName("Rua Coronel Alípio Dias, nº 885, Centro, São José do Rio Pardo - SP")
+    CRU("Centro de Referência","Rua Coronel Alípio Dias, nº 885, Centro, São José do Rio Pardo - SP"),
     @SerializedName("Rua XV de Novembro, nº 582 - Divinolândia - SP")
-    DIVINOLANDIA("Posto de Dininolândia","Rua XV de Novembro, nº 582 - Divinolândia - SP"),
-    @SerializedName("Rua João Batista de Lima Figueredo, nº450 - São José do Rio Pardo - SP")
-    TAPIRATIBA("Posto de Tapiratiba","Rua João Batista de Lima Figueredo, nº450 - São José do Rio Pardo - SP");
+    DIVINOLANDIA("Posto de Divinolândia","Rua XV de Novembro, nº 582 - Divinolândia - SP"),
+    @SerializedName("Rua Carlos Botelho, n° 593, Centro, São José do Rio Pardo – SP")
+    DSO("Departamento de Saúde Ocupacional","Rua Carlos Botelho, n° 593, Centro, São José do Rio Pardo – SP"),
+    @SerializedName("Rua Campos Salles, nº 491, Centro, São José do Rio Pardo – SP")
+    FARMACIA("Farmácia","Rua Campos Salles, nº 491, Centro, São José do Rio Pardo – SP"),
+    @SerializedName("Rua Alexandre Carlos de Melo, nº 118, Jardim Aeroporto, São José do Rio Pardo - SP")
+    HOSPITAL("Hospital","Rua Alexandre Carlos de Melo, nº 118, Jardim Aeroporto, São José do Rio Pardo - SP"),
+    @SerializedName("Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP")
+    MEDPREV("Medicina Preventiva","Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP"),
+    @SerializedName("Rua Costa Machado, nº 573 - Centro, São José do Rio Pardo - SP")
+    PREDIO("Prédio","Rua Costa Machado, nº 573 - Centro, São José do Rio Pardo - SP"),
+    @SerializedName("Rua Francisquinho Dias, nº 583, Centro, São José do Rio Pardo - SP")
+    SEDE("Sede","Rua Francisquinho Dias, nº 583, Centro, São José do Rio Pardo - SP"),
+    @SerializedName("Rua João Batista de Lima Figueredo, nº450 - Tapiratiba - SP")
+    TAPIRATIBA("Posto de Tapiratiba","Rua João Batista de Lima Figueredo, nº450 - Tapiratiba - SP");
 
     AddressEnum(String place, String address) {
         this.place = place;
@@ -69,28 +71,30 @@ public enum AddressEnum {
 
     public static String returnPlace(AddressEnum addressEnum){
         switch (addressEnum){
-            case SEDE:
-                return SEDE.getPlace();
+            case CACONDE:
+                return CACONDE.getPlace();
             case CDU:
                 return CDU.getPlace();
             case CDUANEXO:
                 return CDUANEXO.getPlace();
-            case FARMACIA:
-                return FARMACIA.getPlace();
-            case CRU:
-                return CRU.getPlace();
-            case HOSPITAL:
-                return HOSPITAL.getPlace();
-            case DSO:
-                return DSO.getPlace();
-            case MEDPREV:
-                return MEDPREV.getPlace();
             case CEU:
                 return CEU.getPlace();
-            case CACONDE:
-                return CACONDE.getPlace();
+            case CRU:
+                return CRU.getPlace();
             case DIVINOLANDIA:
                 return DIVINOLANDIA.getPlace();
+            case DSO:
+                return DSO.getPlace();
+            case FARMACIA:
+                return FARMACIA.getPlace();
+            case HOSPITAL:
+                return HOSPITAL.getPlace();
+            case MEDPREV:
+                return MEDPREV.getPlace();
+            case PREDIO:
+                return PREDIO.getPlace();
+            case SEDE:
+                return SEDE.getPlace();
             case TAPIRATIBA:
                 return TAPIRATIBA.getPlace();
             default:

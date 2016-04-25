@@ -32,6 +32,28 @@
                             <span class="required">${errors.from('account.competence')}</span>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+                        <div class="form-group">
+                            <label class="control-label"><fmt:message key="label.phone"></fmt:message></label>
+                            <input type="text" class="form-control phone" id="phone" name="account.phone"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <div class="form-group">
+                            <label class="control-label"><fmt:message key="label.signature.type"></fmt:message></label>
+                            <input type="text" class="form-control" id="signatureType" name="account.signatureType"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <label class="control-label"><fmt:message key="label.typeService"></fmt:message></label>
+                            <input type="text" class="form-control" id="typeService" name="account.typeService"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-3 col-md-3">
                         <div class="form-group">
                             <label class="control-label"><fmt:message key="label.account.place"></fmt:message></label>
@@ -72,10 +94,12 @@
                 <th><fmt:message key="table.type" /></th>
                 <th><fmt:message key="table.competence" /></th>
                 <th><fmt:message key="table.place" /></th>
-                <th><fmt:message key="table.address" /></th>
+                <th><fmt:message key="table.signatureType"/></th>
+                <th><fmt:message key="table.typeService"/></th>
                 <th><fmt:message key="table.value" /></th>
                 <th><fmt:message key="table.discount" /></th>
                 <th><fmt:message key="table.total.value" /></th>
+                <th></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -83,6 +107,7 @@
         <tbody>
         </tbody>
         <tfoot>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>

@@ -52,7 +52,7 @@ public class AccountController {
     public void save(@Valid Account account){
         validator.onErrorForwardTo(this).form();
         accountService.save(account);
-        result.redirectTo(this).list();
+        result.redirectTo(this).form();
     }
 
     @Get("/pesquisa/lugar/{address}/json")

@@ -24,6 +24,17 @@ public class AccountDAO extends DAOImpl<Account,Long> {
             criteria.add(Restrictions.eq("type", account.getType()));
             criteria.add(Restrictions.eq("competence", account.getCompetence()));
             criteria.add(Restrictions.eq("address", account.getAddress()));
+
+            if (account.getPhone() != null){
+                criteria.add(Restrictions.like("phone", account.getPhone()));
+            }
+            if (account.getSignatureType() != null){
+                criteria.add(Restrictions.like("signatureType",account.getSignatureType()));
+            }
+            if (account.getTypeService() != null){
+                criteria.add(Restrictions.like("typeService",account.getTypeService()));
+            }
+
         List<Account> accounts = criteria.list();
         return accounts;
     }
