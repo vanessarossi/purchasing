@@ -101,10 +101,12 @@ public class BudgetServiceImpl implements BudgetService {
 
         if (budgetSaved.getChosenBudget() != null && budgetSaved.getChosenBudget()  == true){
            List<PurchaseOrder> purchasesOrder = purchaseOrderDAO.findByBudget(budgetSaved);
-           if (purchasesOrder.size() == 1){
-               PurchaseOrder purchaseOrder = purchasesOrder.get(0);
-               PaymentInformation paymentInformation = purchaseOrder.getPaymentInformation();
-               paymentInformation.setTotalPrice(budgetSaved.getPaymentInformationBudgets().get(0).getPaymentInformation().getTotalPrice());
+           if (purchasesOrder.size() > 0){
+               for (PurchaseOrder purchaseOrder : purchasesOrder){
+                   PaymentInformation paymentInformation  = new PaymentInformation();
+                    paymentInformation = purchaseOrder.getPaymentInformation();
+                    paymentInformation.setTotalPrice(budgetSaved.getPaymentInformationBudgets().get(0).getPaymentInformation().getTotalPrice());
+               }
            }
         }
         return budgetSaved;
