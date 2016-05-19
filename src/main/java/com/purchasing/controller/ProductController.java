@@ -55,7 +55,6 @@ public class ProductController {
     public void form() {
         result.include("units",unitService.findAllOrderDescription());
         result.include("categories",categoryService.findAllOrderName());
-        result.include("controller", this.getClass().toString());
     }
 
     @Path("/informacao/compra")
