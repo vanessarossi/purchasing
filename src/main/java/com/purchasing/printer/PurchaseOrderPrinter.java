@@ -24,6 +24,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -266,7 +267,7 @@ public class PurchaseOrderPrinter extends PrinterImpl implements BasePrinter {
                 decimalFormat.setMinimumFractionDigits(2);
                 decimalFormat.setGroupingUsed(false);
 
-                BigDecimal valueFreightDivision = freight.divide(new BigDecimal(purchaseOrderViewPrinters.size()));
+                BigDecimal valueFreightDivision = freight.divide(new BigDecimal(purchaseOrderViewPrinters.size()), RoundingMode.HALF_UP);
 
                 purchaseOrderViewPrinter.setTotal_price(decimalFormat.format(new BigDecimal(purchaseOrderViewPrinter.getTotal_price().replace(",", ".")).add(valueFreightDivision)).toString().replace(".", ","));
                 orderViewPrinters.add(purchaseOrderViewPrinter);
