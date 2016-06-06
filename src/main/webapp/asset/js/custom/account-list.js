@@ -74,9 +74,9 @@ function search() {
                     var id = result[i]['id'];
                     var type = result[i]['type'] ;
                     var competence = result[i]['competence'];
-                    var place = result[i]['place'];
-                    var signatureType = result[i]['signatureType'];
-                    var typeService = result[i]['typeService'];
+                    var place = result[i]['place'] == null ? " " : result[i]['place'];
+                    var signatureType = result[i]['signatureType'] ==  null ? " " :result[i]['signatureType'];
+                    var typeService = result[i]['typeService'] == null ? " " : result[i]['typeService'];
                     var value = result[i]['value'].toFixed(2).replace(".", ",");
                     var discount = result[i]['discount'].toFixed(2).replace(".", ",");
                     var totalValue = result[i]['totalValue'].toFixed(2).replace(".", ",");

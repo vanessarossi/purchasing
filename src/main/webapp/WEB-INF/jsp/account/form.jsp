@@ -98,7 +98,7 @@
             <div class="col-sm-2 col-md-2">
                 <div class="form-group">
                     <label class="control-label"><fmt:message key="label.expiration.date"></fmt:message></label>
-                    <input type="text" class="form-control date" id="expirationDate" name="account.expirationDate" value="${account.expirationDate}"/>
+                    <input type="text" class="form-control date" id="expirationDate" name="account.expirationDate" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${account.expirationDate}"/>"/>
                     <span class="required">${errors.from('account.expirationDate')}</span>
                 </div>
             </div>
