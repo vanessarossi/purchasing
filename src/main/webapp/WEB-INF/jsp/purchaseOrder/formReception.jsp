@@ -55,12 +55,13 @@
             <table class="table" id="tableProduct">
               <thead>
               <tr>
-                <th style="width:20%"><fmt:message key="table.costCenter"/></th>
-                <th style="width:50%"><fmt:message key="table.product"/></th>
-                <th style="width:5%"><fmt:message key="table.abbreviatedQuantity"/></th>
-                <th style="width:6%"><fmt:message key="table.unit"/></th>
-                <th style="width:5%"><fmt:message key="table.unitary.price"/></th>
-                <th style="width:5%"><fmt:message key="table.total.price"/></th>
+                <th><fmt:message key="table.costCenter"/></th>
+                <th><fmt:message key="table.product"/></th>
+                <th><fmt:message key="table.abbreviatedQuantity"/></th>
+                <th><fmt:message key="table.unit"/></th>
+                <th><fmt:message key="table.unitary.price"/></th>
+                <th><fmt:message key="table.total.price"/></th>
+                <th></th>
               </tr>
               </thead>
                 <tbody>
@@ -73,20 +74,26 @@
                         <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.product.unit.description}</td>
                         <td><input type="text" id="unityPrice${i.index}" size="10" readonly value="${fn:replace(orderRequest.budgetQuotation.unityPrice,".",",")}"/></td>
                         <td><input type="text" id="totalPriceMaterial${i.index}" size="10" readonly /></td>
+                        <td style="text-align: center" id="check${i.index}"></td>
                       </tr>
                   </c:forEach>
                 </tbody>
               <tfoot>
-                <th style="width:20%"></th>
-                <th style="width:50%"></th>
-                <th style="width:5%"></th>
-                <th style="width:6%"></th>
-                <th style="width:5%"></th>
-                <th style="width:5%"><input type="text" id="totalFinalPriceMaterial" size="10" value="" readonly /></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><input type="text" id="totalFinalPriceMaterial" size="10" value="" readonly /></th>
+                <th></th>
               </tfoot>
             </table>
           </div>
        </div>
+
+        <div class="alert alert-info" role="alert">
+          <p id="resultMessage"></p>
+        </div>
       </c:if>
       <c:if test="${purchaseOrder.budget.quotation.type eq 'Service'}">
         <div class="panel panel-default">
@@ -94,10 +101,10 @@
             <table class="table" id="tableService">
             <thead>
             <tr>
-              <th style="width:20%"><fmt:message key="table.costCenter"/></th>
-              <th style="width:70%"><fmt:message key="table.service"/></th>
-              <th style="width:5%"><fmt:message key="table.unitary.price"/></th>
-              <th style="width:1%"></th>
+              <th><fmt:message key="table.costCenter"/></th>
+              <th><fmt:message key="table.service"/></th>
+              <th><fmt:message key="table.unitary.price"/></th>
+              <th></th>
             </tr>
             </thead>
               <c:forEach items="${purchaseOrder.orderRequests}" var="orderRequest" varStatus="i">
@@ -113,7 +120,8 @@
           </div>
       </div>
       </c:if>
-      <c:if test="${purchaseOrder.id != null}">
+
+    <c:if test="${purchaseOrder.id != null}">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">

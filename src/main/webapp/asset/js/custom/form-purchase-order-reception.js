@@ -62,9 +62,30 @@ function calculateTotalPriceMaterial(i,numberRequestMaterial){
                 centsSeparator: ',',
                 thousandsSeparator: ''
             });
+
+           var totalOrder = $('#totalPrice').val();
+           console.log(totalOrder);
+           console.log(totalFinalPriceMaterial);
+           if (totalOrder.replace(",", ".") != totalFinalPriceMaterial.toFixed(2)){
+                insertTextFinal("Sua recepção está divergente ao pedido, se estiver de acordo com a nota, apenas confira.");
+                $('#confered').show();
+                $('#finalize').hide();
+           }else{
+                insertTextFinal("Sua recepção está igual ao pedido, caso as informações de pagamento estejam corretas com a nota, finalize a recepção.");
+                $('#confered').show();
+                $('#finalize').show();
+           }
       	}
-		
 };
+
+
+function insertText(index, message) {
+    document.getElementById('check'+index).innerHTML = message;
+}
+
+function insertTextFinal(message){
+    $('#resultMessage').text(message);
+}
 
 function validateQuantity(orderRequestId,quantity,i){
     $.ajax({
@@ -77,11 +98,14 @@ function validateQuantity(orderRequestId,quantity,i){
 			if(quantity > result){
 				$('#quantity'+i).val("");
 				$('#totalPriceMaterial'+i).val("");
-				$('#modalErrorReception').modal('show');
-			}
-			if(quantity < result){
-				$('#modalErrorQuantityLess').modal('show');
-			}
+                insertText(i,"Recepção superior ao pedido");
+				//$('#modalErrorReception').modal('show');
+			}else if(quantity < result){
+                insertText(i,"Recepção inferior ao pedido");
+				//$('#modalErrorQuantityLess').modal('show');
+			}else if(quantity == result){
+                insertText(i,"");
+            }
         },
         error: function () {
         }
