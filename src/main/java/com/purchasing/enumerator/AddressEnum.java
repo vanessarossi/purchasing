@@ -30,6 +30,8 @@ public enum AddressEnum {
     HOSPITAL("Hospital","Rua Alexandre Carlos de Melo, nº 118, Jardim Aeroporto, São José do Rio Pardo - SP"),
     @SerializedName("Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP")
     MEDPREV("Medicina Preventiva","Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP"),
+    @SerializedName("Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP")
+    SDU("Serviço Domiciliar","Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP (SDU)"),
     @SerializedName("Rua Costa Machado, nº 573 - Centro, São José do Rio Pardo - SP")
     PREDIO("Prédio","Rua Costa Machado, nº 573 - Centro, São José do Rio Pardo - SP"),
     @SerializedName("Rua Francisquinho Dias, nº 583, Centro, São José do Rio Pardo - SP")
@@ -95,6 +97,8 @@ public enum AddressEnum {
                 return PREDIO.getPlace();
             case SEDE:
                 return SEDE.getPlace();
+            case SDU:
+                return SDU.getPlace();
             case TAPIRATIBA:
                 return TAPIRATIBA.getPlace();
             default:
