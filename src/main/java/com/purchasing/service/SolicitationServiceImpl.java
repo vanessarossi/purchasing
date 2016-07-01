@@ -34,7 +34,9 @@ public class SolicitationServiceImpl implements SolicitationService {
     @Override
     public Solicitation save(Solicitation solicitation) {
         solicitation.setUser(getUserLogged());
-        solicitation.setInitialDate(new Timestamp(new Date().getTime()));
+        if (solicitation.getInitialDate() == null){
+            solicitation.setInitialDate(new Timestamp(new Date().getTime()));
+        }
         Situation situation = new Situation();
 
         if (getUserLogged().getRole().getId() <= 7  ){

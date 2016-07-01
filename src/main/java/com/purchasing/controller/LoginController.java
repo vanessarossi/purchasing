@@ -63,7 +63,7 @@ public class LoginController {
         if (userFound != null && userFound.getId() != null){
             httpSession.setAttribute("userLogged",userFound);
             userSession.setUser(userFound);
-            if (userFound.getFirstAccess() == true){
+            if (userFound.getFirstAccess() == null || userFound.getFirstAccess() == true){
                 userFound.setFirstAccess(false);
                 userService.save(userFound);
                 result.include("user",userFound);
@@ -77,6 +77,7 @@ public class LoginController {
         }
     }
 
+
     @Post("/confirma/nova/senha")
     public void confirmNewPassword(User user){
         User userFound = userService.searchById(user);
@@ -84,6 +85,7 @@ public class LoginController {
         userService.saveNewPassword(userFound);
         result.redirectTo("/home");
     }
+
 
     @Get("/meu/perfil/{user.id}")
     public void myPerfil(User user){
