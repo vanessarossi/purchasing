@@ -100,7 +100,7 @@ function fillReferenceCenter () {
 	$('#city').val("São José do Rio Pardo - SP");
 	$('#zipCode').val("13720-000");
 	$('#number').val("885");
-	$('#receptorName').val("Alessandro - Natalie");
+	$('#receptorName').val("Alessandro - Olivia");
 }
 function fillHospital () {
     $('#place').val("Hospital");
