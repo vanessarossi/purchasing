@@ -46,24 +46,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user){
-        User newUser = user;
-        User userEdit = new User();
-        if (user.getId() != null && user.getPassword() == null){
-            userEdit = searchById(user);
-            newUser.setFirstAccess(userEdit.getFirstAccess());
-            newUser.setPassword(userEdit.getPassword());
-        }else{
+        User userFound = new User();
+
+        /** Usuário já salvo apenas editar, porém com senha null**/
+
+        if (user.getId() != null) {
+            userFound = searchById(user);
+        }
+        userFound.setName(user.getName());
+
+        if (user.getPassword() != null) {
             try {
-                userEdit = searchById(user);
-                newUser.setFirstAccess(userEdit.getFirstAccess());
-                newUser.setPassword(Decrypter.encrypt(user.getPassword()));
+                userFound.setPassword(Decrypter.encrypt(user.getPassword()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        newUser.setUsername(user.getUsername().toLowerCase());
-        newUser = userDAO.save(newUser);
-        return newUser;
+
+        userFound.setUsername(user.getUsername().toLowerCase());
+        userFound.setPassword(userFound.getPassword());
+        userFound.setEmail(user.getEmail());
+        userFound.setActive(user.getActive());
+        userFound.setRole(user.getRole());
+
+        user = userDAO.save(userFound);
+        return user;
     }
 
     @Override
