@@ -23,8 +23,10 @@ public class AccountDAO extends DAOImpl<Account,Long> {
         Criteria criteria = getSession().createCriteria(Account.class);
             criteria.add(Restrictions.eq("type", account.getType()));
             criteria.add(Restrictions.eq("competence", account.getCompetence()));
-            criteria.add(Restrictions.eq("address", account.getAddress()));
 
+            if (account.getAddress() != null){
+                criteria.add(Restrictions.eq("address", account.getAddress()));
+            }
             if (account.getPhone() != null){
                 criteria.add(Restrictions.like("phone", account.getPhone()));
             }
