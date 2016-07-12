@@ -75,6 +75,14 @@ $('input[type="radio"]').on('change', function() {
   		clearFormReportOne();
   		clearFormReportTwo();
 
+   }if(typeReport == 'accountReport'){
+
+      addActionForm('formReportOne',getContextPath()+'relatorio/lancamento/conta');
+      $('#formReportOne').show();
+      $('#formReportTwo').hide();
+      clearFormReportOne();
+      clearFormReportTwo();
+
    }
 });
 

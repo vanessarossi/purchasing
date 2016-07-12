@@ -78,6 +78,13 @@
               </label>
             </div>
             </c:if>
+            <c:if test="${rules[EighthLevelAccessRule].isAllowed()}">
+              <div class="radio">
+                <label class="control-label">
+                  <input type="radio" value="accountReport" name="report" id="report"> <fmt:message key="label.account.report"/>
+                </label>
+              </div>
+            </c:if>
           </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6  col-lg-6">

@@ -11,7 +11,7 @@
 
     <scm>
     	<developerConnection>
-            git@bitbucket.org:vanessarossi/purchasing.git
+            git@github.com:vanessarossi/purchasing.git
     	</developerConnection>
     </scm>
 
