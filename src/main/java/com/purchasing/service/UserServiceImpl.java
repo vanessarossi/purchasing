@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService {
         userFound.setEmail(user.getEmail());
         userFound.setActive(user.getActive());
         userFound.setRole(user.getRole());
+        userFound.setCostCenters(user.getCostCenters());
 
         user = userDAO.save(userFound);
         return user;
