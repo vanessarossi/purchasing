@@ -8,7 +8,7 @@
 <body>
 <html:template>
 <form action='<c:url value="/solicitacao/salvar"></c:url>' method="post" id="solicitationForm">
-    <c:if test="${!empty errors.from('message.error.solicitiation.material')}">
+        <c:if test="${!empty errors.from('message.error.solicitiation.material')}">
             <div class="row">
                 <div class="alert alert-danger alert-dismissible text-center" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -16,13 +16,21 @@
                 </div>
             </div>
         </c:if>
-    <c:if test="${!empty errors.from('message.error.solicitiation.service')}">
+        <c:if test="${!empty errors.from('message.error.no.costCenter')}">
+            <div class="row">
+                <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong> <fmt:message key="label.atention" /> </strong> <span>${errors.from('message.error.no.costCenter')}</span>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="${!empty errors.from('message.error.solicitiation.service')}">
             <div class="alert alert-danger alert-dismissible text-center" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong> <fmt:message key="label.atention" /> </strong> <span>${errors.from('message.error.solicitiation.service')}</span>
             </div>
         </c:if>
-    <c:if test="${!empty errors.from('message.error.solicitiation.service.material')}">
+        <c:if test="${!empty errors.from('message.error.solicitiation.service.material')}">
             <div class="alert alert-danger alert-dismissible text-center" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong > <fmt:message key="label.atention" /> </strong> <span>${errors.from('message.error.solicitiation.service.material')}</span>

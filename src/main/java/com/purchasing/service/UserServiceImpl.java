@@ -48,8 +48,6 @@ public class UserServiceImpl implements UserService {
     public User save(User user){
         User userFound = new User();
 
-        /** Usuário já salvo apenas editar, porém com senha null**/
-
         if (user.getId() != null) {
             userFound = searchById(user);
         }
