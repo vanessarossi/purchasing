@@ -391,18 +391,24 @@
                 <input type="text" class="form-control" id="zipCode" name="purchaseOrder.deliveryInformation.zipCode" value="${purchaseOrder.purchaseOrder.deliveryInformation.zipCode}"/>
               </div>
             </div>
-          </div>
-          <div class="row">
             <div class="col-md-4 col-sm-4">
               <div class="form-group">
                 <label class="control-label" for="receptorName"><fmt:message key="label.receptorName"/></label>
                 <input type="text" class="form-control" id="receptorName" name="purchaseOrder.deliveryInformation.receptorName" value="${purchaseOrder.purchaseOrder.deliveryInformation.receptorName}"/>
               </div>
             </div>
+          </div>
+          <div class="row">
             <div class="col-md-4 col-sm-4">
               <div class="form-group">
                 <label class="control-label" for="place"><fmt:message key="label.place"/></label>
                 <input type="text" class="form-control" id="place" name="purchaseOrder.deliveryInformation.place" value="${purchaseOrder.purchaseOrder.deliveryInformation.place}"/>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <div class="form-group">
+                <label class="control-label" for="cnpj"><fmt:message key="label.cnpjFacture"/></label>
+                <input type="text" class="form-control" id="cnpj" name="purchaseOrder.deliveryInformation.cnpj" value="${purchaseOrder.purchaseOrder.deliveryInformation.cnpj}"/>
               </div>
             </div>
             <div class="col-md-3 col-sm-3">
@@ -412,6 +418,7 @@
                     <option value="0"><fmt:message key="label.select"/></option>
                     <option value="1"><fmt:message key="label.administrativeOffice"/></option>
                     <option value="2"><fmt:message key="label.diagnosticCenter"/></option>
+                    <option value="10"><fmt:message key="label.laboryDiagnosticCenter"/></option>
                     <option value="3"><fmt:message key="label.drugstore"/></option>
                     <option value="4"><fmt:message key="label.optica"/></option>
                     <option value="5"><fmt:message key="label.referenceCenter"/></option>

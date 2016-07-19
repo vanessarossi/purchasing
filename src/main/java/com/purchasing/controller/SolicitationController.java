@@ -126,8 +126,10 @@ public class SolicitationController {
         solicitation = solicitationService.searchById(solicitation);
         if (solicitation.getType() == TypeEnum.Material) {
             result.use(Results.json()).withoutRoot().from(solicitation).include("costCenter").include("user").include("solicitationRequests").include("solicitationRequests.product").serialize();
-        }else{
+        }else if(solicitation.getType() == TypeEnum.Service) {
             result.use(Results.json()).withoutRoot().from(solicitation).include("costCenter").include("user").include("solicitationRequests").include("solicitationRequests.service").include("solicitationRequests.service.typeService").serialize();
+        }else if(solicitation.getType() == TypeEnum.MaterialService){
+            result.use(Results.json()).withoutRoot().from(solicitation).include("costCenter").include("user").include("solicitationRequests").include("solicitationRequests.service").include("solicitationRequests.service.typeService").include("solicitationRequests.product").serialize();
         }
     }
 

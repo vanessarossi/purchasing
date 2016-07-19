@@ -55,6 +55,9 @@ $('#helpPlace').change(function(){
 	   case "9":
 	        fillSpecialtyCenter();
 	        break;
+        case "10":
+            fillLaboryDiagnosticCenter();
+            break;
 	}
 });
 function fillAdministrativeOffice () {
@@ -65,6 +68,7 @@ function fillAdministrativeOffice () {
 	$('#zipCode').val("13720-000");
 	$('#number').val("583");
 	$('#receptorName').val("Eloisa - Everton");
+    $('#cnpj').val('96.182.068/0001-08');
 }
 function fillDiagnosticCenter () {
     $('#place').val("Centro de Diagnóstico");
@@ -74,6 +78,7 @@ function fillDiagnosticCenter () {
 	$('#zipCode').val("13720-000");
 	$('#number').val("260/268");
 	$('#receptorName').val("Flavia - Fernando Prevital - Liliane");
+    $('#cnpj').val('96.182.068/0003-70');
 }
 function fillDrugstore () {
     $('#place').val("Farmácia");
@@ -83,6 +88,7 @@ function fillDrugstore () {
 	$('#zipCode').val("13720-000");
 	$('#number').val("491");
 	$('#receptorName').val("Michel - Eliana");
+    $('#cnpj').val('96.192.068/0002-99');
 }
 function fillOptica () {
     $('#place').val("Optica");
@@ -92,6 +98,7 @@ function fillOptica () {
 	$('#zipCode').val("13720-000");
 	$('#number').val("491");
 	$('#receptorName').val("Ana Claudia");
+    $('#cnpj').val('96.182.068/0005-31');
 }
 function fillReferenceCenter () {
     $('#place').val("Centro de Referencia");
@@ -101,6 +108,7 @@ function fillReferenceCenter () {
 	$('#zipCode').val("13720-000");
 	$('#number').val("885");
 	$('#receptorName').val("Alessandro - Olivia");
+    $('#cnpj').val('96.182.168/0006-12');
 }
 function fillHospital () {
     $('#place').val("Hospital");
@@ -110,6 +118,7 @@ function fillHospital () {
 	$('#zipCode').val("13720-000");
 	$('#number').val("118");
 	$('#receptorName').val("Everton - Eloisa");
+    $('#cnpj').val('96.182.068/0007-01');
 }
 function fillDepartmentOfOccupationalHealth() {
     $('#place').val("Departamento de Saúde Ocupacional");
@@ -119,6 +128,7 @@ function fillDepartmentOfOccupationalHealth() {
 	$('#neighborhood').val("Centro");
 	$('#number').val("593");
 	$('#receptorName').val("Maria Tinti - Bruno");
+    $('#cnpj').val('96.182.068/0001-08');
 }
 function fillPreventiveMedicine () {
     $('#place').val("Medicina Preventiva");
@@ -128,6 +138,7 @@ function fillPreventiveMedicine () {
 	$('#zipCode').val("13720-000");
 	$('#number').val("109");
 	$('#receptorName').val("Sueli - Regiane");
+    $('#cnpj').val('96.182.068/0001-08');
 }
 function fillSpecialtyCenter () {
     $('#place').val("Centro de Especialidades");
@@ -137,7 +148,20 @@ function fillSpecialtyCenter () {
 	$('#zipCode').val("13720-000");
 	$('#number').val("11");
 	$('#receptorName').val("Fernanda - Regiane");
+    $('#cnpj').val('96.182.068/0001-08');
 }
+
+function fillLaboryDiagnosticCenter(){
+    $('#place').val("Centro de Diagnóstico - Laboratório");
+    $('#street').val("Rua Rui Barbosa");
+    $('#neighborhood').val("Centro");
+    $('#city').val("São José do Rio Pardo - SP");
+    $('#zipCode').val("13720-000");
+    $('#number').val("607");
+    $('#receptorName').val("Everton - Flávia");
+    $('#cnpj').val('96.182.068/0003-70');
+}
+
 function clear () {
     $('#place').val("");
 	$('#street').val("");

@@ -46,6 +46,10 @@ public class DeliveryInformation {
     @Column(name = "city")
     private String city;
 
+    @Length(min = 1, max = 20)
+    @Column(name = "cnpj")
+    private String cnpj;
+
     public Long getId() {
         return id;
     }
@@ -118,4 +122,11 @@ public class DeliveryInformation {
         this.city = city;
     }
 
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
+<!-- 2016-07-19T17:06:30 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
@@ -29,6 +31,7 @@
 	<parameter name="city" class="java.lang.String"/>
 	<parameter name="zip_code" class="java.lang.String"/>
 	<parameter name="freight" class="java.lang.String"/>
+	<parameter name="cnpj" class="java.lang.String"/>
 	<field name="service" class="java.lang.String"/>
 	<field name="unityPrice" class="java.lang.String"/>
 	<background>
@@ -121,28 +124,28 @@
 				<reportElement x="0" y="36" width="555" height="20" uuid="c36f0a84-aad8-4c38-8fcc-685b7ac6232d"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="1" y="36" width="91" height="20" uuid="1fad6751-64c9-4f7b-b4cf-ac62294e551f"/>
+				<reportElement x="1" y="36" width="115" height="20" uuid="1fad6751-64c9-4f7b-b4cf-ac62294e551f"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Pedido de compra número]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="83" y="36" width="24" height="20" uuid="45b4c6b5-55df-4cd1-ae1c-c65e2957ffaa"/>
+				<reportElement x="117" y="36" width="24" height="20" uuid="45b4c6b5-55df-4cd1-ae1c-c65e2957ffaa"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{number_request}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="103" y="36" width="345" height="20" uuid="6eb5dea2-57f8-4a3e-8219-55f1642a2ded"/>
+				<reportElement x="141" y="36" width="307" height="20" uuid="6eb5dea2-57f8-4a3e-8219-55f1642a2ded"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<text><![CDATA[,de acordo com as condições exposta no orçamento (proposta) de número]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="439" y="36" width="45" height="20" uuid="b72b1f3e-5c92-48fb-a8fb-68f723589ee3"/>
+				<reportElement x="448" y="36" width="36" height="20" uuid="b72b1f3e-5c92-48fb-a8fb-68f723589ee3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9" isBold="false"/>
 				</textElement>
@@ -477,21 +480,21 @@
 				<text><![CDATA[Cidade]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="260" y="225" width="29" height="20" uuid="35414c7c-beab-470b-949a-93acaf572dca"/>
+				<reportElement x="199" y="226" width="27" height="20" uuid="35414c7c-beab-470b-949a-93acaf572dca"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CEP]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="41" y="225" width="229" height="20" uuid="7665aff3-69c5-4942-83e0-8913f72ca23b"/>
+				<reportElement x="41" y="225" width="158" height="20" uuid="7665aff3-69c5-4942-83e0-8913f72ca23b"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{city}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="291" y="225" width="132" height="20" uuid="d93783ea-7183-490a-b58f-baf431beab26"/>
+				<reportElement x="226" y="226" width="118" height="18" uuid="d93783ea-7183-490a-b58f-baf431beab26"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -517,6 +520,20 @@
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SENHOR FORNECEDOR, INFORMAR O NÚMERO DESTE PEDIDO NA NOTA FISCAL.]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="440" y="226" width="84" height="19" uuid="18f8b801-02a6-42d7-98e4-6e15d2e8441d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cnpj}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="344" y="226" width="96" height="18" uuid="6112a6ed-deac-497a-a21a-647f99fff9d0"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ para Faturamento]]></text>
 			</staticText>
 		</band>
 	</summary>

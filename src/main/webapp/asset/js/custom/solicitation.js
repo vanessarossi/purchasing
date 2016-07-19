@@ -115,7 +115,7 @@ function viewMore(id) {
         		$('#serviceType').show();
 
         		var type = result['solicitationRequests'][0]['service']['typeService']['description'];
-	             var serviceDescription = result['solicitationRequests'][0]['service']['description'];
+				var serviceDescription = result['solicitationRequests'][0]['service']['description'];
 
         		 var row = '<tr>';
 		                row += "<td>"+type+"</td>";
@@ -124,7 +124,8 @@ function viewMore(id) {
 
 	             $('#serviceTable > tbody').append(row);
 
-        	}if(type === 'Material'){
+        	}
+			if(type === 'Material'){
         		$('#productType').show();
         		$('#productTable').show();
         		$('#serviceTable').hide();
@@ -150,7 +151,46 @@ function viewMore(id) {
               		}
    
 
-        	}	
+        	}
+			if(type === 'MaterialService'){
+				$('#productType').show();
+				$('#productTable').show();
+				$('#serviceTable').show();
+				$('#serviceType').show();
+
+				for (var i = 0; i < result['solicitationRequests'].length; i++) {
+
+					if(result['solicitationRequests'][i]['service'] != null ) {
+						var type = result['solicitationRequests'][i]['service']['typeService']['description'];
+						var serviceDescription = result['solicitationRequests'][i]['service']['description'];
+
+						var row = '<tr>';
+						row += "<td>" + type + "</td>";
+						row += "<td>" + serviceDescription + "</td>";
+						row += "</tr>";
+
+						$('#serviceTable > tbody').append(row);
+					}
+					if(result['solicitationRequests'][i]['product'] != null ){
+						var code = result['solicitationRequests'][i]['product']['id'];
+						var description = result['solicitationRequests'][i]['product']['description'];
+						var model = ((result['solicitationRequests'][i]['product']['model'] == null) ? '' : result['solicitationRequests'][i]['product']['model']);
+						var mark = ((result['solicitationRequests'][i]['product']['mark'] == null) ? '' : result['solicitationRequests'][i]['product']['mark']);
+
+						var quantity = result['solicitationRequests'][i]['quantity'];
+
+						var row = '<tr>';
+						row += "<td>"+code+"</td>";
+						row += "<td>"+description+"</td>";
+						row += "<td>"+model+"</td>";
+						row += "<td>"+mark+"</td>";
+						row += "<td>"+quantity+"</td>";
+						row += "</tr>";
+
+						$('#productTable > tbody').append(row);
+					}
+				}
+			}
             $('#viewQuick').modal('show');
         },
         error: function () {
