@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-07-19T17:06:30 -->
+<!-- 2016-07-20T09:57:18 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
@@ -480,21 +480,21 @@
 				<text><![CDATA[Cidade]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="199" y="226" width="27" height="20" uuid="35414c7c-beab-470b-949a-93acaf572dca"/>
+				<reportElement x="190" y="226" width="27" height="20" uuid="35414c7c-beab-470b-949a-93acaf572dca"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CEP]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="41" y="225" width="158" height="20" uuid="7665aff3-69c5-4942-83e0-8913f72ca23b"/>
+				<reportElement x="41" y="225" width="146" height="20" uuid="7665aff3-69c5-4942-83e0-8913f72ca23b"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{city}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="226" y="226" width="118" height="18" uuid="d93783ea-7183-490a-b58f-baf431beab26"/>
+				<reportElement x="217" y="226" width="118" height="18" uuid="d93783ea-7183-490a-b58f-baf431beab26"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -522,14 +522,14 @@
 				<text><![CDATA[SENHOR FORNECEDOR, INFORMAR O NÚMERO DESTE PEDIDO NA NOTA FISCAL.]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="440" y="226" width="84" height="19" uuid="18f8b801-02a6-42d7-98e4-6e15d2e8441d"/>
+				<reportElement x="448" y="226" width="106" height="19" uuid="18f8b801-02a6-42d7-98e4-6e15d2e8441d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{cnpj}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="344" y="226" width="96" height="18" uuid="6112a6ed-deac-497a-a21a-647f99fff9d0"/>
+				<reportElement x="337" y="226" width="111" height="18" uuid="6112a6ed-deac-497a-a21a-647f99fff9d0"/>
 				<textElement verticalAlignment="Middle" markup="none">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>

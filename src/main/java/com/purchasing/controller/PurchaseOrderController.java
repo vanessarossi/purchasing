@@ -165,7 +165,7 @@ public class PurchaseOrderController {
     public void searchConference(PurchaseOrder purchaseOrder){
         purchaseOrder = purchaseOrderService.findByConference(purchaseOrder.getId());
         
-        if (purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material)){
+        if (purchaseOrder != null && purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material)){
             Collections.sort(purchaseOrder.getOrderRequests(), new Comparator<OrderRequest>() {
                 @Override
                 public int compare(OrderRequest o1, OrderRequest o2) {
