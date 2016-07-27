@@ -878,59 +878,72 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     public List<PurchaseOrder> saveOrdersMaterial(List<PurchaseOrder> purchaseOrders) {
         List<PurchaseOrder> purchaseOrdersSaved = new ArrayList<>();
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
-            List<OrderRequest> orderRequests = purchaseOrder.getOrderRequests();
+            if (isThereChosenBudget(purchaseOrder.getOrderRequests())){
+                List<OrderRequest> orderRequests = purchaseOrder.getOrderRequests();
 
-            PaymentInformation paymentInformation = new PaymentInformation();
-            paymentInformation.setMeanPayment(MeanPaymentEnum.Money);
-            paymentInformation.setFormPayment(formPaymentDAO.findById(FormPayment.class, 1l));
-            paymentInformation.setTotalPrice(purchaseOrder.getPaymentInformation().getTotalPrice());
+                PaymentInformation paymentInformation = new PaymentInformation();
+                paymentInformation.setMeanPayment(MeanPaymentEnum.Money);
+                paymentInformation.setFormPayment(formPaymentDAO.findById(FormPayment.class, 1l));
+                paymentInformation.setTotalPrice(purchaseOrder.getPaymentInformation().getTotalPrice());
 
-            paymentInformation = paymentInformationDAO.save(paymentInformation);
+                paymentInformation = paymentInformationDAO.save(paymentInformation);
 
-            purchaseOrder.setDeliveryInformation(null);
-            purchaseOrder.setPaymentInformation(paymentInformation);
-            purchaseOrder.setApproval(null);
-            purchaseOrder.setBudget(purchaseOrder.getOrderRequests().get(0).getBudgetQuotation().getBudget());
+                purchaseOrder.setDeliveryInformation(null);
+                purchaseOrder.setPaymentInformation(paymentInformation);
+                purchaseOrder.setApproval(null);
+                purchaseOrder.setBudget(purchaseOrder.getOrderRequests().get(0).getBudgetQuotation().getBudget());
 
-            purchaseOrder.setDate(new Timestamp(new Date().getTime()));
-            purchaseOrder.setStatus(StatusEnum.Open);
+                purchaseOrder.setDate(new Timestamp(new Date().getTime()));
+                purchaseOrder.setStatus(StatusEnum.Open);
 
-            purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
+                purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
 
-            Budget budget = budgetDAO.findById(Budget.class,purchaseOrder.getBudget().getId());
-            budget.setChosenBudget(true);
-            budgetDAO.save(budget);
+                Budget budget = budgetDAO.findById(Budget.class,purchaseOrder.getBudget().getId());
+                budget.setChosenBudget(true);
+                budgetDAO.save(budget);
 
-            Quotation quotation = new Quotation();
-            for (OrderRequest orderRequest : orderRequests) {
-                if (orderRequest.getBudgetQuotation().getChosenBudget()!= null && orderRequest.getBudgetQuotation().getChosenBudget() == true) {
-                    List<BudgetQuotation> budgetQuotations = budgetQuotationDAO.findByBudgetAndProduct(orderRequest.getBudgetQuotation().getBudget(), orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getProduct());
-                    for (BudgetQuotation budgetQuotation : budgetQuotations) {
-                        OrderRequest newOrderRequest = new OrderRequest();
-                        newOrderRequest.setBudgetQuotation(budgetQuotation);
-                        newOrderRequest.setPurchaseOrder(purchaseOrder);
+                Quotation quotation = new Quotation();
+                for (OrderRequest orderRequest : orderRequests) {
+                    if (orderRequest.getBudgetQuotation().getChosenBudget()!= null && orderRequest.getBudgetQuotation().getChosenBudget() == true) {
+                        List<BudgetQuotation> budgetQuotations = budgetQuotationDAO.findByBudgetAndProduct(orderRequest.getBudgetQuotation().getBudget(), orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getProduct());
+                        for (BudgetQuotation budgetQuotation : budgetQuotations) {
+                            OrderRequest newOrderRequest = new OrderRequest();
+                            newOrderRequest.setBudgetQuotation(budgetQuotation);
+                            newOrderRequest.setPurchaseOrder(purchaseOrder);
 
-                        orderRequestDAO.save(newOrderRequest);
+                            orderRequestDAO.save(newOrderRequest);
 
-                        budgetQuotation.setChosenBudget(true);
-                        budgetQuotationDAO.save(budgetQuotation);
+                            budgetQuotation.setChosenBudget(true);
+                            budgetQuotationDAO.save(budgetQuotation);
 
-                        Situation situation = budgetQuotation.getQuotationRequest().getSolicitationRequest().getSolicitation().getSituation();
-                        situation.setStatus(StatusEnum.AnalysisQuote);
-                        situationDAO.save(situation);
+                            Situation situation = budgetQuotation.getQuotationRequest().getSolicitationRequest().getSolicitation().getSituation();
+                            situation.setStatus(StatusEnum.AnalysisQuote);
+                            situationDAO.save(situation);
+                        }
+                        quotation = budgetQuotations.get(0).getQuotationRequest().getQuotation();
                     }
-                    quotation = budgetQuotations.get(0).getQuotationRequest().getQuotation();
+
                 }
+                quotation.setUser(getUserLogged());
+                quotation.setFinalDate(new Timestamp(new Date().getTime()));
+                quotation.setStatus(StatusEnum.Finished);
+                quotationDAO.save(quotation);
 
+                purchaseOrdersSaved.add(purchaseOrder);
             }
-            quotation.setUser(getUserLogged());
-            quotation.setFinalDate(new Timestamp(new Date().getTime()));
-            quotation.setStatus(StatusEnum.Finished);
-            quotationDAO.save(quotation);
-
-            purchaseOrdersSaved.add(purchaseOrder);
         }
         return  purchaseOrdersSaved;
+    }
+
+    public boolean isThereChosenBudget(List<OrderRequest> orderRequests){
+        boolean result = false;
+        for (OrderRequest orderRequest : orderRequests) {
+            if (orderRequest.getBudgetQuotation().getChosenBudget() != null && orderRequest.getBudgetQuotation().getChosenBudget() == true) {
+                result = true;
+            }
+        }
+        return result;
+
     }
 
     public void alterStatusSolicitationApproved(Solicitation solicitation){
