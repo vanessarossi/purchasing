@@ -16,6 +16,8 @@ public enum AddressEnum {
     CDU("Centro de Diagnóstico","Rua Silvia Jardim,  nº 260 Centro, São José do Rio Pardo - SP"),
     @SerializedName("Rua Silvia Jardim, nº 268, Centro, São José do Rio Pardo - SP")
     CDUANEXO("Centro de Diagnóstico - Anexo","Rua Silvia Jardim, nº 268, Centro, São José do Rio Pardo - SP"),
+    @SerializedName("Rua Rui Barbosa, nº 607, Centro, São José do Rio Pardo - SP")
+    CDULABORATORIO("Centro de Diagnóstico - Laboratório","Rua Rui Barbosa, nº 607, Centro, São José do Rio Pardo - SP"),
     @SerializedName("Rua Leôncio D’Ávilla Riberiro, n° 11, Vila Brasil, São José do Rio Pardo – SP")
     CEU("Centro de Especialidades","Rua Leôncio D’Ávilla Riberiro, n° 11, Vila Brasil, São José do Rio Pardo – SP"),
     @SerializedName("Rua Coronel Alípio Dias, nº 885, Centro, São José do Rio Pardo - SP")
@@ -79,6 +81,8 @@ public enum AddressEnum {
                 return CDU.getPlace();
             case CDUANEXO:
                 return CDUANEXO.getPlace();
+            case CDULABORATORIO:
+                return CDULABORATORIO.getPlace();
             case CEU:
                 return CEU.getPlace();
             case CRU:
