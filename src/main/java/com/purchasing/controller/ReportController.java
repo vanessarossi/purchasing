@@ -94,5 +94,12 @@ public class ReportController {
     public Download purchaseOrderAndSolicitationReport(Report report){
         return reportService.exportPurchaseOrderAndSolicitationReport(report);
     }
+
+    @CustomBrutauthRules(SecondLevelAccessRule.class)
+    @Post("/lancamento/conta")
+    public Download accountReport(Report report){
+        return reportService.exportAccountReport(report);
+    }
+
 }
 

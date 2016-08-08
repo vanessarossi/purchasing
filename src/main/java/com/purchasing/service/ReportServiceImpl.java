@@ -39,6 +39,10 @@ public class ReportServiceImpl implements ReportService {
     private ExportPurchasedServiceTypeByCostCenterReport exportPurchasedServiceTypeByCostCenterReport;
     @Inject
     private ExportPurchaseOrderAndSolicitationReport exportPurchaseOrderAndSolicitationReport;
+
+    @Inject
+    private ExportAccountReport exportAccountReport;
+
     @Inject
     private UserSession userSession;
 
@@ -200,5 +204,20 @@ public class ReportServiceImpl implements ReportService {
         return fileDownload;
     }
 
+    @Override
+    public FileDownload exportAccountReport(Report report) {
+        Collection<Object> objects = reportDAO.getAccountReport(report);
+        File file = exportAccountReport.generateReport(objects);
 
+        FileDownload fileDownload = null;
+        String nameFile = file.getName();
+        String contentType = "application/vnd.ms-excel";
+
+        try {
+            fileDownload = new FileDownload(file,contentType,nameFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return fileDownload;
+    }
 }

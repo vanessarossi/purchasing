@@ -6,6 +6,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import javax.inject.Inject;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -172,5 +173,15 @@ public class ReportDAO extends DAOImpl<Object,Integer> {
         sqlQuery.setParameter("lastMonth",report.getLastMonth());
         objects = sqlQuery.list();
         return  objects ;
+    }
+
+    public Collection<Object> getAccountReport(Report report){
+        Collection<Object> objects = new ArrayDeque<>();
+        SQLQuery sqlQuery = getSession().createSQLQuery("CALL account_report(:year,:initialMonth,:lastMonth)");
+        sqlQuery.setParameter("year",report.getYear());
+        sqlQuery.setParameter("initialMonth",report.getInitialMonth());
+        sqlQuery.setParameter("lastMonth",report.getLastMonth());
+        objects = sqlQuery.list();
+        return objects;
     }
 }

@@ -25,4 +25,6 @@ public interface ReportService {
     public FileDownload exportFinancialManagementByCostCenterReport(Report report);
 
     public FileDownload exportPurchaseOrderAndSolicitationReport(Report report);
+
+    public FileDownload exportAccountReport(Report report);
 }
