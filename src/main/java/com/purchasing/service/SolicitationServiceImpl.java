@@ -34,8 +34,10 @@ public class SolicitationServiceImpl implements SolicitationService {
     @Override
     public Solicitation save(Solicitation solicitation) {
         solicitation.setUser(getUserLogged());
-        if (solicitation.getInitialDate() == null){
+        if (solicitation.getId() == null){
             solicitation.setInitialDate(new Timestamp(new Date().getTime()));
+        }else{
+            solicitation.setInitialDate(solicitationDAO.findById(Solicitation.class,solicitation.getId()).getInitialDate());
         }
         Situation situation = new Situation();
 
