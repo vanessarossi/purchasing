@@ -130,7 +130,7 @@ function fillDepartmentOfOccupationalHealth() {
 	$('#zipCode').val("13720-000");
 	$('#neighborhood').val("Centro");
 	$('#number').val("593");
-	$('#receptorName').val("Maria Tinti - Bruno");
+	$('#receptorName').val("Bruno");
     $('#cnpj').val('96.182.068/0001-08');
 }
 function fillPreventiveMedicine () {
