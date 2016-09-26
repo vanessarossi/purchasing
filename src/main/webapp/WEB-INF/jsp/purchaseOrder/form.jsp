@@ -426,6 +426,7 @@
                     <option value="7"><fmt:message key="label.departmentOfOccupationalHealth"/></option>
                     <option value="8"><fmt:message key="label.preventiveMedicine"/></option>
                     <option value="9"><fmt:message key="label.expertiseCenter"/></option>
+                    <option value="11"><fmt:message key="label.SDU"/></option>
                 </select>
               </div>
             </div>

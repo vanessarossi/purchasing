@@ -58,6 +58,9 @@ $('#helpPlace').change(function(){
         case "10":
             fillLaboryDiagnosticCenter();
             break;
+        case "11":
+            fillSDU();
+            break;
 	}
 });
 function fillAdministrativeOffice () {
@@ -71,13 +74,13 @@ function fillAdministrativeOffice () {
     $('#cnpj').val('96.182.068/0001-08');
 }
 function fillDiagnosticCenter () {
-    $('#place').val("Centro de Diagnóstico");
+    $('#place').val("Centro de Diagnóstico - Imagem");
 	$('#street').val("Rua Silvia Jardim");
 	$('#neighborhood').val("Centro");
 	$('#city').val("São José do Rio Pardo - SP");
 	$('#zipCode').val("13720-000");
 	$('#number').val("260/268");
-	$('#receptorName').val("Flavia - Fernando Prevital - Liliane");
+	$('#receptorName').val("Flavia");
     $('#cnpj').val('96.182.068/0003-70');
 }
 function fillDrugstore () {
@@ -158,8 +161,19 @@ function fillLaboryDiagnosticCenter(){
     $('#city').val("São José do Rio Pardo - SP");
     $('#zipCode').val("13720-000");
     $('#number').val("607");
-    $('#receptorName').val("Everton - Flávia");
+    $('#receptorName').val("Fernando Prevital");
     $('#cnpj').val('96.182.068/0003-70');
+}
+
+function fillSDU(){
+    $('#place').val("Serviço Domiciliar");
+    $('#street').val("Rua Rui Barbosa");
+    $('#neighborhood').val("Centro");
+    $('#city').val("São José do Rio Pardo - SP");
+    $('#zipCode').val("13720-000");
+    $('#number').val("109");
+    $('#receptorName').val("Jacqueline ");
+    $('#cnpj').val('96.182.068/0001-08');
 }
 
 function clear () {
