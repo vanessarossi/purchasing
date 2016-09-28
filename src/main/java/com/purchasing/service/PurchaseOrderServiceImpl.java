@@ -740,7 +740,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             reception = receptionDAO.save(reception);
 
             for (RequestDelivered requestDelivered : requestDelivereds){
-                if ((purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material) && requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f)||(purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Service) && requestDelivered.getPrice() != new BigDecimal(0))){
+                if ((purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material) && requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f)||(purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Service) && requestDelivered.getPrice().compareTo(new BigDecimal(0)) == 1)){
                     requestDelivered.setReception(reception);
                     RequestDelivered requestDeliveredSaved  = requestDeliveredDAO.save(requestDelivered);
                     alterStatusSolicitationConfered(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
@@ -756,7 +756,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             reception = receptionDAO.save(reception);
 
             for (RequestDelivered requestDelivered : requestDelivereds) {
-                if ((purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material) && requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f)||(purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Service))) {
+                if ((purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material) && requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f)||(purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Service) && requestDelivered.getPrice().compareTo(new BigDecimal(0)) == 1 )) {
                     requestDelivered.setReception(reception);
                     RequestDelivered requestDeliveredSaved = requestDeliveredDAO.save(requestDelivered);
                     alterStatusProduct(requestDelivered.getOrderRequest());
