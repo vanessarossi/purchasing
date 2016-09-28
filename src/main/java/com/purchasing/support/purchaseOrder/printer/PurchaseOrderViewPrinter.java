@@ -1,6 +1,7 @@
 package com.purchasing.support.purchaseOrder.printer;
 
 import com.purchasing.entity.RequestDelivered;
+import com.purchasing.enumerator.TypeEnum;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -43,14 +44,21 @@ public class PurchaseOrderViewPrinter implements Comparator<PurchaseOrderViewPri
     public List<PurchaseOrderViewPrinter> generateList(List<RequestDelivered> requestDelivereds) {
         List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters = new ArrayList<>();
         for (RequestDelivered requestDelivered : requestDelivereds){
+
+
             PurchaseOrderViewPrinter purchaseOrderViewPrinter  = new PurchaseOrderViewPrinter();
             purchaseOrderViewPrinter.setCode_cost_center(requestDelivered.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation().getCostCenter().getCode());
             purchaseOrderViewPrinter.setDescription_cost_center(requestDelivered.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation().getCostCenter().getDescription());
 
-            BigDecimal quantity = requestDelivered.getQuantity() == null ? new BigDecimal(1f) : new BigDecimal(requestDelivered.getQuantity());
-            BigDecimal result = requestDelivered.getOrderRequest().getBudgetQuotation().getUnityPrice().multiply(quantity);
+            if (requestDelivered.getReception().getPurchaseOrder().getBudget().getQuotation().getType().equals(TypeEnum.Material)){
+                BigDecimal quantity = requestDelivered.getQuantity() == null ? new BigDecimal(1f) : new BigDecimal(requestDelivered.getQuantity());
+                BigDecimal resultMaterial = requestDelivered.getOrderRequest().getBudgetQuotation().getUnityPrice().multiply(quantity);
+                purchaseOrderViewPrinter.setTotal_price(resultMaterial.toString().replace(".",","));
 
-            purchaseOrderViewPrinter.setTotal_price(result.toString().replace(".",","));
+            }if (requestDelivered.getReception().getPurchaseOrder().getBudget().getQuotation().getType().equals(TypeEnum.Service)){
+                BigDecimal resultService = requestDelivered.getPrice();
+                purchaseOrderViewPrinter.setTotal_price(resultService.toString().replace(".",","));
+            }
             purchaseOrderViewPrinters.add(purchaseOrderViewPrinter);
         }
         return purchaseOrderViewPrinters;

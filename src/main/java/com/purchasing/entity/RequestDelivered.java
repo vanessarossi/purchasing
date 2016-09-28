@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
+import java.math.BigDecimal;
 
 /**
  * @author vanessa
@@ -24,6 +25,10 @@ public class RequestDelivered {
     @Digits(integer = 10, fraction = 2)
     @Column(name = "quantity")
     private Float quantity;
+
+    @Digits(integer = 10, fraction = 2)
+    @Column(name = "price")
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "order_request_id", referencedColumnName = "id", nullable = false)
@@ -47,6 +52,14 @@ public class RequestDelivered {
 
     public void setQuantity(Float quantity) {
         this.quantity = quantity;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public OrderRequest getOrderRequest() {

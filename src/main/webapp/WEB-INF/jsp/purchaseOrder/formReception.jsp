@@ -37,10 +37,16 @@
     </form>
   <br>
   <form action='' method="post" id="confirmReceptionForm">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 ">
+        <label class="control-label"><fmt:message key="message.warming.tax.document"/></label>
+        <br>
+      </div>
+    </div>
       <div class="row">
         <div class="col-md-3 col-sm-3 ">
           <label class="control-label"><fmt:message key="label.tax.document"/></label>
-          <input type="text" class="form-control" name="reception.taxDocument" id="taxDocument" required/>
+          <input type="text" class="form-control" name="reception.taxDocument" id="taxDocument" onkeyup="validNumber(this)" required/>
         </div>
         <div class="col-md-5 col-sm-5 ">
           <label class="control-label"><fmt:message key="label.bar.codetax.document"/></label>
@@ -90,10 +96,6 @@
             </table>
           </div>
        </div>
-
-        <div class="alert alert-info" role="alert">
-          <p id="resultMessage"></p>
-        </div>
       </c:if>
       <c:if test="${purchaseOrder.budget.quotation.type eq 'Service'}">
         <div class="panel panel-default">
@@ -103,24 +105,43 @@
             <tr>
               <th><fmt:message key="table.costCenter"/></th>
               <th><fmt:message key="table.service"/></th>
-              <th><fmt:message key="table.unitary.price"/></th>
-              <th></th>
+              <th><fmt:message key="table.service.price"/></th>
+              <th><fmt:message key="table.complete.recep"/></th>
+              <th><fmt:message key="table.incomplete.recep"/></th>
+              <th><fmt:message key="table.imcomplete.service.price"/></th>
             </tr>
             </thead>
+            <tbody>
               <c:forEach items="${purchaseOrder.orderRequests}" var="orderRequest" varStatus="i">
                 <tr>
-
                   <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.solicitation.costCenter.description}</td>
                   <td>${orderRequest.budgetQuotation.quotationRequest.solicitationRequest.service.description}</td>
-                  <td>${fn:replace(orderRequest.budgetQuotation.unityPrice,".",",")}</td>
-                  <td><input type="checkbox"name="reception.requestDelivereds[${i.index}].orderRequest.id" id="orderRequestId${i.index}" value="${orderRequest.id}"/></td>
+                  <td>
+                    ${fn:replace(orderRequest.budgetQuotation.unityPrice,".",",")}
+                      <input type="hidden" id="priceService${i.index}" value="${fn:replace(orderRequest.budgetQuotation.unityPrice,".",",")}"  readonly />
+                      <input type="hidden" name="reception.requestDelivereds[${i.index}].orderRequest.id" id="orderRequestService${i.index}" value="${orderRequest.id}" />
+                  </td>
+                  <td><input type="checkbox" id="serviceComplete${i.index}" onclick="desableImcompletePrice(${i.index},${fn:length(purchaseOrder.orderRequests)} - 1)" /></td>
+                  <td><input type="checkbox" id="serviceImcomplete${i.index}" onclick="enableImcompletePrice(${i.index})"/></td>
+                  <td><input type="text" size="8" name="reception.requestDelivereds[${i.index}].price" id="price${i.index}" onblur="calculateTotalPriceService(${i.index},${fn:length(purchaseOrder.orderRequests)} - 1)"/></td>
                 </tr>
               </c:forEach>
+            </tbody>
+            <tfoot>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th><fmt:message key="table.total.price"/></th>
+              <th><input type="text" id="totalFinalPriceService" size="10" value="" readonly /></th>
+            </tfoot>
           </table>
           </div>
       </div>
       </c:if>
-
+    <div class="alert alert-info" role="alert">
+      <p id="resultMessage"></p>
+    </div>
     <c:if test="${purchaseOrder.id != null}">
         <div class="panel panel-default">
           <div class="panel-heading">

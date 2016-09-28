@@ -51,6 +51,8 @@ public interface PurchaseOrderService {
     public Float getQuantityByOrderRequest(OrderRequest orderRequest);
     public Float getQuantityDeliveredByOrderRequest(OrderRequest orderRequest);
 
+    public  BigDecimal getPriceTotalByOrderRequest(OrderRequest orderRequest);
+    public  BigDecimal getPriceDeliveredByOrderRequest(OrderRequest orderRequest);
 
     public void saveReception(Reception reception,StatusEnum statusEnum);
 
@@ -58,5 +60,5 @@ public interface PurchaseOrderService {
 
     public Reception findReceptionById(Reception reception);
 
-    public BigDecimal sumTotal(List<RequestDelivered>requestDelivereds);
+    public BigDecimal sumTotal(List<RequestDelivered>requestDelivereds,PurchaseOrder purchaseOrder);
 }

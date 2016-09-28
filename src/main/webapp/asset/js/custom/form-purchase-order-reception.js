@@ -1,25 +1,37 @@
 $(document).ready(function() {
 });
 
+
+function validNumber(num) {
+    var er = /[^0-9]/;
+    er.lastIndex = 0;
+    var campo = num;
+    if (er.test(campo.value)) {
+        campo.value = "";
+    }
+}
+
+
 $('#confered').click(function(){
 	var tax_document = $("#taxDocument").val();
     var observation = $('#observation').val();
-	if(tax_document != null && tax_document != '' && observation != null && observation != ''){
-		$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/conferir');
-		$('#confirmReceptionForm').submit();
-	}else{
-		alert("Existem informações obrigatórias a serem preenchidas (Ex: Número da nota ou observação de recepção).");
-	}
+        if(tax_document != null && tax_document != '' && observation != null && observation != ''){
+            $('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/conferir');
+            $('#confirmReceptionForm').submit();
+        }else{
+            alert("Existem informações obrigatórias a serem preenchidas (Ex: Número da nota ou observação de recepção).");
+        }
+    
 });
 
 $('#finalize').click(function(){
 	var tax_document = $("#taxDocument").val();
-	if(tax_document != null && tax_document != '' && tax_document != ' '){
-		$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/finalizar');
-		$('#confirmReceptionForm').submit();
-	}else{
-		alert("Informe o número da nota fiscal.");
-	}	
+    	if(tax_document != null && tax_document != '' && tax_document != ' '){
+    		$('#confirmReceptionForm').attr('action', '/purchasing/ordemCompra/recepcao/finalizar');
+    		$('#confirmReceptionForm').submit();
+    	}else{
+    		alert("Informe o número da nota fiscal.");
+    	}	
 });
 
 function calculateTotalPriceMaterial(i,numberRequestMaterial){
@@ -64,8 +76,6 @@ function calculateTotalPriceMaterial(i,numberRequestMaterial){
             });
 
            var totalOrder = $('#totalPrice').val();
-           console.log(totalOrder);
-           console.log(totalFinalPriceMaterial);
            if (totalOrder.replace(",", ".") != totalFinalPriceMaterial.toFixed(2)){
                 insertTextFinal("Sua recepção está divergente ao pedido, se estiver de acordo com a nota, apenas confira.");
                 $('#confered').show();
@@ -78,6 +88,59 @@ function calculateTotalPriceMaterial(i,numberRequestMaterial){
       	}
 };
 
+
+function calculateTotalPriceService(i,numberRequestService){
+    price = $('#price'+i).val();
+    numberRequestService = numberRequestService;
+    orderRequestId = $('#orderRequestService'+i).val();
+
+    while (price.indexOf(',') != -1)
+            price = price.replace(',', '.');
+
+    validatePrice(orderRequestId,price,i);    
+
+        if (parseInt(i) === parseInt(numberRequestService)) {
+            totalFinalPriceService = 0;
+            for (var j = 0; j <= parseInt(numberRequestService); j++) {
+                    servicePrice = $('#price'+j).val();
+                    while (servicePrice.indexOf(',') != -1)
+                        servicePrice = servicePrice.replace(',', '.');
+                        totalFinalPriceService = parseFloat(totalFinalPriceService) + parseFloat(servicePrice) ;
+                        totalPrice = totalFinalPriceService;
+            };
+            $('#totalFinalPriceService').val(totalFinalPriceService.toFixed(2).replace(".", ","));
+            $('#totalFinalPriceService').priceFormat({
+                prefix: 'R$ ',
+                centsSeparator: ',',
+                thousandsSeparator: ''
+            });
+
+           var totalOrder = $('#totalPrice').val();
+        
+           if (totalOrder.replace(",", ".") != totalFinalPriceService.toFixed(2)){
+                insertTextFinal("Sua recepção está divergente ao pedido, se estiver de acordo com a nota, apenas confira.");
+                $('#confered').show();
+                $('#finalize').hide();
+            }else{
+                insertTextFinal("Sua recepção está igual ao pedido, caso as informações de pagamento estejam corretas com a nota, finalize a recepção.");
+                $('#confered').show();
+                $('#finalize').show();
+            }
+        }
+}
+
+function enableImcompletePrice(i){
+    $('#price'+i).val("");
+    $('#serviceComplete'+i).prop('checked', false); 
+}
+
+function desableImcompletePrice(i,numberRequestService){
+    $('#price'+i).val("");
+    $('#price'+i).val($('#priceService'+i).val());
+    $('#serviceImcomplete'+i).prop('checked', false);
+
+    calculateTotalPriceService(i,numberRequestService);
+}
 
 function insertText(index, message) {
     document.getElementById('check'+index).innerHTML = message;
@@ -111,3 +174,26 @@ function validateQuantity(orderRequestId,quantity,i){
         }
     });
 };
+
+function validatePrice(orderRequestId,price,i){
+  $.ajax({
+        type: "GET",
+        url: getContextPath()+'ordemCompra/valor/receber/'+orderRequestId+'/json',
+        dataType: "json",
+        beforeSend: function(){
+        },
+        success: function (result) {
+            if(price > result){
+                $('#price'+i).val("");
+                $('#totalFinalPriceService').val("");
+                //insertText(i,"Recepção superior ao pedido");
+            }else if(price < result){
+                //insertText(i,"Recepção inferior ao pedido");
+            }else if(price == result){
+                //insertText(i,"");
+            }
+        },
+        error: function () {
+        }
+    });  
+}

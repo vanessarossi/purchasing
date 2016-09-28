@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.*;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,16 @@ public class RequestDeliveredDAO extends DAOImpl<RequestDelivered,Long> {
         criteria.setProjection(Projections.sum("quantity"));
         Object object =  criteria.uniqueResult();
         total = Float.parseFloat(object == null ? "1" : object.toString());
+        return total;
+    }
+
+    public BigDecimal totalPriceServiceDelivered(OrderRequest orderRequest){
+        BigDecimal total;
+        Criteria criteria = getSession().createCriteria(RequestDelivered.class);
+        criteria.add(Restrictions.eq("orderRequest",orderRequest));
+        criteria.setProjection(Projections.sum("price"));
+        Object object =  criteria.uniqueResult();
+        total = new BigDecimal(object == null ? "0" : object.toString());
         return total;
     }
 

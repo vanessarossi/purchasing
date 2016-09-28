@@ -18,6 +18,7 @@ import com.purchasing.support.purchaseOrder.PurchaseOrderView;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.Comparator;
@@ -198,7 +199,7 @@ public class PurchaseOrderController {
         /** gambiarra **/
 
         DecimalFormat decimalFormat = new DecimalFormat("#0.00");
-        result.include("totalPrice",decimalFormat.format(purchaseOrderService.sumTotal(reception.getRequestDelivereds())));
+        result.include("totalPrice",decimalFormat.format(purchaseOrderService.sumTotal(reception.getRequestDelivereds(),reception.getPurchaseOrder())));
         result.include("reception",reception);
         result.include("formsPayment", formPaymentService.findAll());
         result.include("meansPayment", MeanPaymentEnum.values());
@@ -273,6 +274,14 @@ public class PurchaseOrderController {
       Float quantity =  purchaseOrderService.getQuantityByOrderRequest(orderRequest);
       Float quantityDelivered = purchaseOrderService.getQuantityDeliveredByOrderRequest(orderRequest);
       Float receivable = quantity - quantityDelivered;
+        result.use(Results.json()).withoutRoot().from(receivable).serialize();
+    }
+
+    @Get("/valor/receber/{orderRequest.id}/json")
+    public void totalPriceOrderRequestById (OrderRequest orderRequest){
+        BigDecimal price =  purchaseOrderService.getPriceTotalByOrderRequest(orderRequest);
+        BigDecimal priceDelivered = purchaseOrderService.getPriceDeliveredByOrderRequest(orderRequest);
+        BigDecimal receivable = price.subtract(priceDelivered);
         result.use(Results.json()).withoutRoot().from(receivable).serialize();
     }
 }

@@ -14,11 +14,11 @@
       <table class="table table-striped table-hover table-condensed">
         <thead>
         <tr>
-          <th style="width: 50%"><fmt:message key="table.product"/></th>
-          <th style="width: 20%"><fmt:message key="table.costCenter"/></th>
-          <th style="width: 10%"><fmt:message key="table.abbreviatedQuantity"/></th>
-          <th style="width: 10%"><fmt:message key="table.abbreviatedQuantityDelivered"/></th>
-          <th style="width: 10%"><fmt:message key="table.unitary.price"/></th>
+          <th><fmt:message key="table.product"/></th>
+          <th><fmt:message key="table.costCenter"/></th>
+          <th><fmt:message key="table.abbreviatedQuantity"/></th>
+          <th><fmt:message key="table.abbreviatedQuantityDelivered"/></th>
+          <th><fmt:message key="table.unitary.price"/></th>
         </tr>
         </thead>
         <tbody>
@@ -34,19 +34,28 @@
         </tbody>
       </table>
     </c:if>
-    <c:if test="${reception.purchaseOrder.budget.quotation.type == 'Service'}">
+
+  <c:if test="${reception.purchaseOrder.budget.quotation.type == 'Service'}">
       <table class="table table-striped table-hover table-condensed">
         <thead>
         <tr>
-          <th style="width: 80%"><fmt:message key="table.description"/></th>
-          <th style="width: 10%"><fmt:message key="table.unitary.price"/></th>
+          <th><fmt:message key="table.description"/></th>
+          <th><fmt:message key="table.unitary.price"/></th>
+          <th><fmt:message key="table.imcomplete.service.price"/></th>
         </tr>
         </thead>
         <tbody>
-
+          <c:forEach items="${reception.requestDelivereds}" var="requestDelivered">
+            <tr>
+              <td>${requestDelivered.orderRequest.budgetQuotation.quotationRequest.solicitationRequest.service.description}</td>
+              <td>${fn:replace(requestDelivered.orderRequest.budgetQuotation.unityPrice,".",",")}</td>
+              <td>${fn:replace(requestDelivered.price,".",",")}</td>
+            </tr>
+          </c:forEach>
         </tbody>
       </table>
     </c:if>
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -62,6 +71,7 @@
         </div>
       </div>
     </div>
+
     <form action='<c:url value="/ordemCompra/finalizar/conferencia"></c:url>' method="post" id="finishedConferenceForm">
       <div class="panel panel-default">
         <div class="panel-heading">

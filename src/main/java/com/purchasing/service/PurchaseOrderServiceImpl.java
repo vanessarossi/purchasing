@@ -505,7 +505,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
                     solicitationRequest.setStatus(StatusEnum.Approved);
                     solicitationRequestDAO.save(solicitationRequest);
-                    alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
+                    if ((compareMinimum == 1 || compareMinimum == 0)) {
+                        alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
+                    }
                 }
                 purchaseOrder.setApproval(approval);
 
@@ -525,7 +527,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
                     solicitationRequest.setStatus(StatusEnum.Approved);
                     solicitationRequestDAO.save(solicitationRequest);
-                    alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
+                    if ((compareMinimum == 1 || compareMinimum == 0)) {
+                        alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
+                    }
                 }
 
                 purchaseOrder.setApproval(approval);
@@ -546,7 +550,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
                     solicitationRequest.setStatus(StatusEnum.Approved);
                     solicitationRequestDAO.save(solicitationRequest);
-                    alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
+                    if ((compareMinimum == 1 || compareMinimum == 0) && (compareMaximum == -1 || compareMaximum == 0)) {
+                        alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
+                    }
                 }
                 purchaseOrder.setApproval(approval);
 
@@ -566,7 +572,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                     SolicitationRequest solicitationRequest = orderRequest.getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
                     solicitationRequest.setStatus(StatusEnum.Approved);
                     solicitationRequestDAO.save(solicitationRequest);
-                    alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
+                    if ((compareMinimum == 1 || compareMinimum == 0 )&& (compareMaximum == -1 || compareMaximum == 0)) {
+                        alterStatusSolicitationApproved(solicitationRequest.getSolicitation());
+                    }
                 }
                 purchaseOrder.setApproval(approval);
 
@@ -706,6 +714,20 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public BigDecimal getPriceTotalByOrderRequest(OrderRequest orderRequest) {
+        orderRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId());
+        BigDecimal total = orderRequest.getBudgetQuotation().getUnityPrice() == null ? new BigDecimal(0) : orderRequest.getBudgetQuotation().getUnityPrice();
+        return total;
+    }
+
+    @Override
+    public BigDecimal getPriceDeliveredByOrderRequest(OrderRequest orderRequest) {
+        orderRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId());
+        BigDecimal totalDelivered = requestDeliveredDAO.totalPriceServiceDelivered(orderRequest);
+        return totalDelivered;
+    }
+
+    @Override
     public void saveReception(Reception reception,StatusEnum statusEnum) {
         List<RequestDelivered> requestDelivereds = reception.getRequestDelivereds();
         PurchaseOrder purchaseOrder = purchaseOrderDAO.findById(PurchaseOrder.class, reception.getPurchaseOrder().getId());
@@ -718,7 +740,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             reception = receptionDAO.save(reception);
 
             for (RequestDelivered requestDelivered : requestDelivereds){
-                if ((purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material) && requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f)||(purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Service))){
+                if ((purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material) && requestDelivered.getQuantity() != null && requestDelivered.getQuantity() > 0f)||(purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Service) && requestDelivered.getPrice() != new BigDecimal(0))){
                     requestDelivered.setReception(reception);
                     RequestDelivered requestDeliveredSaved  = requestDeliveredDAO.save(requestDelivered);
                     alterStatusSolicitationConfered(requestDeliveredSaved.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation());
@@ -797,14 +819,25 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
-    public BigDecimal sumTotal(List<RequestDelivered> requestDelivereds) {
+    public BigDecimal sumTotal(List<RequestDelivered> requestDelivereds, PurchaseOrder purchaseOrder) {
+
+       TypeEnum typeEnum = purchaseOrder.getBudget().getQuotation().getType();
+
         BigDecimal total = new BigDecimal("0.00");
 
-        for (RequestDelivered requestDelivered : requestDelivereds){
-            BigDecimal quantity = requestDelivered.getQuantity() == null ? new BigDecimal("1.00") : new BigDecimal(requestDelivered.getQuantity());
-            BigDecimal unitPrice = requestDelivered.getOrderRequest().getBudgetQuotation().getUnityPrice();
-            BigDecimal totalRequest = quantity.multiply(unitPrice);
-            total = total.add(totalRequest);
+        if (typeEnum.equals(TypeEnum.Material)) {
+            for (RequestDelivered requestDelivered : requestDelivereds) {
+                BigDecimal quantity = requestDelivered.getQuantity() == null ? new BigDecimal("1.00") : new BigDecimal(requestDelivered.getQuantity());
+                BigDecimal unitPrice = requestDelivered.getOrderRequest().getBudgetQuotation().getUnityPrice();
+                BigDecimal totalRequest = quantity.multiply(unitPrice);
+                total = total.add(totalRequest);
+            }
+        }if (typeEnum.equals(TypeEnum.Service)) {
+            BigDecimal totalRequest = new BigDecimal(0);
+            for (RequestDelivered requestDelivered : requestDelivereds) {
+                BigDecimal unitPrice = requestDelivered.getPrice();
+                total = total.add(unitPrice);
+            }
         }
         return total;
     }
@@ -992,12 +1025,24 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         List<OrderRequest> orderRequests = purchaseOrder.getOrderRequests();
         Float receivable = 0f;
         StatusEnum statusEnum = StatusEnum.Finished;
-        for (OrderRequest orderRequest : orderRequests){
-            Float quantity = getQuantityByOrderRequest(orderRequest);
-            Float quantityDelivered = getQuantityDeliveredByOrderRequest(orderRequest);
-            receivable = quantity - quantityDelivered;
-            if (receivable > 0 ){
-                statusEnum = statusEnum.PartiallyFinished;
+        if (purchaseOrder.getBudget().getQuotation().getType().equals(TypeEnum.Material)){
+            for (OrderRequest orderRequest : orderRequests){
+                Float quantity = getQuantityByOrderRequest(orderRequest);
+                Float quantityDelivered = getQuantityDeliveredByOrderRequest(orderRequest);
+                receivable = quantity - quantityDelivered;
+                if (receivable > 0) {
+                    statusEnum = statusEnum.PartiallyFinished;
+                }
+            }
+        }else{
+            for (OrderRequest orderRequest : orderRequests){
+                BigDecimal price = getPriceTotalByOrderRequest(orderRequest);
+                BigDecimal priceDelivered = getPriceDeliveredByOrderRequest(orderRequest);
+                BigDecimal sub = new BigDecimal(0);
+                sub = price.subtract(priceDelivered);
+                if (sub.compareTo(new BigDecimal(0)) == 1 ) {
+                    statusEnum = statusEnum.PartiallyFinished;
+                }
             }
         }
         purchaseOrder.setFinalizationDate(new Date());
@@ -1021,18 +1066,34 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     public void alterStatusProduct(OrderRequest orderRequest){
-        Float total = getQuantityByOrderRequest(orderRequest);
-        Float totalDelivered = getQuantityDeliveredByOrderRequest(orderRequest);
-        Integer difference = total.compareTo(totalDelivered);
         SolicitationRequest solicitationRequest = orderRequestDAO.findById(OrderRequest.class,orderRequest.getId()).getBudgetQuotation().getQuotationRequest().getSolicitationRequest();
-        if (difference == 0){
-            solicitationRequest.setDeliveryDate(new Date());
-            solicitationRequest.setStatus(StatusEnum.Delivered);
+
+        if (solicitationRequest.getSolicitation().getType().equals(TypeEnum.Material)){
+            Float total = getQuantityByOrderRequest(orderRequest);
+            Float totalDelivered = getQuantityDeliveredByOrderRequest(orderRequest);
+            Integer difference = total.compareTo(totalDelivered);
+
+            if (difference == 0){
+                solicitationRequest.setDeliveryDate(new Date());
+                solicitationRequest.setStatus(StatusEnum.Delivered);
+            }
+            if (difference == -1) {
+                solicitationRequest.setStatus(StatusEnum.PartiallyDelivered);
+            }
+            solicitationRequestDAO.save(solicitationRequest);
+        }if (solicitationRequest.getSolicitation().getType().equals(TypeEnum.Service)){
+
+            BigDecimal totalPrice = getPriceTotalByOrderRequest(orderRequest);
+            BigDecimal totalPriceDelivered = getPriceDeliveredByOrderRequest(orderRequest);
+            BigDecimal differencePrice = totalPrice.subtract(totalPriceDelivered);
+
+            if (differencePrice.compareTo(new BigDecimal(0)) == 1){
+                solicitationRequest.setStatus(StatusEnum.PartiallyDelivered);
+            }else{
+                solicitationRequest.setDeliveryDate(new Date());
+                solicitationRequest.setStatus(StatusEnum.Delivered);
+            }
         }
-        if (difference == -1) {
-            solicitationRequest.setStatus(StatusEnum.PartiallyDelivered);
-        }
-        solicitationRequestDAO.save(solicitationRequest);
     }
 }
 
