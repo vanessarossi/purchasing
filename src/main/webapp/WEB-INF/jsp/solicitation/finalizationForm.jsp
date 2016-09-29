@@ -87,11 +87,11 @@
                        <table class="table" id="tableProductSolicitation">
                            <thead>
                            <tr>
-                               <th style="width:1%"><fmt:message key="table.code"/></th>
-                               <th style="width:50%"><fmt:message key="table.product"/></th>
-                               <th style="width:5%"><fmt:message key="table.abbreviatedQuantity"/></th>
-                               <th style="width:6%"><fmt:message key="table.unit"/></th>
-                               <th style="width:1%"> </th>
+                               <th><fmt:message key="table.code"/></th>
+                               <th><fmt:message key="table.product"/></th>
+                               <th><fmt:message key="table.abbreviatedQuantity"/></th>
+                               <th><fmt:message key="table.unit"/></th>
+                               <th> </th>
                            </tr>
                            </thead>
                            <tbody>

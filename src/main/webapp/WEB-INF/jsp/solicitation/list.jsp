@@ -28,15 +28,15 @@
     <table id="solicitationTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
-                <th style="width: 3%"><fmt:message key="table.code" /></th>
-                <th style="width: 10%" ><fmt:message key="table.initialDate" /></th>
-                <th style="width: 18%" ><fmt:message key="table.costCenter" /></th>
-                <th style="width: 22%"><fmt:message key="table.user" /></th>
-                <th style="width: 18%"><fmt:message key="table.status" /></th>
-                <th style="width: 2%" ><fmt:message key="table.##" /></th>
-                <th style="width: 2%" ><fmt:message key="table.##" /></th>
-                <th style="width: 2%" ><fmt:message key="table.##" /></th>
-                <th style="width: 2%" ><fmt:message key="table.##" /></th>
+                <th><fmt:message key="table.code" /></th>
+                <th><fmt:message key="table.initialDate" /></th>
+                <th><fmt:message key="table.costCenter" /></th>
+                <th><fmt:message key="table.user" /></th>
+                <th><fmt:message key="table.status" /></th>
+                <th><fmt:message key="table.##" /></th>
+                <th><fmt:message key="table.##" /></th>
+                <th><fmt:message key="table.##" /></th>
+                <th><fmt:message key="table.##" /></th>
             </tr>
             </thead>
             <tbody>

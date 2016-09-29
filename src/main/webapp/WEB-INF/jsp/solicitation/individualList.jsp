@@ -24,25 +24,26 @@
             </div>
         </div>
     <c:if test="${! empty messageErrorEdit}">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 text-center">
-                    <span class="message-error"><fmt:message key="${messageErrorEdit}"/></span>
-                </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                <span class="message-error"><fmt:message key="${messageErrorEdit}"/></span>
             </div>
-        </c:if>
+        </div>
+    </c:if>
     <br/><br/>
     <table id="solicitationTable" class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
-                <th style="width: 2%"><fmt:message key="table.code" /></th>
-                <th style="width: 10%" ><fmt:message key="table.initialDate" /></th>
-                <th style="width: 20%" ><fmt:message key="table.costCenter" /></th>
-                <th style="width: 20%"><fmt:message key="table.user" /></th>
-                <th style="width: 15%"><fmt:message key="table.status" /></th>
-                <th style="width: 1%" ><fmt:message key="table.##" /></th>
-                <th style="width: 1%" ><fmt:message key="table.##" /></th>
-                <th style="width: 1%" ><fmt:message key="table.##" /></th>
-                <th style="width: 1%" ><fmt:message key="table.##" /></th>
+                <th><fmt:message key="table.code" /></th>
+                <th><fmt:message key="table.initialDate" /></th>
+                <th><fmt:message key="table.costCenter" /></th>
+                <th><fmt:message key="table.user" /></th>
+                <th><fmt:message key="table.status" /></th>
+                <th><fmt:message key="table.##" /></th>
+                <th><fmt:message key="table.##" /></th>
+                <th><fmt:message key="table.##" /></th>
+                <th><fmt:message key="table.##" /></th>
+                <th><fmt:message key="table.##" /></th>
             </tr>
             </thead>
             <tbody>
