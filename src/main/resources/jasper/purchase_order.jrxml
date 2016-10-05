@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-05-09T15:19:32 -->
+<!-- 2016-10-05T16:27:38 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
@@ -98,7 +98,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Recepeção]]></text>
+				<text><![CDATA[Recepção]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="454" y="15" width="99" height="15" uuid="06ef8f20-db83-4f4f-84d7-525a883d5e06"/>
@@ -175,10 +175,10 @@
 				<text><![CDATA[Telefone]]></text>
 			</staticText>
 			<line>
-				<reportElement x="1" y="0" width="555" height="1" uuid="293daa59-accf-4077-8d58-f827e7f52809"/>
+				<reportElement x="1" y="1" width="555" height="1" uuid="293daa59-accf-4077-8d58-f827e7f52809"/>
 			</line>
 			<staticText>
-				<reportElement x="392" y="-14" width="64" height="15" uuid="580d1416-2bb4-488a-b5d5-f8dcbbb45920"/>
+				<reportElement x="390" y="-13" width="64" height="15" uuid="580d1416-2bb4-488a-b5d5-f8dcbbb45920"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
