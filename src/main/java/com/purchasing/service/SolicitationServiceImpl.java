@@ -330,6 +330,7 @@ public class SolicitationServiceImpl implements SolicitationService {
             String buttonView = "<a href=/purchasing/solicitacao/visualizar/"+solicitation.getId()+"/geral><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
             String buttonPrinter= "<a href=/purchasing/solicitacao/imprimir/"+solicitation.getId()+"  target='_blank'><span class=\"fa fa-print btn btn-default btn-xs\"></span></a>";
             String buttonCancel = "<a  onclick=reproveSolicitation("+solicitation.getId()+")><span class=\"fa fa-times btn btn-default btn-xs\"></span></a>";
+
             String [] row = {
                     colCode,
                     colInitialDate,
@@ -373,6 +374,7 @@ public class SolicitationServiceImpl implements SolicitationService {
             String buttonEdit = "<a href=/purchasing/solicitacao/editar/"+solicitation.getId()+"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
             String buttonCope = "<a href=/purchasing/solicitacao/copiar/"+solicitation.getId()+"><span class=\"fa fa-files-o btn btn-default btn-xs\"></span></a>";
             String buttonCancel = "<a href='#' onclick=cancelSolicitation("+solicitation.getId()+")><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
+            String buttonPrinter= "<a href=/purchasing/solicitacao/imprimir/"+solicitation.getId()+"  target='_blank'><span class=\"fa fa-print btn btn-default btn-xs\"></span></a>";
             String [] row = {
                     colCode,
                     colInitialDate,
@@ -382,6 +384,7 @@ public class SolicitationServiceImpl implements SolicitationService {
                     buttonView,
                     buttonEdit,
                     buttonCope,
+                    buttonPrinter,
                     buttonCancel
             };
             solicitationsList.add(row);

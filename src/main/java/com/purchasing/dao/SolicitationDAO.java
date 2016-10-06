@@ -204,8 +204,8 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
         criteria.setMaxResults(iDisplayLength);
         Disjunction disjunction = Restrictions.disjunction();
         criteria.createAlias("costCenter","cc");
-        criteria.createAlias("user","u");
-        criteria.add(Restrictions.eq("situation.status", status));
+        criteria.createAlias("user", "u");
+        criteria.createAlias("situation", "situation");
         disjunction.add(Restrictions.ilike("cc.description", sSearch, MatchMode.ANYWHERE));
         disjunction.add(Restrictions.ilike("u.name",sSearch, MatchMode.ANYWHERE));
         criteria.add(disjunction);
@@ -221,9 +221,9 @@ public class SolicitationDAO extends DAOImpl<Solicitation,Long> {
         Integer total = 0;
         Criteria criteria = getSession().createCriteria(Solicitation.class);
         Disjunction disjunction = Restrictions.disjunction();
-            criteria.createAlias("costCenter","cc");
-            criteria.createAlias("user","u");
-        criteria.add(Restrictions.eq("situation.status", status));
+        criteria.createAlias("costCenter","cc");
+        criteria.createAlias("user", "u");
+        criteria.createAlias("situation", "situation");
         disjunction.add(Restrictions.ilike("cc.description", sSearch, MatchMode.ANYWHERE));
         disjunction.add(Restrictions.ilike("u.name",sSearch, MatchMode.ANYWHERE));
             criteria.add(disjunction);
