@@ -111,7 +111,7 @@ function fillReferenceCenter () {
 	$('#zipCode').val("13720-000");
 	$('#number').val("885");
 	$('#receptorName').val("Alessandro - Olivia");
-    $('#cnpj').val('96.182.168/0006-12');
+    $('#cnpj').val('96.182.068/0006-12');
 }
 function fillHospital () {
     $('#place').val("Hospital");
