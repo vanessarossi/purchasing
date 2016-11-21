@@ -104,7 +104,7 @@
                                 <td>
                                     <input type="hidden"  name="budget.budgetQuotations[${i.index}].quotationRequest.solicitationRequest.product.id" value="${quotationRequest.product.id}">
                                     <input type="hidden" name="budget.budgetQuotations[${i.index}].quotationRequest.id" value="${quotationRequest.id}">
-                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice"  id="unityPrice${i.index}" onclick="calculateTotalPriceMaterial(${i.index})" onblur="calculateTotalPriceMaterialTwo(${i.index})" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>" >
+                                    <input type="text"  name="budget.budgetQuotations[${i.index}].unityPrice"  id="unityPrice${i.index}" onclick="calculateTotalPriceMaterial(${i.index})" onblur="calculateTotalPriceMaterialTwo(${i.index})" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].unityPrice,"." ,"," )}</c:if>" placeholder="00,000" >
                                 </td>
                                 <td><input type="text" id="totalPriceMaterial${i.index}" value="<c:if test="${budgetQuotations[i.index].product.id eq quotationRequest.product.id}">${fn:replace(budgetQuotations[i.index].totalPrice,"." ,"," )}</c:if>" readonly></td>
                             </tr>

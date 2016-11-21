@@ -40,7 +40,7 @@ function viewDetailBudget(id,type){
                         row += "<td>"+product+"</td>";
                         row += "<td>"+quantity+"</td>";
                         row += "<td>"+unit+"</td>";
-                        row += "<td>"+unityPrice.toFixed(2).replace(".", ",")+"</td>";
+                        row += "<td>"+unityPrice.toFixed(3).replace(".", ",")+"</td>";
                         row += "<td>"+totalPrice.toFixed(2).replace(".", ",")+"</td>";
                         row += "</tr>";
 
@@ -56,7 +56,7 @@ function viewDetailBudget(id,type){
 
                         var row = "<tr>";
                         row += "<td>"+service+"</td>";
-                        row += "<td>"+unityPrice.toFixed(2).replace(".", ",")+"</td>";
+                        row += "<td>"+unityPrice.toFixed(3).replace(".", ",")+"</td>";
                         row += "<td>"+totalPrice.toFixed(2).replace(".", ",")+"</td>";
                         row += "</tr>";
 
