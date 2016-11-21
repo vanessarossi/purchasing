@@ -18,7 +18,7 @@ public class BudgetQuotation {
     @Column(name = "chosen_budget")
     private Boolean chosenBudget;
 
-    @Digits(integer = 10, fraction = 3)
+    @Digits(integer = 10, fraction = 4)
     @Column(name = "unity_price")
     private BigDecimal unityPrice;
 

@@ -88,7 +88,6 @@ function calculateTotalPriceMaterial(i,numberRequestMaterial){
       	}
 };
 
-
 function calculateTotalPriceService(i,numberRequestService){
     price = $('#price'+i).val();
     numberRequestService = numberRequestService;
@@ -135,8 +134,9 @@ function enableImcompletePrice(i){
 }
 
 function desableImcompletePrice(i,numberRequestService){
+    var price = $('#priceService'+i).val();
     $('#price'+i).val("");
-    $('#price'+i).val($('#priceService'+i).val());
+    $('#price'+i).val(parseFloat(price).toFixed(2).replace(".", ","));
     $('#serviceImcomplete'+i).prop('checked', false);
 
     calculateTotalPriceService(i,numberRequestService);
