@@ -4,6 +4,8 @@ import com.purchasing.entity.RequestDelivered;
 import com.purchasing.enumerator.TypeEnum;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -43,8 +45,13 @@ public class PurchaseOrderViewPrinter implements Comparator<PurchaseOrderViewPri
 
     public List<PurchaseOrderViewPrinter> generateList(List<RequestDelivered> requestDelivereds) {
         List<PurchaseOrderViewPrinter> purchaseOrderViewPrinters = new ArrayList<>();
-        for (RequestDelivered requestDelivered : requestDelivereds){
+        DecimalFormat decimalFormat = new DecimalFormat();
+        decimalFormat.setMaximumFractionDigits(3);
+        decimalFormat.setMinimumFractionDigits(3);
+        decimalFormat.setRoundingMode(RoundingMode.CEILING);
+        decimalFormat.setGroupingUsed(false);
 
+        for (RequestDelivered requestDelivered : requestDelivereds){
 
             PurchaseOrderViewPrinter purchaseOrderViewPrinter  = new PurchaseOrderViewPrinter();
             purchaseOrderViewPrinter.setCode_cost_center(requestDelivered.getOrderRequest().getBudgetQuotation().getQuotationRequest().getSolicitationRequest().getSolicitation().getCostCenter().getCode());
@@ -53,7 +60,7 @@ public class PurchaseOrderViewPrinter implements Comparator<PurchaseOrderViewPri
             if (requestDelivered.getReception().getPurchaseOrder().getBudget().getQuotation().getType().equals(TypeEnum.Material)){
                 BigDecimal quantity = requestDelivered.getQuantity() == null ? new BigDecimal(1f) : new BigDecimal(requestDelivered.getQuantity());
                 BigDecimal resultMaterial = requestDelivered.getOrderRequest().getBudgetQuotation().getUnityPrice().multiply(quantity);
-                purchaseOrderViewPrinter.setTotal_price(resultMaterial.toString().replace(".",","));
+                purchaseOrderViewPrinter.setTotal_price(decimalFormat.format(resultMaterial).toString().replace(".",","));
 
             }if (requestDelivered.getReception().getPurchaseOrder().getBudget().getQuotation().getType().equals(TypeEnum.Service)){
                 BigDecimal resultService = requestDelivered.getPrice();
