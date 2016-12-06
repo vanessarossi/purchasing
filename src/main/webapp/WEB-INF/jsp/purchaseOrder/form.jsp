@@ -356,7 +356,7 @@
               <div class="col-md-2 col-sm-2">
                   <div class="form-group">
                       <label class="control-label" for="deliveryTime"><fmt:message key="label.delivery.time"/></label>
-                      <input type="text" class="form-control" id="deliveryTime" name="purchaseOrder.deliveryInformation.deliveryTime" value="${purchaseOrder.purchaseOrder.deliveryInformation.deliveryTime}"/>
+                      <input type="text" class="form-control" id="deliveryTime" name="purchaseOrder.deliveryInformation.deliveryTime" onkeyup="validNumber(this)" value="${purchaseOrder.purchaseOrder.deliveryInformation.deliveryTime}"  />
                   </div>
               </div>
               <div class="col-md-4 col-sm-4">

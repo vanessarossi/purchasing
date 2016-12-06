@@ -29,6 +29,7 @@ public class QuotationDAO extends DAOImpl<Quotation,Long> {
         Disjunction disjunction = Restrictions.disjunction();
         criteria.createAlias("user","u");
         disjunction.add(Restrictions.ilike("u.name",sSearch, MatchMode.ANYWHERE));
+        disjunction.add(Restrictions.ilike("description",sSearch, MatchMode.ANYWHERE));
         criteria.add(disjunction);
         criteria.addOrder(Order.desc("id"));
         List<Quotation>quotations = new ArrayList<>();
@@ -42,6 +43,7 @@ public class QuotationDAO extends DAOImpl<Quotation,Long> {
         Disjunction disjunction = Restrictions.disjunction();
         criteria.createAlias("user","u");
         disjunction.add(Restrictions.ilike("u.name", sSearch, MatchMode.ANYWHERE));
+        disjunction.add(Restrictions.ilike("description",sSearch, MatchMode.ANYWHERE));
         criteria.add(disjunction);
         criteria.addOrder(Order.desc("id"));
         criteria.setProjection(Projections.rowCount());
@@ -56,6 +58,7 @@ public class QuotationDAO extends DAOImpl<Quotation,Long> {
         Disjunction disjunction = Restrictions.disjunction();
         criteria.createAlias("user","u");
         disjunction.add(Restrictions.ilike("u.name", sSearch, MatchMode.ANYWHERE));
+        disjunction.add(Restrictions.ilike("description",sSearch, MatchMode.ANYWHERE));
         criteria.add(disjunction);
         criteria.add(Restrictions.eq("status", status));
         criteria.addOrder(Order.desc("id"));
@@ -70,6 +73,7 @@ public class QuotationDAO extends DAOImpl<Quotation,Long> {
         Disjunction disjunction = Restrictions.disjunction();
         criteria.createAlias("user","u");
         disjunction.add(Restrictions.ilike("u.name", sSearch, MatchMode.ANYWHERE));
+        disjunction.add(Restrictions.ilike("description",sSearch, MatchMode.ANYWHERE));
         criteria.add(disjunction);
         criteria.add(Restrictions.eq("status",status));
         criteria.addOrder(Order.desc("id"));

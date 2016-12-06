@@ -21,6 +21,16 @@ function fillTable(){
   });
 };
 
+function validNumber(num) {
+    var er = /[^0-9]/;
+    er.lastIndex = 0;
+    var campo = num;
+    if (er.test(campo.value)) {
+        campo.value = "";
+    }
+}
+
+
 $('#helpPlace').change(function(){
 	helpPlace = $('#helpPlace').val();
 
@@ -153,7 +163,6 @@ function fillSpecialtyCenter () {
 	$('#receptorName').val("Fernanda - Regiane");
     $('#cnpj').val('96.182.068/0001-08');
 }
-
 function fillLaboryDiagnosticCenter(){
     $('#place').val("Centro de Diagnóstico - Laboratório");
     $('#street').val("Rua Rui Barbosa");
@@ -164,7 +173,6 @@ function fillLaboryDiagnosticCenter(){
     $('#receptorName').val("Fernando Prevital");
     $('#cnpj').val('96.182.068/0003-70');
 }
-
 function fillSDU(){
     $('#place').val("Serviço Domiciliar");
     $('#street').val("Rua Rui Barbosa");
@@ -175,7 +183,6 @@ function fillSDU(){
     $('#receptorName').val("Jacqueline ");
     $('#cnpj').val('96.182.068/0001-08');
 }
-
 function clear () {
     $('#place').val("");
 	$('#street').val("");

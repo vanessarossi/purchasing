@@ -134,7 +134,7 @@ function enableImcompletePrice(i){
 }
 
 function desableImcompletePrice(i,numberRequestService){
-    var price = $('#priceService'+i).val();
+    var price = $('#priceService'+i).val().replace(",", ".");
     $('#price'+i).val("");
     $('#price'+i).val(parseFloat(price).toFixed(2).replace(".", ","));
     $('#serviceImcomplete'+i).prop('checked', false);

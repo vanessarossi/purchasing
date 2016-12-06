@@ -48,6 +48,14 @@
                     </div>
                 </div>
         </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+                <label class="control-label" for="number"><fmt:message key="label.description"/></label>
+                <input type="text" class="form-control" id="description" readonly="true" value="${quotation.description}"/>
+            </div>
+        </div>
+    </div>
     <form action='<c:url value="/cotacao/salvar/pedido/material"></c:url>' method="post" id="addRequestQuotationMaterialForm">
             <c:if test="${quotation.type == 'Material'}">
                 <div  id="divMaterial">

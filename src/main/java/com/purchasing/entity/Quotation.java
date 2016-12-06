@@ -51,6 +51,9 @@ public class Quotation {
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
@@ -133,6 +136,14 @@ public class Quotation {
 
     public void setStatus(StatusEnum status) {
         this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getUser() {

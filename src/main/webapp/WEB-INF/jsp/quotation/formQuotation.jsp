@@ -24,6 +24,12 @@
                             <span class="required">${errors.from('quotation.type')}</span>
                         </div>
                     </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <label class="control-label"><fmt:message key="label.description"></fmt:message></label>
+                            <input type="text" class="form-control" id="description" name="quotation.description" />
+                        </div>
+                    </div>
                     <div>
 
                     </div>
@@ -72,6 +78,14 @@
                         </div>
                     </div>
                 </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label" for="number"><fmt:message key="label.description"/></label>
+                        <input type="text" class="form-control" id="description" readonly="true" value="${quotation.description}"/>
+                    </div>
+                </div>
+            </div>
             <c:if test="${quotation.type == 'Material'}">
                     <c:if test="${quotation.status eq 'Open'}">
                         <a href="<c:url value="/cotacao/formulario/adicionar/${quotation.id}"></c:url>"  class="btn btn-primary" > <fmt:message key="button.addProduct"  /> </a>

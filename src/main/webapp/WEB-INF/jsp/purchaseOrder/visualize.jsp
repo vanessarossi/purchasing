@@ -220,10 +220,10 @@
           <table class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
-              <th style="width: 25%"><fmt:message key="table.user"/></th>
-              <th style="width: 25%"><fmt:message key="table.tax.document"/></th>
-              <th style="width: 25%"><fmt:message key="table.date"/></th>
-              <th style="width: 2%"><fmt:message key="table.##"/></th>
+              <th><fmt:message key="table.user"/></th>
+              <th><fmt:message key="table.tax.document"/></th>
+              <th><fmt:message key="table.date"/></th>
+              <th><fmt:message key="table.##"/></th>
             </tr>
             </thead>
             <tbody>

@@ -36,15 +36,16 @@
         <table id="quotationTable" class="table table-striped table-hover table-condensed">
             <thead>
                 <tr>
-                    <th style="width:2%"><fmt:message key="table.code"/></th>
-                    <th style="width:10%"><fmt:message key="table.type"/></th>
-                    <th style="width:30%"><fmt:message key="table.user"/></th>
-                    <th style="width:10%"><fmt:message key="table.status"/></th>
-                    <th style="width:15%"><fmt:message key="table.initialDate"/></th>
-                    <th style="width:15%"><fmt:message key="table.finalDate"/></th>
-                    <th style="width:2%"><fmt:message key="table.##"/></th>
-                    <th style="width:2%"><fmt:message key="table.##"/></th>
-                    <th style="width:2%"><fmt:message key="table.##"/></th>
+                    <th><fmt:message key="table.code"/></th>
+                    <th><fmt:message key="table.type"/></th>
+                    <th><fmt:message key="table.user"/></th>
+                    <th><fmt:message key="table.description"/></th>
+                    <th><fmt:message key="table.status"/></th>
+                    <th><fmt:message key="table.initialDate"/></th>
+                    <th><fmt:message key="table.finalDate"/></th>
+                    <th><fmt:message key="table.##"/></th>
+                    <th><fmt:message key="table.##"/></th>
+                    <th><fmt:message key="table.##"/></th>
                 </tr>
             </thead>
             <tbody>

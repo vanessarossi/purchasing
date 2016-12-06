@@ -287,6 +287,7 @@ public class QuotationServiceImpl implements QuotationService {
             String colNumber = quotation.getId().toString();
             String colType = quotation.getType().getDescription();
             String colUser = quotation.getUser().getName();
+            String colDescription = quotation.getDescription();
             String colStatus = quotation.getStatus().getDescription();
             String colInitialDate = Conversor.converterDateTimeInString(quotation.getInitialDate());
             String colFinalDate = Conversor.converterDateTimeInString(quotation.getFinalDate());
@@ -297,6 +298,7 @@ public class QuotationServiceImpl implements QuotationService {
                     colNumber,
                     colType,
                     colUser,
+                    colDescription,
                     colStatus,
                     colInitialDate,
                     colFinalDate,

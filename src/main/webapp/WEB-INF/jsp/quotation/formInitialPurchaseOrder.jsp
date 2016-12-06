@@ -49,7 +49,15 @@
                            value="${quotation.status.description}"/>
                 </div>
             </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+                <label class="control-label" for="number"><fmt:message key="label.description"/></label>
+                <input type="text" class="form-control" id="description" readonly="true" value="${quotation.description}"/>
+            </div>
         </div>
+    </div>
     <form action='<c:url value="/ordemCompra/salvar"></c:url>' method="post" id="initialPurchasingOrderForm">
             <c:forEach items="${budgets}" var="budget" varStatus="i">
                 <c:if test="${quotation.type == 'Material'}">
