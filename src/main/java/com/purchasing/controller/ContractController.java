@@ -1,12 +1,7 @@
 package com.purchasing.controller;
 
 import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
-import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.observer.upload.UploadedFile;
+import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
@@ -18,7 +13,6 @@ import com.purchasing.support.datatable.DataTableModel;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.io.File;
 import java.util.List;
 
 /**
@@ -56,10 +50,10 @@ public class ContractController {
     }
 
     @Post("/salvar")
-    public void salvar(@Valid Contract contract, UploadedFile uploadedFile) {
+    public void salvar(@Valid Contract contract) {
         validator.ensure(contract.getSupplier().getId() != null, new I18nMessage("contract.supplier", "message.error.null"));
         validator.onErrorForwardTo(this).form();
-        contractService.save(contract,uploadedFile);
+        contractService.save(contract);
         result.redirectTo(this).list();
     }
 
@@ -99,21 +93,14 @@ public class ContractController {
            result.use(Results.json()).withoutRoot().from(dataTableModel).include("aaData").serialize();
     }
 
-    @Get("/download/{contract.id}")
-    public File download (Contract contract){
-        if(contract.getId() == null){
-            result.include("message","Ocorreu um para realizar o download do contrato").redirectTo(this).list();
-        }
-        return contractService.download(contract);
-    }
 
     /** renovação **/
 
     @Post("/renovacao/salvar")
-    public void salvarRenewal(@Valid RenewalContract renewalContract, UploadedFile renewalUploadedFile) {
+    public void salvarRenewal(@Valid RenewalContract renewalContract) {
         validator.ensure(renewalContract.getContract().getId() != null , new I18nMessage("renewalContract.contract", "message.error.null"));
         validator.onErrorForwardTo(this).form();
-        contractService.saveRenewal(renewalContract, renewalUploadedFile);
+        contractService.saveRenewal(renewalContract);
         result.redirectTo(this).list();
     }
 
@@ -121,14 +108,6 @@ public class ContractController {
     public void deleteRenewal(RenewalContract renewalContract) {
         contractService.deleteRenewal(renewalContract);
         result.use(Results.json()).withoutRoot().from(true).serialize();
-    }
-
-    @Get("/renovacao/download/{renewalContract.id}")
-    public File download (RenewalContract renewalContract){
-        if(renewalContract.getId() == null){
-            result.include("message","Ocorreu um para realizar o download do contrato").redirectTo(this).list();
-        }
-        return contractService.downloadRenewal(renewalContract);
     }
 
 }

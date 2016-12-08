@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-        <div class="row">
+            <div class="row">
                 <div class="col-lg-11 col-md-11 col-sm-11">
                     <div class="form-group">
                         <label class="control-label" for="observation"><fmt:message key="label.observation"></fmt:message></label>
@@ -53,16 +53,7 @@
                     </div>
                 </div>
             </div>
-        <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label" for="uploadedFile"><fmt:message key="label.file"></fmt:message></label><span class="required"> *</span>
-                        <input type="file" class="form-control" name="uploadedFile" id="uploadedFile"/>
-                        <span class="required">${errors.from('file')}</span>
-                    </div>
-                </div>
-            </div>
-        <div class="panel panel-default">
+            <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><fmt:message key="title.renewals" /></h3>
             </div>
@@ -72,8 +63,7 @@
                     <tr>
                         <th><fmt:message key="table.initialDate" /></th>
                         <th><fmt:message key="table.finalDate" /></th>
-                        <th style="width: 2%" ><fmt:message key="table.##" /></th>
-                        <th style="width: 2%" ><fmt:message key="table.##" /></th>
+                        <th><fmt:message key="table.##" /></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -141,15 +131,6 @@
                         <label class="control-label" for="finalDateRenewal"><fmt:message key="label.finalDate"></fmt:message></label><span class="required"> *</span>
                         <input type="text" class="form-control date" name="renewalContract.finalDate" id="finalDateRenewal" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${renewalContract.finalDate}"/>">
                         <span class="required">${errors.from('renewalContract.finalDate')}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label" for="renewalUploadedFile"><fmt:message key="label.file"></fmt:message></label><span class="required"> *</span>
-                        <input type="file" class="form-control" name="renewalUploadedFile" id="renewalUploadedFile" />
-                        <span class="required">${errors.from('file')}</span>
                     </div>
                 </div>
             </div>

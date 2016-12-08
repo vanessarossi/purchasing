@@ -1,18 +1,6 @@
 package com.purchasing.entity;
 
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -39,10 +27,6 @@ public class Contract {
 
     @Column(name = "observation")
     private String observation;
-
-    @Length(min = 1, max = 1000)
-    @Column(name = "file_name")
-    private String fileName;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", referencedColumnName = "id", nullable = false)
@@ -84,14 +68,6 @@ public class Contract {
 
     public void setObservation(String observation) {
         this.observation = observation;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 
     public Supplier getSupplier() {

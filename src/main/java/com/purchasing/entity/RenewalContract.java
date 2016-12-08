@@ -1,17 +1,6 @@
 package com.purchasing.entity;
 
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -35,10 +24,6 @@ public class RenewalContract {
     @Column(name = "final_date")
     @Temporal(TemporalType.DATE)
     private Date finalDate;
-
-    @Length(min = 1,max = 100)
-    @Column(name = "file_name")
-    private String fileName;
 
     @ManyToOne
     @JoinColumn(name = "contract_id", referencedColumnName = "id", nullable = false)
@@ -66,14 +51,6 @@ public class RenewalContract {
 
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 
     public Contract getContract() {

@@ -27,7 +27,7 @@ public class RenewalContractDAO extends DAOImpl<RenewalContract,Long> {
         Criteria criteria = getSession().createCriteria(RenewalContract.class);
                             criteria.add(Restrictions.eq("contract", contract));
                             criteria.addOrder(Order.desc("finalDate"));
-        renewalContracts = criteria.list();
+        renewalContracts.addAll(criteria.list());
         return renewalContracts;
     }
 }

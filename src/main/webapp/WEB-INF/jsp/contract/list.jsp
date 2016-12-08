@@ -18,12 +18,11 @@
     <table id="contractTable" class="table table-striped table-hover table-condensed">
         <thead>
         <tr>
-            <th style="width: 10%" ><fmt:message key="table.initialDate" /></th>
-            <th style="width: 10%" ><fmt:message key="table.finalDate" /></th>
-            <th style="width: 50%" ><fmt:message key="table.supplier" /></th>
-            <th style="width: 2%" ><fmt:message key="table.##" /></th>
-            <th style="width: 2%" ><fmt:message key="table.##" /></th>
-            <th style="width: 2%" ><fmt:message key="table.##" /></th>
+            <th><fmt:message key="table.initialDate"/></th>
+            <th><fmt:message key="table.finalDate"/></th>
+            <th><fmt:message key="table.supplier"/></th>
+            <th><fmt:message key="table.##"/></th>
+            <th><fmt:message key="table.##"/></th>
         </tr>
         </thead>
         <tbody>
