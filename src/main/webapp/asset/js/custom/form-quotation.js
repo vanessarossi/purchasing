@@ -51,7 +51,7 @@ function chooseProduct(code,product,unit){
 };
 
 function searchProductByProduct() {
-    var product = $('#code').val().trim();
+    var product = $('#code').val();
     if (product != null && product != '') {
       $.ajax({
             url: getContextPath() + 'solicitacao/pesquisar/pedido/produto/'+product+'/json',

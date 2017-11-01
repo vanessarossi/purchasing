@@ -10,8 +10,8 @@ import java.util.List;
  */
 public enum AddressEnum {
 
-    @SerializedName("Rua Padre de Angelis, nº 39 , Caconde - SP")
-    CACONDE("Posto de Caconde","Rua Padre de Angelis, nº 39 , Caconde - SP"),
+    @SerializedName("Rua Marechal Deodoro, nº 21 , Caconde - SP")
+    CACONDE("Posto de Caconde","Marechal Deodoro, nº 21 , Caconde - SP"),
     @SerializedName("Rua Silvia Jardim,  nº 260 Centro, São José do Rio Pardo - SP")
     CDU("Centro de Diagnóstico","Rua Silvia Jardim,  nº 260 Centro, São José do Rio Pardo - SP"),
     @SerializedName("Rua Silvia Jardim, nº 268, Centro, São José do Rio Pardo - SP")
@@ -39,7 +39,9 @@ public enum AddressEnum {
     @SerializedName("Rua Francisquinho Dias, nº 583, Centro, São José do Rio Pardo - SP")
     SEDE("Sede","Rua Francisquinho Dias, nº 583, Centro, São José do Rio Pardo - SP"),
     @SerializedName("Rua João Batista de Lima Figueredo, nº450 - Tapiratiba - SP")
-    TAPIRATIBA("Posto de Tapiratiba","Rua João Batista de Lima Figueredo, nº450 - Tapiratiba - SP");
+    TAPIRATIBA("Posto de Tapiratiba","Rua João Batista de Lima Figueredo, nº450 - Tapiratiba - SP"),
+    @SerializedName("Rua Coronel Alípio Dias, 863 - São José do Rio Pardo - SP")
+    ONCOLOGIA("Oncologia","Rua Coronel Alípio Dias, 863 - São José do Rio Pardo - SP");
 
     AddressEnum(String place, String address) {
         this.place = place;
@@ -105,6 +107,8 @@ public enum AddressEnum {
                 return SDU.getPlace();
             case TAPIRATIBA:
                 return TAPIRATIBA.getPlace();
+            case ONCOLOGIA:
+                return ONCOLOGIA.getPlace();
             default:
                 return "Não Encontrado";
         }

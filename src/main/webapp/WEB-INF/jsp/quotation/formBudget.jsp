@@ -119,11 +119,11 @@
                         </c:forEach>
                         <tfoot>
                             <tr>
-                            <th style="width: 60%"></th>
-                            <th style="width: 5%"><input type="hidden" id="numberRequestMaterial" value="${fn:length(quotationRequests)}" ></th>
-                            <th style="width: 8%"></th>
-                            <th style="width: 5%"></th>
-                            <th style="width: 5%"><input type="text" id="totalFinalPriceMaterial" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}"  readonly></th>
+                            <th></th>
+                            <th><input type="hidden" id="numberRequestMaterial" value="${fn:length(quotationRequests)}" ></th>
+                            <th></th>
+                            <th></th>
+                            <th style="width: 5%"><input type="text" id="totalFinalPriceMaterial" value="${fn:replace(budget.paymentInformationBudgets[1].paymentInformation.totalPrice,".",",")}"  readonly></th style="width: 5%">
                         </tr>
                         </tfoot>
                     </tbody>

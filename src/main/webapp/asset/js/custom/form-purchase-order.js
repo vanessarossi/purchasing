@@ -80,7 +80,7 @@ function fillAdministrativeOffice () {
 	$('#city').val("São José do Rio Pardo - SP");
 	$('#zipCode').val("13720-000");
 	$('#number').val("583");
-	$('#receptorName').val("Eloisa - Everton");
+	$('#receptorName').val("Eloisa - Milena");
     $('#cnpj').val('96.182.068/0001-08');
 }
 function fillDiagnosticCenter () {
@@ -130,7 +130,7 @@ function fillHospital () {
 	$('#city').val("São José do Rio Pardo - SP");
 	$('#zipCode').val("13720-000");
 	$('#number').val("118");
-	$('#receptorName').val("Everton - Eloisa");
+	$('#receptorName').val("Milena - Eloisa");
     $('#cnpj').val('96.182.068/0007-01');
 }
 function fillDepartmentOfOccupationalHealth() {

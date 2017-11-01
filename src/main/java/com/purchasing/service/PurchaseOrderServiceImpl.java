@@ -8,6 +8,7 @@ import com.purchasing.enumerator.TypeEnum;
 import com.purchasing.printer.OrderPrinter;
 import com.purchasing.printer.PurchaseOrderPrinter;
 import com.purchasing.service.impl.PurchaseOrderService;
+import com.purchasing.support.date.Conversor;
 import com.purchasing.support.purchaseOrder.OrderRequestProductView;
 import com.purchasing.support.purchaseOrder.printer.PurchaseOrderViewPrinter;
 
@@ -249,6 +250,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             }
 
             String colCode = purchaseOrder.getId().toString();
+            String colDate = Conversor.converterDateInString(purchaseOrder.getDate());
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
             String colStatus = purchaseOrder.getStatus().getDescription();
             String colButtonEdit = "<a href=/purchasing/ordemCompra/adicionar/informacao/" + purchaseOrder.getId() +"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
@@ -256,6 +258,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             String colButtonCancel = "<a "+onclickCancel+" ><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String[] row = {
                     colCode,
+                    colDate,
                     colSupplier,
                     colStatus,
                     colButtonEdit,
@@ -287,6 +290,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             }
 
             String colCode = purchaseOrder.getId().toString();
+            String colDate = Conversor.converterDateInString(purchaseOrder.getDate());
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
             String colStatus = purchaseOrder.getStatus().getDescription();
             String colButtonEdit = "<a href=/purchasing/ordemCompra/adicionar/informacao/" + purchaseOrder.getId() +"><span class=\"fa fa-edit btn btn-default btn-xs\"></span></a>";
@@ -294,6 +298,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             String colButtonCancel = "<a "+ onclickCancel +" ><span class=\"fa fa-trash-o btn btn-default btn-xs\"></span></a>";
             String[] row = {
                     colCode,
+                    colDate,
                     colSupplier,
                     colStatus,
                     colButtonEdit,
@@ -333,11 +338,13 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
         for (PurchaseOrder purchaseOrder : purchaseOrders) {
             String colCode = purchaseOrder.getId().toString();
+            String colDate = Conversor.converterDateInString(purchaseOrder.getDate());
             String colSupplier = purchaseOrder.getBudget().getSupplier().getPerson().getName();
             String colButtonView = "<a href=/purchasing/ordemCompra/visualizar/" + purchaseOrder.getId() +"/approve><span class=\"fa fa-eye btn btn-default btn-xs\"></span></a>";
 
             String[] row = {
                     colCode,
+                    colDate,
                     colSupplier,
                     colButtonView,
             };
@@ -378,11 +385,13 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
         for (Reception reception : receptions) {
             String colCode = reception.getPurchaseOrder().getId().toString();
+            String colDate = Conversor.converterDateInString(reception.getDate());
             String colSupplier = reception.getPurchaseOrder().getBudget().getSupplier().getPerson().getName();
             String colButtonConfirmConference = "<a href=/purchasing/ordemCompra/confirmacao/conferencia/" + reception.getId() +"><span class=\"fa fa-check-square btn btn-default btn-xs\"></span></a>";
 
             String[] row = {
                     colCode,
+                    colDate,
                     colSupplier,
                     colButtonConfirmConference,
             };
@@ -435,10 +444,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 }
                 BigDecimal quantity = new BigDecimal(orderRequestProductView.getQuantity().toString()).add(new BigDecimal(orderRequestProductV.getQuantity().toString()));
                 BigDecimal totalPrice = orderRequestProductV.getTotalPrice().add(orderRequestProductView.getTotalPrice());
-
-
-
-
                 orderRequestProductV.setQuantity(Float.parseFloat(quantity.toString()));
                 orderRequestProductV.setTotalPrice(totalPrice.setScale(2,BigDecimal.ROUND_HALF_EVEN));
             }

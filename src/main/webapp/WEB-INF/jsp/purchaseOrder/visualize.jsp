@@ -97,7 +97,7 @@
       <div class="panel-body">
         <c:forEach items="${purchaseOrder.budget.quotation.budgets}" var="budget">
           <div class="row">
-            <div class="col-sm-7 col-md-7">
+            <div class="col-sm-5 col-md-5">
               <div class="form-group <c:if test="${purchaseOrder.budget.id eq budget.id}">has-success</c:if>" >
                   <label class="control-label"><fmt:message key="label.supplier" /> <c:if test="${purchaseOrder.budget.id eq budget.id}"> - <fmt:message key="label.select" /></c:if> </label>
                   <input type="text" class="form-control" readonly value="${budget.supplier.person.name}" />
@@ -112,7 +112,13 @@
             <div class="col-sm-2 col-md-2">
               <div class="form-group <c:if test="${purchaseOrder.budget.id eq budget.id}">has-success</c:if>">
                 <label class="control-label"><fmt:message key="label.total.price"/></label>
-                <input type="text" class="form-control" readonly value="${fn:replace(budget.paymentInformationBudgets[0].paymentInformation.totalPrice,"." ,"," )}"/>
+                <input type="text" class="form-control" readonly value="<fmt:formatNumber value="${budget.paymentInformationBudgets[0].paymentInformation.totalPrice}" type="currency" currencySymbol="R$" />"/>
+              </div>
+            </div>
+            <div class="col-sm-2 col-md-2">
+              <div class="form-group <c:if test="${purchaseOrder.budget.id eq budget.id}">has-success</c:if>">
+                <label class="control-label"><fmt:message key="label.totalFinalPrice"/></label>
+                <input type="text" class="form-control" readonly value="<fmt:formatNumber value="${budget.paymentInformationBudgets[0].paymentInformation.totalFinalPrice}" type="currency" currencySymbol="R$" />"/>
               </div>
             </div>
           </div>
