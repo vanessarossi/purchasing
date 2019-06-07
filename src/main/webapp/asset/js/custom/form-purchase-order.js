@@ -84,7 +84,7 @@ function fillAdministrativeOffice () {
     $('#cnpj').val('96.182.068/0001-08');
 }
 function fillDiagnosticCenter () {
-    $('#place').val("Centro de Diagnóstico - Imagem");
+    $('#place').val("Centro Diagnóstico - Imagem");
 	$('#street').val("Rua Silvia Jardim");
 	$('#neighborhood').val("Centro");
 	$('#city').val("São José do Rio Pardo - SP");
@@ -164,14 +164,14 @@ function fillSpecialtyCenter () {
     $('#cnpj').val('96.182.068/0001-08');
 }
 function fillLaboryDiagnosticCenter(){
-    $('#place').val("Centro de Diagnóstico - Laboratório");
+    $('#place').val("Centro Diagnóstico - Laboratório");
     $('#street').val("Rua Rui Barbosa");
     $('#neighborhood').val("Centro");
     $('#city').val("São José do Rio Pardo - SP");
     $('#zipCode').val("13720-000");
     $('#number').val("607");
     $('#receptorName').val("Fernando Prevital");
-    $('#cnpj').val('96.182.068/0003-70');
+    $('#cnpj').val('96.182.068/0011-80');
 }
 function fillSDU(){
     $('#place').val("Serviço Domiciliar");

@@ -33,7 +33,7 @@ public enum AddressEnum {
     @SerializedName("Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP")
     MEDPREV("Medicina Preventiva","Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP"),
     @SerializedName("Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP")
-    SDU("Serviço Domiciliar","Rua Rui Barbosa, n° 109, Centro, São José do Rio Pardo – SP (SDU)"),
+    SDU("Serviço Domiciliar","Rua Coronel Alípio Dias, 863 - São José do Rio Pardo - SP (SDU)"),
     @SerializedName("Rua Costa Machado, nº 573 - Centro, São José do Rio Pardo - SP")
     PREDIO("Prédio","Rua Costa Machado, nº 573 - Centro, São José do Rio Pardo - SP"),
     @SerializedName("Rua Francisquinho Dias, nº 583, Centro, São José do Rio Pardo - SP")

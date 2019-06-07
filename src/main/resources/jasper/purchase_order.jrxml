@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2016-10-05T16:27:38 -->
+<!-- 2017-11-06T14:41:48 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="purchase_request_product" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f041ed41-b9ce-4816-9cfd-ebd03c4b2790">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
@@ -620,7 +620,7 @@
 				<text><![CDATA[Justificativa para o Fornecedor escolhido]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="1" y="169" width="553" height="20" uuid="e8367273-da5d-49fa-be7e-6730ffc1952f"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="169" width="553" height="20" uuid="e8367273-da5d-49fa-be7e-6730ffc1952f"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
